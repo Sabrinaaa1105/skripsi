@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "skripsi/wsgi.py",
+      "use": "@vercel/python",
+      "config": { "maxDuration": 90 }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "skripsi/wsgi.py"
+    }
+  ]
+}
