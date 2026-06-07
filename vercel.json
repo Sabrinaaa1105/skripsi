@@ -5,6 +5,7 @@
       "src": "skripsi/wsgi.py",
       "use": "@vercel/python",
       "config": { "maxDuration": 90 }
+      
     }
   ],
   "routes": [
