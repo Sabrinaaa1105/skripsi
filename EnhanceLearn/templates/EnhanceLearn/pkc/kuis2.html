@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Kuis Citra Digital</title>
+    <link rel="stylesheet" href="{% static 'css/kuis.css' %}">
+</head>
+<body>
+
+<div class="container">
+    <div id="quizIntro">
+        <div class="intro-card">
+            <div class="intro-title-box">
+                Kuis Subbab 2 : Pengantar <em>Image Enhancement</em>
+            </div>
+            <div class="intro-inner-card">
+                <div class="intro-header">Petunjuk Pengerjaan Kuis</div>
+                <div class="intro-body">
+                    <ol class="quiz-rule">
+                        <li>Tekan tombol <strong>Mulai</strong> untuk masuk ke halaman kuis.</li>
+                        <li>Kuis terdiri dari 10 soal pilihan ganda.</li>
+                        <li>Waktu pengerjaan kuis selama <strong>20 menit</strong>. Jika waktu pengerjaan habis, maka tampilan akan beralih ke halaman hasil.</li>
+                        <li>Klik nomor pada navigasi di sebelah kanan untuk berpindah soal secara langsung.</li>
+                        <li>Jika nilai belum mencapai KKM, maka kuis harus di ulang. Tetapi jika nilai sudah mencapai atau melebihi KKM, maka mahasiswa tidak perlu mengerjakan kuis lagi.</li>
+                        <li>Klik tombol <strong>Selesai</strong> untuk mengakhiri kuis jika sudah yakin dengan semua jawaban.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="intro-footer-outside">
+                <a href="{% url 'rangkuman1' %}" class="btn-secondary" style="text-decoration: none; display: inline-block; text-align: center;">Kembali Ke materi</a>
+                <button id="startQuizBtn" type="button" class="btn-primary">Mulai</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="quizArea" style="display:none;">
+        <div class="intro-title-box">
+            Kuis Subbab 2 : Pengantar <em>Image Enhancement</em>
+        </div>
+
+        <div class="quiz-layout">
+            <div class="card question-card">
+                <h3 id="questionTitle">Nomor 1:</h3>
+                <div id="questionText" class="question-content"></div>
+
+                <form id="choices" class="choices-form"></form>
+                
+                <div class="doubt-wrapper">
+                    <label class="doubt-label">
+                        <input type="checkbox" id="doubtCheck">
+                        Ragu-ragu
+                    </label>
+                </div>
+
+                <div class="nav-buttons">
+                    <button id="prevBtn" type="button" class="btn-secondary">Sebelumnya</button>
+                    <button id="nextBtn" type="button" class="btn-primary">Selanjutnya</button>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="timer">⏱️ Waktu tersisa: <span id="timer">20:00</span></div>
+                <div class="card nav-card">
+                    <h4>Nomor Soal</h4>
+                    <div id="numberNav" class="number-nav"></div>
+                    
+                    <div class="finish-inner-wrapper">
+                        <button id="finishBtn" type="button" class="btn-finish">Selesai</button>
+                    </div>
+                </div>
+
+                <div class="card legend-card">
+                    <h4>Keterangan</h4>
+                    <div class="legend-item"><span class="dot current"></span> Nomor soal saat ini</div>
+                    <div class="legend-item"><span class="dot answered"></span> Soal sudah terjawab</div>
+                    <div class="legend-item"><span class="dot doubt"></span> Jawaban ragu-ragu</div>
+                    <div class="legend-item"><span class="dot empty"></span> Soal belum terjawab</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="finishModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <span class="modal-close closeModal">&times;</span>
+        <div class="modal-icon warning-icon">!</div>
+        <h2 class="modal-text">Apakah anda yakin ingin menyelesaikan Kuis?</h2>
+        <div class="modal-footer">
+            <button id="confirmFinishBtn" class="btn-confirm">Iya</button>
+            <button class="btn-cancel cancelModal">Batal</button>
+        </div>
+    </div>
+</div>
+
+<div id="incompleteModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <span class="modal-close closeModal">&times;</span>
+        <div class="modal-icon warning-icon">!</div>
+        <h2 class="modal-text">Belum bisa submit</h2>
+        <p style="color: #666; margin-bottom: 25px;">Ada soal yang belum dijawab!</p>
+        <div class="modal-footer">
+            <button class="btn-ok cancelModal">OK</button>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/data-kuis.js' %}"></script>
+
+<script src="{% static 'js/kuis.js' %}"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    if (typeof quizData2 !== 'undefined') {
+        initQuiz(quizData2);
+    } else {
+        console.error("Data kuis tidak ditemukan!");
+    }
+});
+</script>
+
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    },
+    options: {
+      processHtmlClass: 'question-content'
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</body>
+</html>

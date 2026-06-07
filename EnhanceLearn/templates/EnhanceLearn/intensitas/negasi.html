@@ -1,0 +1,492 @@
+{% extends "EnhanceLearn/base.html" %}
+{% load static %}
+
+{% block title %}Intensitas{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/materi.css' %}">
+
+<div class="materi-container">
+    <h1 class="subbab-title">SUBBAB 3: <em>INVERS</em></h1>
+
+
+    <div class="materi-box">
+        <div class="materi-box-header">
+            <i class="bi bi-circle-half"></i>
+            Konsep Operasi Negasi <em>(Invers)</em>
+        </div>
+
+        <div class="materi-box-body">
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Operasi negasi <em>(invers)</em> merupakan salah satu transformasi intensitas dasar
+                pada pemrosesan citra digital, yaitu transformasi yang <strong>nilai intensitas piksel keluarannya hanya 
+                bergantung pada nilai intensitas piksel masukan pada posisi yang sama</strong>. 
+                Tujuan utamanya untuk <strong>membalik tingkat intensitas piksel</strong> pada citra <em>grayscale</em>. 
+                Pada operasi ini, piksel dengan intensitas rendah akan dipetakan menjadi intensitas tinggi, dan sebaliknya.
+            </p>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Operasi negasi sering digunakan untuk <strong>menonjolkan detail tertentu</strong> pada citra, 
+                terutama pada citra dengan latar belakang gelap dan objek terang, atau sebaliknya. 
+                Dengan membalik nilai intensitas, struktur objek dapat menjadi lebih mudah diamati secara visual. 
+                Gambar 3.7 adalah contoh citra asli dan citra setelah melalui proses operasi negasi.
+            </p>
+
+            <div style="margin:20px 0;">
+                <table style="width:100%; margin:0 auto; border-collapse:collapse; border:1px solid #cbd5e1; text-align:center; table-layout:fixed;">
+                    <thead>
+                        <tr>
+                            <th style="width:50%; border-right:1px solid #cbd5e1; padding:6px; font-weight:600; font-size:14px;">
+                                Citra asli
+                            </th>
+                            <th style="width:50%; padding:6px; font-weight:600; font-size:14px;">
+                                Citra negasi
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:8px;">
+                                <img src="{% static 'img/intensitas/negasi.png' %}" alt="Citra Asli" style="width:85%; height:auto;">
+                            </td>
+                            <td style="border-top:1px solid #cbd5e1; padding:8px;">
+                                <img src="{% static 'img/intensitas/invers.png' %}" alt="Citra Negasi" style="width:85%; height:auto;">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size:13px; margin-top:6px; font-style:italic; text-align:center;">
+                    Gambar 3.7 Perbandingan citra asli dan citra negasi
+                </p>
+            </div>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Dari Gambar 3.7 terlihat bahwa piksel–piksel yang berwarna putih diubah menjadi hitam, 
+                sebaliknya piksel–piksel yang berwarna hitam diubah menjadi putih. 
+                Secara matematis, untuk citra <em>grayscale</em> dengan jumlah tingkat keabuan 
+                <em>L</em>, operasi negasi dinyatakan dengan persamaan:
+            </p>
+
+            <div style="text-align:center; margin: 16px 0; font-size: 17px;">
+                $$ s = (L - 1) - r $$
+            </div>
+
+            <p style="font-size: 17px;">Dimana:</p>
+            <ul style="font-size: 17px; line-height: 1.8;">
+                <li><strong>$s$</strong> = nilai intensitas piksel citra keluaran</li>
+                <li><strong>$L$</strong> = jumlah tingkat keabuan (<em>gray level</em>)</li>
+                <li><strong>$r$</strong> = nilai intensitas piksel citra masukan</li>
+            </ul>
+
+            <p style="font-size: 17px; margin-top: 14px;">
+                Misalkan, citra dengan <strong>256 derajat keabuan (8 bit)</strong> maka citra keluaran diperoleh dengan persamaan
+            </p>
+            <div style="text-align:center; margin: 12px 0; font-size: 17px;">
+                $$ s = 255 - r $$
+            </div>
+
+            <p style="font-size: 17px; margin-top: 14px;">
+                Sedangkan citra dengan <strong>128 derajat keabuan (7 bit)</strong> maka citra keluaran diperoleh dengan persamaan
+            </p>
+            <div style="text-align:center; margin: 12px 0; font-size: 17px;">
+                $$ s = 127 - r $$
+            </div>
+        </div>
+    </div>
+
+    <div class="materi-box">
+        <div class="materi-box-body">
+            <h3 style="color:#007bff; border-left:5px solid #007bff; padding-left:15px; margin-top:10px; margin-bottom:20px; font-weight:bold;">
+                <i class="bi bi-pencil-fill"></i> Contoh Perhitungan
+            </h3>
+
+            <div class="materi-box-contoh" style="margin:0; box-shadow:0 4px 15px rgba(0,0,0,0.4); background:#f8fbff;">
+                <div class="materi-box-body">
+                    <p style="font-size:17px;">
+                        Gambar berikut menunjukkan citra grayscale 4×4 yang akan dihitung menggunakan operasi negasi.
+                    </p>
+
+                    <div style="margin:16px 0;">
+                        <table style="width:70%; margin:0 auto; border-collapse:collapse; border:1px solid #cbd5e1; text-align:center; table-layout:fixed; background:white;">
+                            <tbody>
+                                <tr>
+                                    <td style="width:50%; border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:8px;">
+                                        <img src="{% static 'img/intensitas/negasi/contoh-citra.png' %}" style="width:85%; margin:auto;">
+                                    </td>
+                                    <td style="width:50%; border-top:1px solid #cbd5e1; padding:8px;">
+                                        <img src="{% static 'img/intensitas/negasi/contoh-matriks.png' %}" style="width:85%; margin:auto;">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="font-size:13px; margin-top:6px; font-style:italic; text-align:center;">
+                            Gambar 3.8 Citra untuk perhitungan contrast stretching
+                        </p>
+                    </div>
+
+                    <p style="font-weight:bold; color:#007bff; margin-bottom:10px; font-size:16px;">
+                        <i class="bi bi-mouse3-fill"></i> Petunjuk Simulasi Interaktif:
+                    </p>
+
+                    <ol style="font-size:14.5px; line-height:1.8; color:#334155; padding-left:20px;">
+                        <li><strong>Mulai Proses:</strong> Klik tombol <span style="color:#2f6fd6; font-weight:bold;">Mulai</span> untuk memulai proses transformasi piksel satu per satu.</li>
+                        <li><strong>Lihat Perhitungan:</strong> Klik tombol <span style="color:#236820; font-weight:bold;">Lanjut</span> untuk melihat proses perhitungan nilai intensitas baru pada setiap piksel.</li>
+                        <li><strong>Perhatikan Hasil:</strong> Nilai intensitas baru akan ditampilkan pada matriks output dan citra hasil.</li>
+                        <li><strong>Reset:</strong> Klik tombol <span style="color:#e03a3a; font-weight:bold;">Ulangi</span> untuk mengulang simulasi dari awal.</li>
+                    </ol>
+
+                    <div class="simulator-container-box">
+                        <div class="grid-sim">
+                            <div class="panel-sim">
+                                <h5 style="text-align:center; font-weight:700; color:#1e3a8a;">Input Citra</h5>
+                                <img id="imgSource" src="{% static 'img/intensitas/negasi/contoh-citra.png' %}" style="display:none;">
+                                <div class="mobile-pair">
+                                    <canvas id="canvasIn" width="160" height="160"></canvas>
+                                    <div class="matrix-sim" id="inMatrix"></div>
+                                </div>
+                            </div>
+
+                            <div class="panel-sim controls-sim">
+                                <h5 style="text-align:center; font-weight:700; color:#1e3a8a;">Perhitungan</h5>
+                                <b>Rumus:</b>
+                                \[ s = (L-1) - r \]
+                                <div class="param-row">
+                                    <div class="param-box">
+                                        \(L\)
+                                        <input type="number" id="Lval" value="256">
+                                    </div>
+                                </div>
+                                <button id="startBtn" class="btn-sim btn-start">
+                                Mulai
+                                </button>
+
+                                <button id="nextBtn" class="btn-sim btn-next hidden-sim">
+                                Lanjut
+                                </button>
+
+                                <button id="resetBtn" class="btn-sim btn-reset hidden-sim">
+                                Ulangi
+                                </button>
+                                <div class="calc-box-sim" id="calcBox">
+                                    Klik <b>Mulai</b> untuk memulai perhitungan.
+                                </div>
+                            </div>
+
+                            <div class="panel-sim">
+                                <h5 style="text-align:center; font-weight:700; color:#1e3a8a;">Hasil Negasi</h5>
+                                <div class="mobile-pair">
+                                    <canvas id="canvasOut" width="160" height="160"></canvas>
+                                    <div class="matrix-sim" id="outMatrix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= EXPLORASI MANDIRI ================= -->
+<div class="materi-box-contoh" style="margin:0; margin-top:24px; box-shadow:0 4px 15px rgba(0,0,0,0.4); background:#f8fbff;">
+    <div class="materi-box-body">
+
+        <h4 style="color:#2f6fd6; font-weight:bold;">
+            <i class="bi bi-sliders"></i> Eksplorasi Mandiri
+        </h4>
+
+        <p style="font-size:17px;">
+            Upload gambar Anda sendiri dan amati bagaimana operasi negasi (<em>invers</em>) membalik nilai intensitas piksel pada citra.
+        </p>
+
+        <!-- CONTROL -->
+        <div class="exp-top-control">
+
+            <!-- Upload -->
+            <div>
+                <label for="uploadImageExp" class="upload-btn">
+                    <i class="bi bi-upload"></i> Upload
+                </label>
+                <input type="file" id="uploadImageExp" class="upload-input" accept="image/*">
+            </div>
+
+            <!-- LEVEL -->
+            <div class="exp-slider-group">
+                <label class="slider-label">
+                    <b>Gray Level (L):</b>
+                </label>
+
+                <div class="exp-slider-row">
+                    <input type="range" id="expL" min="2" max="256" value="256">
+                    <span id="expLVal">256</span>
+                    <button id="expResetBtn" class="btn-reset">Reset</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CANVAS -->
+        <div class="exp-canvas-row">
+
+            <div>
+                <b>Citra Asli</b><br>
+                <canvas id="expCanvasIn" width="220" height="220"></canvas>
+            </div>
+
+            <div>
+                <b>Hasil Negasi</b><br>
+                <canvas id="expCanvasOut" width="220" height="220"></canvas>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+        </div>
+    </div>
+
+    {% include "EnhanceLearn/intensitas/aktivitas7.html" %}
+
+    <div style="margin-top:32px; display:flex; justify-content:space-between;">
+        <a href="{% url 'contrast' %}" class="btn-prev-materi">« Kembali</a>
+        <a href="{% url 'thresholding' %}" class="btn-next-materi">Selanjutnya »</a>
+    </div>
+</div>
+
+<script>
+    window.MathJax = {
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+    };
+
+    // DATA PIXEL
+    const pixels = [
+        [151, 161, 149, 151],
+        [153, 144, 137, 115],
+        [120, 104, 84, 57],
+        [141, 144, 136, 124]
+    ];
+
+    let result = Array.from({ length: 4 }, () => Array(4).fill(""));
+    let step = 0;
+
+    // CANVAS
+    const canvasIn = document.getElementById("canvasIn");
+    const canvasOut = document.getElementById("canvasOut");
+    const ctxIn = canvasIn.getContext("2d");
+    const ctxOut = canvasOut.getContext("2d");
+
+    // ELEMENTS
+    const inMatrix = document.getElementById("inMatrix");
+    const outMatrix = document.getElementById("outMatrix");
+    const calcBox = document.getElementById("calcBox");
+    const LInput = document.getElementById("Lval");
+    const startBtn = document.getElementById("startBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const resetBtn = document.getElementById("resetBtn");
+
+    // DRAW IMAGE
+    function drawImage(matrix, ctx) {
+        for (let y = 0; y < 4; y++) {
+            for (let x = 0; x < 4; x++) {
+                let v = matrix[y][x];
+                if (v === "") continue;
+                ctx.fillStyle = `rgb(${v},${v},${v})`;
+                ctx.fillRect(x * 40, y * 40, 40, 40);
+            }
+        }
+    }
+
+    function drawInput() {
+        const img = document.getElementById("imgSource");
+        img.onload = function () {
+            ctxIn.drawImage(img, 0, 0, 160, 160);
+        };
+        if (img.complete) {
+            ctxIn.drawImage(img, 0, 0, 160, 160);
+        }
+    }
+
+    function drawOutput(matrix) {
+        ctxOut.clearRect(0, 0, 160, 160);
+        drawImage(matrix, ctxOut);
+    }
+
+    // MATRIX DISPLAY
+    function renderMatrices(active = -1, matrix = result) {
+        inMatrix.innerHTML = "";
+        outMatrix.innerHTML = "";
+        for (let i = 0; i < 16; i++) {
+            let y = Math.floor(i / 4);
+            let x = i % 4;
+
+            let a = document.createElement("div");
+            a.className = "cell-sim input-cell-sim" + (i === active ? " active-sim" : "");
+            a.textContent = pixels[y][x];
+            inMatrix.appendChild(a);
+
+            let b = document.createElement("div");
+            b.className = "cell-sim output-cell-sim" + (i === active ? " active-sim" : "");
+            b.textContent = matrix[y][x];
+            outMatrix.appendChild(b);
+        }
+    }
+
+    // STEP PERHITUNGAN NEGASI
+    function stepCalc() {
+        const L = parseInt(LInput.value);
+        const y = Math.floor(step / 4);
+        const x = step % 4;
+        const r = pixels[y][x];
+        const maxVal = L - 1;
+        const s = maxVal - r;
+
+        result[y][x] = s;
+
+        calcBox.innerHTML = `
+            \\[ s = (L-1) - r \\]
+            \\[ s = (${L}-1) - ${r} \\]
+            \\[ s = ${maxVal} - ${r} \\]
+            \\[ s = ${s} \\]
+        `;
+
+        MathJax.typesetPromise();
+        drawOutput(result);
+        renderMatrices(step, result);
+        step++;
+    }
+
+    // BUTTONS
+    startBtn.onclick = () => {
+        step = 0;
+        result = Array.from({ length: 4 }, () => Array(4).fill(""));
+        startBtn.classList.add("hidden-sim");
+        nextBtn.classList.remove("hidden-sim");
+        resetBtn.classList.remove("hidden-sim");
+        stepCalc();
+    };
+
+    nextBtn.onclick = () => {
+        if (step < 16) stepCalc();
+    };
+
+    resetBtn.onclick = () => {
+        step = 0;
+        result = Array.from({ length: 4 }, () => Array(4).fill(""));
+        ctxOut.clearRect(0, 0, 160, 160);
+        renderMatrices();
+        startBtn.classList.remove("hidden-sim");
+        nextBtn.classList.add("hidden-sim");
+        resetBtn.classList.add("hidden-sim");
+        calcBox.innerHTML = "Klik <b>Mulai</b> untuk memulai proses perhitungan.";
+    };
+
+    // INIT
+    drawInput();
+    renderMatrices();
+</script>
+
+<script>
+/* ================= EKSPLORASI NEGASI ================= */
+
+const uploadImageExp = document.getElementById("uploadImageExp");
+
+const expCanvasIn = document.getElementById("expCanvasIn");
+const expCanvasOut = document.getElementById("expCanvasOut");
+
+const expCtxIn = expCanvasIn.getContext("2d");
+const expCtxOut = expCanvasOut.getContext("2d");
+
+const expL = document.getElementById("expL");
+const expLVal = document.getElementById("expLVal");
+const expResetBtn = document.getElementById("expResetBtn");
+
+let expImageData = null;
+
+// ================= UPLOAD =================
+uploadImageExp.onchange = function(e){
+
+    const file = e.target.files[0];
+    if(!file) return;
+
+    const img = new Image();
+
+    img.onload = function(){
+
+        const canvasSize = 220;
+
+        expCtxIn.clearRect(0,0,canvasSize,canvasSize);
+        expCtxOut.clearRect(0,0,canvasSize,canvasSize);
+
+        // fit gambar agar tidak terpotong
+        let scale = Math.min(canvasSize / img.width, canvasSize / img.height);
+
+        let w = img.width * scale;
+        let h = img.height * scale;
+
+        let x = (canvasSize - w) / 2;
+        let y = (canvasSize - h) / 2;
+
+        // tampilkan gambar asli
+        expCtxIn.drawImage(img, x, y, w, h);
+
+        // ambil data gambar asli
+        expImageData = expCtxIn.getImageData(0,0,canvasSize,canvasSize);
+
+        applyNegative();
+    };
+
+    img.src = URL.createObjectURL(file);
+};
+
+// ================= APPLY NEGATIVE =================
+function applyNegative(){
+
+    if(!expImageData) return;
+
+    let L = parseInt(expL.value);
+
+    expLVal.textContent = L;
+
+    let maxVal = L - 1;
+
+    let newImage = new ImageData(
+        new Uint8ClampedArray(expImageData.data),
+        expImageData.width,
+        expImageData.height
+    );
+
+    let data = newImage.data;
+
+    for(let i=0;i<data.length;i+=4){
+
+        // operasi invers RGB
+        data[i] = maxVal - data[i];         // R
+        data[i+1] = maxVal - data[i+1];     // G
+        data[i+2] = maxVal - data[i+2];     // B
+
+        // clipping
+        data[i] = Math.max(0, Math.min(255, data[i]));
+        data[i+1] = Math.max(0, Math.min(255, data[i+1]));
+        data[i+2] = Math.max(0, Math.min(255, data[i+2]));
+    }
+
+    expCtxOut.clearRect(0,0,220,220);
+    expCtxOut.putImageData(newImage,0,0);
+}
+
+// ================= SLIDER =================
+expL.oninput = function(){
+    applyNegative();
+};
+
+// ================= RESET =================
+expResetBtn.onclick = function(){
+
+    expL.value = 256;
+    expLVal.textContent = 256;
+
+    if(expImageData){
+        applyNegative();
+    }
+};
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+{% endblock %}

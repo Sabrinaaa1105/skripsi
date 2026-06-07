@@ -1,0 +1,87 @@
+{% extends "EnhanceLearn/base.html" %}
+{% load static %}
+
+{% block title %}Rangkuman{% endblock %}
+
+{% block content %}
+<div class="materi-container">
+
+    <h1 class="subbab-title">SUBBAB 3: RANGKUMAN</h1>
+
+    <!-- BOX RANGKUMAN -->
+    <div class="materi-box">
+        <div class="materi-box-header">
+            <i class="bi bi-journal-check"></i>
+            Ringkasan Materi
+        </div>
+
+        <div class="materi-box-body">
+            <h6 style="font-weight:700; color: #1e3a8a">
+                <em>1. Brightness</em>
+            </h6>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                <em>Brightness</em> (kecerahan) merupakan proses untuk mengatur tingkat terang atau gelap suatu 
+                citra dengan cara menambahkan atau mengurangi nilai intensitas piksel. Jika nilai piksel 
+                ditambah, citra akan terlihat lebih terang, sedangkan jika dikurangi, citra akan menjadi lebih 
+                gelap.
+            </p>
+
+            <h6 style=" margin-top:30px; font-weight:700; color: #1e3a8a">
+                <em>2. Contrast</em>
+            </h6>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                <em>Contrast</em> (kontras) adalah proses untuk memperjelas perbedaan antara bagian terang dan 
+                gelap pada citra. Peningkatan kontras membuat detail objek lebih terlihat jelas, sedangkan 
+                penurunan kontras membuat citra tampak lebih datar atau kurang tegas.
+            </p>
+
+            <h6 style=" margin-top:30px; font-weight:700; color: #1e3a8a">
+                <em>3. Invers</em>
+            </h6>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Negasi citra merupakan transformasi yang membalik nilai intensitas piksel, sehingga bagian 
+                terang menjadi gelap dan bagian gelap menjadi terang. Transformasi ini sering digunakan untuk 
+                menonjolkan detail tertentu yang sulit terlihat pada citra asli.
+            </p>
+
+            <h6 style=" margin-top:30px; font-weight:700; color: #1e3a8a">
+                <em>4. Thresholding</em>
+            </h6>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                <em>Thresholding</em> adalah teknik yang digunakan untuk mengubah citra ke dalam bentuk biner 
+                (hitam dan putih) berdasarkan suatu nilai ambang tertentu. Piksel yang memiliki nilai di atas 
+                ambang akan dijadikan putih, sedangkan yang di bawah ambang akan dijadikan hitam, sehingga 
+                memudahkan proses pemisahan objek dan latar belakang.
+            </p>
+
+            <h6 style=" margin-top:30px; font-weight:700; color: #1e3a8a">
+                <em>5. Logaritmik</em>
+            </h6>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Transformasi logaritmik adalah metode non-linear yang digunakan untuk memperjelas detail pada 
+                bagian citra yang gelap. Transformasi ini bekerja dengan memperbesar nilai intensitas rendah dan 
+                mengompresi nilai intensitas tinggi, sehingga detail pada area gelap menjadi lebih terlihat.
+            </p>
+
+            <h6 style=" margin-top:30px; font-weight:700; color: #1e3a8a">
+                <em>6. Power-Law (Gamma)</em>
+            </h6>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                <em>Power-law transformation</em> atau <em>gamma correction</em> merupakan transformasi 
+                non-linear yang digunakan untuk mengatur kecerahan citra secara lebih fleksibel. Nilai gamma 
+                yang lebih kecil dari satu akan membuat citra lebih terang, sedangkan nilai gamma yang lebih 
+                besar dari satu akan membuat citra lebih gelap. Teknik ini banyak digunakan pada perangkat 
+                tampilan seperti monitor dan kamera.
+            </p>
+        </div>
+    </div>
+
+    <!-- TOMBOL LANJUT -->
+    <div style="margin-top:32px; display:flex; justify-content:space-between;">
+        <a href="{% url 'power_law' %}" class="btn-prev-materi">« Kembali</a>
+
+        <a href="{% url 'halaman_kuis' 'intensitas' %}" class="btn-next-materi">Selanjutnya »</a>
+    </div>
+
+</div>
+{% endblock %}

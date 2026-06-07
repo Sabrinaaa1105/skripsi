@@ -1,0 +1,652 @@
+/* ================== MATERI CONTAINER ================== */
+.materi-container {
+    background-color: #ffffff;
+    border-radius: 14px;
+    padding: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: auto;
+}
+
+/* ================== JUDUL SUBBAB ================== */
+.subbab-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1e3a8a;
+    margin-bottom: 18px;
+}
+
+/* ================== BOX MATERI ================== */
+.materi-box {
+    width:100%;
+    max-width:100%;
+    box-sizing:border-box;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    background-color: #ffffff;
+    overflow: hidden;
+        box-shadow:
+        0 0 0 1px #1e40af,
+        0 6px 16px rgba(30, 64, 175, 0.30);
+}
+
+
+/* HEADER BOX */
+.materi-box-header {
+    background-color: #1e40af;
+    color: #ffffff;
+    padding: 10px 16px;
+    font-size: 23px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ISI BOX */
+.materi-box-body {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    box-sizing:border-box;
+    padding: 14px 16px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #1f2937;
+}
+
+
+.materi-box-body p {
+    margin-bottom: 10px;
+}
+
+.materi-box-body ul{
+    padding-left:20px;
+}
+
+.materi-box-body li{
+    overflow-wrap: break-word;
+}
+
+/* Tombol Kembali */
+.btn-prev-materi {
+    background-color: #6b7280; /* abu-abu */
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+/* Hover efek */
+.btn-prev-materi:hover {
+    background-color: #4b5563;
+}
+
+
+/* Tombol Selanjutnya */
+.btn-next-materi {
+    background-color: #2563eb; /* biru */
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+/* Hover efek */
+.btn-next-materi:hover {
+    background-color: #1e40af;
+}
+
+/* ================= SIMULATOR  ================= */
+
+.simulator-container-box {
+    margin: 25px auto;
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #aaa;
+    border-radius: 10px;
+}
+
+.grid-sim {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.panel-sim {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.panel-sim h3 {
+    text-align: center;
+    margin-top: 0;
+}
+
+
+.matrix-sim {
+    display: grid;
+    grid-template-columns: repeat(4, 42px);
+    gap: 6px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.cell-sim {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: 1px solid #aaa;
+    font-size: 14px;
+}
+
+.input-cell-sim {
+    background: #cfd6e1;
+}
+
+.output-cell-sim {
+    background: #f2f2f2;
+}
+
+.active-sim {
+    outline: 3px solid red;
+}
+
+/* ================= CONTROL ================= */
+
+.controls-sim {
+    text-align: center;
+}
+
+.controls-sim input[type=range] {
+    width: 100%;
+    max-width: 200px;
+}
+
+.controls-sim input[type=number] {
+    width: 70px;
+}
+
+.calc-box-sim{
+    padding:10px;
+    min-height:90px;
+    width:85%;
+    margin:auto;
+    line-height:1;
+    background:#dbeafe !important; 
+    border:1px solid #93c5fd;
+    border-radius:10px;
+}
+
+/* ================= BUTTON ================= */
+
+.btn-sim{
+    margin:6px;
+    padding:10px 22px;
+    border-radius:14px;
+    border:none;
+    font-family:inherit;
+    font-size:15px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+/* tombol mulai */
+.btn-start{
+    background:#2f6fd6;
+    color:#fff;
+}
+
+/* tombol lanjut */
+.btn-next{
+    background:#236820;
+    color:#fff;
+}
+
+/* tombol reset */
+.btn-reset{
+    background:#e03a3a;
+    color:#fff;
+}
+
+.hidden-sim{
+    display:none;
+}
+/* ================= CANVAS ================= */
+
+canvas {
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #000;
+}
+
+
+/* ================= BOX PERHITUNGAN ================= */
+
+.calc-box-sim {
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 12px;
+    min-height: 140px;
+    background: #fafafa;
+}
+
+/* PARAMETER CONTRAST */
+
+.param-row{
+display:flex;
+justify-content:center;
+gap:16px;
+margin:12px 0;
+}
+
+.param-box{
+display:flex;
+flex-direction:column;
+align-items:center;
+font-size:14px;
+}
+
+.param-box input{
+width:60px;
+padding:4px;
+font-size:14px;
+text-align:center;
+border:1px solid #aaa;
+border-radius:6px;
+margin-top:4px;
+}
+
+
+.upload-input {
+    display: none;
+}
+
+.upload-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #2f6fd6;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* TOP CONTROL */
+.exp-top-control {
+    display: flex;
+    align-items: center;
+    gap: 25px; /* atur jarak di sini */
+    flex-wrap: wrap;
+}
+
+/* SLIDER GROUP */
+.exp-slider-group {
+    display: flex;
+    flex-direction: column; /* paksa vertikal */
+    align-items: flex-start; /* biar ke kiri */
+}
+
+/* .exp-slider-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+} */
+
+.exp-slider-row input[type="range"] {
+    width: 200px;
+}
+
+/* CANVAS */
+.exp-canvas-row {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.exp-canvas-row canvas {
+    border: 1px solid #ccc;
+}
+
+
+/* Label tepat di atas slider */
+.slider-label {
+    width: 100%;
+    display: block;
+    text-align: left; /* penting */
+    margin-bottom: 6px;
+}
+
+/* Slider layout */
+.exp-slider-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* RESET BUTTON MERAH */
+.btn-reset {
+    background: #e03a3a;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-reset:hover {
+    background: #c92f2f;
+}
+
+/* SLIDER NETRAL (tidak biru) */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 200px;
+    height: 6px;
+    background: #d1d5db; /* abu-abu */
+    border-radius: 5px;
+    outline: none;
+}
+
+/* thumb (bulatnya) */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #555; /* abu gelap */
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Firefox */
+input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #555;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* CSS */
+
+.pdf-table,
+.cdf-table,
+.mapping-table{
+    border-collapse:collapse;
+    width:100%;
+    text-align:center;
+    font-size:16px;
+    border:1px solid #222;
+}
+
+.title-cell{
+    border:1px solid #222;
+    padding:10px;
+    width:120px;
+    font-weight:bold;
+    line-height:1.5;
+    background:#f8fafc;
+    color:#0f172a;
+}
+
+.pixel-cell,
+.pdf-cell{
+    border:1px solid #222;
+    width:55px;
+    height:52px;
+    transition:0.3s;
+    background:white;
+}
+
+.cdf-pixel-cell,
+.cdf-pdf-cell,
+.cdf-result-cell{
+    border:1px solid #222;
+    width:55px;
+    height:60px;
+    text-align:center;
+    vertical-align:middle;
+
+}
+
+.active-cell{
+    border:3px solid red !important;
+    background:#fff7ed !important;
+}
+
+.calculation-box{
+display: none; 
+    max-width: 500px; 
+    margin: 20px auto; 
+    padding: 15px 20px; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15); 
+    background-color: #f0f7ff; 
+    border: 1px solid #b9ddff;
+}
+
+
+/* =========================
+   POPUP SELESAI
+========================= */
+
+.popup-overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.35);
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:9999;
+}
+
+.popup-box{
+    width:500px;
+    background:white;
+    border-radius:14px;
+    padding:40px 30px;
+    text-align:center;
+
+    animation:popupShow 0.3s ease;
+}
+
+.popup-icon{
+    width:120px;
+    height:120px;
+
+    margin:0 auto 20px;
+
+    border:6px solid #d9ead3;
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:#8dc971;
+    font-size:70px;
+}
+
+.popup-box h2{
+    font-size:48px;
+    margin-bottom:15px;
+    color:#4b4b4b;
+}
+
+.popup-box p{
+    font-size:20px;
+    color:#666;
+    margin-bottom:30px;
+}
+
+#popupOkBtn{
+    background:#6c63ff;
+    color:white;
+
+    border:none;
+    border-radius:10px;
+
+    padding:14px 28px;
+
+    font-size:20px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:0 0 0 4px rgba(108,99,255,0.25);
+}
+
+@keyframes popupShow{
+    from{
+        transform:scale(0.8);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+mjx-container{
+    max-width:100%;
+    overflow-x:auto;
+    overflow-y:hidden;
+}
+
+@media (max-width:768px){
+
+    .content{
+        width:100%;
+        overflow-x:hidden;
+    }
+
+    body{
+        overflow-x:auto;
+    }
+
+    mjx-container{
+        overflow-x:auto;
+        max-width:100%;
+    }
+
+    .grid-sim{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .panel-sim{
+        width:100%;
+        box-sizing:border-box;
+    }
+
+    /* Input */
+    .grid-sim > .panel-sim:nth-child(1){
+        grid-column:1;
+        grid-row:1;
+    }
+
+    /* Hasil */
+    .grid-sim > .panel-sim:nth-child(3){
+        grid-column:2;
+        grid-row:1;
+    }
+
+    /* Perhitungan */
+    .controls-sim{
+        grid-column:1 / span 2;
+        grid-row:2;
+    }
+
+    .cell-sim{
+        width:24px;
+        height:24px;
+        font-size:10px;
+    }
+
+    #canvasIn,
+    #canvasOut{
+        max-width:160px;
+        height:auto;
+        display:block;
+        margin:auto;
+    }
+
+
+}
+
+
+/* Desktop tetap seperti sekarang */
+.mobile-pair{
+    display:block;
+}
+
+/* Hanya HP */
+@media (max-width:768px){
+
+    .mobile-pair{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:10px;
+        width:100%;
+    }
+
+    .mobile-pair canvas{
+        width:120px;
+        height:120px;
+    }
+
+    .mobile-pair .matrix-sim{
+        grid-template-columns:repeat(4,28px);
+        gap:3px;
+        margin-top:0;
+    }
+
+    .mobile-pair .cell-sim{
+        width:28px;
+        height:28px;
+        font-size:11px;
+    }
+
+    .calc-box-sim{
+        width:90%;
+        min-height:40px;
+        padding:5px;
+        font-size:12px;
+    }
+
+    .controls-sim{
+        grid-column:1 / span 2;
+        grid-row:2;
+
+    }
+
+    .controls-sim h5{
+        font-size:15px;
+        margin-bottom:7px;
+    }
+    
+}
+

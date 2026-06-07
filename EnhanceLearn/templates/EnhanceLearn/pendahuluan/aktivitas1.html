@@ -1,0 +1,51 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/aktivitas.css' %}">
+<script src="{% static 'js/data-aktivitas.js' %}"></script>
+<script src="{% static 'js/aktivitas.js' %}"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    window.namaAktivitas = "aktivitas1";
+
+    console.log("Aktivitas yang sedang dibuka:", window.namaAktivitas);
+
+    initQuiz(dataAktivitas1);
+
+});
+</script>
+
+<div class="materi-box aktivitas-wrapper">
+    <div class="materi-box-header">
+        <h4><i class="bi bi-pencil-square"></i> Aktivitas 1</h4>
+    </div>
+
+    <div class="materi-box-body">
+        <p><strong>Kerjakan aktivitas berikut untuk menguji pemahaman kamu.</strong></p>
+        <p>Pilih satu jawaban yang paling tepat. Kamu boleh mencoba lebih dari satu kali.</p>
+
+        <div class="materi-box aktivitas-question-box">
+            <div class="materi-box-body">
+
+                <p id="counter"></p>
+                <h4 id="question"></h4>
+                <div id="choices"></div>
+                <div id="feedback"></div>
+
+                <button id="nextBtn" type="button" class="btn-next disabled">Selanjutnya</button>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="finishModal" class="modal-overlay">
+    <div class="modal-box">
+        <div class="check-circle">✓</div>
+        <h3>Semua jawaban benar!</h3>
+        <p>Klik tombol <strong>Selanjutnya</strong> untuk lanjut ke materi berikutnya.</p>
+        <button onclick="closeModal()">OK</button>
+    </div>
+</div>

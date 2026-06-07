@@ -1,0 +1,717 @@
+{% extends "EnhanceLearn/base.html" %}
+{% load static %}
+
+{% block title %}Intensitas{% endblock %}
+
+{% block content %}
+
+<div class="materi-container">
+
+    <h1 class="subbab-title">SUBBAB 3: LOGARITMIK</h1>
+
+    <div class="materi-box">
+        <div class="materi-box-header">
+            <i class="bi bi-graph-up"></i>
+            <h5>Transformasi Logaritmik</h5>
+        </div>
+
+        <div class="materi-box-body">
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Transformasi logaritmik merupakan salah satu transformasi intensitas digunakan untuk 
+                <strong>memperluas nilai intensitas rendah</strong> dan 
+                <strong>menekan nilai intensitas tinggi</strong> pada citra <em>grayscale</em>. 
+                Transformasi ini sering dimanfaatkan untuk <strong>menonjolkan detail pada bagian citra yang gelap</strong>, 
+                sehingga informasi yang sebelumnya sulit diamati menjadi lebih jelas. Dalam pemrosesan citra digital, transformasi logaritmik termasuk ke dalam 
+                <strong><em>point operation</em></strong>, karena nilai intensitas piksel keluaran 
+                hanya bergantung pada nilai intensitas piksel masukan pada posisi yang sama. 
+                Transformasi ini sangat berguna untuk citra yang memiliki 
+                <strong>rentang intensitas besar</strong> atau 
+                <strong>distribusi intensitas yang tidak merata</strong>. Bentuk umum dari transformasi logaritmik adalah
+            </p>
+
+            <div style="text-align:center; margin: 16px 0; font-size: 17px;">
+                $$ s = c \cdot \log(1 + r) $$
+            </div>
+
+            <p style="font-size: 17px;">Dimana:</p>
+
+            <ul style="font-size: 17px; line-height: 1.8;">
+                <li><strong>$s$</strong> : nilai intensitas piksel citra keluaran</li>
+                <li><strong>$r$</strong> : nilai intensitas piksel citra masukan</li>
+                <li><strong>$c$</strong> : konstanta penskalaan</li>
+                <li><strong>$\log$</strong> : logaritma</li>
+            </ul>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Penambahan nilai 1 pada $r$ bertujuan untuk 
+                menghindari nilai logaritma nol ketika <strong>$r = 0$</strong>.
+            </p>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Berdasarkan persamaan tersebut, perubahan kecil pada nilai intensitas rendah 
+                akan menghasilkan perubahan yang relatif besar pada citra keluaran. 
+                Sebalnya, perubahan pada nilai intensitas tinggi akan menghasilkan perubahan 
+                yang lebih kecil. Akibatnya, detail pada area gelap citra menjadi lebih terlihat, 
+                sementara area terang tidak mengalami peningkatan yang berlebihan.
+            </p>
+
+        </div>
+    </div>
+
+    <div class="materi-box">
+<div class="materi-box-body">
+
+<h3 style="color:#007bff;border-left:5px solid #007bff;padding-left:15px;margin-bottom:20px;">
+<i class="bi bi-pencil-fill"></i> Contoh Perhitungan
+</h3>
+
+        <div class="materi-box-contoh" style="margin:0; box-shadow:0 4px 15px rgba(0,0,0,0.4); background:#f8fbff;">
+          <div class="materi-box-body">
+<p>Gambar berikut menunjukkan citra <em>grayscale</em> 4×4.</p>
+
+<div style="margin:16px 0;">
+<table style="width:70%;margin:auto;border:1px solid #cbd5e1;text-align:center;background:white;">
+<tr>
+
+<td style="width:50%;border-right:1px solid #cbd5e1;padding:8px;">
+<img src="{% static 'img/intensitas/log/contoh-citra.png' %}" style="width:85%;">
+</td>
+
+<td style="width:50%;padding:8px;">
+<img src="{% static 'img/intensitas/log/contoh-matriks.png' %}" style="width:85%;">
+</td>
+
+</tr>
+</table>
+
+<p style="font-size:13px;margin-top:6px;font-style:italic;text-align:center;">
+Gambar 3.2 Citra untuk perhitungan transformasi logaritmik
+</p>
+
+</div>
+
+
+<p style="font-weight:bold;color:#007bff;margin-bottom:10px;">
+<i class="bi bi-mouse3-fill"></i> Petunjuk Simulasi Interaktif:
+</p>
+
+<ol style="font-size:14.5px; line-height:1.8; color:#334155; padding-left:20px;">
+
+    <li>
+        <strong>Atur Nilai Konstanta:</strong> Geser slider atau ubah nilai 
+        konstanta <em>c</em> yang digunakan pada transformasi logaritmik. 
+        Nilai konstanta ini mempengaruhi tingkat peningkatan intensitas piksel 
+        pada citra hasil.
+    </li>
+
+    <li>
+        <strong>Mulai Simulasi:</strong> Klik tombol 
+        <span style="color:#2f6fd6; font-weight:bold;">Mulai</span>. 
+        Simulasi akan menyorot piksel pertama pada matriks input dan memulai 
+        proses transformasi logaritmik secara bertahap.
+    </li>
+
+    <li>
+        <strong>Lihat Proses Perhitungan:</strong> Klik tombol 
+        <span style="color:#236820; font-weight:bold;">Lanjut</span> 
+        untuk melihat proses perhitungan matematis setiap piksel menggunakan 
+        persamaan transformasi logaritmik.
+    </li>
+
+    <li>
+        <strong>Amati Perubahan Intensitas:</strong> Perhatikan bagaimana 
+        piksel dengan intensitas rendah mengalami peningkatan kecerahan yang 
+        lebih signifikan dibandingkan piksel dengan intensitas tinggi pada 
+        citra hasil.
+    </li>
+
+    <li>
+        <strong>Reset Simulasi:</strong> Klik tombol 
+        <span style="color:#e03a3a; font-weight:bold;">Ulangi</span> 
+        untuk menghapus hasil sebelumnya dan memulai kembali simulasi dengan 
+        nilai konstanta <em>c</em> yang berbeda.
+    </li>
+
+</ol>
+
+
+<div class="simulator-container-box">
+
+<div class="grid-sim">
+
+<div class="panel-sim">
+<h5 style="text-align:center; font-weight:700; color:#1e3a8a;">Input Citra</h5>
+<img id="imgSource" src="{% static 'img/intensitas/log/contoh-citra.png' %}" style="display:none;">
+<div class="mobile-pair">
+<canvas id="canvasIn" width="160" height="160"></canvas>
+<div class="matrix-sim" id="inMatrix"></div>
+</div>
+</div>
+
+
+<div class="panel-sim controls-sim">
+
+<h5 style="text-align:center; font-weight:700; color:#1e3a8a;">Perhitungan</h5>
+
+<b>Rumus:</b>
+
+\[
+s = c \cdot \log(1+r)
+\]
+
+Nilai <b>c</b>
+
+<input type="range" min="1" max="60" value="45" id="cSlider">
+
+<input type="number" min="1" max="60" value="45" id="cNumber">
+
+<br><br>
+
+<button id="startBtn" class="btn-sim btn-start">
+Mulai
+</button>
+
+<button id="nextBtn" class="btn-sim btn-next hidden-sim">
+Lanjut
+</button>
+
+<button id="resetBtn" class="btn-sim btn-reset hidden-sim">
+Ulangi
+</button>
+
+<div class="calc-box-sim" id="calcBox">
+Klik <b>Mulai</b> untuk memulai perhitungan.
+</div>
+
+</div>
+
+
+<div class="panel-sim">
+<h5 style="text-align:center; font-weight:700; color:#1e3a8a;">Hasil Transformasi Logaritmik</h5>
+<div class="mobile-pair">
+<canvas id="canvasOut" width="160" height="160"></canvas>
+<div class="matrix-sim" id="outMatrix"></div>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- ================= EXPLORASI MANDIRI ================= -->
+<div class="materi-box-contoh" style="margin:0; margin-top:24px; box-shadow:0 4px 15px rgba(0,0,0,0.4); background:#f8fbff;">
+    <div class="materi-box-body">
+
+        <h3 style="color:#007bff;border-left:5px solid #007bff;padding-left:15px;margin-bottom:20px;">
+            <i class="bi bi-sliders"></i> Eksplorasi Mandiri
+        </h3>
+
+        <p style="font-size:17px; line-height:1.8; text-align:justify;">
+            Upload gambar Anda sendiri dan amati bagaimana transformasi logaritmik 
+            memperjelas detail pada area gelap citra dengan mengubah distribusi 
+            intensitas piksel menggunakan konstanta <em>c</em>.
+        </p>
+
+        <!-- CONTROL -->
+        <div class="exp-top-control">
+
+            <!-- Upload -->
+            <div>
+                <label for="uploadLogImage" class="upload-btn">
+                    <i class="bi bi-upload"></i> Upload
+                </label>
+
+                <input 
+                    type="file"
+                    id="uploadLogImage"
+                    class="upload-input"
+                    accept="image/*">
+            </div>
+
+            <!-- Slider -->
+            <div class="exp-slider-group">
+
+                <label class="slider-label">
+                    <b>Konstanta c:</b>
+                </label>
+
+                <div class="exp-slider-row">
+
+                    <input 
+                        type="range"
+                        id="expLogSlider"
+                        min="1"
+                        max="60"
+                        value="45">
+
+                    <span id="expLogVal">45</span>
+
+                    <button id="expLogReset" class="btn-reset">
+                        Reset
+                    </button>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CANVAS -->
+        <div class="exp-canvas-row">
+
+            <div>
+                <b>Citra Asli</b><br>
+                <canvas id="expCanvasIn" width="220" height="220"></canvas>
+            </div>
+
+            <div>
+                <b>Hasil Transformasi Logaritmik</b><br>
+                <canvas id="expCanvasOut" width="220" height="220"></canvas>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</div>
+</div>
+
+
+{% include "EnhanceLearn/intensitas/aktivitas9.html" %}
+
+<div style="margin-top:32px; display:flex; justify-content:space-between;">
+<a href="{% url 'thresholding' %}" class="btn-prev-materi">« Kembali</a>
+<a href="{% url 'power_law' %}" class="btn-next-materi">Selanjutnya »</a>
+</div>
+
+</div>
+
+
+
+<script>
+
+window.MathJax = {
+tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+};
+
+
+// ================= DATA =================
+
+const pixels = [
+[69,88,98,92],
+[74,90,93,103],
+[60,78,87,87],
+[60,74,84,83]
+];
+
+let result = Array.from({length:4},()=>Array(4).fill(""));
+let step = 0;
+let isStepping = false;
+
+
+// ================= CANVAS =================
+
+const canvasIn = document.getElementById("canvasIn");
+const canvasOut = document.getElementById("canvasOut");
+
+const ctxIn = canvasIn.getContext("2d");
+const ctxOut = canvasOut.getContext("2d");
+
+
+// ================= ELEMENT =================
+
+const inMatrix = document.getElementById("inMatrix");
+const outMatrix = document.getElementById("outMatrix");
+
+const calcBox = document.getElementById("calcBox");
+
+const cSlider = document.getElementById("cSlider");
+const cNumber = document.getElementById("cNumber");
+
+const startBtn = document.getElementById("startBtn");
+const nextBtn  = document.getElementById("nextBtn");
+const resetBtn = document.getElementById("resetBtn");
+
+
+// ================= DRAW =================
+
+function drawImage(matrix, ctx, isInputCanvas = false){
+
+for(let y=0;y<4;y++){
+
+for(let x=0;x<4;x++){
+
+let v = matrix[y][x];
+
+if(v==="") continue;
+
+let finalV = v;
+
+if (isInputCanvas) {
+    // Penskalaan khusus untuk Gambar Input agar terlihat kontras dari hitam ke putih (sesuai Gambar 3.2)
+    let minVal = 60;
+    let maxVal = 103;
+    finalV = Math.round(((v - minVal) / (maxVal - minVal)) * 255);
+} else {
+    // Untuk Gambar Hasil, tampilkan nilai intensitas murni (0-255) tanpa scaling ulang
+    // agar transformasi logaritmik (efek mencerahkan area gelap) terlihat nyata secara visual.
+    finalV = v;
+}
+
+finalV = Math.min(255, Math.max(0, finalV));
+
+ctx.fillStyle=`rgb(${finalV},${finalV},${finalV})`;
+
+ctx.fillRect(x*40,y*40,40,40);
+
+}
+
+}
+
+}
+
+function drawInput(){
+    drawImage(pixels, ctxIn, true);
+}
+
+function drawOutput(matrix){
+    ctxOut.clearRect(0,0,160,160);
+    drawImage(matrix, ctxOut, false);
+}
+
+function clearOutput(){
+
+    ctxOut.clearRect(0,0,160,160);
+
+    let empty = Array.from({length:4},()=>Array(4).fill(""));
+
+    renderMatrices(-1, empty);
+
+}
+
+
+
+// ================= MATRIX =================
+
+function renderMatrices(active=-1, matrix=result){
+
+inMatrix.innerHTML="";
+outMatrix.innerHTML="";
+
+for(let i=0;i<16;i++){
+
+let y=Math.floor(i/4);
+let x=i%4;
+
+let a=document.createElement("div");
+a.className="cell-sim input-cell-sim"+(i===active?" active-sim":"");
+a.textContent=pixels[y][x];
+
+inMatrix.appendChild(a);
+
+
+let b=document.createElement("div");
+b.className="cell-sim output-cell-sim"+(i===active?" active-sim":"");
+b.textContent=matrix[y][x];
+
+outMatrix.appendChild(b);
+
+}
+
+}
+
+
+
+// ================= PREVIEW =================
+
+function previewLog(c){
+
+let preview = pixels.map(row =>
+row.map(v => {
+
+let s = Math.round(c * Math.log(1 + v));
+
+return Math.min(255, Math.max(0, s));
+
+})
+);
+
+drawOutput(preview);
+
+renderMatrices(-1, preview);
+
+}
+
+
+
+// ================= STEP =================
+
+function stepCalc(){
+
+const c = parseFloat(cSlider.value);
+
+const y = Math.floor(step/4);
+const x = step % 4;
+
+const r = pixels[y][x];
+
+const logVal = Math.log(1+r);
+
+let s = Math.round(c * logVal);
+
+s = Math.min(255, Math.max(0, s));
+
+result[y][x] = s;
+
+calcBox.innerHTML = `
+
+\\[
+s = c \\cdot log(1+r)
+\\]
+
+\\[
+s = ${c} \\cdot log(1+${r})
+\\]
+
+\\[
+s = ${c} \\cdot log(${1+r})
+\\]
+
+\\[
+s = ${c} \\cdot ${logVal.toFixed(3)}
+\\]
+
+\\[
+s = ${s}
+\\]
+
+`;
+
+MathJax.typesetPromise();
+
+drawOutput(result);
+
+renderMatrices(step, result);
+
+step++;
+
+}
+
+
+
+// ================= SLIDER =================
+
+cSlider.oninput=()=>{
+
+cNumber.value = cSlider.value;
+
+if(!isStepping) previewLog(parseFloat(cSlider.value));
+
+};
+
+cNumber.oninput=()=>{
+
+cSlider.value = cNumber.value;
+
+if(!isStepping) previewLog(parseFloat(cNumber.value));
+
+};
+
+
+
+// ================= BUTTON =================
+
+startBtn.onclick=()=>{
+
+isStepping = true;
+
+step = 0;
+
+result = Array.from({length:4},()=>Array(4).fill(""));
+
+clearOutput();
+
+startBtn.classList.add("hidden-sim");
+
+nextBtn.classList.remove("hidden-sim");
+
+resetBtn.classList.remove("hidden-sim");
+
+stepCalc();
+
+};
+
+
+nextBtn.onclick=()=>{
+
+if(step<16) stepCalc();
+
+};
+
+
+resetBtn.onclick=()=>{
+
+isStepping = false;
+
+step = 0;
+
+result = Array.from({length:4},()=>Array(4).fill(""));
+
+clearOutput();
+
+startBtn.classList.remove("hidden-sim");
+
+nextBtn.classList.add("hidden-sim");
+
+resetBtn.classList.add("hidden-sim");
+
+calcBox.innerHTML="Geser slider atau klik <b>Mulai</b> untuk memulai perhitungan.";
+
+renderMatrices();
+
+};
+
+
+
+// ================= INIT =================
+
+drawInput();
+
+renderMatrices();
+
+clearOutput();
+
+</script>
+
+<script>
+/* ================= EKSPLORASI LOGARITMIK ================= */
+
+const uploadLogImage = document.getElementById("uploadLogImage");
+
+const expCanvasIn = document.getElementById("expCanvasIn");
+const expCanvasOut = document.getElementById("expCanvasOut");
+
+const expCtxIn = expCanvasIn.getContext("2d");
+const expCtxOut = expCanvasOut.getContext("2d");
+
+const expLogSlider = document.getElementById("expLogSlider");
+const expLogVal = document.getElementById("expLogVal");
+
+const expLogReset = document.getElementById("expLogReset");
+
+let expLogImageData = null;
+
+
+// ================= UPLOAD =================
+
+uploadLogImage.onchange = function(e){
+
+    const file = e.target.files[0];
+
+    if(!file) return;
+
+    const img = new Image();
+
+    img.onload = function(){
+
+        const canvasSize = 220;
+
+        expCtxIn.clearRect(0,0,canvasSize,canvasSize);
+        expCtxOut.clearRect(0,0,canvasSize,canvasSize);
+
+        // fit gambar
+        let scale = Math.min(
+            canvasSize / img.width,
+            canvasSize / img.height
+        );
+
+        let w = img.width * scale;
+        let h = img.height * scale;
+
+        let x = (canvasSize - w) / 2;
+        let y = (canvasSize - h) / 2;
+
+        // tampilkan gambar asli
+        expCtxIn.drawImage(img, x, y, w, h);
+
+        // ambil data gambar
+        expLogImageData = expCtxIn.getImageData(
+            0,0,canvasSize,canvasSize
+        );
+
+        applyLogTransform();
+    };
+
+    img.src = URL.createObjectURL(file);
+};
+
+
+// ================= APPLY LOG =================
+
+function applyLogTransform(){
+
+    if(!expLogImageData) return;
+
+    let c = parseFloat(expLogSlider.value);
+
+    expLogVal.textContent = c;
+
+    let newImage = new ImageData(
+        new Uint8ClampedArray(expLogImageData.data),
+        expLogImageData.width,
+        expLogImageData.height
+    );
+
+    let data = newImage.data;
+
+    for(let i=0;i<data.length;i+=4){
+
+        // transformasi log RGB
+        data[i] = c * Math.log(1 + data[i]);         // R
+        data[i+1] = c * Math.log(1 + data[i+1]);     // G
+        data[i+2] = c * Math.log(1 + data[i+2]);     // B
+
+        // clipping
+        data[i] = Math.max(0, Math.min(255, data[i]));
+        data[i+1] = Math.max(0, Math.min(255, data[i+1]));
+        data[i+2] = Math.max(0, Math.min(255, data[i+2]));
+    }
+
+    expCtxOut.clearRect(0,0,220,220);
+
+    expCtxOut.putImageData(newImage,0,0);
+}
+
+
+// ================= SLIDER =================
+
+expLogSlider.oninput = function(){
+
+    applyLogTransform();
+
+};
+
+
+// ================= RESET =================
+
+expLogReset.onclick = function(){
+
+    expLogSlider.value = 45;
+
+    expLogVal.textContent = 45;
+
+    if(expLogImageData){
+
+        applyLogTransform();
+
+    }
+
+};
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+{% endblock %}

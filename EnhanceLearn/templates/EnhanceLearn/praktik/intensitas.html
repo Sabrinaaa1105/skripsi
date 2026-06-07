@@ -1,0 +1,293 @@
+{% extends "EnhanceLearn/base.html" %}
+{% load static %}
+
+{% block title %}Transformasi intensitas Citra dengan Python{% endblock %}
+
+{% block content %}
+
+<div class="materi-container">
+    <h1 class="subbab-title">SUBBAB 5: TRANSFORMASI INTENSITAS CITRA DENGAN PYTHON</h1>
+
+    <div class="materi-box">
+        <div class="materi-box-header">
+            <i class="bi bi-code-slash"></i>
+            Transformasi Intesitas Citra dengan Python
+        </div>
+
+        <div class="materi-box-body">
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Library Pillow menyediakan berbagai fungsi yang dapat digunakan untuk melakukan transformasi intensitas citra, seperti pengaturan kecerahan (<em>brightness</em>), kontras (<em>contrast</em>), negasi (<em>invers</em>), <em>thresholding</em>, serta transformasi non-linear seperti logaritmik dan <em>power-law (gamma)</em>.
+                Fitur-fitur ini dapat diakses melalui modul seperti <code>Image</code>, <code>ImageEnhance</code>, dan <code>ImageOps</code>.<br>
+                Sebagai contoh, <code>ImageEnhance.Brightness</code> digunakan untuk mengatur tingkat kecerahan citra, sedangkan <code>ImageEnhance.Contrast</code> digunakan untuk meningkatkan atau menurunkan kontras. Untuk operasi negasi, Pillow menyediakan fungsi <code>ImageOps.invert</code> yang secara langsung membalik nilai intensitas piksel. Operasi thresholding dapat
+                dilakukan dengan memanfaatkan metode <code>point()</code> untuk memetakan nilai piksel berdasarkan ambang batas tertentu.
+            </p>
+
+            <hr style="margin-top:35px; margin-bottom:18px;">
+
+            <h4 style="font-weight:700; color: #1e3a8a;"><em>Brightness</em></h4>
+            <pre style="background: #dbeafe; border: 1px solid #60a5fa; border-radius: 12px; padding: 18px 20px; overflow-x: auto; margin-top: 18px;">
+<code style="font-family: 'Courier New', monospace; font-size: 16px; line-height: 1.5; color: #0f172a;">img = Image.open("gambar.jpg")
+brightness = ImageEnhance.Brightness(img)
+hasil = brightness.enhance(1.5)</code></pre>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Pada kode di atas, gambar diubah menjadi <em>grayscale</em> lalu tingkat kecerahannya ditingkatkan menggunakan <code>ImageEnhance.Brightness()</code>. Nilai 1.5 membuat gambar menjadi 1,5 kali lebih terang dari gambar asli. 
+            </p>
+
+            <hr style="margin-top:35px; margin-bottom:18px;">
+
+            <h4 style="font-weight:700; color: #1e3a8a;"><em>Contrass</em></h4>
+            <pre style="background: #dbeafe; border: 1px solid #60a5fa; border-radius: 12px; padding: 18px 20px; overflow-x: auto; margin-top: 18px;">
+<code style="font-family: 'Courier New', monospace; font-size: 16px; line-height: 1.5; color: #0f172a;">img = Image.open("gambar.jpg")
+contrast = ImageEnhance.Contrast(img)
+hasil = contrast.enhance(1.5)</code></pre>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Pada kode di atas, gambar <em>grayscale</em> diproses menggunakan <code>ImageEnhance.Contrast()</code>. Nilai 1.5 digunakan untuk meningkatkan perbedaan antara area terang dan gelap sehingga detail gambar lebih jelas.  
+            </p>
+
+            <hr style="margin-top:35px; margin-bottom:18px;">
+
+            <h4 style="font-weight:700; color: #1e3a8a;"><em>Invers</em></h4>
+            <pre style="background: #dbeafe; border: 1px solid #60a5fa; border-radius: 12px; padding: 18px 20px; overflow-x: auto; margin-top: 18px;">
+<code style="font-family: 'Courier New', monospace; font-size: 16px; line-height: 1.5; color: #0f172a;">img = Image.open("gambar.jpg")
+invert = ImageOps.invert(img.convert("L"))
+hasil = ImageOps.invert(img)</code></pre>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Pada kode di atas, fungsi <code>ImageOps.invert()</code> digunakan untuk membalik nilai piksel. Piksel terang menjadi gelap dan piksel gelap menjadi terang sehingga menghasilkan citra negatif.   
+            </p>
+
+            <hr style="margin-top:35px; margin-bottom:18px;">
+
+            <h4 style="font-weight:700; color: #1e3a8a;"><em>Thresholding</em></h4>
+            <pre style="background: #dbeafe; border: 1px solid #60a5fa; border-radius: 12px; padding: 18px 20px; overflow-x: auto; margin-top: 18px;">
+<code style="font-family: 'Courier New', monospace; font-size: 16px; line-height: 1.5; color: #0f172a;">img = Image.open("gambar.jpg").convert("L")
+threshold = 128
+hasil = img.point(lambda p: 255 if p > threshold else 0)</code></pre>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Pada kode di atas, setiap piksel dibandingkan dengan nilai ambang <em>(threshold)</em> sebesar 128 menggunakan fungsi <code>point()</code>. Piksel di atas ambang menjadi putih, sedangkan piksel di bawah ambang menjadi hitam sehingga menghasilkan citra biner.    
+            </p>
+
+            <hr style="margin-top:35px; margin-bottom:18px;">
+
+            <h4 style="font-weight:700; color: #1e3a8a;">Logaritmik</h4>
+            <pre style="background: #dbeafe; border: 1px solid #60a5fa; border-radius: 12px; padding: 18px 20px; overflow-x: auto; margin-top: 18px;">
+<code style="font-family: 'Courier New', monospace; font-size: 16px; line-height: 1.5; color: #0f172a;">img = Image.open("gambar.jpg").convert("L")
+log = img.point(lambda p:int(255*math.log(1+p)/math.log(256)))</code></pre>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Pada kode di atas, transformasi logaritmik diterapkan pada setiap piksel menggunakan fungsi <code>point()</code>. Metode ini memperjelas detail pada area gelap tanpa membuat area terang terlalu dominan.    
+            </p>
+
+            <hr style="margin-top:35px; margin-bottom:18px;">
+
+            <h4 style="font-weight:700; color: #1e3a8a;"><em>Power Law (Gamma Correction)</em></h4>
+            <pre style="background: #dbeafe; border: 1px solid #60a5fa; border-radius: 12px; padding: 18px 20px; overflow-x: auto; margin-top: 18px;">
+<code style="font-family: 'Courier New', monospace; font-size: 16px; line-height: 1.5; color: #0f172a;">img = Image.open("gambar.jpg").convert("L")
+gamma = 2.0
+power_law = img.point(lambda p: int(255 * (p / 255) ** gamma))</code></pre>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+               Pada kode di atas, setiap piksel diproses menggunakan rumus <em>gamma correction</em> dengan nilai <code>gamma = 2.0</code>. Metode ini digunakan untuk mengatur kecerahan citra secara nonlinier, sehingga gambar menjadi lebih gelap atau lebih terang sesuai nilai gamma.   
+            </p>
+        </div>
+    </div>
+
+    <div class="materi-box">
+        <div class="materi-box-header">
+            EnhanceLearn - Praktik
+        </div>
+
+        <div class="materi-box-body">
+            <div class="editor-guide">
+                <h5 style="font-weight:700; color: #1e3a8a;">Petunjuk:</h5>
+                <ul>
+                    <li><strong>Upload File:</strong> Klik tombol <strong>Upload Gambar</strong> untuk mengunggah citra yang akan digunakan pada praktik. Pastikan file gambar berhasil dimuat sebelum menjalankan kode.</li>
+                    <li><strong>Menjalankan Proses (▶):</strong> Setelah gambar diunggah, tekan tombol <strong>▶ Run</strong> pada setiap cell untuk menjalankan kode.</li>
+                    <li><strong>Menghapus Kode (🗑):</strong> Klik tombol <strong>🗑 Hapus</strong> untuk mengosongkan seluruh kode pada cell yang dipilih.</li>
+                    <li><strong>Menambah Cell (+):</strong> Klik tombol <strong>+ Add Cell</strong> untuk menambahkan cell baru apabila diperlukan untuk menulis atau mencoba kode tambahan.</li>
+                </ul>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="editor-box">
+                        <div class="editor-box-body">
+
+                            <div class="cell-box">
+                                <div class="editor-wrap">
+                                    <textarea id="editor-brightness">
+from PIL import Image, ImageEnhance
+
+# Membuka dan mengubah gambar menjadi grayscale
+img = Image.open("gambar.png").convert("L") 
+
+brightness = ImageEnhance.Brightness(img) # Membuat objek brightness
+
+# Nilai > 1 = lebih terang
+# Nilai < 1 = lebih gelap
+hasil = brightness.enhance(1.5) 
+</textarea>
+                                </div>
+                                <div class="side-tools">
+                                    <button class="editor-icon-btn" id="run-brightness">▶</button>
+                                    <button class="editor-icon-btn trash" id="clear-brightness">🗑</button>
+                                </div>
+                            </div>
+                            <div class="output" id="out-brightness">(Output muncul di sini)</div>
+                            <img id="img-brightness" class="preview-img">
+                            <a id="download-brightness" class="btn btn-primary btn-sm mt-2" download="hasil_brightness.png" style="display:none;">Download Hasil</a>
+                            <div class="add-cell-btn">+</div>
+
+                            <div class="cell-box">
+                                <div class="editor-wrap">
+                                    <textarea id="editor-contrast">
+from PIL import Image, ImageEnhance
+
+# Membuka dan mengubah gambar menjadi grayscale
+img = Image.open("gambar.png").convert("L") 
+
+contrast = ImageEnhance.Contrast(img) # Membuat objek contrast
+
+# Nilai > 1 = contrast lebih tinggi
+# Nilai < 1 = contrast lebih rendah
+hasil = contrast.enhance(1.5) 
+</textarea>
+                                </div>
+                                <div class="side-tools">
+                                    <button class="editor-icon-btn" id="run-contrast">▶</button>
+                                    <button class="editor-icon-btn trash" id="clear-contrast">🗑</button>
+                                </div>
+                            </div>
+                            <div class="output" id="out-contrast">(Output muncul di sini)</div>
+                            <img id="img-contrast" class="preview-img">
+                            <a id="download-contrast" class="btn btn-primary btn-sm mt-2" download="hasil_contrast.png" style="display:none;">Download Hasil</a>
+                            <div class="add-cell-btn">+</div>
+
+                            <div class="cell-box">
+                                <div class="editor-wrap">
+                                    <textarea id="editor-negasi">
+from PIL import Image, ImageOps
+
+# Membuka dan mengubah gambar menjadi grayscale
+img = Image.open("gambar.png").convert("L") 
+
+hasil = ImageOps.invert(img) # Membalik nilai intensitas piksel
+</textarea>
+                                </div>
+                                <div class="side-tools">
+                                    <button class="editor-icon-btn" id="run-negasi">▶</button>
+                                    <button class="editor-icon-btn trash" id="clear-negasi">🗑</button>
+                                </div>
+                            </div>
+                            <div class="output" id="out-negasi">(Output muncul di sini)</div>
+                            <img id="img-negasi" class="preview-img">
+                            <a id="download-negasi" class="btn btn-primary btn-sm mt-2" download="hasil_negasi.png" style="display:none;">Download Hasil</a>
+                            <div class="add-cell-btn">+</div>
+
+                            <div class="cell-box">
+                                <div class="editor-wrap">
+                                    <textarea id="editor-threshold">
+from PIL import Image
+# Membuka dan mengubah gambar menjadi grayscale
+img = Image.open("gambar.png").convert("L") 
+
+threshold = 128 # Menentukan nilai ambang
+
+# Mengubah ke citra biner
+hasil = img.point(lambda p: 255 if p > threshold else 0) 
+</textarea>
+                                </div>
+                                <div class="side-tools">
+                                    <button class="editor-icon-btn" id="run-threshold">▶</button>
+                                    <button class="editor-icon-btn trash" id="clear-threshold">🗑</button>
+                                </div>
+                            </div>
+                            <div class="output" id="out-threshold">(Output muncul di sini)</div>
+                            <img id="img-threshold" class="preview-img">
+                            <a id="download-threshold" class="btn btn-primary btn-sm mt-2" download="hasil_threshold.png" style="display:none;">Download Hasil</a>
+                            <div class="add-cell-btn">+</div>
+
+                            <div class="cell-box">
+                                <div class="editor-wrap">
+                                    <textarea id="editor-log">
+from PIL import Image
+import math
+
+# Membuka dan mengubah gambar menjadi grayscale
+img = Image.open("gambar.png").convert("L") 
+
+# Transformasi logaritmik
+hasil = img.point(lambda p: int(255 * math.log(1 + p) / math.log(256))) 
+</textarea>
+                                </div>
+                                <div class="side-tools">
+                                    <button class="editor-icon-btn" id="run-log">▶</button>
+                                    <button class="editor-icon-btn trash" id="clear-log">🗑</button>
+                                </div>
+                            </div>
+                            <div class="output" id="out-log">(Output muncul di sini)</div>
+                            <img id="img-log" class="preview-img">
+                            <a id="download-log" class="btn btn-primary btn-sm mt-2" download="hasil_logaritmik.png" style="display:none;">Download Hasil</a>
+                            <div class="add-cell-btn">+</div>
+
+                            <div class="cell-box">
+                                <div class="editor-wrap">
+                                    <textarea id="editor-gamma">
+from PIL import Image
+
+# Membuka dan mengubah gambar menjadi grayscale
+img = Image.open("gambar.png").convert("L") 
+
+gamma = 2.0 # Menentukan nilai gamma
+
+# Transformasi gamma
+hasil = img.point(lambda p: int(255 * (p / 255) ** gamma)) 
+</textarea>
+                                </div>
+                                <div class="side-tools">
+                                    <button class="editor-icon-btn" id="run-gamma">▶</button>
+                                    <button class="editor-icon-btn trash" id="clear-gamma">🗑</button>
+                                </div>
+                            </div>
+                            <div class="output" id="out-gamma">(Output muncul di sini)</div>
+                            <img id="img-gamma" class="preview-img">
+                            <a id="download-gamma" class="btn btn-primary btn-sm mt-2" download="hasil_gamma.png" style="display:none;">Download Hasil</a>
+                            <div class="add-cell-btn">+</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="upload-box text-center h-100">
+                        <i class="bi bi-upload upload-icon"></i>
+                        <p class="fw-semibold mt-2">Upload Gambar</p>
+                        <input type="file" id="uploadInput" class="form-control mt-2" accept="image/*">
+                        <p class="upload-hint mt-3">
+                            File gambar akan digunakan sebagai:
+                            <br>
+                            <code id="file-name-show">gambar.png</code>
+                        </p>
+                        <img id="upload-preview" class="preview-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include "EnhanceLearn/praktik/aktivitas14.html" %}
+
+    <div style="margin-top:32px; display:flex; justify-content:space-between;">
+        <a href="{% url 'grayscale_biner' %}" class="btn-prev-materi">« Kembali</a>
+        <a href="{% url 'histogram' %}" class="btn-next-materi">Selanjutnya »</a>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js"></script>
+<link rel="stylesheet" href="{% static 'css/python-editor.css' %}">
+<script src="{% static 'js/python-editor.js' %}"></script>
+
+{% endblock %}

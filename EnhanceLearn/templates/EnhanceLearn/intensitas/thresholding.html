@@ -1,0 +1,564 @@
+{% extends "EnhanceLearn/base.html" %}
+{% load static %}
+
+{% block title %}Operasi Thresholding{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/materi.css' %}">
+
+<div class="materi-container">
+  <h1 class="subbab-title">SUBBAB 3: <em>THRESHOLD</em></h1>
+
+  <div class="materi-box">
+    <div class="materi-box-header">
+      <i class="bi bi-filter"></i>
+      Konsep Operasi Ambang Batas (<em>Thresholding</em>)
+    </div>
+
+    <div class="materi-box-body">
+      <p style="text-align: justify; font-size: 7px; line-height: 1.75;">
+        Operasi ambang batas (<em>thresholding</em>) merupakan salah satu teknik dasar dalam pemrosesan citra digital yang 
+        digunakan untuk <strong>memisahkan objek dan latar belakang</strong> berdasarkan nilai intensitas piksel. Pada operasi ini, 
+        setiap piksel citra <em>grayscale</em> dibandingkan dengan suatu nilai ambang tertentu yang disebut sebagai 
+        <strong><em>threshold (T)</em></strong>. Hasil perbandingan tersebut menentukan nilai piksel pada citra keluaran. Berbeda dengan 
+        transformasi intensitas seperti <em>brightness</em> atau <em>contrast stretching</em> yang menghasilkan citra <em>grayscale</em> baru, 
+        <strong><em>thresholding</em> mengubah citra <em>grayscale</em> menjadi citra biner</strong>, sehingga hanya terdapat dua kemungkinan 
+        nilai piksel pada citra hasil. Secara matematis, operasi <em>thresholding</em> sederhana dapat dinyatakan sebagai:
+      </p>
+
+      <div style="text-align:center; margin:16px 0; font-size:17px;">
+        $$ s = \begin{cases} 1, & r > T \\ 0, & r \le T \end{cases} $$
+      </div>
+
+        <p style="font-size:17px;">di mana:</p>
+
+        <ul style="font-size:17px; line-height:1.8;">
+          <li>\(r\) menyatakan tingkat intensitas piksel pada citra masukan (<em>input image</em>).</li>
+          <li>\(s\) menyatakan tingkat intensitas piksel pada citra keluaran (<em>output image</em>).</li>
+          <li>\(T\) menyatakan nilai ambang (<em>threshold</em>) yang digunakan dalam proses transformasi.</li>
+      </ul>
+      
+      <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+        Dalam implementasi tertentu, nilai keluaran juga dapat dinyatakan sebagai <strong>0 dan L-1</strong>, sehingga persamaan 
+        <em>thresholding</em> dapat dituliskan sebagai:
+      </p>
+
+      <div style="text-align:center; margin:16px 0; font-size:16.5px;">
+        $$ s = \begin{cases} L-1, & r > T \\ 0, & r \le T \end{cases} $$
+      </div>
+
+      <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+        Berdasarkan persamaan tersebut, setiap nilai intensitas piksel citra masukan dibandingkan dengan nilai ambang <em>T</em>. 
+        Jika nilai intensitas piksel lebih besar dari <em>T</em>, maka piksel tersebut diklasifikasikan sebagai <strong>objek</strong> dan 
+        diberi nilai maksimum. Sebaliknya, jika nilai intensitas piksel lebih kecil atau sama dengan <em>T</em>, maka piksel tersebut 
+        diklasifikasikan sebagai <strong>latar belakang</strong> dan diberi nilai 0. Gambar 3.10 adalah hasil percobaan dari citra hitam putih 
+        yang memiliki <em>grayscale</em> 256, yang dipetakan menjadi citra biner.
+      </p>
+
+      <div style="margin:20px 0;">
+        <table style="width:100%; margin:0 auto; border-collapse:collapse; border:1px solid #cbd5e1; text-align:center;">
+          <thead>
+            <tr>
+              <th style="width:50%; border-right:1px solid #cbd5e1;">Citra asli</th>
+              <th style="width:50%;">Citra <em>thresholding</em></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:8px;">
+                <img src="{% static 'img/intensitas/thresholding.png' %}" style="width:85%;">
+              </td>
+              <td style="padding:8px;">
+                <img src="{% static 'img/intensitas/threshold-hasil.png' %}" style="width:85%;">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size:13px; margin-top:6px; font-style:italic; text-align:center;">
+          Gambar 3.10 Perbandingan citra asli dan citra thresholding
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="materi-box">
+    <div class="materi-box-body">
+      <h3 style="color:#007bff; border-left:5px solid #007bff; padding-left:15px; margin-bottom:20px; font-weight:bold;">
+        <i class="bi bi-pencil-fill"></i> Contoh Perhitungan
+      </h3>
+
+
+        <div class="materi-box-contoh" style="margin:0; box-shadow:0 4px 15px rgba(0,0,0,0.4); background:#f8fbff;">
+          <div class="materi-box-body">
+
+      <p style="font-size:17px;">
+        Gambar berikut menunjukan citra grayscale berukuran 4×4 yang akan digunakan untuk contoh perhitungan <em>thresholding</em>.
+      </p>
+
+      <div style="margin:16px 0;">
+        <table style="width:70%; margin:0 auto; border-collapse:collapse; border:1px solid #cbd5e1; text-align:center; table-layout:fixed; background:white;">
+          <tbody>
+            <tr>
+              <td style="width:50%; border-right:1px solid #cbd5e1; padding:8px;">
+                <img src="{% static 'img/intensitas/threshold/contoh-citra.png' %}" style="width:85%;">
+              </td>
+              <td style="width:50%; padding:8px;">
+                <img src="{% static 'img/intensitas/threshold/contoh-matriks.png' %}" style="width:85%;">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size:13px; margin-top:6px; font-style:italic; text-align:center;">
+          Gambar 3.11 Citra untuk perhitungan thresholding
+        </p>
+      </div>
+
+      <p style="font-weight:bold; color:#007bff; margin-bottom:10px; font-size:16px;">
+        <i class="bi bi-mouse3-fill"></i> Petunjuk Simulasi Interaktif:
+      </p>
+
+      <ol style="font-size:14.5px; line-height:1.8; color:#334155; padding-left:20px;">
+          <li>
+              <strong>Atur Nilai Threshold:</strong> Geser slider atau ubah angka pada kolom 
+              <em>Threshold (T)</em> untuk menentukan batas intensitas piksel yang akan digunakan 
+              pada proses <em>thresholding</em>.
+          </li>
+
+          <li>
+              <strong>Mulai Proses:</strong> Klik tombol 
+              <span style="color:#2f6fd6; font-weight:bold;">Mulai</span>. 
+              Simulasi akan menyorot piksel pertama pada matriks input dan mulai melakukan 
+              proses klasifikasi piksel berdasarkan nilai threshold.
+          </li>
+
+          <li>
+              <strong>Lihat Perhitungan Bertahap:</strong> Klik tombol 
+              <span style="color:#236820; font-weight:bold;">Lanjut</span> 
+              untuk melihat proses perhitungan satu per satu pada setiap piksel. 
+              Sistem akan membandingkan nilai intensitas piksel \(r\) dengan nilai ambang \(T\).
+          </li>
+
+          <li>
+              <strong>Amati Hasil Thresholding:</strong> Jika nilai piksel lebih besar dari 
+              <em>Threshold (T)</em>, maka piksel output akan diubah menjadi 
+              <strong>255 (putih)</strong>. Sebaliknya, jika nilai piksel lebih kecil atau sama 
+              dengan <em>T</em>, maka output akan menjadi <strong>0 (hitam)</strong>.
+          </li>
+
+          <li>
+              <strong>Reset Simulasi:</strong> Klik tombol 
+              <span style="color:#e03a3a; font-weight:bold;">Ulangi</span> 
+              untuk memulai simulasi kembali dengan nilai threshold yang berbeda.
+          </li>
+      </ol>
+
+      <div class="simulator-container-box">
+        <div class="grid-sim">
+          <div class="panel-sim">
+            <h5 style="text-align:center; font-weight:700; color:#1e3a8a;">Input Citra</h5>
+            <img id="imgSource" src="{% static 'img/intensitas/threshold/contoh-citra.png' %}" style="visibility:hidden; position:absolute;">
+            <div class="mobile-pair">
+              <canvas id="canvasIn" width="160" height="160"></canvas>
+              <div class="matrix-sim" id="inMatrix"></div>
+            </div>
+          </div>
+
+          <div class="panel-sim controls-sim">
+            <h5 style="text-align:center; font-weight:700; color:#1e3a8a;">Perhitungan</h5>
+            <b>Rumus:</b>
+            \[ s = \begin{cases} 255 & r > T \\ 0 & r \le T \end{cases} \]
+
+            <div class="param-row">
+              <div class="param-box">
+                Threshold (T)
+                <input type="range" id="Tslider" min="0" max="255" value="100" style="width:160px;">
+                <br>
+                <input type="number" id="Tval" min="0" max="255" value="100" style="width:70px; margin-top:6px;">
+              </div>
+            </div>
+            <button id="startBtn" class="btn-sim btn-start">
+            Mulai
+            </button>
+
+            <button id="nextBtn" class="btn-sim btn-next hidden-sim">
+            Lanjut
+            </button>
+
+            <button id="resetBtn" class="btn-sim btn-reset hidden-sim">
+            Ulangi
+            </button>
+
+            <div class="calc-box-sim" id="calcBox">
+              Klik <b>Mulai</b> untuk memulai proses.
+            </div>
+          </div>
+
+          <div class="panel-sim">
+            <h5 style="text-align:center; font-weight:700; color:#1e3a8a;">Hasil Citra</h5>
+            <div class="mobile-pair">
+              <canvas id="canvasOut" width="160" height="160"></canvas>
+              <div class="matrix-sim" id="outMatrix"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+      
+
+      <!-- ================= EXPLORASI MANDIRI ================= -->
+<div class="materi-box-contoh" style="margin:0; margin-top:24px; box-shadow:0 4px 15px rgba(0,0,0,0.4); background:#f8fbff;">
+    <div class="materi-box-body">
+
+    <h3 style="color:#007bff; border-left:5px solid #007bff; padding-left:15px; margin-bottom:20px; font-weight:bold;">
+      <i class="bi bi-sliders"></i> Eksplorasi Mandiri
+    </h3>
+
+    <p style="font-size:15.5px; line-height:1.8; text-align:justify;">
+      Upload gambar Anda sendiri kemudian ubah nilai 
+      <em>threshold (T)</em> untuk melihat bagaimana proses 
+      <em>thresholding</em> memisahkan objek dan latar belakang 
+      menjadi citra biner hitam putih.
+    </p>
+
+    <!-- CONTROL -->
+    <div class="exp-top-control">
+
+      <!-- Upload -->
+      <div>
+        <label for="uploadThresholdImage" class="upload-btn">
+          <i class="bi bi-upload"></i> Upload
+        </label>
+
+        <input 
+          type="file"
+          id="uploadThresholdImage"
+          class="upload-input"
+          accept="image/*">
+      </div>
+
+      <!-- Slider -->
+      <div class="exp-slider-group">
+
+        <label class="slider-label">
+          <b>Threshold (T):</b>
+        </label>
+
+        <div class="exp-slider-row">
+          <input type="range" id="expThreshold" min="0" max="255" value="127">
+          <span id="expThresholdVal">127</span>
+
+          <button id="expThresholdReset" class="btn-reset">
+            Reset
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CANVAS -->
+    <div class="exp-canvas-row">
+
+      <div>
+        <b>Citra Asli</b><br>
+        <canvas id="expCanvasIn" width="220" height="220"></canvas>
+      </div>
+
+      <div>
+        <b>Hasil Thresholding</b><br>
+        <canvas id="expCanvasOut" width="220" height="220"></canvas>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+      </div>  
+  </div>
+
+
+{% include "EnhanceLearn/intensitas/aktivitas8.html" %}
+
+        <div style="margin-top:32px; display:flex; justify-content:space-between;">
+        <a href="{% url 'negasi' %}" class="btn-prev-materi">« Kembali</a>
+        <a href="{% url 'logaritmik' %}" class="btn-next-materi">Selanjutnya »</a>
+      </div>
+</div>
+
+<script>
+  (function() {
+    const pixels = [
+      [40, 60, 120, 180],
+      [30, 90, 140, 200],
+      [20, 70, 110, 160],
+      [10, 50, 100, 190]
+    ];
+
+    let result = Array.from({ length: 4 }, () => Array(4).fill(""));
+    let step = 0;
+
+    const canvasIn = document.getElementById("canvasIn");
+    const canvasOut = document.getElementById("canvasOut");
+    const ctxIn = canvasIn.getContext("2d");
+    const ctxOut = canvasOut.getContext("2d");
+
+    const inMatrix = document.getElementById("inMatrix");
+    const outMatrix = document.getElementById("outMatrix");
+    const calcBox = document.getElementById("calcBox");
+
+    const TInput = document.getElementById("Tval");
+    const Tslider = document.getElementById("Tslider");
+
+    const startBtn = document.getElementById("startBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const resetBtn = document.getElementById("resetBtn");
+
+    // ================= DRAW INPUT =================
+    function drawInput() {
+      const img = document.getElementById("imgSource");
+      img.onload = function() {
+        ctxIn.drawImage(img, 0, 0, 160, 160);
+      };
+      if (img.complete) {
+        ctxIn.drawImage(img, 0, 0, 160, 160);
+      }
+    }
+
+    // ================= DRAW =================
+    function drawImage(matrix, ctx) {
+      for (let y = 0; y < 4; y++) {
+        for (let x = 0; x < 4; x++) {
+          let v = matrix[y][x];
+          if (v === "") continue;
+          ctx.fillStyle = `rgb(${v},${v},${v})`;
+          ctx.fillRect(x * 40, y * 40, 40, 40);
+        }
+      }
+    }
+
+    function drawOutput(matrix) {
+      ctxOut.clearRect(0, 0, 160, 160);
+      drawImage(matrix, ctxOut);
+    }
+
+    // ================= MATRIX =================
+    function renderMatrices(active = -1, matrix = result) {
+      inMatrix.innerHTML = "";
+      outMatrix.innerHTML = "";
+
+      for (let i = 0; i < 16; i++) {
+        let y = Math.floor(i / 4);
+        let x = i % 4;
+
+        let a = document.createElement("div");
+        a.className = "cell-sim input-cell-sim" + (i === active ? " active-sim" : "");
+        a.textContent = pixels[y][x];
+        inMatrix.appendChild(a);
+
+        let b = document.createElement("div");
+        b.className = "cell-sim output-cell-sim" + (i === active ? " active-sim" : "");
+        b.textContent = matrix[y][x];
+        outMatrix.appendChild(b);
+      }
+    }
+
+    // ================= REALTIME =================
+    function applyThresholdRealtime() {
+      const T = parseInt(TInput.value);
+      for (let y = 0; y < 4; y++) {
+        for (let x = 0; x < 4; x++) {
+          const r = pixels[y][x];
+          result[y][x] = (r > T) ? 255 : 0;
+        }
+      }
+      drawOutput(result);
+      renderMatrices(-1, result);
+    }
+
+    // ================= STEP =================
+    function stepCalc() {
+      const T = parseInt(TInput.value);
+      const y = Math.floor(step / 4);
+      const x = step % 4;
+
+      const r = pixels[y][x];
+      const s = (r > T) ? 255 : 0;
+
+      result[y][x] = s;
+
+      calcBox.innerHTML = `
+        r=${r}<br>
+        T=${T}<br>
+        ${r} ${r > T ? ">" : "≤"} ${T}<br>
+        s=${s}
+      `;
+
+      drawOutput(result);
+      renderMatrices(step, result);
+      step++;
+    }
+
+    // ================= EVENT =================
+    Tslider.addEventListener("input", () => {
+      TInput.value = Tslider.value;
+      applyThresholdRealtime();
+    });
+
+    TInput.addEventListener("input", () => {
+      Tslider.value = TInput.value;
+      applyThresholdRealtime();
+    });
+
+    startBtn.onclick = () => {
+      step = 0;
+      result = Array.from({ length: 4 }, () => Array(4).fill(""));
+      startBtn.classList.add("hidden-sim");
+      nextBtn.classList.remove("hidden-sim");
+      resetBtn.classList.remove("hidden-sim");
+      stepCalc();
+    };
+
+    nextBtn.onclick = () => {
+      if (step < 16) stepCalc();
+    };
+
+    resetBtn.onclick = () => {
+      step = 0;
+      result = Array.from({ length: 4 }, () => Array(4).fill(""));
+      ctxOut.clearRect(0, 0, 160, 160);
+      renderMatrices();
+      startBtn.classList.remove("hidden-sim");
+      nextBtn.classList.add("hidden-sim");
+      resetBtn.classList.add("hidden-sim");
+      calcBox.innerHTML = "Klik <b>Mulai</b> untuk memulai proses.";
+    };
+
+    // ================= INIT =================
+    drawInput();
+    renderMatrices();
+  })();
+</script>
+
+<script>
+/* ================= EXPLORASI THRESHOLDING ================= */
+
+const uploadThresholdImage = document.getElementById("uploadThresholdImage");
+
+const expCanvasIn = document.getElementById("expCanvasIn");
+const expCanvasOut = document.getElementById("expCanvasOut");
+
+const expCtxIn = expCanvasIn.getContext("2d");
+const expCtxOut = expCanvasOut.getContext("2d");
+
+const expThreshold = document.getElementById("expThreshold");
+const expThresholdVal = document.getElementById("expThresholdVal");
+
+const expThresholdReset = document.getElementById("expThresholdReset");
+
+let expThresholdImageData = null;
+
+// ================= UPLOAD =================
+uploadThresholdImage.onchange = function(e){
+
+    const file = e.target.files[0];
+    if(!file) return;
+
+    const img = new Image();
+
+    img.onload = function(){
+
+        const canvasSize = 220;
+
+        expCtxIn.clearRect(0,0,canvasSize,canvasSize);
+        expCtxOut.clearRect(0,0,canvasSize,canvasSize);
+
+        // fit gambar agar tidak terpotong
+        let scale = Math.min(
+            canvasSize / img.width,
+            canvasSize / img.height
+        );
+
+        let w = img.width * scale;
+        let h = img.height * scale;
+
+        let x = (canvasSize - w) / 2;
+        let y = (canvasSize - h) / 2;
+
+        // tampilkan gambar asli
+        expCtxIn.drawImage(img, x, y, w, h);
+
+        // ambil data gambar asli
+        expThresholdImageData = expCtxIn.getImageData(
+            0,0,canvasSize,canvasSize
+        );
+
+        applyThresholdExploration();
+    };
+
+    img.src = URL.createObjectURL(file);
+};
+
+// ================= APPLY THRESHOLD =================
+function applyThresholdExploration(){
+
+    if(!expThresholdImageData) return;
+
+    let T = parseInt(expThreshold.value);
+
+    expThresholdVal.textContent = T;
+
+    let newImage = new ImageData(
+        new Uint8ClampedArray(expThresholdImageData.data),
+        expThresholdImageData.width,
+        expThresholdImageData.height
+    );
+
+    let data = newImage.data;
+
+    for(let i=0;i<data.length;i+=4){
+
+        // grayscale sementara untuk threshold
+        let gray =
+            0.299 * data[i] +
+            0.587 * data[i+1] +
+            0.114 * data[i+2];
+
+        let binary = (gray > T) ? 255 : 0;
+
+        data[i] = binary;
+        data[i+1] = binary;
+        data[i+2] = binary;
+    }
+
+    expCtxOut.clearRect(0,0,220,220);
+    expCtxOut.putImageData(newImage,0,0);
+}
+
+// ================= SLIDER =================
+expThreshold.oninput = function(){
+    applyThresholdExploration();
+};
+
+// ================= RESET =================
+expThresholdReset.onclick = function(){
+
+    expThreshold.value = 127;
+    expThresholdVal.textContent = 127;
+
+    if(expThresholdImageData){
+        applyThresholdExploration();
+    }
+};
+</script>
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+{% endblock %}

@@ -1,0 +1,1640 @@
+{% extends "EnhanceLearn/base.html" %}
+{% load static %}
+
+{% block title %}Histogram Specification{% endblock %}
+
+{% block content %}
+
+<div class="materi-container">
+
+    <h1 class="subbab-title">SUBBAB 4: <em>HISTOGRAM SPECIFICATION</em></h1>
+
+    <!-- ===================== HISTOGRAM SPECIFICATION ===================== -->
+
+    <div class="materi-box">
+        <div class="materi-box-header">
+            <i class="bi bi-diagram-3"></i><em>Histogram Specification</em>
+        </div>
+
+        <div class="materi-box-body">
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                <strong><em>Histogram specification</em></strong> atau <strong><em>histogram matching</em></strong> 
+                merupakan teknik pemrosesan citra yang bertujuan untuk 
+                <strong>mengubah distribusi tingkat keabuan suatu citra sehingga menyerupai distribusi histogram yang telah ditentukan pengguna</strong>. 
+                Berbeda dengan <em>histogram equalization</em> yang selalu menghasilkan histogram seragam, 
+                <em>histogram specification</em> memberikan fleksibilitas untuk membentuk histogram akhir sesuai dengan kebutuhan tertentu. 
+                Teknik ini banyak digunakan ketika diperlukan keseragaman karakteristik visual antar citra 
+                atau ketika bentuk histogram hasil ingin dikendalikan secara eksplisit.
+            </p>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Secara matematis, <em>histogram specification</em> dilakukan dengan memanfaatkan 
+                <strong>histogram kumulatif</strong> (<em>cumulative distribution function</em>, CDF) 
+                dari citra sumber dan histogram target. Histogram citra sumber dinyatakan dalam bentuk peluang sebagai berikut.
+            </p>
+
+            <div style="text-align:center; margin:16px 0; font-size:18px;">
+                $$ P_r(r_k) = \frac{n_k}{n} $$
+            </div>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                dengan $r_k$ menyatakan tingkat keabuan sumber ke-$k$, 
+                $n_k$ jumlah piksel dengan tingkat keabuan tersebut, 
+                dan $n$ jumlah total piksel. Histogram kumulatif citra sumber kemudian didefinisikan sebagai berikut.
+            </p>
+
+            <div style="text-align:center; margin:16px 0; font-size:17px;">
+                $$ s_k = T(r_k) = \sum_{j=0}^{k} P_r(r_j) $$
+            </div>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                yang menyatakan proporsi piksel dengan tingkat keabuan kurang dari atau sama dengan $r_k$. 
+                Histogram target dinyatakan dengan cara yang sama, yaitu
+            </p>
+
+            <div style="text-align:center; margin:16px 0; font-size:17px;">
+                $$ P_z(z_k) = \frac{n_k}{n} $$
+            </div>
+
+            <p style="font-size:17px;">di mana:</p>
+
+            <ul style="font-size:17px; line-height:1.8;">
+                <li><strong>$z_k$</strong> = tingkat keabuan target ke-$k$</li>
+                <li><strong>$P_z(z_k)$</strong> = peluang kemunculan piksel pada tingkat keabuan target $z_k$</li>
+            </ul>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                dan histogram kumulatif target didefinisikan sebagai
+            </p>
+
+            <div style="text-align:center; margin:16px 0; font-size:17px;">
+                $$ G(z_k) = \sum_{j=0}^{k} P_z(z_j) $$
+            </div>
+
+            <p style="font-size:17px;">di mana:</p>
+
+            <ul style="font-size:17px; line-height:1.8;">
+                <li><strong>$G(z_k)$</strong> = nilai histogram kumulatif target hingga tingkat keabuan ke-$k$</li>
+            </ul>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                dengan $z_k$ menyatakan tingkat keabuan target ke-$k$. Nilai $G(z_k)$ menunjukkan posisi relatif 
+                tingkat keabuan target dalam distribusi kumulatif. 
+                <strong>Pemetaan nilai keabuan</strong> pada <em>histogram specification</em> dilakukan dengan 
+                <strong>mencocokkan nilai histogram kumulatif citra sumber $s_k$ dengan nilai histogram kumulatif target $G(z_k)$. 
+                Setiap nilai $s_k$ dipetakan ke nilai keabuan target $z_k$ yang memiliki nilai $G(z_k)$ paling mendekati</strong>.
+            </p>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                <em>Histogram equalization</em> dapat dipandang sebagai kasus khusus dari 
+                <em>histogram specification</em>, yaitu ketika histogram target berbentuk distribusi seragam. 
+                Pada <em>histogram specification</em>, histogram target tidak harus seragam dan dapat ditentukan 
+                sesuai dengan karakteristik citra yang diinginkan. Oleh karena itu, 
+                <em>histogram specification</em> memberikan <strong>kendali yang lebih besar</strong> 
+                dibandingkan <em>histogram equalization</em> dalam proses peningkatan kualitas citra.
+            </p>
+
+        </div>
+    </div>
+
+
+    {% comment %} CONTOH {% endcomment %}
+
+    <div class="materi-box">
+        <div class="materi-box-body">
+            <h3 style="color: #007bff; border-left: 5px solid #007bff; padding-left: 15px; margin-top: 10px; margin-bottom: 20px; font-weight: bold; font-family: 'Segoe UI', sans-serif;">
+                <i class="bi bi-pencil-fill"></i> Contoh Perhitungan
+            </h3>
+
+            <div class="materi-box-contoh" style="margin:0; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); background-color: #f8fbff;">
+                <div class="materi-box-body">
+                    <p style="text-align: justify; font-size:17px; line-height:1.75;">
+                        Gambar 4.4 menunjukkan matriks citra awal yang berukuran \(4 \times 4\) dengan jumlah derajat keabuan \(L = 8\) dan jumlah seluruh piksel \(n = 4 \times 4 = 16\) 
+                        beserta sebaran histogramnya. Gambar 4.5 menunjukkan histogram target atau histogram yang diinginkan.
+                    </p>
+                    <div style="margin:16px 0;">
+                        <table style="width:80%; margin:0 auto; border-collapse:collapse; border:1px solid #cbd5e1; text-align:center; table-layout:fixed; background-color: white;">
+                            <tbody>
+                                <tr>
+                                    <td style="width:50%; border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:8px;">
+                                        <img src="{% static 'img/histogram/spesifikasi/contoh-matriks.png' %}" alt="Matriks" style="width:85%; height:auto; display:block; margin:0 auto;">
+                                    </td>
+                                    <td style="width:50%; border-top:1px solid #cbd5e1; padding:8px;">
+                                        <img src="{% static 'img/histogram/spesifikasi/contoh-hist.png' %}" alt="Matriks" style="width:85%; height:auto; display:block; margin:0 auto;">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="font-size:13px; margin-top:6px; font-style:italic; text-align:center;">Gambar 4.4 Citra untuk histogram specification</p>
+                        <table style="width:50%; margin:0 auto; border-collapse:collapse; border:1px solid #cbd5e1; text-align:center; table-layout:fixed; background-color: white;">
+                            <tbody>
+                                <tr>
+                                    <td style="width:40%; border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:8px;">
+                                        <img src="{% static 'img/histogram/spesifikasi/hist-target.png' %}" alt="Citra" style="width:85%; height:auto; display:block; margin:0 auto;">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="font-size:13px; margin-top:6px; font-style:italic; text-align:center;">Gambar 4.5 Histogram target</p>
+                    </div>
+
+                    <p style="font-size: 17px; line-height: 1.5; margin-bottom: 10px; text-align: justify;">
+                        Kita akan melakukan perhitungan <i>histogram specification</i> dengan langkah-langkah berikut:
+                    </p>
+
+                    <hr style="margin-top:30px; margin-bottom:18px;">
+
+                    <h3 style="font-weight:700; color:#1e3a8a; margin-bottom:14px;">
+                        Langkah 1: Hitung histogram citra asal
+                    </h3>
+                    <p style="font-size:17px; line-height:1.75; text-align:justify; margin-bottom:18px;">
+                        Tujuannya untuk mengetahui seberapa sering setiap nilai intensitas muncul dalam citra. 
+                    </p>
+
+                    <div style="overflow-x:auto; margin:20px 0;">
+                        <table style="border-collapse:collapse; width:100%; text-align:center; font-size:16px; border:1px solid #222;">
+                            <tbody>
+                                <tr>
+                                    <td class="title-cell">Nilai Keabuan \(k\)</td>
+                                    <td class="pixel-cell">4</td>
+                                    <td class="pixel-cell">5</td>
+                                    <td class="pixel-cell">6</td>
+                                    <td class="pixel-cell">7</td>
+                                </tr>
+                                <tr>
+                                    <td class="title-cell">Jumlah Piksel \(n_k\)</td>
+                                    <td class="pixel-cell">4</td>
+                                    <td class="pixel-cell">4</td>
+                                    <td class="pixel-cell">3</td>
+                                    <td class="pixel-cell">5</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <hr style="margin-top:30px; margin-bottom:18px;">
+
+                    <h3 style="font-weight:700; color:#1e3a8a; margin-bottom:14px;">
+                        Langkah 2: Menghitung PDF (<em>Probability Density Function</em>) citra asal
+                    </h3>
+                    <p style="font-size:17px; line-height:1.75; text-align:justify; margin-bottom:18px;">
+                        Tujuannya mengubah jumlah piksel menjadi bentuk perbandingan (proporsi).<br>
+                        <strong>Rumus:</strong>
+                    </p>
+                    <div style="text-align:center; margin:20px 0; font-size:17px;">
+                        $$ P_r(r_k) = \frac{n_k}{n} $$
+                    </div>
+
+                    <div style="overflow-x:auto; margin:20px 0;">
+                        <table class="pdf-table pdf-input-table">
+                            <tbody>
+                                <tr>
+                                    <td class="title-cell">Piksel</td>
+                                    <td class="pixel-cell">4</td>
+                                    <td class="pixel-cell">5</td>
+                                    <td class="pixel-cell">6</td>
+                                    <td class="pixel-cell">7</td>
+                                </tr>
+                                <tr>
+                                    <td class="title-cell">Hasil PDF</td>
+                                    <td class="pdf-cell"></td>
+                                    <td class="pdf-cell"></td>
+                                    <td class="pdf-cell"></td>
+                                    <td class="pdf-cell"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="sim-controls-wrapper" style="display: flex; justify-content: center; align-items: center; gap: 12px; margin: 25px 0;">
+                        <button id="startBtn" class="btn-sim btn-start">Mulai</button>
+                        <button id="nextBtn" class="btn-sim btn-next hidden-sim">Lanjut</button>
+                        <button id="autoBtn" class="btn-sim btn-auto hidden-sim" style="background-color: #28a745; color: white;">Auto Play</button>
+                        <button id="pauseBtn" class="btn-sim btn-pause hidden-sim" style="background-color: #ffc107; color: black;">Pause</button>
+                        <button id="resetBtn" class="btn-sim btn-reset hidden-sim">Ulangi</button>
+                    </div>
+
+                    <div id="calculationBox" class="calculation-box"></div>
+
+                    <hr style="margin-top:30px; margin-bottom:18px;">
+
+                    <h3 style="font-weight:700; color:#1e3a8a; margin-bottom:14px;">
+                        Langkah 3: Menghitung CDF (<em>Cumulative Density Function</em>) citra asal
+                    </h3>
+                    <p style="font-size:17px; line-height:1.75; text-align:justify; margin-bottom:18px;">
+                        Tujuannya mengetahui akumulasi distribusi intensitas dari nilai terendah ke tertinggi. 
+                        CDF diperoleh dari penjumlahan secara bertahap dari hasil PDF.<br>
+                        <strong>Rumus:</strong>
+                    </p>
+
+                    <div style="text-align:center; margin:20px 0; font-size:17px;">
+                        $$ CDF(r_k)=\sum_{j=0}^{k} P_r(r_j) $$
+                    </div>
+
+                    <div style="overflow-x:auto; margin:20px 0;">
+                        <table class="cdf-table cdf-input-table">
+                            <tbody>
+                                <tr>
+                                    <td class="title-cell">Piksel</td>
+                                    <td class="cdf-pixel-cell">4</td>
+                                    <td class="cdf-pixel-cell">5</td>
+                                    <td class="cdf-pixel-cell">6</td>
+                                    <td class="cdf-pixel-cell">7</td>
+                                </tr>
+                                <tr>
+                                    <td class="title-cell">Hasil PDF</td>
+                                    <td class="cdf-pdf-cell"></td>
+                                    <td class="cdf-pdf-cell"></td>
+                                    <td class="cdf-pdf-cell"></td>
+                                    <td class="cdf-pdf-cell"></td>
+                                </tr>
+                                <tr>
+                                    <td class="title-cell">Hasil CDF</td>
+                                    <td class="cdf-result-cell"></td>
+                                    <td class="cdf-result-cell"></td>
+                                    <td class="cdf-result-cell"></td>
+                                    <td class="cdf-result-cell"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="sim-controls-wrapper" style="display:flex; justify-content:center; align-items:center; gap:12px; margin:25px 0;">
+                        <button id="startCDFBtn" class="btn-sim btn-start">Mulai</button>
+                        <button id="nextCDFBtn" class="btn-sim btn-next hidden-sim">Lanjut</button>
+                        <button id="autoCDFBtn" class="btn-sim btn-auto hidden-sim" style="background-color:#28a745; color:white;">Auto Play</button>
+                        <button id="pauseCDFBtn" class="btn-sim btn-pause hidden-sim" style="background-color:#ffc107; color:black;">Pause</button>
+                        <button id="resetCDFBtn" class="btn-sim btn-reset hidden-sim">Ulangi</button>
+                    </div>
+                    <div id="cdfCalculationBox" class="calculation-box"></div>
+
+
+
+                    <hr style="margin-top:30px; margin-bottom:18px;">
+                    <h3 style="font-weight:700; color:#1e3a8a; margin-bottom:14px;">
+                        Langkah 4: Hitung intensitas histogram target
+                    </h3>
+                    <p style="font-size:17px; line-height:1.75; text-align:justify; margin-bottom:18px;">
+                        Tujuannya untuk mengetahui seberapa sering setiap nilai intensitas muncul dalam citra target. 
+                    </p>
+
+                    <div style="overflow-x:auto; margin:20px 0;">
+                        <table style="border-collapse:collapse; width:100%; text-align:center; font-size:16px; border:1px solid #222;">
+                            <tbody>
+                                <tr>
+                                    <td class="title-cell">Nilai Keabuan \(k\)</td>
+                                    <td class="pixel-cell">0</td>
+                                    <td class="pixel-cell">1</td>
+                                    <td class="pixel-cell">2</td>
+                                    <td class="pixel-cell">3</td>
+                                    <td class="pixel-cell">4</td>
+                                    <td class="pixel-cell">5</td>
+                                    <td class="pixel-cell">6</td>
+                                </tr>
+                                <tr>
+                                    <td class="title-cell">Jumlah Piksel \(n_k\)</td>
+                                    <td class="pixel-cell">1</td>
+                                    <td class="pixel-cell">1</td>
+                                    <td class="pixel-cell">2</td>
+                                    <td class="pixel-cell">3</td>
+                                    <td class="pixel-cell">4</td>
+                                    <td class="pixel-cell">3</td>
+                                    <td class="pixel-cell">2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <hr style="margin-top:30px; margin-bottom:18px;">
+                    <h3 style="font-weight:700; color:#1e3a8a; margin-bottom:14px;">
+                        Langkah 5: Menghitung PDF (<em>Probability Density Function</em>) target
+                    </h3>
+                    <p style="font-size:17px; line-height:1.75; text-align:justify; margin-bottom:18px;">
+                        Tujuannya mengubah jumlah piksel menjadi bentuk perbandingan (proporsi) sebelum menghitung CDF target.<br>
+                        <strong>Rumus:</strong>
+                    </p>
+                    <div style="text-align:center; margin:10px 0; font-size:17px;">
+                        $$ P_z(z_k) = \frac{n_k}{n} $$
+                    </div>
+
+                    <div style="overflow-x:auto; margin:20px 0;">
+                        <table class="pdf-table pdf-target-table">
+                            <tbody>
+                                <tr>
+                                    <td class="title-cell">Piksel target</td>
+                                    <td class="pixel-cell">0</td>
+                                    <td class="pixel-cell">1</td>
+                                    <td class="pixel-cell">2</td>
+                                    <td class="pixel-cell">3</td>
+                                    <td class="pixel-cell">4</td>
+                                    <td class="pixel-cell">5</td>
+                                    <td class="pixel-cell">6</td>
+                                </tr>
+                                <tr>
+                                    <td class="title-cell">Hasil PDF target</td>
+                                    <td class="pdf-cell"></td>
+                                    <td class="pdf-cell"></td>
+                                    <td class="pdf-cell"></td>
+                                    <td class="pdf-cell"></td>
+                                    <td class="pdf-cell"></td>
+                                    <td class="pdf-cell"></td>
+                                    <td class="pdf-cell"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="sim-controls-wrapper" style="display: flex; justify-content: center; align-items: center; gap: 12px; margin: 25px 0;">
+                        <button id="startPdfTargetBtn" class="btn-sim btn-start">Mulai</button>
+                        <button id="nextPdfTargetBtn" class="btn-sim btn-next hidden-sim">Lanjut</button>
+                        <button id="autoPdfTargetBtn" class="btn-sim btn-auto hidden-sim" style="background-color: #28a745; color: white;">Auto Play</button>
+                        <button id="pausePdfTargetBtn" class="btn-sim btn-pause hidden-sim" style="background-color: #ffc107; color: black;">Pause</button>
+                        <button id="resetPdfTargetBtn" class="btn-sim btn-reset hidden-sim">Ulangi</button>
+                    </div>
+
+                    <div id="calculationBoxPdfTarget" class="calculation-box"></div>
+
+                    <hr style="margin-top:30px; margin-bottom:18px;">
+
+                    <h3 style="font-weight:700; color:#1e3a8a; margin-bottom:14px;">
+                        Langkah 6: Menghitung CDF (<em>Cumulative Density Function</em>) target
+                    </h3>
+                    <p style="font-size:17px; line-height:1.55; text-align:justify; margin-bottom:18px;">
+                        Tujuannya mengetahui akumulasi distribusi intensitas dari nilai terendah ke tertinggi. 
+                        CDF diperoleh dari penjumlahan secara bertahap dari hasil PDF.<br>
+                        <strong>Rumus:</strong>
+                    </p>
+
+                    <div style="text-align:center; margin:10px 0; font-size:17px;">
+                        $$ G(z_k)=\sum_{j=0}^{k} P_z(z_j) $$
+                    </div>
+
+                    <div style="overflow-x:auto; margin:20px 0;">
+                        <table class="cdf-table cdf-target-table">
+                            <tbody>
+                                <tr>
+                                    <td class="title-cell">Piksel target</td>
+                                    <td class="pixel-cell">0</td>
+                                    <td class="pixel-cell">1</td>
+                                    <td class="pixel-cell">2</td>
+                                    <td class="pixel-cell">3</td>
+                                    <td class="pixel-cell">4</td>
+                                    <td class="pixel-cell">5</td>
+                                    <td class="pixel-cell">6</td>
+                                </tr>
+                                <tr>
+                                    <td class="title-cell">Hasil PDF target</td>
+                                    <td class="cdf-pdf-cell"></td>
+                                    <td class="cdf-pdf-cell"></td>
+                                    <td class="cdf-pdf-cell"></td>
+                                    <td class="cdf-pdf-cell"></td>
+                                    <td class="cdf-pdf-cell"></td>
+                                    <td class="cdf-pdf-cell"></td>
+                                    <td class="cdf-pdf-cell"></td>
+                                </tr>
+                                <tr>
+                                    <td class="title-cell">Hasil CDF target</td>
+                                    <td class="cdf-result-cell"></td>
+                                    <td class="cdf-result-cell"></td>
+                                    <td class="cdf-result-cell"></td>
+                                    <td class="cdf-result-cell"></td>
+                                    <td class="cdf-result-cell"></td>
+                                    <td class="cdf-result-cell"></td>
+                                    <td class="cdf-result-cell"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="sim-controls-wrapper" style="display:flex; justify-content:center; align-items:center; gap:12px; margin:25px 0;">
+                        <button id="startCdfTargetBtn" class="btn-sim btn-start">Mulai</button>
+                        <button id="nextCdfTargetBtn" class="btn-sim btn-next hidden-sim">Lanjut</button>
+                        <button id="autoCdfTargetBtn" class="btn-sim btn-auto hidden-sim" style="background-color:#28a745; color:white;">Auto Play</button>
+                        <button id="pauseCdfTargetBtn" class="btn-sim btn-pause hidden-sim" style="background-color:#ffc107; color:black;">Pause</button>
+                        <button id="resetCdfTargetBtn" class="btn-sim btn-reset hidden-sim">Ulangi</button>
+                    </div>
+
+                    <div id="CalculationBoxCdfTarget" class="calculation-box"></div>
+
+                    <hr style="margin-top:35px; margin-bottom:18px;">
+
+                    <h3 style="font-weight:700; color:#1e3a8a; margin-bottom:14px;">
+                        Langkah 7: Pemetaan histogram
+                    </h3>
+                    <p style="font-size:17px; line-height:1.75; text-align:justify; margin-bottom:18px;">
+                        Pemetaan nilai keabuan dilakukan dengan mencocokkan nilai histogram kumulatif citra sumber \(s_k\) dengan 
+                        histogram kumulatif target \(G(z_k)\) yang paling mendekati sehingga diperoleh nilai keabuan target.
+                    </p>
+
+                    <div style="overflow-x:auto; margin:20px 0;">
+                        <table class="mapping-table">
+                            <tbody>
+                                <tr>
+                                    <td class="title-cell">Piksel Input</td>
+                                    <td class="pixel-cell">4</td>
+                                    <td class="pixel-cell">5</td>
+                                    <td class="pixel-cell">6</td>
+                                    <td class="pixel-cell">7</td>
+                                </tr>
+                                <tr>
+                                    <td class="title-cell">Hasil CDF Input</td>
+                                    <td class="cdf-result-cell"></td>
+                                    <td class="cdf-result-cell"></td>
+                                    <td class="cdf-result-cell"></td>
+                                    <td class="cdf-result-cell"></td>
+                                </tr>
+                                <tr>
+                                    <td class="title-cell">Piksel target</td>
+                                    <td class="pixel-cell">0</td>
+                                    <td class="pixel-cell">1</td>
+                                    <td class="pixel-cell">2</td>
+                                    <td class="pixel-cell">3</td>
+                                    <td class="pixel-cell">4</td>
+                                    <td class="pixel-cell">5</td>
+                                    <td class="pixel-cell">6</td>
+                                </tr>
+                                <tr>
+                                    <td class="title-cell">Hasil CDF target</td>
+                                    <td class="cdf-result-cell"></td>
+                                    <td class="cdf-result-cell"></td>
+                                    <td class="cdf-result-cell"></td>
+                                    <td class="cdf-result-cell"></td>
+                                    <td class="cdf-result-cell"></td>
+                                    <td class="cdf-result-cell"></td>
+                                    <td class="cdf-result-cell"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <hr style="margin-top:30px; margin-bottom:18px;">
+                        <div class="grid-sim" style="display:flex; justify-content:center; align-items:flex-start; gap:26px; flex-wrap:wrap;">
+                            <div class="panel-sim">
+                                <h5 style="text-align:center; font-weight:700; color:#1e3a8a; margin-bottom:16px;">Matriks Input</h5>
+                                <div class="matrix-sim" id="equalCDFInputMatrix">
+                                    <div class="cell-sim cdf-input-cell input-cell-sim">4</div>
+                                    <div class="cell-sim cdf-input-cell input-cell-sim">5</div>
+                                    <div class="cell-sim cdf-input-cell input-cell-sim">5</div>
+                                    <div class="cell-sim cdf-input-cell input-cell-sim">5</div>
+
+                                    <div class="cell-sim cdf-input-cell input-cell-sim">4</div>
+                                    <div class="cell-sim cdf-input-cell input-cell-sim">7</div>
+                                    <div class="cell-sim cdf-input-cell input-cell-sim">7</div>
+                                    <div class="cell-sim cdf-input-cell input-cell-sim">6</div>
+
+                                    <div class="cell-sim cdf-input-cell input-cell-sim">4</div>
+                                    <div class="cell-sim cdf-input-cell input-cell-sim">6</div>
+                                    <div class="cell-sim cdf-input-cell input-cell-sim">7</div>
+                                    <div class="cell-sim cdf-input-cell input-cell-sim">5</div>
+
+                                    <div class="cell-sim cdf-input-cell input-cell-sim">4</div>
+                                    <div class="cell-sim cdf-input-cell input-cell-sim">5</div>
+                                    <div class="cell-sim cdf-input-cell input-cell-sim">7</div>
+                                    <div class="cell-sim cdf-input-cell input-cell-sim">6</div>
+                                </div>
+                            </div>
+
+                            <div class="panel-sim controls-sim">
+                                <h5 style="text-align:center; font-weight:700; color:#1e3a8a; margin-bottom:14px;">Pemetaan</h5>
+                                <div style="text-align:center; font-size:17px; margin-bottom:16px;">
+                                    
+                                </div>
+                                <div class="sim-controls-wrapper" style="display:flex; flex-direction:column; align-items:center; gap:10px; margin-bottom:18px;">
+                                    <div style="display:flex; justify-content:center; gap:10px;">
+                                        <button id="startGrayBtn" class="btn-sim btn-start">Mulai</button>
+                                        <button id="nextGrayBtn" class="btn-sim btn-next hidden-sim">Lanjut</button>
+                                    </div>
+                                    <div style="display:flex; justify-content:center; gap:10px;">
+                                        <button id="autoGrayBtn" class="btn-sim btn-auto hidden-sim" style="background:#28a745; color:white;">Auto Play</button>
+                                        <button id="pauseGrayBtn" class="btn-sim btn-pause hidden-sim" style="background:#ffc107; color:black;">Pause</button>
+                                        <button id="resetGrayBtn" class="btn-sim btn-reset hidden-sim">Ulangi</button>
+                                    </div>
+                                </div>
+                                <div class="calc-box-sim" id="grayCalcBox">
+                                    Klik <b>Mulai</b> untuk memulai proses.
+                                </div>
+                            </div>
+
+                            <div class="panel-sim">
+                                <h5 style="text-align:center; font-weight:700; color:#1e3a8a; margin-bottom:16px;">Matriks Hasil Pemetaan</h5>
+                                <div class="matrix-sim" id="equalizationMatrix">
+                                    <div class="cell-sim gray-output-cell output-cell-sim"></div>
+                                    <div class="cell-sim gray-output-cell output-cell-sim"></div>
+                                    <div class="cell-sim gray-output-cell output-cell-sim"></div>
+                                    <div class="cell-sim gray-output-cell output-cell-sim"></div>
+
+                                    <div class="cell-sim gray-output-cell output-cell-sim"></div>
+                                    <div class="cell-sim gray-output-cell output-cell-sim"></div>
+                                    <div class="cell-sim gray-output-cell output-cell-sim"></div>
+                                    <div class="cell-sim gray-output-cell output-cell-sim"></div>
+
+                                    <div class="cell-sim gray-output-cell output-cell-sim"></div>
+                                    <div class="cell-sim gray-output-cell output-cell-sim"></div>
+                                    <div class="cell-sim gray-output-cell output-cell-sim"></div>
+                                    <div class="cell-sim gray-output-cell output-cell-sim"></div>
+
+                                    <div class="cell-sim gray-output-cell output-cell-sim"></div>
+                                    <div class="cell-sim gray-output-cell output-cell-sim"></div>
+                                    <div class="cell-sim gray-output-cell output-cell-sim"></div>
+                                    <div class="cell-sim gray-output-cell output-cell-sim"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <hr style="margin-top:30px; margin-bottom:18px;">
+                    <div class="grid-sim" style="display:flex; justify-content:center; align-items:flex-start; gap:30px; flex-wrap:wrap;">
+                        <div class="panel-sim">
+                            <h5 style="text-align:center; font-weight:700; color:#1e3a8a;">Matriks Hasil Pemetaan</h5>
+                            <div class="matrix-sim" id="equalInputMatrix">
+                                <div class="cell-sim input-cell-sim equalization-realtime-cell"></div>
+                                <div class="cell-sim input-cell-sim equalization-realtime-cell"></div>
+                                <div class="cell-sim input-cell-sim equalization-realtime-cell"></div>
+                                <div class="cell-sim input-cell-sim equalization-realtime-cell"></div>
+                                <div class="cell-sim input-cell-sim equalization-realtime-cell"></div>
+                                <div class="cell-sim input-cell-sim equalization-realtime-cell"></div>
+                                <div class="cell-sim input-cell-sim equalization-realtime-cell"></div>
+                                <div class="cell-sim input-cell-sim equalization-realtime-cell"></div>
+                                <div class="cell-sim input-cell-sim equalization-realtime-cell"></div>
+                                <div class="cell-sim input-cell-sim equalization-realtime-cell"></div>
+                                <div class="cell-sim input-cell-sim equalization-realtime-cell"></div>
+                                <div class="cell-sim input-cell-sim equalization-realtime-cell"></div>
+                                <div class="cell-sim input-cell-sim equalization-realtime-cell"></div>
+                                <div class="cell-sim input-cell-sim equalization-realtime-cell"></div>
+                                <div class="cell-sim input-cell-sim equalization-realtime-cell"></div>
+                                <div class="cell-sim input-cell-sim equalization-realtime-cell"></div>
+
+                            </div>
+                        </div>
+
+                        <div class="panel-sim">
+                            <h5 style="text-align:center; font-weight:700; color:#1e3a8a;"><em>Histogram</em></h5>
+                            <div id="equalizationHistogramContainer" style="
+                                width:260px;
+                                height:260px;
+
+                                display:flex;
+                                align-items:flex-end;
+                                justify-content:center;
+
+                                gap:10px;
+
+                                padding:15px;
+
+                                border:1px solid #cbd5e1;
+                                border-radius:14px;
+
+                                background:white;
+
+                                margin:0 auto;
+                            ">
+
+                                <!-- batang histogram realtime -->
+
+                            </div>
+                    </div>
+
+                    <div style="margin-top:20px; padding:15px; ">
+                        <p style="font-size:17px; margin-bottom:0;">
+                            <em>Histogram specification</em> menghasilkan citra baru dengan distribusi tingkat keabuan yang lebih sesuai dengan histogram target. 
+                            Pada contoh ini, mayoritas piksel terkonsentrasi pada tingkat keabuan 2, 3, 4, dan 6 dengan frekuensi masing-masing 4, 5, 3, dan 4 piksel, 
+                            sehingga karakteristik kontras citra berubah mengikuti pola distribusi yang diharapkan.<br>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="finishPopup" class="popup-overlay">
+        <div class="popup-box">
+            <div class="popup-icon">
+                <i class="bi bi-check-lg"></i>
+            </div>
+            <h2>Selesai!</h2>
+            <p>Perhitungan sudah selesai.</p>
+            <button id="popupOkBtn">OK</button>
+        </div>
+    </div>
+
+
+    {% include "EnhanceLearn/histogram/aktivitas12.html" %}
+
+    <div style="margin-top:32px; display:flex; justify-content:space-between;">
+        <a href="{% url 'histogram_equalization' %}" class="btn-prev-materi">« Kembali</a>
+
+        <a href="{% url 'rangkuman4' %}" class="btn-next-materi">Selanjutnya »</a>
+    </div>
+
+</div>
+
+
+
+<script> 
+// ==========================================
+// DATA UTAMA
+// ==========================================
+const pixels = [4, 5, 6, 7];
+const nk     = [4, 4, 3, 5];
+const totalPixel = 16;
+let savedPDF = [0, 0, 0, 0]; // Menyimpan hasil PDF untuk komputasi CDF
+let savedCDF = [0, 0, 0, 0]; // Menyimpan hasil CDF untuk referensi langkah berikutnya
+
+// ==========================================
+// SELECTOR ELEMEN LANGKAH 2 (PDF)
+// ==========================================
+const pixelCells = document.querySelectorAll(".pixel-cell");
+const pdfCells   = document.querySelectorAll(".pdf-cell");
+const startBtn   = document.getElementById("startBtn");
+const nextBtn    = document.getElementById("nextBtn");
+const autoBtn    = document.getElementById("autoBtn");
+const pauseBtn   = document.getElementById("pauseBtn");
+const resetBtn   = document.getElementById("resetBtn");
+const calculationBox = document.getElementById("calculationBox");
+
+// ==========================================
+// SELECTOR ELEMEN LANGKAH 3 (CDF)
+// ==========================================
+const cdfPixelCells  = document.querySelectorAll(".cdf-pixel-cell");
+const cdfPdfCells    = document.querySelectorAll(".cdf-pdf-cell");
+const cdfResultCells = document.querySelectorAll(".cdf-result-cell");
+const startCDFBtn    = document.getElementById("startCDFBtn");
+const nextCDFBtn     = document.getElementById("nextCDFBtn");
+const autoCDFBtn     = document.getElementById("autoCDFBtn");
+const pauseCDFBtn    = document.getElementById("pauseCDFBtn");
+const resetCDFBtn    = document.getElementById("resetCDFBtn");
+const cdfCalculationBox = document.getElementById("cdfCalculationBox");
+
+// Selector Pop-up umum
+const finishPopup = document.getElementById("finishPopup");
+const popupOkBtn  = document.getElementById("popupOkBtn");
+
+// State Indeks dan Interval
+let currentIndex = 0;
+let cdfIndex = 0;
+let autoPlayInterval = null;
+let cdfInterval = null;
+
+/* ==========================================
+   LOGIKA LANGKAH 2: PDF (PROBABILITY DENSITY FUNCTION)
+   ========================================= */
+
+function clearHighlight(){
+    pixelCells.forEach(cell => cell.classList.remove("active-cell"));
+    pdfCells.forEach(cell => cell.classList.remove("active-cell"));
+}
+
+function showStep(index){
+    clearHighlight();
+
+    pixelCells[index].classList.add("active-cell");
+    pdfCells[index].classList.add("active-cell");
+
+    let pdf = (nk[index] / totalPixel).toFixed(2);
+    pdfCells[index].innerHTML = pdf;
+    
+    savedPDF[index] = parseFloat(pdf);
+    cdfPdfCells[index].innerHTML = pdf; 
+
+    calculationBox.style.display = "block";
+    calculationBox.innerHTML = `
+        <strong>Perhitungan:</strong>
+        <div style="margin-top:15px; text-align:center; font-size:17px;">
+            \\[ P_r(r_k) = \\frac{${nk[index]}}{${totalPixel}} = ${pdf} \\]
+        </div>
+    `;
+
+    if(window.MathJax){
+        MathJax.typesetPromise([calculationBox]);
+    }
+}
+
+function nextStep() {
+    currentIndex++;
+    if(currentIndex < pixels.length){
+        showStep(currentIndex);
+    } else {
+        stopAutoPlay();
+        nextBtn.classList.add("hidden-sim");
+        autoBtn.classList.add("hidden-sim");
+        pauseBtn.classList.add("hidden-sim");
+
+        calculationBox.innerHTML += `
+            <div id="finishMessage" style="margin-top:15px; color:#166534; font-weight:bold; text-align:center; font-size:18px;">
+                Semua perhitungan PDF selesai dilakukan.
+            </div>
+        `;
+        setTimeout(() => { finishPopup.style.display = "flex"; }, 300);
+    }
+}
+
+function startAutoPlay() {
+    if (autoPlayInterval === null) autoPlayInterval = setInterval(nextStep, 2000);
+}
+
+function stopAutoPlay() {
+    if (autoPlayInterval !== null) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = null;
+    }
+}
+
+startBtn.addEventListener("click", () => {
+    currentIndex = 0;
+    stopAutoPlay();
+    pdfCells.forEach(cell => cell.innerHTML = "");
+    cdfPdfCells.forEach(cell => cell.innerHTML = ""); 
+    startBtn.classList.add("hidden-sim");
+    nextBtn.classList.remove("hidden-sim");
+    autoBtn.classList.remove("hidden-sim");
+    pauseBtn.classList.remove("hidden-sim");
+    resetBtn.classList.remove("hidden-sim");
+    showStep(currentIndex);
+});
+
+nextBtn.addEventListener("click", () => { stopAutoPlay(); nextStep(); });
+autoBtn.addEventListener("click", () => {
+    if (currentIndex >= pixels.length - 1 && document.getElementById("finishMessage")) return;
+    startAutoPlay();
+});
+pauseBtn.addEventListener("click", () => { stopAutoPlay(); });
+resetBtn.addEventListener("click", () => {
+    stopAutoPlay();
+    currentIndex = 0;
+    clearHighlight();
+    pdfCells.forEach(cell => cell.innerHTML = "");
+    cdfPdfCells.forEach(cell => cell.innerHTML = ""); 
+    calculationBox.style.display = "none";
+    calculationBox.innerHTML = "";
+    startBtn.classList.remove("hidden-sim");
+    nextBtn.classList.add("hidden-sim");
+    autoBtn.classList.add("hidden-sim");
+    pauseBtn.classList.add("hidden-sim");
+    resetBtn.classList.add("hidden-sim");
+});
+
+
+/* ==========================================
+   LOGIKA LANGKAH 3: CDF (CUMULATIVE DENSITY FUNCTION)
+   ========================================== */
+
+function clearCDFHighlight() {
+    cdfPixelCells.forEach(cell => cell.classList.remove("active-cell"));
+    cdfPdfCells.forEach(cell => cell.classList.remove("active-cell"));
+    cdfResultCells.forEach(cell => cell.classList.remove("active-cell"));
+}
+
+function showCDFStep(index) {
+    clearCDFHighlight();
+
+    cdfPixelCells[index].classList.add("active-cell");
+    cdfPdfCells[index].classList.add("active-cell");
+    cdfResultCells[index].classList.add("active-cell");
+
+    let currentPDF = savedPDF[index];
+    let cdfValue = 0;
+    let formulaText = "";
+
+    if (index === 0) {
+        // Langkah pertama, CDF langsung sama dengan PDF pertama
+        cdfValue = currentPDF;
+        formulaText = `${currentPDF.toFixed(2)}`;
+    } else {
+        // Langkah berikutnya, CDF sebelumnya + PDF saat ini
+        let prevCDF = savedCDF[index - 1];
+        cdfValue = prevCDF + currentPDF;
+        formulaText = `${prevCDF.toFixed(2)} + ${currentPDF.toFixed(2)}`;
+    }
+
+    // Hindari kelebihan presisi pecahan JavaScript
+    cdfValue = parseFloat(cdfValue.toFixed(2));
+    if (cdfValue > 1) cdfValue = 1.00; 
+
+    // Simpan nilai ke array agar bisa dibaca langkah berikutnya
+    savedCDF[index] = cdfValue;
+    const mapInputCdfCells = document.querySelectorAll(".mapping-table tr:nth-child(2) .cdf-result-cell");
+    if (mapInputCdfCells[index]) {
+        mapInputCdfCells[index].innerHTML = cdfValue;
+    }
+    
+    cdfResultCells[index].innerHTML = cdfValue.toFixed(2);
+
+    cdfCalculationBox.style.display = "block";
+    cdfCalculationBox.innerHTML = `
+        <strong>Perhitungan:</strong>
+        <div style="margin-top:15px; text-align:center; font-size:17px;">
+            \\[ CDF(r_{${index}}) = ${formulaText} = ${cdfValue.toFixed(2)} \\]
+        </div>
+    `;
+
+    if(window.MathJax){
+        MathJax.typesetPromise([cdfCalculationBox]);
+    }
+}
+
+function nextCDFStep() {
+    cdfIndex++;
+    if(cdfIndex < pixels.length) {
+        showCDFStep(cdfIndex);
+    } else {
+        stopCDFAutoPlay();
+        nextCDFBtn.classList.add("hidden-sim");
+        autoCDFBtn.classList.add("hidden-sim");
+        pauseCDFBtn.classList.add("hidden-sim");
+
+        cdfCalculationBox.innerHTML += `
+            <div id="finishCDFMessage" style="margin-top:15px; color:#166534; font-weight:bold; text-align:center; font-size:18px;">
+                Semua perhitungan CDF selesai dilakukan.
+            </div>
+        `;
+        setTimeout(() => { finishPopup.style.display = "flex"; }, 300);
+    }
+}
+
+function startCDFAutoPlay() {
+    if (cdfInterval === null) cdfInterval = setInterval(nextCDFStep, 2000);
+}
+
+function stopCDFAutoPlay() {
+    if (cdfInterval !== null) {
+        clearInterval(cdfInterval);
+        cdfInterval = null;
+    }
+}
+
+// ==========================================
+// TOMBOL MULAI LANGKAH 3 (CDF) DENGAN VALIDASI
+// ==========================================
+startCDFBtn.addEventListener("click", () => {
+    // VALIDASI: Cek apakah Langkah 2 sudah selesai (currentIndex harus mencapai akhir array)
+    const isLangkah2Selesai = currentIndex >= pixels.length && document.getElementById("finishMessage");
+
+    if (!isLangkah2Selesai) {
+        // Tampilkan pesan peringatan jika Langkah 2 belum selesai
+        cdfCalculationBox.style.display = "block";
+        cdfCalculationBox.innerHTML = `
+            <div style="
+                color: red; 
+                font-weight: bold; 
+                text-align: center; 
+                font-size: 20px; 
+                margin: 15px 0;
+            ">
+                Selesaikan langkah 2 terlebih dahulu.
+            </div>
+        `;
+        return; // Hentikan fungsi di sini agar simulator CDF tidak berjalan
+    }
+
+    // --- JIKA LANGKAH 2 SUDAH SELESAI, JALANKAN LOGIKA DI BAWAH INI ---
+    cdfIndex = 0;
+    stopCDFAutoPlay();
+    cdfResultCells.forEach(cell => cell.innerHTML = "");
+    savedCDF = [0, 0, 0, 0]; // Reset data penyimpanan CDF
+    
+    startCDFBtn.classList.add("hidden-sim");
+    nextCDFBtn.classList.remove("hidden-sim");
+    autoCDFBtn.classList.remove("hidden-sim");
+    pauseCDFBtn.classList.remove("hidden-sim");
+    resetCDFBtn.classList.remove("hidden-sim");
+
+    showCDFStep(cdfIndex);
+});
+
+nextCDFBtn.addEventListener("click", () => { stopAutoPlay(); nextCDFStep(); });
+autoCDFBtn.addEventListener("click", () => {
+    if (cdfIndex >= pixels.length - 1 && document.getElementById("finishCDFMessage")) return;
+    startCDFAutoPlay();
+});
+pauseCDFBtn.addEventListener("click", () => { stopCDFAutoPlay(); });
+resetCDFBtn.addEventListener("click", () => {
+    stopCDFAutoPlay();
+    cdfIndex = 0;
+    clearCDFHighlight();
+    cdfResultCells.forEach(cell => cell.innerHTML = "");
+    savedCDF = [0, 0, 0, 0];
+    cdfCalculationBox.style.display = "none";
+    cdfCalculationBox.innerHTML = "";
+
+    startCDFBtn.classList.remove("hidden-sim");
+    nextCDFBtn.classList.add("hidden-sim");
+    autoCDFBtn.classList.add("hidden-sim");
+    pauseCDFBtn.classList.add("hidden-sim");
+    resetCDFBtn.classList.add("hidden-sim");
+});
+
+// Logika Pop-up
+popupOkBtn.addEventListener("click", () => {
+    finishPopup.style.display = "none";
+});
+</script>
+
+
+<script>
+// ==========================================================================
+// DATA UTAMA LANGKAH 5 & 6 (TARGET)
+// ==========================================================================
+const pixelsTarget = [0, 1, 2, 3, 4, 5, 6];
+const nkTarget     = [1, 1, 2, 3, 4, 3, 2]; // Diambil dari data jumlah piksel terverifikasi
+const totalPixelTarget = 16;
+
+// Wadah data komputasi untuk jembatan penghubung Langkah 5 ke Langkah 6
+let savedPdfTarget = [0, 0, 0, 0, 0, 0, 0]; 
+let savedCdfTarget = [0, 0, 0, 0, 0, 0, 0]; 
+
+// ==========================================================================
+// SELECTOR ELEMEN LANGKAH 5 (PDF TARGET)
+// ==========================================================================
+const targetTable = document.querySelector(".pdf-target-table");
+const pixelTargetCells = targetTable.querySelectorAll("tr:nth-child(1) .pixel-cell");
+const pdfTargetCells   = targetTable.querySelectorAll("tr:nth-child(2) .pdf-cell");
+
+const startPdfTargetBtn = document.getElementById("startPdfTargetBtn");
+const nextPdfTargetBtn  = document.getElementById("nextPdfTargetBtn");
+const autoPdfTargetBtn  = document.getElementById("autoPdfTargetBtn");
+const pausePdfTargetBtn = document.getElementById("pausePdfTargetBtn");
+const resetPdfTargetBtn = document.getElementById("resetPdfTargetBtn");
+const calculationBoxPdfTarget = document.getElementById("calculationBoxPdfTarget");
+
+let pdfTargetIndex = 0;
+let pdfTargetInterval = null;
+
+// ==========================================================================
+// SELECTOR ELEMEN LANGKAH 6 (CDF TARGET)
+// ==========================================================================
+const cdfTargetTable       = document.querySelector(".cdf-target-table");
+const cdfPixelTargetCells  = cdfTargetTable.querySelectorAll("tr:nth-child(1) .pixel-cell");
+const cdfPdfTargetCells    = cdfTargetTable.querySelectorAll("tr:nth-child(2) .cdf-pdf-cell");
+const cdfResultTargetCells = cdfTargetTable.querySelectorAll("tr:nth-child(3) .cdf-result-cell");
+
+const startCdfTargetBtn = document.getElementById("startCdfTargetBtn");
+const nextCdfTargetBtn  = document.getElementById("nextCdfTargetBtn");
+const autoCdfTargetBtn  = document.getElementById("autoCdfTargetBtn");
+const pauseCdfTargetBtn = document.getElementById("pauseCdfTargetBtn");
+const resetCdfTargetBtn = document.getElementById("resetCdfTargetBtn");
+const CalculationBoxCdfTarget = document.getElementById("CalculationBoxCdfTarget") || document.getElementById("calculationBoxCdfTarget");
+
+let cdfTargetIndex = 0;
+let cdfTargetInterval = null;
+
+
+/* ==========================================================================
+   LANGKAH 5: PDF TARGET (SESUAI KODE ASLI ANDA + SINKRONISASI REAL-TIME)
+   ========================================================================== */
+
+function clearPdfTargetHighlight() {
+    pixelTargetCells.forEach(cell => cell.classList.remove("active-cell"));
+    pdfTargetCells.forEach(cell => cell.classList.remove("active-cell"));
+}
+
+function showPdfTargetStep(index) {
+    clearPdfTargetHighlight();
+
+    pixelTargetCells[index].classList.add("active-cell");
+    pdfTargetCells[index].classList.add("active-cell");
+
+    let pdf = (nkTarget[index] / totalPixelTarget).toFixed(2);
+    pdfTargetCells[index].innerHTML = pdf;
+
+    // --- FITUR REAL-TIME: Isi data ke array dan tabel Langkah 6 ---
+    savedPdfTarget[index] = parseFloat(pdf);
+    if (cdfPdfTargetCells && cdfPdfTargetCells[index]) {
+        cdfPdfTargetCells[index].innerHTML = pdf;
+    }
+
+    calculationBoxPdfTarget.style.display = "block";
+    calculationBoxPdfTarget.innerHTML = `
+        <strong>Perhitungan PDF Target:</strong>
+        <div style="margin-top:15px; text-align:center; font-size:17px;">
+            \\[ P_z(z_{${pixelsTarget[index]}}) = \\frac{${nkTarget[index]}}{${totalPixelTarget}} = ${pdf} \\]
+        </div>
+    `;
+
+    if (window.MathJax) {
+        MathJax.typesetPromise([calculationBoxPdfTarget]);
+    }
+}
+
+function nextPdfTargetStep() {
+    pdfTargetIndex++;
+
+    if (pdfTargetIndex < pixelsTarget.length) {
+        showPdfTargetStep(pdfTargetIndex);
+    } else {
+        stopPdfTargetAutoPlay();
+        
+        nextPdfTargetBtn.classList.add("hidden-sim");
+        autoPdfTargetBtn.classList.add("hidden-sim");
+        pausePdfTargetBtn.classList.add("hidden-sim");
+
+        calculationBoxPdfTarget.innerHTML += `
+            <div id="finishPdfTargetMessage" style="margin-top:15px; color:#166534; font-weight:bold; text-align:center; font-size:18px;">
+                Semua perhitungan PDF Target selesai dilakukan.
+            </div>
+        `;
+
+        setTimeout(() => {
+            const finishPopup = document.getElementById("finishPopup");
+            if (finishPopup) finishPopup.style.display = "flex";
+        }, 300);
+    }
+}
+
+function startPdfTargetAutoPlay() {
+    if (pdfTargetInterval === null) {
+        pdfTargetInterval = setInterval(nextPdfTargetStep, 2000); 
+    }
+}
+
+function stopPdfTargetAutoPlay() {
+    if (pdfTargetInterval !== null) {
+        clearInterval(pdfTargetInterval);
+        pdfTargetInterval = null;
+    }
+}
+
+// Event Listeners Kontrol Langkah 5 (Sesuai Kode Asli Anda)
+startPdfTargetBtn.addEventListener("click", () => {
+    const isLangkahSebelumnyaSelesai = document.getElementById("finishCDFMessage") !== null;
+
+    if (!isLangkahSebelumnyaSelesai) {
+        calculationBoxPdfTarget.style.display = "block";
+        calculationBoxPdfTarget.innerHTML = `
+            <div style="color: red; font-weight: bold; text-align: center; font-size: 20px; margin: 15px 0;">
+                Selesaikan langkah sebelumnya terlebih dahulu.
+            </div>
+        `;
+        return;
+    }
+
+    pdfTargetIndex = 0;
+    stopPdfTargetAutoPlay();
+    pdfTargetCells.forEach(cell => cell.innerHTML = "");
+    if (cdfPdfTargetCells) cdfPdfTargetCells.forEach(cell => cell.innerHTML = ""); // Reset bayangan Langkah 6
+
+    startPdfTargetBtn.classList.add("hidden-sim");
+    nextPdfTargetBtn.classList.remove("hidden-sim");
+    autoPdfTargetBtn.classList.remove("hidden-sim");
+    pausePdfTargetBtn.classList.remove("hidden-sim");
+    resetPdfTargetBtn.classList.remove("hidden-sim");
+
+    showPdfTargetStep(pdfTargetIndex);
+});
+
+nextPdfTargetBtn.addEventListener("click", () => {
+    stopPdfTargetAutoPlay();
+    nextPdfTargetStep();
+});
+
+autoPdfTargetBtn.addEventListener("click", () => {
+    if (pdfTargetIndex >= pixelsTarget.length - 1 && document.getElementById("finishPdfTargetMessage")) return;
+    startPdfTargetAutoPlay();
+});
+
+pausePdfTargetBtn.addEventListener("click", () => {
+    stopPdfTargetAutoPlay();
+});
+
+resetPdfTargetBtn.addEventListener("click", () => {
+    stopPdfTargetAutoPlay();
+    pdfTargetIndex = 0;
+    clearPdfTargetHighlight();
+    pdfTargetCells.forEach(cell => cell.innerHTML = "");
+    if (cdfPdfTargetCells) cdfPdfTargetCells.forEach(cell => cell.innerHTML = "");
+
+    calculationBoxPdfTarget.style.display = "none";
+    calculationBoxPdfTarget.innerHTML = "";
+
+    startPdfTargetBtn.classList.remove("hidden-sim");
+    nextPdfTargetBtn.classList.add("hidden-sim");
+    autoPdfTargetBtn.classList.add("hidden-sim");
+    pausePdfTargetBtn.classList.add("hidden-sim");
+    resetPdfTargetBtn.classList.add("hidden-sim");
+});
+
+
+/* ==========================================================================
+   LANGKAH 6: CDF TARGET (DENGAN SINKRONISASI OTOMATIS KE LANGKAH 7)
+   ========================================================================== */
+
+function clearCdfTargetHighlight() {
+    cdfPixelTargetCells.forEach(cell => cell.classList.remove("active-cell"));
+    cdfPdfTargetCells.forEach(cell => cell.classList.remove("active-cell"));
+    cdfResultTargetCells.forEach(cell => cell.classList.remove("active-cell"));
+}
+
+function showCdfTargetStep(index) {
+    clearCdfTargetHighlight();
+
+    cdfPixelTargetCells[index].classList.add("active-cell");
+    cdfPdfTargetCells[index].classList.add("active-cell");
+    cdfResultTargetCells[index].classList.add("active-cell");
+
+    let currentPDF = savedPdfTarget[index];
+    let cdfValue = 0;
+    let formulaText = "";
+
+    if (index === 0) {
+        cdfValue = currentPDF;
+        formulaText = `${currentPDF.toFixed(2)}`;
+    } else {
+        let prevCDF = savedCdfTarget[index - 1];
+        cdfValue = prevCDF + currentPDF;
+        formulaText = `${prevCDF.toFixed(2)} + ${currentPDF.toFixed(2)}`;
+    }
+
+    cdfValue = parseFloat(cdfValue.toFixed(2));
+    if (cdfValue > 1) cdfValue = 1.00; 
+
+    savedCdfTarget[index] = cdfValue;
+    cdfResultTargetCells[index].innerHTML = cdfValue.toFixed(2);
+
+    // ======================================================================
+    // SISIPAN 1: Isi Baris "Hasil CDF Target" di Tabel Langkah 7 secara Real-time
+    // ======================================================================
+    const mapTargetCdfCells = document.querySelectorAll(".mapping-table tr:nth-child(4) .cdf-result-cell");
+    if (mapTargetCdfCells && mapTargetCdfCells[index]) {
+        mapTargetCdfCells[index].innerHTML = cdfValue.toFixed(2);
+    }
+    // ======================================================================
+
+    if (CalculationBoxCdfTarget) {
+        CalculationBoxCdfTarget.style.display = "block";
+        CalculationBoxCdfTarget.innerHTML = `
+            <strong>Perhitungan:</strong>
+            <div style="margin-top:15px; text-align:center; font-size:17px;">
+                \\[ G(z_{${index}}) = ${formulaText} = ${cdfValue.toFixed(2)} \\]
+            </div>
+        `;
+    }
+
+    if (window.MathJax) {
+        MathJax.typesetPromise([CalculationBoxCdfTarget]);
+    }
+}
+
+function nextCdfTargetStep() {
+    cdfTargetIndex++;
+
+    if (cdfTargetIndex < pixelsTarget.length) {
+        showCdfTargetStep(cdfTargetIndex);
+    } else {
+        stopCdfTargetAutoPlay();
+        
+        nextCdfTargetBtn.classList.add("hidden-sim");
+        autoCdfTargetBtn.classList.add("hidden-sim");
+        pauseCdfTargetBtn.classList.add("hidden-sim");
+
+        if (CalculationBoxCdfTarget) {
+            CalculationBoxCdfTarget.innerHTML += `
+                <div id="finishCdfTargetMessage" style="margin-top:15px; color:#166534; font-weight:bold; text-align:center; font-size:17px;">
+                    Semua perhitungan CDF Target selesai dilakukan.
+                </div>
+            `;
+        }
+        
+        jalankanPemetaanOtomatis();
+        // ======================================================================
+        
+        setTimeout(() => {
+            const finishPopup = document.getElementById("finishPopup");
+            if (finishPopup) finishPopup.style.display = "flex";
+        }, 300);
+    }
+}
+
+function startCdfTargetAutoPlay() {
+    if (cdfTargetInterval === null) cdfTargetInterval = setInterval(nextCdfTargetStep, 2000);
+}
+
+function stopCdfTargetAutoPlay() {
+    if (cdfTargetInterval !== null) {
+        clearInterval(cdfTargetInterval);
+        cdfTargetInterval = null;
+    }
+}
+
+// Event Listener Tombol Mulai Langkah 6 dengan Proteksi Validasi
+startCdfTargetBtn.addEventListener("click", () => {
+    const isLangkah5Selesai = document.getElementById("finishPdfTargetMessage") !== null;
+
+    if (!isLangkah5Selesai) {
+        if (CalculationBoxCdfTarget) {
+            CalculationBoxCdfTarget.style.display = "block";
+            CalculationBoxCdfTarget.innerHTML = `
+                <div style="color: red; font-weight: bold; text-align: center; font-size: 17px; margin: 15px 0;">
+                    Selesaikan langkah 5 terlebih dahulu.
+                </div>
+            `;
+        }
+        return;
+    }
+
+    cdfTargetIndex = 0;
+    stopCdfTargetAutoPlay();
+    if (cdfResultTargetCells) cdfResultTargetCells.forEach(cell => cell.innerHTML = "");
+    
+    // Reset juga sisa isian di tabel Langkah 7 saat mengulang simulasi
+    const mapTargetCdfCells = document.querySelectorAll(".mapping-table tr:nth-child(4) .cdf-result-cell");
+    if (mapTargetCdfCells) mapTargetCdfCells.forEach(cell => cell.innerHTML = "");
+    const calculationBoxMap = document.getElementById("calculationBoxMap");
+    if (calculationBoxMap) { calculationBoxMap.style.display = "none"; calculationBoxMap.innerHTML = ""; }
+
+    savedCdfTarget = [0, 0, 0, 0, 0, 0, 0];
+
+    startCdfTargetBtn.classList.add("hidden-sim");
+    nextCdfTargetBtn.classList.remove("hidden-sim");
+    autoCdfTargetBtn.classList.remove("hidden-sim");
+    pauseCdfTargetBtn.classList.remove("hidden-sim");
+    resetCdfTargetBtn.classList.remove("hidden-sim");
+
+    showCdfTargetStep(cdfTargetIndex);
+});
+
+nextCdfTargetBtn.addEventListener("click", () => { stopCdfTargetAutoPlay(); nextCdfTargetStep(); });
+autoCdfTargetBtn.addEventListener("click", () => {
+    if (cdfTargetIndex >= pixelsTarget.length - 1 && document.getElementById("finishCdfTargetMessage")) return;
+    startCdfTargetAutoPlay();
+});
+pauseCdfTargetBtn.addEventListener("click", () => { stopCdfTargetAutoPlay(); });
+
+resetCdfTargetBtn.addEventListener("click", () => {
+    stopCdfTargetAutoPlay();
+    cdfTargetIndex = 0;
+    clearCdfTargetHighlight();
+    if (cdfResultTargetCells) cdfResultTargetCells.forEach(cell => cell.innerHTML = "");
+    
+    // Reset data tabel Langkah 7 saat tombol ulangi Langkah 6 ditekan
+    const mapTargetCdfCells = document.querySelectorAll(".mapping-table tr:nth-child(4) .cdf-result-cell");
+    if (mapTargetCdfCells) mapTargetCdfCells.forEach(cell => cell.innerHTML = "");
+    const calculationBoxMap = document.getElementById("calculationBoxMap");
+    if (calculationBoxMap) { calculationBoxMap.style.display = "none"; calculationBoxMap.innerHTML = ""; }
+
+    savedCdfTarget = [0, 0, 0, 0, 0, 0, 0];
+    
+    if (CalculationBoxCdfTarget) {
+        CalculationBoxCdfTarget.style.display = "none";
+        CalculationBoxCdfTarget.innerHTML = "";
+    }
+
+    startCdfTargetBtn.classList.remove("hidden-sim");
+    nextCdfTargetBtn.classList.add("hidden-sim");
+    autoCdfTargetBtn.classList.add("hidden-sim");
+    pauseCdfTargetBtn.classList.add("hidden-sim");
+    resetCdfTargetBtn.classList.add("hidden-sim");
+});
+
+
+/* ==========================================================================
+   LANGKAH 7: FUNGSI PEMETAAN OTOMATIS & VISUALISASI MATRIKS + HISTOGRAM REAL-TIME
+   (INTERLOCK VISUAL INNER-BOX: ANTI POP-UP BROWSER)
+   ========================================================================== */
+
+// 1. Variabel Global untuk Sinkronisasi Data dan Histogram (0-6)
+let currentHistogramData = [0, 0, 0, 0, 0, 0, 0]; 
+
+// Konfigurasi Map Pemetaan (Asal -> [Index Tabel CDF Input, Index Tabel CDF Target, Nilai Target Baru])
+const petaEdukasi = {
+    4: { inputIdx: 0, targetIdx: 2, hasilBaru: 2 },
+    5: { inputIdx: 1, targetIdx: 3, hasilBaru: 3 },
+    6: { inputIdx: 2, targetIdx: 4, hasilBaru: 4 },
+    7: { inputIdx: 3, targetIdx: 6, hasilBaru: 6 }
+};
+
+// 2. DOM Elements Penunjang
+const mappingTable = document.querySelector(".mapping-table") || document.querySelector("table");
+const t7InputPixelCells = mappingTable.querySelectorAll("tr:nth-child(1) td:not(.title-cell)");
+const t7InputCdfCells   = mappingTable.querySelectorAll("tr:nth-child(2) td:not(.title-cell)");
+const t7TargetPixelCells= mappingTable.querySelectorAll("tr:nth-child(3) td:not(.title-cell)");
+const t7TargetCdfCells  = mappingTable.querySelectorAll("tr:nth-child(4) td:not(.title-cell)");
+
+const grayInputCells   = document.querySelectorAll("#equalCDFInputMatrix .cdf-input-cell");
+const grayOutputCells  = document.querySelectorAll("#equalizationMatrix .gray-output-cell");
+const grayCalcBox      = document.getElementById("grayCalcBox");
+
+// Elemen tambahan untuk komponen matriks bawah & histogram real-time
+const realtimeOutputCells = document.querySelectorAll("#equalInputMatrix .equalization-realtime-cell");
+const histogramContainer  = document.getElementById("equalizationHistogramContainer");
+
+let grayMatrixIndex = 0;
+let grayMatrixInterval = null;
+
+/**
+ * VALIDASI INTERLOCK VISUAL (Mengganti Kotak Deskripsi, Tanpa Alert Browser)
+ * Memeriksa apakah baris CDF Target di tabel Langkah 6 masih kosong.
+ */
+function cekKesiapanLangkahSebelumnya() {
+    const barisCdfTarget = mappingTable ? mappingTable.querySelectorAll("tr:nth-child(4) td:not(.title-cell)") : [];
+    
+    // Deteksi jika sel tabel target kosong atau belum terdefinisi
+    if (barisCdfTarget.length === 0 || barisCdfTarget[0].innerText.trim() === "") {
+        
+        // Tampilkan teks peringatan langsung di dalam komponen box simulasi sesuai request gambar
+        if (grayCalcBox) {
+            grayCalcBox.innerHTML = `
+                <div style="color:red; font-weight:bold; text-align:center;">
+                    Selesaikan langkah sebelumnya terlebih dahulu.
+                </div>
+            `;
+        }
+        return false;
+    }
+    return true;
+}
+
+/**
+ * Fungsi Pembantu untuk Merender Ulang Batang Grafik Histogram
+ */
+function updateRealtimeHistogram() {
+    if (!histogramContainer) return;
+    
+    const maxFreq = Math.max(...currentHistogramData) || 1;
+    histogramContainer.innerHTML = ""; 
+
+    for (let i = 0; i <= 6; i++) {
+        let count = currentHistogramData[i];
+        let barHeight = count > 0 ? (count / maxFreq) * 180 : 0; 
+
+        let barWrapper = document.createElement("div");
+        barWrapper.style.cssText = `
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            height: 100%;
+            justify-content: flex-end;
+        `;
+
+        let bar = document.createElement("div");
+        bar.style.cssText = `
+            width: 100%;
+            height: ${barHeight}px;
+            background-color: #3b82f6;
+            border-radius: 4px 4px 0 0;
+            transition: height 0.3s ease;
+            position: relative;
+        `;
+
+        if (count > 0) {
+            bar.innerHTML = `
+                <span style="position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 10px; font-weight: bold; color: #1e293b;">
+                    ${count}
+                </span>
+            `;
+        }
+
+        let label = document.createElement("div");
+        label.style.cssText = `
+            font-size: 11px;
+            font-weight: bold;
+            color: #64748b;
+            margin-top: 4px;
+        `;
+        label.innerText = i;
+
+        barWrapper.appendChild(bar);
+        barWrapper.appendChild(label);
+        histogramContainer.appendChild(barWrapper);
+    }
+}
+
+/**
+ * Jalankan Pemetaan Otomatis (Mengisi Tabel & Analisis Teks Utama)
+ */
+function jalankanPemetaanOtomatis() {
+    if (!cekKesiapanLangkahSebelumnya()) return;
+
+    const mapInputCdfCells = document.querySelectorAll(".mapping-table tr:nth-child(2) .cdf-result-cell");
+    const calculationBoxMap = document.getElementById("calculationBoxMap");
+
+    if (mapInputCdfCells && typeof savedCDF !== 'undefined') {
+        for (let i = 0; i < pixels.length; i++) {
+            if (mapInputCdfCells[i]) mapInputCdfCells[i].innerHTML = savedCDF[i].toFixed(2);
+        }
+    }
+
+    if (calculationBoxMap) {
+        calculationBoxMap.style.display = "block";
+        calculationBoxMap.innerHTML = `
+            <strong style="color: #1e3a8a;">Hasil Analisis Pemetaan Nilai Keabuan (Spesifikasi Histogram):</strong>
+            <div id="mappingResultList" style="margin-top:15px; text-align:left; font-size:17px; line-height: 2;">
+            </div>
+        `;
+        
+        const resultListContainer = document.getElementById("mappingResultList");
+
+        for (let i = 0; i < pixels.length; i++) {
+            let currentInputCDF = savedCDF[i];
+            let closestTargetIndex = 0;
+            let minDifference = Math.abs(currentInputCDF - savedCdfTarget[0]);
+
+            for (let j = 1; j < savedCdfTarget.length; j++) {
+                let diff = Math.abs(currentInputCDF - savedCdfTarget[j]);
+                if (diff < minDifference) {
+                    minDifference = diff;
+                    closestTargetIndex = j;
+                }
+            }
+
+            resultListContainer.innerHTML += `
+                <div>
+                    Piksel Asal <strong>${pixels[i]}</strong> (${currentInputCDF.toFixed(2)}) 
+                    paling dekat dengan CDF Target <b>${savedCdfTarget[closestTargetIndex].toFixed(2)}</b> 
+                    (Piksel Target <strong>${pixelsTarget[closestTargetIndex]}</strong>) 
+                    <span style="color:#1e3a8a; font-weight:bold;"> &rarr; Dipetakan menjadi Piksel Baru: ${pixelsTarget[closestTargetIndex]}</span>
+                </div>
+            `;
+        }
+    }
+    updateRealtimeHistogram();
+}
+
+/**
+ * Fungsi Membersihkan Warna Highlight Simulasi
+ */
+function clearAllSimulationHighlights() {
+    grayInputCells.forEach(cell => cell.style.backgroundColor = "");
+    grayOutputCells.forEach(cell => cell.style.backgroundColor = "");
+    realtimeOutputCells.forEach(cell => cell.style.backgroundColor = "");
+
+    if(t7InputPixelCells)  t7InputPixelCells.forEach(c => c.style.backgroundColor = "");
+    if(t7InputCdfCells)    t7InputCdfCells.forEach(c => c.style.backgroundColor = "");
+    if(t7TargetPixelCells) t7TargetPixelCells.forEach(c => c.style.backgroundColor = "");
+    if(t7TargetCdfCells)   t7TargetCdfCells.forEach(c => c.style.backgroundColor = "");
+}
+
+/**
+ * Fungsi Utama Mengisi Matriks Per Sel + Histogram Real-time
+ */
+function showMatrixStep(index) {
+    clearAllSimulationHighlights();
+
+    let nilaiAsal = parseInt(grayInputCells[index].innerText);
+    let dataPeta = petaEdukasi[nilaiAsal];
+
+    if (!dataPeta) return;
+
+    grayInputCells[index].style.backgroundColor = "#dbeafe"; 
+    grayOutputCells[index].style.backgroundColor = "#bbf7d0"; 
+    grayOutputCells[index].innerText = dataPeta.hasilBaru;
+
+    if (realtimeOutputCells[index]) {
+        realtimeOutputCells[index].innerText = dataPeta.hasilBaru;
+        realtimeOutputCells[index].style.backgroundColor = "#bbf7d0"; 
+    }
+
+    let nilaiBaru = dataPeta.hasilBaru;
+    currentHistogramData[nilaiBaru] += 1; 
+    updateRealtimeHistogram(); 
+
+    if (t7InputPixelCells[dataPeta.inputIdx]) t7InputPixelCells[dataPeta.inputIdx].style.backgroundColor = "#dbeafe"; 
+    if (t7InputCdfCells[dataPeta.inputIdx]) {
+        t7InputCdfCells[dataPeta.inputIdx].style.backgroundColor = "#93c5fd";
+        t7InputCdfCells[dataPeta.inputIdx].style.fontWeight = "bold";
+    }
+
+    if (t7TargetPixelCells[dataPeta.targetIdx]) t7TargetPixelCells[dataPeta.targetIdx].style.backgroundColor = "#fef08a"; 
+    if (t7TargetCdfCells[dataPeta.targetIdx]) {
+        t7TargetCdfCells[dataPeta.targetIdx].style.backgroundColor = "#fde047"; 
+        t7TargetCdfCells[dataPeta.targetIdx].style.fontWeight = "bold";
+    }
+
+    let txtCdfInput = t7InputCdfCells[dataPeta.inputIdx] ? t7InputCdfCells[dataPeta.inputIdx].innerText : "0.00";
+    let txtCdfTarget = t7TargetCdfCells[dataPeta.targetIdx] ? t7TargetCdfCells[dataPeta.targetIdx].innerText : "0.00";
+
+    grayCalcBox.innerHTML = `
+        <div style="text-align: center; font-size: 20px; font-weight: 600; font-family: monospace; line-height: 1.8; color: #1e293b; padding: 10px;">
+            ${nilaiAsal} &rarr; CDF ${txtCdfInput}<br>
+            ${txtCdfInput} &approx; ${txtCdfTarget}<br>
+            <span style="color: #16a34a; font-weight: 700;">Target = ${dataPeta.hasilBaru}</span>
+        </div>
+    `;
+}
+
+/**
+ * Fungsi Langkah Alur Matriks Berikutnya
+ */
+function nextMatrixStep() {
+    grayMatrixIndex++;
+
+    if (grayMatrixIndex < grayInputCells.length) {
+        showMatrixStep(grayMatrixIndex);
+    } else {
+        stopMatrixAutoPlay();
+        
+        document.getElementById("nextGrayBtn").classList.add("hidden-sim");
+        document.getElementById("autoGrayBtn").classList.add("hidden-sim");
+        document.getElementById("pauseGrayBtn").classList.add("hidden-sim");
+        
+        clearAllSimulationHighlights();
+        
+        if (grayCalcBox) {
+            grayCalcBox.innerHTML = `
+                <div style="text-align: center; font-size: 18px; font-weight: bold; color: #16a34a; padding: 10px;">
+                    Pemetaan matriks telah selesai.
+                </div>
+            `;
+        }
+
+        setTimeout(() => {
+            const finishPopup = document.getElementById("finishPopup");
+            if (finishPopup) {
+                finishPopup.style.display = "flex";
+            }
+        }, 300);
+    }
+}
+
+function startMatrixAutoPlay() {
+    if (grayMatrixInterval === null) {
+        grayMatrixInterval = setInterval(nextMatrixStep, 1500); 
+    }
+}
+
+function stopMatrixAutoPlay() {
+    if (grayMatrixInterval !== null) {
+        clearInterval(grayMatrixInterval);
+        grayMatrixInterval = null;
+    }
+}
+
+function resetKomponenBawahDanHistogram() {
+    realtimeOutputCells.forEach(cell => {
+        cell.innerText = "";
+        cell.style.backgroundColor = "";
+    });
+    currentHistogramData = [0, 0, 0, 0, 0, 0, 0];
+    updateRealtimeHistogram();
+}
+
+// 3. Event Listeners Kontrol Navigasi Interaktif (Proteksi Kotak Deskripsi Inner)
+document.getElementById("startGrayBtn").addEventListener("click", () => {
+    // Jika fungsi cek kesiapan bernilai false, eksekusi tombol langsung berhenti di sini
+    if (!cekKesiapanLangkahSebelumnya()) return;
+
+    grayMatrixIndex = 0;
+    stopMatrixAutoPlay();
+    
+    grayOutputCells.forEach(cell => cell.innerText = "");
+    resetKomponenBawahDanHistogram();
+
+    document.getElementById("startGrayBtn").classList.add("hidden-sim");
+    document.getElementById("nextGrayBtn").classList.remove("hidden-sim");
+    document.getElementById("autoGrayBtn").classList.remove("hidden-sim");
+    document.getElementById("pauseGrayBtn").classList.remove("hidden-sim");
+    document.getElementById("resetGrayBtn").classList.remove("hidden-sim");
+
+    showMatrixStep(grayMatrixIndex);
+});
+
+document.getElementById("nextGrayBtn").addEventListener("click", () => { 
+    if (!cekKesiapanLangkahSebelumnya()) return;
+    stopMatrixAutoPlay(); 
+    nextMatrixStep(); 
+});
+
+document.getElementById("autoGrayBtn").addEventListener("click", () => {
+    if (!cekKesiapanLangkahSebelumnya()) return;
+    startMatrixAutoPlay();
+});
+
+document.getElementById("pauseGrayBtn").addEventListener("click", stopMatrixAutoPlay);
+
+document.getElementById("resetGrayBtn").addEventListener("click", () => {
+    stopMatrixAutoPlay();
+    grayMatrixIndex = 0;
+    clearAllSimulationHighlights();
+    
+    grayOutputCells.forEach(cell => cell.innerText = "");
+    resetKomponenBawahDanHistogram();
+    
+    // Kembalikan ke text default awal saat direset
+    grayCalcBox.innerHTML = "Klik <b>Mulai</b> untuk memulai proses.";
+
+    const finishPopup = document.getElementById("finishPopup");
+    if (finishPopup) finishPopup.style.display = "none";
+
+    document.getElementById("startGrayBtn").classList.remove("hidden-sim");
+    document.getElementById("nextGrayBtn").classList.add("hidden-sim");
+    document.getElementById("autoGrayBtn").classList.add("hidden-sim");
+    document.getElementById("pauseGrayBtn").classList.add("hidden-sim");
+    document.getElementById("resetGrayBtn").classList.add("hidden-sim");
+});
+</script>
+
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+{% endblock %}

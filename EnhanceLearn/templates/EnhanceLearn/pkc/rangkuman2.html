@@ -1,0 +1,52 @@
+{% extends "EnhanceLearn/base.html" %}
+{% load static %}
+
+{% block title %}Rangkuman{% endblock %}
+
+{% block content %}
+<div class="materi-container">
+
+    <h1 class="subbab-title">SUBBAB 2: RANGKUMAN</h1>
+
+    <!-- BOX RANGKUMAN -->
+    <div class="materi-box">
+        <div class="materi-box-header">
+            <i class="bi bi-journal-check"></i>
+            Ringkasan Materi
+        </div>
+
+        <div class="materi-box-body">
+            <h6 style="font-weight:700; color: #1e3a8a">
+                1. Pengertian Peningkatan Kualitas Citra
+            </h6>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Peningkatan Kualitas Citra (<em>Image Enhancement</em>) adalah serangkaian proses untuk mengubah sebuah citra menjadi citra 
+                baru sesuai dengan kebutuhan melalui berbagai cara. Cara – cara yang bisa dilakukan misalnya dengan fungsi transformasi, 
+                operasi matematis, pemfilteran, dan lain – lain. Tujuan utama dari peningkatan kualitas citra adalah untuk memproses citra 
+                sehingga citra yang dihasilkan lebih baik daripada citra aslinya untuk aplikasi tertentu.
+            </p>
+
+            <h6 style="margin-top:30px; font-weight:700; color: #1e3a8a">
+                2. Perbedaan <em>Image Enhancement</em> & <em>Image Restoration</em>
+            </h6>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                <em>Image enhancement</em> dan <em>image restoration</em> dibedakan berdasarkan apakah proses perbaikan citra dilakukan tanpa 
+                model degradasi atau berdasarkan model degradasi yang diketahui. Degradasi citra adalah penurunan kualitas citra yang terjadi 
+                ketika citra tidak merepresentasikan objek aslinya dengan baik. Degradasi menyebabkan citra menjadi kabur, berisik, terlalu 
+                gelap, terlalu terang, atau kehilangan detail seperti kamera bergerak maka foto menjadi kabur (blur).
+            </p>
+
+        </div>
+    </div>
+
+    <!-- TOMBOL LANJUT -->
+    <div style="margin-top:32px; display:flex; justify-content:space-between;">
+        <a href="{% url 'pkc_restoration' %}" class="btn-prev-materi">« Kembali</a>
+
+        <a href="{% url 'halaman_kuis' 'pkc' %}" class="btn-next-materi">Selanjutnya »</a>
+    </div>
+
+</div>
+{% endblock %}

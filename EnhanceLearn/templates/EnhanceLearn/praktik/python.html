@@ -1,0 +1,45 @@
+{% extends "EnhanceLearn/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="editor-wrapper">
+
+    <div class="editor-header">
+        <h3>EdgeExplorer</h3>
+        <button class="add-cell-btn" onclick="addCell()">+ Add Cell</button>
+    </div>
+
+    <div class="editor-body">
+
+        <div class="editor-left">
+            <div id="cells"></div>
+        </div>
+
+        <div class="editor-right">
+            <input type="file" id="uploadInput" class="upload-btn">
+        </div>
+
+    </div>
+</div>
+
+<textarea id="default-code" style="display:none;">
+{% block default_code %}{% endblock %}
+</textarea>
+
+<!-- CodeMirror -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+
+<!-- Pyodide -->
+<script src="https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js"></script>
+
+<link rel="stylesheet" href="{% static 'css/python-editor.css' %}">
+<script src="{% static 'js/python-editor.js' %}"></script>
+
+{% endblock %}

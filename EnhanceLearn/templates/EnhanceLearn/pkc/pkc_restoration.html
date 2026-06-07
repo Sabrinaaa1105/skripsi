@@ -1,0 +1,73 @@
+{% extends "EnhanceLearn/base.html" %}
+{% load static %}
+
+{% block title %}PKC{% endblock %}
+
+{% block content %}
+<div class="materi-container">
+
+    <h1 class="subbab-title">SUBBAB 2: PERBEDAAN <em>IMAGE ENHANCEMENT & IMAGE RESTORATION</em></h1>
+
+    <!-- Pengertian -->
+    <div class="materi-box">
+        <div class="materi-box-header">
+            <i class="bi bi-image"></i>
+            Perbedaan <em>Image Enhancement</em> dan <em>Image Restoration</em>
+        </div>
+
+        <div class="materi-box-body">
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Dalam pemrosesan citra digital, peningkatan kualitas citra dapat dilakukan melalui dua pendekatan utama, 
+                yaitu <strong><em>image enhancement</em> dan <em>image restoration</em></strong>. Kedua pendekatan ini sama – sama bertujuan menghasilkan citra dengan 
+                kualitas yang lebih baik, namun berbeda dari segi tujuan, asumsi, dan metode yang digunakan. Image enhancement dan image 
+                restoration dibedakan berdasarkan apakah proses perbaikan citra dilakukan <strong>tanpa model degradasi atau berdasarkan model 
+                degradasi yang diketahui</strong>. Degradasi citra adalah penurunan kualitas citra yang terjadi ketika citra tidak merepresentasikan 
+                objek aslinya dengan baik. Degradasi menyebabkan citra menjadi kabur, berisik, terlalu gelap, terlalu terang, atau kehilangan 
+                detail seperti kamera bergerak maka foto menjadi kabur (blur). Gambar 2.3 merupakan contoh degradasi citra akibat pergerakan 
+                kamera atau objek saat proses pengambilan gambar, yang menyebabkan citra menjadi kabur (<em>motion blur</em>) dan kehilangan detail 
+                visual.
+            </p>
+
+
+            <div style="margin:16px 0;">
+                <table style="width:75%; margin:0 auto; border-collapse:collapse; border:1px solid #cbd5e1; text-align:center;">
+                    <tbody>
+                        <tr>
+                            <td style="border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:6px; vertical-align:top;">
+                                <img src="{% static 'img/pkc/degradasi.jpg' %}"
+                                     alt="Citra degradasi"
+                                     style="width:100%; height:350px; object-fit:cover; display:block; margin:0 auto;">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size:13px; margin-top:6px; font-style:italic; text-align:center;">
+                    Gambar 2.3 Citra degradasi
+                </p>
+            </div>
+
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75; margin-top: 10px;">
+                Kadang – kadang <em>image restoration</em> sering dipertukarkan dengan pengertian <em>image enhancement</em>. Kedua teknik ini memang 
+                sering bertukar metode dalam menyelesaikan masalah, tetapi titik berat restorasi adalah pada perbaikan citra yang mengalami kerusakan, 
+                baik selama proses digitalisasi maupun cacat akibat usia, jamur, goresan, pelabelan teks pada citra yang dilakukan baik sengaja 
+                maupun tidak sengaja. Sedangkan <em>image enhancement</em> cenderung memperhatikan perbaikan kualitas citra yang mengalami penurunan 
+                kualitas selama pembentukan citra atau justru memberi efek berlebih pada citra yang sudah ada. 
+            </p>
+
+         </div>
+    </div>
+
+    <!-- AKTIVITAS (TETAP, TIDAK DIUBAH) -->
+    {% include "EnhanceLearn/pkc/aktivitas4.html" %}
+
+    <!-- TOMBOL SELANJUTNYA (HANYA DITAMBAHKAN, POSISI BENAR) -->
+    <div style="margin-top:32px; display:flex; justify-content:space-between;">
+        <a href="{% url 'pkc' %}" class="btn-prev-materi">« Kembali</a>
+
+        <a href="{% url 'rangkuman2' %}" class="btn-next-materi">Selanjutnya »</a>
+    </div>
+
+</div>
+{% endblock %}

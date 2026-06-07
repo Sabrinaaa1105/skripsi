@@ -1,0 +1,53 @@
+{% extends "EnhanceLearn/base.html" %}
+{% load static %}
+
+{% block title %}Rangkuman{% endblock %}
+
+{% block content %}
+<div class="materi-container">
+
+    <h1 class="subbab-title">SUBBAB 4: RANGKUMAN</h1>
+
+    <!-- BOX RANGKUMAN -->
+    <div class="materi-box">
+        <div class="materi-box-header">
+            <i class="bi bi-journal-check"></i>
+            Ringkasan Materi
+        </div>
+
+        <div class="materi-box-body">
+            <h6 style="font-weight:700; color: #1e3a8a">
+                <em>1. Histogram Equalization</em>
+            </h6>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                <em>Histogram equalization</em> adalah teknik peningkatan kualitas citra yang bertujuan untuk 
+                memperbaiki kontras dengan cara meratakan distribusi intensitas piksel. Metode ini bekerja 
+                dengan menyebarkan nilai intensitas sehingga seluruh rentang keabuan digunakan secara lebih 
+                optimal. Hasilnya, detail pada citra terutama pada area yang sebelumnya terlalu gelap atau 
+                terlalu terang menjadi lebih jelas terlihat.
+            </p>
+
+            <h6 style=" margin-top:30px; font-weight:700; color: #1e3a8a">
+                <em>2. Histogram Specification</em>
+            </h6>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                <em>Histogram specification atau histogram matching</em> merupakan teknik yang digunakan untuk 
+                mengubah distribusi histogram suatu citra agar menyerupai histogram citra lain yang diinginkan. 
+                Berbeda dengan <em>histogram equalization</em> yang menghasilkan distribusi seragam, 
+                <em>histogram specification</em> memungkinkan kita mengatur bentuk distribusi intensitas sesuai 
+                kebutuhan tertentu, misalnya untuk menyesuaikan tampilan beberapa citra agar konsisten atau 
+                mengikuti karakteristik citra referensi.
+            </p>
+
+        </div>
+    </div>
+
+    <!-- TOMBOL LANJUT -->
+    <div style="margin-top:32px; display:flex; justify-content:space-between;">
+        <a href="{% url 'histogram_specification' %}" class="btn-prev-materi">« Kembali</a>
+
+        <a href="{% url 'halaman_kuis' 'histogram' %}" class="btn-next-materi">Selanjutnya »</a>
+    </div>
+
+</div>
+{% endblock %}

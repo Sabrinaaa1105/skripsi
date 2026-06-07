@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ judul }}</title>
+    <link rel="stylesheet" href="{% static 'css/kuis.css' %}">
+</head>
+<body>
+
+<div class="container">
+    <div class="intro-card">
+
+        <div class="intro-title-box">{{ judul }}</div>
+
+        <div class="intro-inner-card">
+            <div class="intro-body result-body">
+                <p><strong>Nama:</strong> {{ nama|default:"-" }}</p>
+                <p><strong>Nilai:</strong> {{ nilai }}</p>
+                <p><strong>Waktu Pengerjaan:</strong> {{ waktu }}</p>
+
+                {% if not lulus %}
+                    <div class="result-message result-fail">
+                        ❌ Nilai Anda belum mencukupi
+                    </div>
+                {% else %}
+                    <div class="result-message result-pass">
+                        ✅ Selamat! Anda lulus kuis
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if not lulus %}
+            <div class="alert-box-inline">
+                Nilai kamu belum mencukupi. Silakan ulangi kuis.
+            </div>
+        {% endif %}
+
+        <div class="intro-footer-outside">
+            {% if not lulus %}
+                <a href="{% url 'kuis2' %}" class="btn-primary">Ulangi Kuis</a>
+                <a href="{% url 'rangkuman2' %}" class="btn-secondary">Kembali ke Materi</a>
+            {% else %}
+                <a href="{% url 'brightness' %}" class="btn-primary">Lanjut Materi</a>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

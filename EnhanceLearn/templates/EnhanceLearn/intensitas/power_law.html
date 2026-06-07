@@ -1,0 +1,728 @@
+{% extends "EnhanceLearn/base.html" %}
+{% load static %}
+
+{% block title %}Transformasi Power-Law (Gamma){% endblock %}
+
+{% block content %}
+
+<div class="materi-container">
+
+    <h1 class="subbab-title">SUBBAB 3: <em>POWER-LAW</em></h1>
+
+    <div class="materi-box">
+        <div class="materi-box-header">
+            <i class="bi bi-sliders"></i>Transformasi <em>Power-Law (Gamma)</em>
+        </div>
+
+        <div class="materi-box-body">
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Transformasi power–law atau yang lebih dikenal sebagai 
+                <strong><em>gamma correction</em></strong> merupakan salah satu 
+                transformasi intensitas yang digunakan dalam peningkatan kualitas citra. 
+                Transformasi ini dilakukan dengan memetakan nilai intensitas piksel masukan 
+                ke nilai keluaran melalui operasi perpangkatan, sehingga distribusi tingkat 
+                keabuan citra dapat diatur secara nonlinier. Secara umum, transformasi <em>power–law</em> 
+                didefinisikan sebagai berikut:
+            </p>
+
+            <div style="text-align:center; margin: 16px 0; font-size: 17px;">
+                $$ s = c \cdot r^\gamma $$
+            </div>
+
+            <p style="font-size: 17px;">Di mana:</p>
+
+            <ul style="font-size: 17px; line-height: 1.8;">
+                <li><strong>$r$</strong> menyatakan nilai intensitas piksel masukan</li>
+                <li><strong>$s$</strong> menyatakan nilai intensitas piksel keluaran</li>
+                <li><strong>$c$</strong> merupakan konstanta skala</li>
+                <li><strong>$\gamma$</strong> (<em>gamma</em>) merupakan parameter yang mengatur bentuk transformasi</li>
+            </ul>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Pada transformasi power-law, nilai konstanta (<em>c</em>) and parameter gamma ($\gamma$) 
+                ditentukan oleh pengguna untuk mengatur skala dan bentuk transformasi intensitas 
+                citra sesuai dengan kebutuhan aplikasi. Nilai intensitas piksel harus 
+                <strong>dinormalisasi ke rentang [0,1]</strong> sebelum transformasi power-law diterapkan dengan persamaan berikut
+            </p>
+
+            <div style="text-align:center; margin: 16px 0; font-size: 17px;"> 
+                $$ s = 255\left(\frac{r}{255}\right)^\gamma $$
+            </div>
+
+            <p style="font-size: 17px;">Di mana:</p>
+            <ul style="font-size: 17px; line-height: 1.8;">
+                <li><strong>\(r\)</strong> menyatakan nilai intensitas piksel masukan</li>
+                <li><strong>\(s\)</strong> menyatakan nilai intensitas piksel keluaran</li>
+                <li><strong>255</strong> merupakan nilai intensitas maksimum pada citra 8-bit</li>
+                <li><strong>\(\gamma\)</strong> (<em>gamma</em>) merupakan parameter yang mengatur bentuk transformasi</li>
+            </ul>
+
+            <p style="font-size: 17px; margin-top: 12px;">
+                Tanpa normalisasi, hasil transformasi dapat tidak sesuai dengan rentang intensitas yang diharapkan, 
+                sehingga distribusi intensitas menjadi tidak sesuai.
+            </p>
+
+            <p style="font-size: 17px; margin-top: 12px;">
+                Nilai <strong>\(\gamma\)</strong> berperan penting dalam menentukan hasil transformasi citra:
+            </p>
+
+            <ul style="font-size: 17px; line-height: 1.8;">
+                <li><strong>\(\gamma < 1\)</strong> → Citra menjadi lebih terang, detail pada area gelap lebih terlihat.</li>
+                <li><strong>\(\gamma = 1\)</strong> → Tidak terjadi perubahan (transformasi identitas).</li>
+                <li><strong>\(\gamma > 1\)</strong> → Citra menjadi lebih gelap, detail pada area terang lebih ditekan.</li>
+            </ul>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Pada transformasi power-law dengan <strong>\(\gamma = 0.5\)</strong>, 
+                proses transformasi intensitas dilakukan dengan cara mengakarkan nilai piksel masukan.
+            </p>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Transformasi ini bersifat <strong>nonlinier</strong>, sehingga mampu mengubah distribusi 
+                intensitas citra secara lebih fleksibel dibandingkan transformasi linier seperti 
+                <em>brightness</em> dan kontras. Dengan demikian, <strong><em>gamma correction</em></strong> 
+                memungkinkan penyesuaian distribusi intensitas citra agar lebih sesuai dengan 
+                karakteristik visual manusia atau perangkat tampilan. Gambar 3.15 adalah contoh citra asli dan citra hasil transformasi.
+            </p>
+
+            <div style="margin:20px 0;">
+                <table style="width:100%; margin:0 auto; border-collapse:collapse; border:1px solid #cbd5e1; text-align:center; table-layout:fixed;">
+                    <thead>
+                        <tr>
+                            <th style="width:33.33%; border-right:1px solid #cbd5e1; padding:6px; font-weight:600; font-size:14px;">
+                                Citra asli
+                            </th>
+                            <th style="width:33.33%; border-right:1px solid #cbd5e1; padding:6px; font-weight:600; font-size:14px;">
+                                Citra gamma $\gamma < 1$
+                            </th>
+                            <th style="width:33.33%; padding:6px; font-weight:600; font-size:14px;">
+                                Citra gamma $\gamma > 1$
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:8px;">
+                                <img src="{% static 'img/intensitas/gamma-1.png' %}" style="width:85%; height:auto;">
+                            </td>
+                            <td style="border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:8px;">
+                                <img src="{% static 'img/intensitas/gamma-2.png' %}" style="width:85%; height:auto;">
+                            </td>
+                            <td style="border-top:1px solid #cbd5e1; padding:8px;">
+                                <img src="{% static 'img/intensitas/gamma-3.png' %}" style="width:85%; height:auto;">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p style="font-size:13px; margin-top:6px; font-style:italic; text-align:center;">
+                    Gambar 3.15 Perbandingan citra asli dan hasil transformasi gamma
+                </p>
+            </div>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Gambar 3.15 menunjukkan perbandingan antara citra asli dengan citra hasil transformasi <em>gamma correction</em> 
+                menggunakan nilai gamma yang berbeda. Pada citra dengan nilai $\gamma < 1$, tampilan gambar 
+                menjadi lebih terang dibandingkan citra asli. Peningkatan kecerahan ini menyebabkan detail pada area gelap 
+                terlihat lebih jelas, seperti bagian rambut dan latar belakang yang sebelumnya kurang tampak. Transformasi ini 
+                cocok digunakan untuk memperbaiki citra yang terlalu gelap karena intensitas piksel rendah diperbesar. 
+                Sebaliknya, pada citra dengan nilai $\gamma > 1$, gambar terlihat lebih gelap dibandingkan citra 
+                asli. Detail pada area terang menjadi berkurang karena intensitas piksel tinggi ditekan. Akibatnya, beberapa 
+                bagian wajah dan latar tampak lebih redup. Transformasi ini biasanya digunakan untuk mengurangi tingkat 
+                kecerahan pada citra yang terlalu terang.
+            </p>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Sementara itu, apabila nilai $\gamma = 1$, maka tidak terjadi perubahan pada citra karena transformasi 
+                bersifat identitas. Secara umum, gamma correction merupakan transformasi nonlinier yang digunakan untuk 
+                menyesuaikan distribusi intensitas citra agar tampilan visual lebih sesuai dengan kebutuhan pengamatan manusia 
+                maupun karakteristik perangkat tampilan.
+            </p>
+
+            <h5 style="margin-top:17px; font-weight:700; color: #1e3a8a">
+                Tahapan peningkatan kualitas citra dengan transfomari gamma
+            </h5>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                <strong>1. Normalisasi nilai intensitas citra: </strong>Tujuannya untuk mengubah rentang nilai 
+                intensitas dari 0–255 menjadi 0–1 agar operasi perpangkatan dapat dilakukan dengan lebih tepat dan 
+                sesuai dengan konsep transformasi power-law.
+            </p>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                <strong>2. Transformasi Gamma:</strong> Tujuannya mengubah distribusi intensitas secara nonlinier, 
+                sehingga bagian tertentu dari citra (gelap atau terang) dapat ditingkatkan atau ditekan sesuai nilai γ. 
+            </p>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                <strong>3. Mengembalikan nilai ke rentang semula dan <em>clipping</em>:</strong> Tujuannya mengubah 
+                kembali nilai hasil transformasi ke rentang 0–255 agar dapat ditampilkan sebagai citra digital dan 
+                memastikan nilai intensitas hasil tetap valid dan tidak keluar dari rentang yang diperbolehkan pada 
+                citra <em>grayscale</em>.
+            </p>
+
+        </div>
+    </div>
+
+    <div class="materi-box">
+        <div class="materi-box-body">
+
+            <h3 style="color:#007bff;border-left:5px solid #007bff;padding-left:15px;margin-bottom:20px;font-weight:bold;">
+                <i class="bi bi-pencil-fill"></i> Contoh Perhitungan
+            </h3>
+
+            <div class="materi-box-contoh" style="margin:0; box-shadow:0 4px 15px rgba(0,0,0,0.4); background:#f8fbff;">
+                <div class="materi-box-body">
+                    <p style="font-size:17px;">
+                        Citra grayscale 4×4 berikut akan diproses menggunakan transformasi gamma.
+                    </p>
+
+                    <div style="margin:16px 0;">
+                        <table style="width:70%; margin:auto; border:1px solid #cbd5e1; text-align:center; background:white;">
+                            <tr>
+                                <td style="width:50%; border-right:1px solid #cbd5e1; padding:8px;">
+                                    <img src="{% static 'img/intensitas/gamma/contoh-citra.png' %}" style="width:85%;">
+                                </td>
+                                <td style="width:50%; padding:8px;">
+                                    <img src="{% static 'img/intensitas/gamma/contoh-matriks.png' %}" style="width:85%;">
+                                </td>
+                            </tr>
+                        </table>
+                        <p style="font-size:13px; margin-top:6px; font-style:italic; text-align:center;">
+                            Gambar 3.16 Citra untuk transformasi power-law
+                        </p>
+                    </div>
+
+                    <p style="font-size:17px; line-height:1; text-align:justify; margin-bottom:4px;">
+                        Kita akan menghitung transformasi <em>gamma correction</em> dengan menggunakan parameter transformasi berikut:
+                    </p>
+
+                    <ul style="font-size:17px; line-height:1; margin-top:4px; margin-bottom:4px;">
+                        <li>\( c = 1 \)</li>
+                        <li>\( \gamma = 0.5 \)</li>
+                        <li>Skala intensitas: 0–255</li>
+                    </ul>
+
+                    <hr style="margin-top:30px; margin-bottom:18px;">
+
+                    <h3 style="font-weight:700; color:#1e3a8a; margin-bottom:14px;">
+                        Langkah 1: Normalisasi
+                    </h3>
+
+                    <p style="font-size:17px; line-height:1.5; text-align:justify; margin-bottom:18px;">
+                        Tahap ini bertujuan untuk <strong>mengubah nilai intensitas piksel dari skala 0–255 ke skala 0–1.</strong> Normalisasi diperlukan karena rumus <em>power-law</em> secara teoritis bekerja pada nilai intensitas yang berada dalam rentang [0,1].
+                    </p>
+                    <p style="font-size:16px; margin-top:10px; margin-bottom:18px; line-height:1.5;">
+                        <strong>Petunjuk:</strong> Klik tombol <strong>Mulai Hitung</strong>, lalu klik <strong>Lanjut</strong> untuk melanjutkan proses.
+                    </p>
+
+                    <div class="simulator-container-box">
+                        <div class="grid-sim">
+                            <div class="panel-sim">
+                                <h5 style="text-align:center; font-weight:700; color:#1e3a8a;">Matriks Input</h5>
+                                <div class="matrix-sim" id="inMatrix"></div>
+                            </div>
+
+                            <div class="panel-sim controls-sim">
+                                <h5 style="text-align:center; font-weight:700; color:#1e3a8a;">Perhitungan</h5>
+                                <b>Rumus:</b>
+                                \[ r_n = \frac{r}{255} \]
+                                <button id="startBtn" class="btn-sim btn-start">Mulai</button>
+                                <button id="nextBtn" class="btn-sim btn-next hidden-sim">Lanjut</button>
+                                <button id="resetBtn" class="btn-sim btn-reset hidden-sim">Ulangi</button>
+                                <div class="calc-box-sim" id="calcBox">
+                                    Klik <b>Mulai</b> untuk memulai proses.
+                                </div>
+                            </div>
+
+                            <div class="panel-sim">
+                                <h5 style="text-align:center; font-weight:700; color:#1e3a8a;">Hasil Normalisasi</h5>
+                                <div class="matrix-sim" id="outMatrix"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr style="margin-top:35px; margin-bottom:18px;">
+
+                    <h3 style="font-weight:700; color:#1e3a8a; margin-bottom:14px;">
+                        Langkah 2: <em>Transformasi Power-Law</em>
+                    </h3>
+
+                    <p style="font-size:17px; line-height:1.8; text-align:justify; margin-bottom:18px;">
+                        Rumus <strong><em>power-law</em></strong> diterapkan pada nilai intensitas yang telah dinormalisasi. Parameter gamma (\(\gamma\)) menentukan bagaimana tingkat kecerahan piksel diubah pada proses transformasi.
+                    </p>
+
+                    <div class="simulator-container-box" style="margin-top:30px;">
+                        <div class="grid-sim">
+                            <div class="panel-sim">
+                                <h5 style="text-align:center; font-weight:700; color:#1e3a8a;">Matriks Normalisasi</h5>
+                                <div class="matrix-sim" id="gammaInputMatrix"></div>
+                            </div>
+
+                            <div class="panel-sim controls-sim">
+                                <h5 style="text-align:center; font-weight:700; color:#1e3a8a;">Perhitungan</h5>
+                                <div style="margin-bottom:10px;">
+                                    \[ s_n = c \cdot r_n^\gamma \]
+                                </div>
+                                Gamma (γ)
+                                <input type="number" id="gammaValue" value="0.5" step="0.1" style="width:70px; margin-bottom:12px;">
+                                <br>
+                                <button id="startGammaBtn" class="btn-sim btn-start">Mulai</button>
+                                <button id="nextGammaBtn" class="btn-sim btn-next hidden-sim">Lanjut</button>
+                                <button id="resetGammaBtn" class="btn-sim btn-reset hidden-sim">Ulangi</button>
+                                <div class="calc-box-sim" id="gammaCalcBox">Klik <b>Mulai</b> untuk memulai proses gamma.</div>
+                            </div>
+
+                            <div class="panel-sim">
+                                <h5 style="text-align:center; font-weight:700; color:#1e3a8a;">Hasil Transformasi</h5>
+                                <div class="matrix-sim" id="gammaOutputMatrix"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr style="margin-top:35px; margin-bottom:18px;">
+
+                    <h3 style="font-weight:700; color:#1e3a8a; margin-bottom:14px;">
+                        Langkah 3: Pengembalian ke Skala Citra
+                    </h3>
+
+                    <p style="font-size:17px; line-height:1.8; text-align:justify; margin-bottom:18px;">
+                        Hasil transformasi masih berada pada skala [0,1], sehingga <strong>perlu dikembalikan ke skala 0–255</strong> agar dapat ditampilkan sebagai citra digital 8-bit.
+                    </p>
+
+                    <div class="simulator-container-box" style="margin-top:30px;">
+                        <div class="grid-sim">
+                            <div class="panel-sim">
+                                <h5 style="text-align:center; font-weight:700; color:#1e3a8a;">Matriks Hasil Transformasi</h5>
+                                <div class="matrix-sim" id="scaleInputMatrix"></div>
+                            </div>
+
+                            <div class="panel-sim controls-sim">
+                                <h5 style="text-align:center; font-weight:700; color:#1e3a8a;">Perhitungan</h5>
+                                <div style="margin-bottom:10px;">
+                                    \[ s = s_n \times (L-1) \]
+                                </div>
+                                <button id="startScaleBtn" class="btn-sim btn-start">Mulai</button>
+                                <button id="nextScaleBtn" class="btn-sim btn-next hidden-sim">Lanjut</button>
+                                <button id="resetScaleBtn" class="btn-sim btn-reset hidden-sim">Ulangi</button>
+                                <div class="calc-box-sim" id="scaleCalcBox">
+                                    Klik <b>Mulai</b> untuk memulai proses.
+                                </div>
+                            </div>
+
+                            <div class="panel-sim">
+                                <h5 style="text-align:center; font-weight:700; color:#1e3a8a;">Hasil Akhir Transformasi</h5>
+                                <div class="matrix-sim" id="scaleOutputMatrix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="materi-box-contoh" style="margin:0; margin-top:24px; box-shadow:0 4px 15px rgba(0,0,0,0.4); background:#f8fbff;">
+                <div class="materi-box-body">
+                    <h3 style="color:#007bff; border-left:5px solid #007bff; padding-left:15px; margin-bottom:20px;">
+                        <i class="bi bi-sliders"></i>Eksplorasi Mandiri
+                    </h3>
+                    <p style="font-size:17px; line-height:1.8; text-align:justify;">
+                        Upload gambar Anda sendiri dan amati bagaimana transformasi <em>power-law (gamma correction)</em> mempengaruhi tingkat kecerahan citra dengan mengubah nilai parameter <em>gamma</em> (\(\gamma\)).
+                    </p>
+
+                    <div class="exp-top-control">
+                        <div>
+                            <label for="uploadGammaImage" class="upload-btn">
+                                <i class="bi bi-upload"></i> Upload
+                            </label>
+                            <input type="file" id="uploadGammaImage" class="upload-input" accept="image/*">
+                        </div>
+
+                        <div class="exp-slider-group">
+                            <label class="slider-label">
+                                <b>Gamma (\(\gamma\)):</b>
+                            </label>
+                            <div class="exp-slider-row">
+                                <input type="range" id="expGammaSlider" min="0.1" max="3" step="0.1" value="1">
+                                <span id="expGammaVal">1</span>
+                                <button id="expGammaReset" class="btn-reset">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exp-canvas-row">
+                        <div>
+                            <b>Citra Asli</b><br>
+                            <canvas id="expGammaCanvasIn" width="220" height="220"></canvas>
+                        </div>
+                        <div>
+                            <b>Hasil Transformasi Gamma</b><br>
+                            <canvas id="expGammaCanvasOut" width="220" height="220"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    {% include "EnhanceLearn/intensitas/aktivitas10.html" %}
+
+    <div style="margin-top:32px; display:flex; justify-content:space-between;">
+        <a href="{% url 'logaritmik' %}" class="btn-prev-materi">« Kembali</a>
+        <a href="{% url 'rangkuman3' %}" class="btn-next-materi">Selanjutnya »</a>
+    </div>
+
+</div>
+
+<script>
+    const pixels = [
+        [22, 24, 23, 26],
+        [131, 215, 174, 45],
+        [17, 90, 46, 4],
+        [64, 115, 8, 6]
+    ];
+
+    let result = Array.from({ length: 4 }, () => Array(4).fill(""));
+    let step = 0;
+
+    const inMatrix = document.getElementById("inMatrix");
+    const outMatrix = document.getElementById("outMatrix");
+    const calcBox = document.getElementById("calcBox");
+    const startBtn = document.getElementById("startBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const resetBtn = document.getElementById("resetBtn");
+
+    function previewNormalization() {
+        let preview = [];
+        for (let y = 0; y < 4; y++) {
+            preview[y] = [];
+            for (let x = 0; x < 4; x++) {
+                let r = pixels[y][x];
+                let rn = r / 255;
+                preview[y][x] = rn.toFixed(3);
+            }
+        }
+        renderMatrices(-1, preview);
+    }
+
+    function renderMatrices(active = -1, matrix = result) {
+        inMatrix.innerHTML = "";
+        outMatrix.innerHTML = "";
+
+        for (let i = 0; i < 16; i++) {
+            let y = Math.floor(i / 4);
+            let x = i % 4;
+
+            let a = document.createElement("div");
+            a.className = "cell-sim input-cell-sim" + (i === active ? " active-sim" : "");
+            a.textContent = pixels[y][x];
+            inMatrix.appendChild(a);
+
+            let b = document.createElement("div");
+            b.className = "cell-sim output-cell-sim" + (i === active ? " active-sim" : "");
+            b.textContent = matrix[y][x];
+            outMatrix.appendChild(b);
+        }
+    }
+
+    function stepCalc() {
+        const y = Math.floor(step / 4);
+        const x = step % 4;
+        const r = pixels[y][x];
+        let rn = r / 255;
+
+        result[y][x] = rn.toFixed(3);
+
+        calcBox.innerHTML = `
+            \\( r = ${r} \\)<br>
+            \\( r_n = \\frac{r}{255} \\)<br>
+            \\( r_n = \\frac{${r}}{255} \\)<br>
+            \\( r_n = ${rn.toFixed(3)} \\)
+        `;
+
+        MathJax.typeset();
+        renderMatrices(step, result);
+        renderGammaMatrices();
+        step++;
+    }
+
+    startBtn.onclick = () => {
+        step = 0;
+        result = Array.from({ length: 4 }, () => Array(4).fill(""));
+        startBtn.classList.add("hidden-sim");
+        nextBtn.classList.remove("hidden-sim");
+        resetBtn.classList.remove("hidden-sim");
+        stepCalc();
+    };
+
+    nextBtn.onclick = () => {
+        if (step < 16) stepCalc();
+    };
+
+    resetBtn.onclick = () => {
+        step = 0;
+        result = Array.from({ length: 4 }, () => Array(4).fill(""));
+        renderMatrices();
+        startBtn.classList.remove("hidden-sim");
+        nextBtn.classList.add("hidden-sim");
+        resetBtn.classList.add("hidden-sim");
+        calcBox.innerHTML = "Klik <b>Mulai</b> untuk memulai proses.";
+    };
+
+    renderMatrices();
+
+    const gammaInputMatrix = document.getElementById("gammaInputMatrix");
+    const gammaOutputMatrix = document.getElementById("gammaOutputMatrix");
+    const gammaCalcBox = document.getElementById("gammaCalcBox");
+    const gammaValue = document.getElementById("gammaValue");
+    const startGammaBtn = document.getElementById("startGammaBtn");
+    const nextGammaBtn = document.getElementById("nextGammaBtn");
+    const resetGammaBtn = document.getElementById("resetGammaBtn");
+
+    let gammaStep = 0;
+    let gammaResult = Array.from({ length: 4 }, () => Array(4).fill(""));
+
+    function renderGammaMatrices(active = -1) {
+        gammaInputMatrix.innerHTML = "";
+        gammaOutputMatrix.innerHTML = "";
+
+        for (let i = 0; i < 16; i++) {
+            let y = Math.floor(i / 4);
+            let x = i % 4;
+
+            let a = document.createElement("div");
+            a.className = "cell-sim input-cell-sim" + (i === active ? " active-sim" : "");
+            a.textContent = result[y][x];
+            gammaInputMatrix.appendChild(a);
+
+            let b = document.createElement("div");
+            b.className = "cell-sim output-cell-sim" + (i === active ? " active-sim" : "");
+            b.textContent = gammaResult[y][x];
+            gammaOutputMatrix.appendChild(b);
+        }
+    }
+
+    function stepGammaCalc() {
+        const y = Math.floor(gammaStep / 4);
+        const x = gammaStep % 4;
+        const gamma = parseFloat(gammaValue.value);
+        const c = 1;
+        let rn = parseFloat(result[y][x]);
+        let sn = c * Math.pow(rn, gamma);
+
+        gammaResult[y][x] = sn.toFixed(3);
+
+        gammaCalcBox.innerHTML = `
+            \\( c = ${c} \\)<br>
+            \\( \\gamma = ${gamma} \\)<br>
+            \\( r_{(${y},${x})} = ${rn.toFixed(3)} \\)<br>
+            \\( s_{(${y},${x})} = 1 \\cdot ${rn.toFixed(4)}^{${gamma}} \\)<br>
+            \\( s_{(${y},${x})} = 1 \\cdot ${(Math.pow(rn, gamma)).toFixed(4)} \\)<br>
+            \\( s_{(${y},${x})} = ${sn.toFixed(3)} \\)
+        `;
+
+        MathJax.typeset();
+        renderGammaMatrices(gammaStep);
+        renderScaleMatrices();
+        gammaStep++;
+    }
+
+    startGammaBtn.onclick = () => {
+        gammaStep = 0;
+        gammaResult = Array.from({ length: 4 }, () => Array(4).fill(""));
+        startGammaBtn.classList.add("hidden-sim");
+        nextGammaBtn.classList.remove("hidden-sim");
+        resetGammaBtn.classList.remove("hidden-sim");
+        stepGammaCalc();
+    };
+
+    nextGammaBtn.onclick = () => {
+        if (gammaStep < 16) {
+            stepGammaCalc();
+        }
+    };
+
+    resetGammaBtn.onclick = () => {
+        gammaStep = 0;
+        gammaResult = Array.from({ length: 4 }, () => Array(4).fill(""));
+        renderGammaMatrices();
+        startGammaBtn.classList.remove("hidden-sim");
+        nextGammaBtn.classList.add("hidden-sim");
+        resetGammaBtn.classList.add("hidden-sim");
+        gammaCalcBox.innerHTML = `Klik <b>Mulai</b> untuk memulai proses gamma.`;
+    };
+
+    renderGammaMatrices();
+
+    const scaleInputMatrix = document.getElementById("scaleInputMatrix");
+    const scaleOutputMatrix = document.getElementById("scaleOutputMatrix");
+    const scaleCalcBox = document.getElementById("scaleCalcBox");
+    const startScaleBtn = document.getElementById("startScaleBtn");
+    const nextScaleBtn = document.getElementById("nextScaleBtn");
+    const resetScaleBtn = document.getElementById("resetScaleBtn");
+
+    let scaleStep = 0;
+    let scaleResult = Array.from({ length: 4 }, () => Array(4).fill(""));
+
+    function renderScaleMatrices(active = -1) {
+        scaleInputMatrix.innerHTML = "";
+        scaleOutputMatrix.innerHTML = "";
+
+        for (let i = 0; i < 16; i++) {
+            let y = Math.floor(i / 4);
+            let x = i % 4;
+
+            let a = document.createElement("div");
+            a.className = "cell-sim input-cell-sim" + (i === active ? " active-sim" : "");
+            a.textContent = gammaResult[y][x];
+            scaleInputMatrix.appendChild(a);
+
+            let b = document.createElement("div");
+            b.className = "cell-sim output-cell-sim" + (i === active ? " active-sim" : "");
+            b.textContent = scaleResult[y][x];
+            scaleOutputMatrix.appendChild(b);
+        }
+    }
+
+    function stepScaleCalc() {
+        const y = Math.floor(scaleStep / 4);
+        const x = scaleStep % 4;
+        let sn = parseFloat(gammaResult[y][x]);
+        let s = sn * 255;
+        let rounded = Math.round(s);
+
+        scaleResult[y][x] = rounded;
+
+        scaleCalcBox.innerHTML = `
+            \\( s_{(${y},${x})} = ${sn.toFixed(4)} \\)<br>
+            \\( s = s_n \\times (256-1) \\)<br>
+            \\( s = ${sn.toFixed(4)} \\times 255 \\)<br>
+            \\( s = ${s.toFixed(3)} \\approx ${rounded} \\)
+        `;
+
+        MathJax.typeset();
+        renderScaleMatrices(scaleStep);
+        scaleStep++;
+    }
+
+    startScaleBtn.onclick = () => {
+        scaleStep = 0;
+        scaleResult = Array.from({ length: 4 }, () => Array(4).fill(""));
+        startScaleBtn.classList.add("hidden-sim");
+        nextScaleBtn.classList.remove("hidden-sim");
+        resetScaleBtn.classList.remove("hidden-sim");
+        stepScaleCalc();
+    };
+
+    nextScaleBtn.onclick = () => {
+        if (scaleStep < 16) {
+            stepScaleCalc();
+        }
+    };
+
+    resetScaleBtn.onclick = () => {
+        scaleStep = 0;
+        scaleResult = Array.from({ length: 4 }, () => Array(4).fill(""));
+        renderScaleMatrices();
+        startScaleBtn.classList.remove("hidden-sim");
+        nextScaleBtn.classList.add("hidden-sim");
+        resetScaleBtn.classList.add("hidden-sim");
+        scaleCalcBox.innerHTML = `Klik <b>Mulai</b> untuk memulai proses.`;
+    };
+
+    renderScaleMatrices();
+
+    /* ================= EKSPLORASI GAMMA ================= */
+    const uploadGammaImage = document.getElementById("uploadGammaImage");
+    const expGammaCanvasIn = document.getElementById("expGammaCanvasIn");
+    const expGammaCanvasOut = document.getElementById("expGammaCanvasOut");
+
+    const expGammaCtxIn = expGammaCanvasIn.getContext("2d");
+    const expGammaCtxOut = expGammaCanvasOut.getContext("2d");
+
+    const expGammaSlider = document.getElementById("expGammaSlider");
+    const expGammaVal = document.getElementById("expGammaVal");
+    const expGammaReset = document.getElementById("expGammaReset");
+
+    let expGammaImageData = null;
+
+    /* ================= UPLOAD ================= */
+    uploadGammaImage.onchange = function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const img = new Image();
+        img.onload = function() {
+            const canvasSize = 220;
+
+            expGammaCtxIn.clearRect(0, 0, canvasSize, canvasSize);
+            expGammaCtxOut.clearRect(0, 0, canvasSize, canvasSize);
+
+            let scale = Math.min(
+                canvasSize / img.width,
+                canvasSize / img.height
+            );
+
+            let w = img.width * scale;
+            let h = img.height * scale;
+
+            let x = (canvasSize - w) / 2;
+            let y = (canvasSize - h) / 2;
+
+            expGammaCtxIn.drawImage(img, x, y, w, h);
+            expGammaImageData = expGammaCtxIn.getImageData(0, 0, canvasSize, canvasSize);
+
+            applyGammaTransform();
+        };
+        img.src = URL.createObjectURL(file);
+    };
+
+    /* ================= APPLY GAMMA ================= */
+    function applyGammaTransform() {
+        if (!expGammaImageData) return;
+
+        let gamma = parseFloat(expGammaSlider.value);
+        expGammaVal.textContent = gamma;
+
+        let newImage = new ImageData(
+            new Uint8ClampedArray(expGammaImageData.data),
+            expGammaImageData.width,
+            expGammaImageData.height
+        );
+
+        let data = newImage.data;
+
+        for (let i = 0; i < data.length; i += 4) {
+            data[i] = 255 * Math.pow(data[i] / 255, gamma);
+            data[i + 1] = 255 * Math.pow(data[i + 1] / 255, gamma);
+            data[i + 2] = 255 * Math.pow(data[i + 2] / 255, gamma);
+
+            data[i] = Math.max(0, Math.min(255, data[i]));
+            data[i + 1] = Math.max(0, Math.min(255, data[i + 1]));
+            data[i + 2] = Math.max(0, Math.min(255, data[i + 2]));
+        }
+
+        expGammaCtxOut.clearRect(0, 0, 220, 220);
+        expGammaCtxOut.putImageData(newImage, 0, 0);
+    }
+
+    /* ================= SLIDER ================= */
+    expGammaSlider.oninput = function() {
+        applyGammaTransform();
+    };
+
+    /* ================= RESET ================= */
+    expGammaReset.onclick = function() {
+        expGammaSlider.value = 1;
+        applyGammaTransform();
+    };
+</script>
+
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']] // Baris ini yang mengaktifkan tanda $
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+{% endblock %}

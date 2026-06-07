@@ -1,0 +1,267 @@
+{% extends "EnhanceLearn/base.html" %}
+{% load static %}
+
+{% block title %}Histogram dengan Python{% endblock %}
+
+{% block content %}
+
+<div class="materi-container">
+    <h1 class="subbab-title">SUBBAB 5: PERBAIKAN HISTOGRAM DENGAN PYTHON</h1>
+
+    <div class="materi-box">
+        <div class="materi-box-header">
+            <i class="bi bi-code-slash"></i>
+            Perbaikan Histogram Citra dengan Python
+        </div>
+
+        <div class="materi-box-body">
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Library Pillow juga menyediakan berbagai fungsi untuk analisis dan manipulasi histogram citra. Histogram citra dapat diperoleh menggunakan metode <code>histogram()</code> yang menghasilkan distribusi frekuensi intensitas piksel pada citra. Distribusi tersebut dapat divisualisasikan dalam bentuk grafik menggunakan pustaka Matplotlib sehingga karakteristik citra, seperti tingkat kecerahan dan kontras, dapat diamati dengan lebih mudah.
+            </p>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Berdasarkan histogram yang diperoleh, proses seperti <em>histogram equalization</em> dapat dilakukan untuk meningkatkan kontras citra dengan meratakan distribusi intensitas menggunakan fungsi <code>ImageOps.equalize()</code>. Selain itu, terdapat pula teknik <em>histogram specification (histogram matching)</em> yang bertujuan menyesuaikan distribusi histogram suatu citra agar menyerupai histogram citra referensi tertentu. Proses ini umumnya memanfaatkan kombinasi Pillow dan NumPy untuk melakukan perhitungan distribusi histogram, fungsi distribusi kumulatif (<em>Cumulative Distribution Function/CDF</em>), serta pemetaan nilai intensitas piksel.
+            </p>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Untuk implementasi histogram dengan python ini, Pillow digunakan untuk membaca dan memproses citra, NumPy digunakan untuk membantu perhitungan histogram dan transformasi intensitas, sedangkan Matplotlib digunakan untuk menampilkan histogram dalam bentuk grafik sehingga distribusi intensitas piksel dapat dianalisis secara visual.
+            </p>
+
+            <hr style="margin-top:35px; margin-bottom:18px;">
+
+            <h4 style="font-weight:700; color: #1e3a8a;"><em>Histogram Equalization</em></h4>
+            <pre style="background: #dbeafe; border: 1px solid #60a5fa; border-radius: 12px; padding: 18px 20px; overflow-x: auto; margin-top: 18px;">
+<code style="font-family: 'Courier New', monospace; font-size: 16px; line-height: 1.5; color: #0f172a;">img = Image.open("gambar.jpg")
+img = Image.open("gambar.jpg").convert("L")
+equali = ImageOps.equalize(img)</code></pre>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Pada kode di atas, gambar terlebih dahulu diubah menjadi <em>grayscale</em> menggunakan <code>convert("L")</code>. Selanjutnya fungsi <code>ImageOps.equalize()</code> digunakan untuk meratakan distribusi intensitas piksel sehingga kontras gambar meningkat dan detail menjadi lebih jelas.     
+            </p>
+
+            <hr style="margin-top:35px; margin-bottom:18px;">
+
+            <h4 style="font-weight:700; color: #1e3a8a;"><em>Histogram Specification</em></h4>
+            <pre style="background: #dbeafe; border: 1px solid #60a5fa; border-radius: 12px; padding: 18px 20px; overflow-x: auto; margin-top: 18px;">
+<code style="font-family: 'Courier New', monospace; font-size: 16px; line-height: 1.5; color: #0f172a;">img = Image.open("gambar.jpg").convert("L")
+referensi = Image.open("referensi.jpg").convert("L")
+hasil = histogram_specification(img, referensi)</code></pre>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Pada kode di atas, gambar utama dan gambar referensi diubah menjadi <em>grayscale</em> menggunakan <code>convert("L")</code>. Selanjutnya proses <em>histogram specification</em> dilakukan dengan menyesuaikan histogram gambar utama agar menyerupai histogram gambar referensi, 
+                sehingga karakteristik kecerahan dan kontras kedua gambar menjadi lebih mirip.     
+            </p>
+
+        </div>
+    </div>
+
+    <div class="materi-box">
+        <div class="materi-box-header">
+            EnhanceLearn - Praktik
+        </div>
+
+        <div class="materi-box-body">
+            <div class="editor-guide">
+                <h5 style="font-weight:700; color: #1e3a8a;">Petunjuk:</h5>
+                <ul>
+                    <li><strong>Upload File:</strong> Klik tombol <strong>Upload Gambar</strong> untuk mengunggah citra yang akan digunakan pada praktik. Pastikan file gambar berhasil dimuat sebelum menjalankan kode.</li>
+                    <li><strong>Menjalankan Proses (▶):</strong> Setelah gambar diunggah, tekan tombol <strong>▶ Run</strong> pada setiap cell untuk menjalankan kode.</li>
+                    <li><strong>Menghapus Kode (🗑):</strong> Klik tombol <strong>🗑 Hapus</strong> untuk mengosongkan seluruh kode pada cell yang dipilih.</li>
+                    <li><strong>Menambah Cell (+):</strong> Klik tombol <strong>+ Add Cell</strong> untuk menambahkan cell baru apabila diperlukan untuk menulis atau mencoba kode tambahan.</li>
+                </ul>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="editor-box">
+                        <div class="editor-box-body">
+
+                            <div class="cell-box">
+    <div class="editor-wrap">
+<textarea id="editor-equalization">
+from PIL import Image, ImageOps
+import matplotlib.pyplot as plt
+import io, base64
+
+# Membuka dan mengubah gambar menjadi grayscale
+img = Image.open("gambar.png").convert("L")
+
+# fungsi histogram equalization
+hasil = ImageOps.equalize(img)
+
+hist_awal = img.histogram()
+hist_hasil = hasil.histogram()
+
+plt.figure(figsize=(10,4))
+
+plt.subplot(1,2,1)
+plt.bar(range(256), hist_awal, width=1)
+plt.title("Sebelum Equalization")
+plt.xlabel("Intensitas")
+plt.ylabel("Frekuensi")
+
+plt.subplot(1,2,2)
+plt.bar(range(256), hist_hasil, width=1)
+plt.title("Sesudah Equalization")
+plt.xlabel("Intensitas")
+plt.ylabel("Frekuensi")
+
+plt.tight_layout()
+
+buffer = io.BytesIO()
+
+plt.savefig(buffer, format="png", dpi=70, bbox_inches="tight")
+
+buffer.seek(0)
+
+print("HIST:" + base64.b64encode(buffer.read()).decode())
+
+plt.close("all")
+</textarea>
+    </div>
+
+    <div class="side-tools">
+        <button class="editor-icon-btn" id="run-equalization">▶</button>
+        <button class="editor-icon-btn trash" id="clear-equalization">🗑</button>
+    </div>
+</div>
+
+<div class="output" id="out-equalization">
+(Output muncul di sini)
+</div>
+
+<img id="img-equalization" class="preview-img">
+
+<a id="download-equalization"
+   class="btn btn-primary btn-sm mt-2"
+   download="hasil_equalization.png"
+   style="display:none;">
+   Download Hasil
+</a>
+<div class="add-cell-btn">+</div>
+
+
+<div class="cell-box">
+                                <div class="editor-wrap">
+                                    <textarea id="editor-negasi">
+from PIL import Image
+import numpy as np
+import matplotlib.pyplot as plt
+import io, base64
+
+# Gambar sumber
+img = Image.open("gambar.png").convert("L") 
+
+# Gambar referensi
+referensi = Image.open("referensi.JPG").convert("L") 
+
+# Mengubah citra menjadi array
+sumber = np.array(img)
+target = np.array(referensi)
+
+# Menghitung histogram
+hist_sumber, _ = np.histogram(sumber.flatten(),bins=256, range=(0,256))
+
+hist_target, _ = np.histogram(target.flatten(),bins=256, range=(0,256))
+
+# Menghitung CDF
+cdf_sumber = hist_sumber.cumsum()
+cdf_target = hist_target.cumsum()
+
+cdf_sumber = cdf_sumber / cdf_sumber[-1]
+cdf_target = cdf_target / cdf_target[-1]
+
+# Membuat lookup table
+lookup = np.zeros(256, dtype=np.uint8)
+
+# Perulangan setiap intensitas
+for i in range(256):
+    lookup[i] = np.argmin(np.abs(cdf_target - cdf_sumber[i]))
+
+hasil = Image.fromarray(lookup[sumber])
+
+# Histogram Specification
+hasil = Image.fromarray(lookup[sumber].astype(np.uint8))
+
+
+# Histogram hasil
+hist_hasil = hasil.histogram()
+
+# Menampilkan histogram
+plt.figure(figsize=(12,4))
+
+plt.subplot(1,3,1)
+plt.bar(range(256), hist_sumber, width=1)
+plt.title("Sumber")
+plt.xlabel("Intensitas")
+plt.ylabel("Frekuensi")
+
+plt.subplot(1,3,2)
+plt.bar(range(256), hist_target, width=1)
+plt.title("Referensi")
+plt.xlabel("Intensitas")
+
+plt.subplot(1,3,3)
+plt.bar(range(256), hist_hasil, width=1)
+plt.title("Hasil")
+plt.xlabel("Intensitas")
+
+plt.tight_layout()
+
+buffer = io.BytesIO()
+
+plt.savefig(buffer, format="png", dpi=70, bbox_inches="tight")
+
+buffer.seek(0)
+
+print("HIST:" + base64.b64encode(buffer.read()).decode())
+
+plt.close("all")
+</textarea>
+                                </div>
+                                <div class="side-tools">
+                                    <button class="editor-icon-btn" id="run-negasi">▶</button>
+                                    <button class="editor-icon-btn trash" id="clear-negasi">🗑</button>
+                                </div>
+                            </div>
+                            <div class="output" id="out-negasi">(Output muncul di sini)</div>
+                            <img id="img-negasi" class="preview-img">
+                            <a id="download-negasi" class="btn btn-primary btn-sm mt-2" download="hasil_negasi.png" style="display:none;">Download Hasil</a>
+                            <div class="add-cell-btn">+</div>
+
+</div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="upload-box text-center h-100">
+                        <i class="bi bi-upload upload-icon"></i>
+                        <p class="fw-semibold mt-2">Upload Gambar</p>
+                        <input type="file" id="uploadInput" class="form-control mt-2" accept="image/*">
+                        <p class="upload-hint mt-3">
+                            File gambar akan digunakan sebagai:
+                            <br>
+                            <code id="file-name-show">gambar.png</code>
+                        </p>
+                        <img id="upload-preview" class="preview-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include "EnhanceLearn/praktik/aktivitas15.html" %}
+
+    <div style="margin-top:32px; display:flex; justify-content:space-between;">
+        <a href="{% url 'intensitas' %}" class="btn-prev-materi">« Kembali</a>
+        <a href="{% url 'rangkuman5' %}" class="btn-next-materi">Selanjutnya »</a>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js"></script>
+<link rel="stylesheet" href="{% static 'css/python-editor.css' %}">
+<script src="{% static 'js/python-editor.js' %}"></script>
+
+{% endblock %}

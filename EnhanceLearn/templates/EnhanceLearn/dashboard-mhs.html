@@ -1,0 +1,471 @@
+{% extends "EnhanceLearn/base.html" %}
+
+{% block title %}Dashboard Mahasiswa{% endblock %}
+
+{% block content %}
+
+<style>
+/* ================= DASHBOARD ================= */
+body{
+    overflow-y: hidden;
+}
+
+.dashboard-container {
+    width: 95%;
+}
+
+/* JUDUL */
+.dashboard-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #111827;
+}
+
+/* ================= PROGRESS BELAJAR ================= */
+.progress-card {
+    max-width: 1200px;
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 14px 26px;   /* sebelumnya 22px */
+    margin-bottom: 20px; /* sebelumnya 36px */
+    box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+}
+
+.progress-label {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.progress-wrapper {
+    width: 100%;
+    height: 14px;
+    background-color: #eef0f3;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background-color: #ef4444; /* awal merah */
+    border-radius: 999px;
+    transition: width 0.5s ease, background-color 0.5s ease;
+}
+
+.progress-wrapper {
+    position: relative;
+}
+
+.progress-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* ================= GRID MODUL ================= */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 1200px;
+}
+
+/* ================= CARD MODUL ================= */
+.module-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    overflow: hidden;
+}
+
+/* HEADER MODUL */
+.module-header {
+    padding: 14px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* WARNA HEADER */
+.bg-blue { background: #1e40af; }
+.bg-indigo { background: #2563eb; }
+.bg-purple { background: #6d28d9; }
+.bg-cyan { background: #0891b2; }
+.bg-teal { background: #0f766e; }
+.bg-dark { background: #1f2937; }
+
+/* BODY MODUL */
+.module-body {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ITEM MODUL */
+.module-item {
+    border: 1.5px solid currentColor;
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* WARNA ITEM */
+.item-blue { color: #1e40af; }
+.item-indigo { color: #2563eb; }
+.item-purple { color: #6d28d9; }
+.item-cyan { color: #0891b2; }
+.item-teal { color: #0f766e; }
+.item-dark { color: #1f2937; }
+
+/* BADGE STATUS */
+.badge-status {
+    background: #dc3545;
+    color: #ffffff;
+    padding: 4px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 8px;
+}
+
+.status.selesai {
+    background: #27da48;
+    color: #ffffff;
+    padding: 4px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px){
+
+    .dashboard-grid{
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .dashboard-title{
+        font-size:24px;
+    }
+
+    .module-header{
+        font-size:16px;
+    }
+
+    .module-item{
+        font-size:14px;
+    }
+
+}
+
+</style>
+
+<div class="materi-container">
+
+    <h2 class="dashboard-title">Dashboard</h2>
+
+    <!-- PROGRESS BELAJAR -->
+    <div class="progress-card">
+        <div class="progress-label">Progress Belajar:</div>
+        <div class="progress-wrapper">
+            <div class="progress-fill"></div>
+            <div class="progress-text">0%</div>
+        </div>
+    </div>
+
+    <!-- GRID MODUL SESUAI MATERI -->
+    <div class="dashboard-grid">
+
+        <!-- Pendahuluan -->
+        <div class="module-card">
+            <div class="module-header bg-blue">Pendahuluan</div>
+            <div class="module-body">
+                <div class="module-item item-blue">
+                    📘 Materi
+                    <span class="badge-status" id="pendahuluan-progress">0/2 Selesai</span>
+                </div>
+                <div class="module-item item-blue">
+                    📝 Kuis
+                            {% if "pendahuluan" in kuis_selesai %}
+            <span class="status selesai">Sudah</span>
+        {% else %}
+            <span class="badge-status">Belum</span>
+        {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Pengantar PKC -->
+        <div class="module-card">
+            <div class="module-header bg-indigo">Pengantar Peningkatan Kualitas Citra</div>
+            <div class="module-body">
+                <div class="module-item item-indigo">
+                    📘 Materi
+                    <span class="badge-status" id="pkc-progress">0/2 Selesai</span>
+                </div>
+                <div class="module-item item-indigo">📝 Kuis
+                {% if "pkc" in kuis_selesai %}
+                    <span class="status selesai">Sudah</span>
+                {% else %}
+                    <span class="badge-status">Belum</span>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Transformasi Intensitas -->
+        <div class="module-card">
+            <div class="module-header bg-purple">Transformasi Intensitas Citra</div>
+            <div class="module-body">
+                <div class="module-item item-purple">
+                    📘 Materi
+                    <span class="badge-status" id="intensitas-progress">0/6 Selesai</span>
+                </div>
+                <div class="module-item item-purple">📝 Kuis 
+                    {% if "intensitas" in kuis_selesai %}
+                        <span class="status selesai">Sudah</span>
+                    {% else %}
+                        <span class="badge-status">Belum</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Modifikasi Histogram -->
+        <div class="module-card">
+            <div class="module-header bg-cyan">Modifikasi Histogram</div>
+            <div class="module-body">
+                <div class="module-item item-cyan">
+                    📘 Materi
+                    <span class="badge-status" id="histogram-progress">0/2 Selesai</span>
+                </div>
+                <div class="module-item item-cyan">📝 Kuis
+                    {% if "histogram" in kuis_selesai %}
+                        <span class="status selesai">Sudah</span>
+                    {% else %}
+                        <span class="badge-status">Belum</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Implementasi Python -->
+        <div class="module-card">
+            <div class="module-header bg-dark">Implementasi Python</div>
+            <div class="module-body">
+                <div class="module-item item-dark">
+                    💻 Praktik
+                    <span class="badge-status" id="praktik-progress">0/3 Selesai</span>
+                    </div>
+                <div class="module-item item-teal">📝 Kuis
+                    {% if "praktik" in kuis_selesai %}
+                        <span class="status selesai">Sudah</span>
+                    {% else %}
+                        <span class="badge-status">Belum</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Evaluasi Akhir -->
+        <div class="module-card">
+            <div class="module-header bg-teal">Evaluasi Akhir</div>
+            <div class="module-body">
+                <div class="module-item item-teal">🏆 Evaluasi
+                    {% if "evaluasi" in kuis_selesai %}
+                        <span class="status selesai">Sudah</span>
+                    {% else %}
+                        <span class="badge-status">Belum</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+function getCookie(name) {
+let cookieValue = null;
+if (document.cookie && document.cookie !== '') {
+const cookies = document.cookie.split(';');
+for (let i = 0; i < cookies.length; i++) {
+const cookie = cookies[i].trim();
+if (cookie.substring(0, name.length + 1) === (name + '=')) {
+cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+break;
+}
+}
+}
+return cookieValue;
+}
+
+const csrftoken = getCookie('csrftoken');
+
+</script>
+
+<script>
+// ================= PROGRESS SETIAP MODUL =================
+function updateProgress(modulId, aktivitasList){
+
+    let selesai = 0;
+
+    aktivitasList.forEach(a => {
+        if(aktivitasSelesai.includes(a)){
+            selesai++;
+        }
+    });
+
+    let el = document.getElementById(modulId);
+
+    if(el){
+
+        el.innerText = selesai + "/" + aktivitasList.length + " Selesai";
+
+        // jika semua aktivitas selesai → warna hijau
+        if(selesai === aktivitasList.length){
+            el.classList.remove("badge-status");
+            el.classList.add("status","selesai");
+        }
+
+    }
+}
+
+
+// ================= PROGRESS BAR =================
+
+const aktivitasSelesai = [
+{% for a in aktivitas_selesai %}
+    "{{ a }}",
+{% endfor %}
+];
+
+console.log("AKTIVITAS DATABASE:", aktivitasSelesai);
+
+function updateProgressBar(){
+
+    let total = 0;
+    let selesai = 0;
+
+    let aktivitasSelesaiCount = 0;
+    let kuisSelesai = 0;
+
+    const aktivitas = [
+        "aktivitas1","aktivitas2",
+        "aktivitas3","aktivitas4",
+        "aktivitas5","aktivitas6","aktivitas7","aktivitas8","aktivitas9","aktivitas10",
+        "aktivitas11","aktivitas12",
+        "aktivitas13","aktivitas14","aktivitas15"
+    ];
+
+    aktivitas.forEach(a => {
+
+        total++;
+
+        if(aktivitasSelesai.includes(a)){
+            selesai++;
+            aktivitasSelesaiCount++;
+        }
+
+    });
+
+
+    const kuis = [
+        {% if "pendahuluan" in kuis_selesai %} true {% else %} false {% endif %},
+        {% if "pkc" in kuis_selesai %} true {% else %} false {% endif %},
+        {% if "intensitas" in kuis_selesai %} true {% else %} false {% endif %},
+        {% if "histogram" in kuis_selesai %} true {% else %} false {% endif %},
+        {% if "praktik" in kuis_selesai %} true {% else %} false {% endif %},
+        {% if "evaluasi" in kuis_selesai %} true {% else %} false {% endif %}
+    ];
+
+    kuis.forEach(k => {
+
+        total++;
+
+        if(k){
+            selesai++;
+            kuisSelesai++;
+        }
+
+    });
+
+
+    let persen = Math.round((selesai / total) * 100);
+
+    let bar = document.querySelector(".progress-fill");
+    let text = document.querySelector(".progress-text");
+
+    if(bar){
+
+        bar.style.width = persen + "%";
+
+        if(persen < 30){
+            bar.style.backgroundColor = "#ef4444";
+        }
+        else if(persen < 70){
+            bar.style.backgroundColor = "#facc15";
+        }
+        else{
+            bar.style.backgroundColor = "#22c55e";
+        }
+
+    }
+
+    if(text){
+        text.innerText = persen + "%";
+    }
+
+
+    // ================= SIMPAN KE DATABASE =================
+
+    fetch("/simpan-progress/", {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrftoken
+        },
+
+        body: JSON.stringify({
+            progress: persen,
+            aktivitas: aktivitasSelesaiCount,
+            kuis: kuisSelesai
+        })
+
+    });
+
+}
+
+
+// ================= JALANKAN SAAT DASHBOARD DIBUKA =================
+document.addEventListener("DOMContentLoaded", function(){
+
+    updateProgress("pendahuluan-progress", ["aktivitas1","aktivitas2"]);
+    updateProgress("pkc-progress", ["aktivitas3","aktivitas4"]);
+    updateProgress("intensitas-progress", ["aktivitas5","aktivitas6","aktivitas7","aktivitas8","aktivitas9","aktivitas10"]);
+    updateProgress("histogram-progress", ["aktivitas11","aktivitas12"]);
+    updateProgress("praktik-progress", ["aktivitas13","aktivitas14","aktivitas15"]);
+
+    updateProgressBar();
+
+});
+
+
+</script>
+{% endblock %}

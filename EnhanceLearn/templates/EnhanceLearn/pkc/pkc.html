@@ -1,0 +1,106 @@
+{% extends "EnhanceLearn/base.html" %}
+{% load static %}
+
+{% block title %}PKC{% endblock %}
+
+{% block content %}
+<div class="materi-container">
+
+    <h1 class="subbab-title">SUBBAB 2: PENGERTIAN PENINGKATAN KUALITAS CITRA</h1>
+
+    <!-- Tujuan Pembelajaran -->
+    <div class="materi-box">
+        <div class="materi-box-header">
+            <i class="bi bi-lightbulb"></i>
+            Tujuan Pembelajaran
+        </div>
+        <div class="materi-box-body">
+        <h6>Setelah mempelajari bab ini, mahasiswa diharapkan:</h6>
+            <ul style="font-size:15px;">
+                <li>Mampu memahami konsep, tujuan dan manfaat peningkatan kualitas citra.</li>
+                <li>Dapat membedakan konsep <em>image enhancement</em> dan <em>image restoration</em>.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Pengertian -->
+    <div class="materi-box">
+        <div class="materi-box-header">
+            <i class="bi bi-image"></i>
+            Pengertian Peningkatan Kualitas Citra
+        </div>
+
+        <div class="materi-box-body">
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                <strong>Coba bayangkan ketika kamu mengambil foto yang terlalu gelap atau terlalu buram.</strong>
+                Apa yang kamu lakukan? Kamu pasti memanipulasinya di aplikasi editor foto agar hasilnya lebih
+                enak dilihat. Konsep inilah yang mendasari <strong>Peningkatan Kualitas Citra</strong>.
+                Pada gambar 2.1 dibawah ini merupakan contoh foto yang telah di naikkan 
+                kecerahannya nya agar lebih terang.
+            </p>
+
+            <!-- GAMBAR 1.1 -->
+             <!-- GAMBAR 1.1 -->
+            <div style="text-align:center; margin:16px 0;">
+                <img src="{% static 'img/pkc/enhance.png' %}" alt="Citra Asli" style="width: 80%; max-width: 900px; height: auto;">
+                <p style="font-size:13px; margin-top:8px; font-style:italic;">
+                    Gambar 2.1 Perbaikan Nilai Kecerahan
+                </p>
+            </div>
+
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75; margin-top: 10px;">
+                Peningkatan Kualitas Citra <em>(Image Enhancement)</em> adalah serangkaian proses untuk mengubah
+                sebuah citra menjadi citra baru sesuai dengan kebutuhan melalui berbagai cara.
+                Cara – cara yang bisa dilakukan misalnya dengan fungsi transformasi, operasi matematis,
+                pemfilteran, dan lain – lain. Tujuan utama dari peningkatan kualitas citra adalah <strong>untuk
+                memproses citra sehingga citra yang dihasilkan lebih baik daripada citra aslinya</strong>
+                untuk aplikasi tertentu. Gambar 1.2 menunjukkan perubahan kontras citra menggunakan teknik
+                <em>Histogram Equalization</em>.
+            </p>
+
+            <!-- GAMBAR 1.2 -->
+            <div style="text-align:center; margin:14px 0;">
+                <img src="{% static 'img/hist_asli.png' %}" alt="Histogram Citra Asli" width="40%" style="margin-right:20px;">
+                <img src="{% static 'img/hist_hasil.png' %}" alt="Histogram Equalization" width="40%">
+                <p style="font-size:12px; margin-top:6px; font-style:italic;">
+                    Gambar 2.1 Perbaikan Teknik Histogram Equalization
+                </p>
+            </div>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75; margin-top: 12px;">
+                <strong>Peningkatan kualitas citra merupakan langkah awal yang krusial</strong>, sering
+                dikategorikan sebagai <em><strong>Image Pre-processing</strong></em>, dalam alur pengolahan
+                citra digital. Kebutuhan untuk perbaikan kualitas muncul karena citra mentah yang diakuisisi
+                seringkali mengalami penurunan mutu, misalnya, citra yang terlalu terang atau terlalu gelap,
+                citra yang kurang tajam, atau citra yang tercemar oleh <strong>derau (noise)</strong>.
+            </p>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Proses perbaikan ini memiliki <strong>implikasi teknis yang signifikan</strong>, terutama dalam
+                aplikasi seperti <strong>deteksi objek dan pengenalan pola</strong>. Apabila sebuah citra masukan
+                memiliki kontras yang buruk atau mengandung tingkat derau yang tinggi, algoritma deteksi tepi
+                atau segmentasi yang diterapkan selanjutnya cenderung menghasilkan
+                <strong>keluaran yang tidak akurat</strong>, memicu <em>false positives</em>, atau bahkan
+                <strong>kegagalan total dalam pengenalan objek</strong>. Oleh karena itu,
+                <strong>kemampuan menerapkan teknik Image Enhancement yang efektif</strong> berfungsi sebagai
+                jembatan penting yang mengubah data visual mentah menjadi data yang siap diproses oleh sistem
+                komputer.
+            </p>
+
+        </div>
+    </div>
+
+    <!-- AKTIVITAS (TETAP, TIDAK DIUBAH) -->
+    {% include "EnhanceLearn/pkc/aktivitas3.html" %}
+
+    <!-- TOMBOL SELANJUTNYA (HANYA DITAMBAHKAN, POSISI BENAR) -->
+    <div style="margin-top:32px; display:flex; justify-content:space-between;">
+        <a href="{% url 'jenis_citra' %}" class="btn-prev-materi">« Kembali</a>
+
+        <a href="{% url 'pkc_restoration' %}" class="btn-next-materi">Selanjutnya »</a>
+    </div>
+
+</div>
+{% endblock %}

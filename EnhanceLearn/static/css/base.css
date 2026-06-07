@@ -1,0 +1,297 @@
+/* ================= GLOBAL ================= */
+body {
+    margin: 0;
+    background-color: #F4F7FB;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* ================= NAVBAR ================= */
+.navbar-custom {
+    background: linear-gradient(90deg, #1E3A8A, #2563EB) !important;
+    color: #ffffff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px; 
+}
+
+.menu-toggle{
+    display: block;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    margin-right: 12px;
+}
+
+.navbar-brand {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+.navbar-brand .brand-learn{
+    color:#BFDBFE;
+}
+
+.brand-enhance {
+    color: #DBEAFE;
+}
+
+.brand-learn {
+    color: #FFFFFF;
+}
+
+.nav-home {
+    font-size: 20px;
+    color: #E5EDFF;
+    text-decoration: none;
+}
+
+.nav-home:hover {
+    color: #BFDBFE;
+}
+
+/* ================= LAYOUT ================= */
+.layout {
+    padding-top: 56px;
+    display: flex;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar {
+    width: 260px;
+
+    background: linear-gradient(
+        180deg,
+        #1E3A8A 0%,
+        #2563EB 100%
+    );
+
+    position: fixed;
+    top: 56px;
+    left: 0;
+    transition: left .3s ease;
+    z-index: 9999;
+
+    height: calc(100vh - 56px);
+
+    padding: 18px 14px;
+
+    overflow-y: auto;      /* scroll vertikal */
+    overflow-x: hidden;    /* sembunyikan scroll horizontal */
+
+    box-shadow: 4px 0 15px rgba(0,0,0,.15);
+}
+
+.sidebar.show{
+    left: 0;
+}
+
+.sidebar-link {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+
+    padding: 12px 14px;
+    margin-bottom: 8px;
+
+    border-radius: 10px;
+
+    transition: all .25s ease;
+}
+
+.sidebar-link:hover {
+    background: rgba(255,255,255,.12);
+    transform: translateX(5px);
+}
+
+/* ================= ACCORDION ================= */
+.accordion-item {
+    margin-bottom: 6px;
+}
+
+.accordion-header {
+    width: 100%;
+
+    background: rgba(255,255,255,.08);
+
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    color: white;
+
+    padding: 13px 15px;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    transition: all .25s ease;
+}
+
+.accordion-header:hover {
+    background: rgba(255,255,255,.15);
+
+    transform: translateX(4px);
+}
+
+.accordion-item.active .accordion-header {
+    background: #3B82F6;
+
+    box-shadow:
+        0 8px 20px rgba(59,130,246,.35);
+}
+
+.accordion-body {
+    display: none;
+
+    padding: 8px 0 8px 12px;
+
+    margin-top: 6px;
+}
+
+.accordion-item.active .accordion-body {
+    display: block;
+}
+
+.accordion-body a {
+    display: block;
+
+    color: #E0E7FF;
+
+    text-decoration: none;
+
+    padding: 9px 12px;
+
+    border-radius: 8px;
+
+    margin-bottom: 3px;
+
+    transition: all .2s ease;
+}
+
+.accordion-body a:hover {
+    background: rgba(255,255,255,.1);
+    color: #fff;
+    padding-left: 18px;
+}
+
+/* ================= ACTIVE LINK ================= */
+.accordion-body a.active,
+.sidebar-link.active {
+    background: white;
+
+    color: #1E40AF;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 4px 12px rgba(255,255,255,.2);
+}
+
+/* ================= ICON ROTATE ================= */
+.icon {
+    transition: all .3s ease;
+}
+
+.accordion-item.active .icon {
+    transform: rotate(90deg);
+}
+
+/* ================= CONTENT ================= */
+.content {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+    padding: 5px;
+    overflow-x: hidden;
+    transition: all .3s ease;
+}
+
+.content.expanded {
+    margin-left: 0;
+    width: 100%;
+}
+
+.content .container-fluid {
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+/* ================= SIDEBAR COLLAPSE DESKTOP ================= */
+
+.sidebar.collapsed{
+    left: -260px;
+}
+
+.content.expanded{
+    margin-left: 0;
+}
+
+/* animasi */
+.sidebar,
+.content{
+    transition: all .3s ease;
+}
+
+.locked-link{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:10px 15px;
+    color:#999;
+    cursor:not-allowed;
+
+    width:100%;
+}
+
+.locked-link i{
+    flex-shrink:0;
+    margin-left:10px;
+}
+
+
+@media (max-width: 768px){
+
+
+    .sidebar{
+        left: -260px;
+        z-index: 9999;
+    }
+
+    .sidebar.show{
+        left: 0;
+    }
+
+    .content{
+        margin-left: 0;
+    }
+
+
+    .brand-text{
+        display:none;
+    }
+
+    .user-text{
+        display:none;
+    }
+
+
+}

@@ -1,0 +1,334 @@
+{% extends "EnhanceLearn/dosen/content.html" %}
+{% load static %}
+
+{% block title %}
+Progres Mahasiswa
+{% endblock %}
+
+{% block page_title %}
+Progres Mahasiswa
+{% endblock %}
+
+{% block page_content %}
+
+<link rel="stylesheet" href="{% static 'css/dosen.css' %}?v=2">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+
+/* PROGRESS BAR */
+.progress-container{
+    width:250px;
+    height:18px;
+    background:#e5e7eb;
+    border-radius:10px;
+    overflow:hidden;
+    margin:auto;
+}
+
+.progress-bar{
+    height:100%;
+    color:white;
+    font-size:11px;
+    text-align:center;
+    line-height:18px;
+}
+
+/* tombol detail */
+.btn-detail{
+    background:#06b6d4;
+    color:white;
+    padding:6px 10px;
+    border-radius:6px;
+    text-decoration:none;
+}
+
+.btn-detail:hover{
+    background:#0891b2;
+}
+
+</style>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+    <!-- FILTER KELAS -->
+    <div class="d-flex align-items-center gap-2">
+        <label class="fw-semibold">Pilih Kelas:</label>
+
+        <select class="form-select" style="width:200px" id="filterKelas">
+
+            <option value="">Semua Kelas</option>
+
+            {% for k in kelas_list %}
+            <option value="{{ k.id }}">{{ k.nama_kelas }}</option>
+            {% endfor %}
+
+        </select>
+    </div>
+
+
+    <!-- SEARCH -->
+    <div class="position-relative">
+
+        <i class="bi bi-search position-absolute"
+           style="left:12px; top:50%; transform:translateY(-50%); color:#6b7280;"></i>
+
+        <input type="text"
+               id="searchMahasiswa"
+               class="form-control ps-5"
+               style="width:260px"
+               placeholder="Cari nama / NIM...">
+
+    </div>
+
+</div>
+
+<div class="table-responsive">
+
+<table id="tabelMahasiswa" class="table table-hover table-bordered align-middle">
+
+<thead class="table-light">
+<tr data-kelas="{{ p.kelas }}">
+<th width="30">No</th>
+<th width="250">Nama Mahasiswa</th>
+<th width="200">NIM</th>
+<th width="200">Kelas</th>
+<th width="300">Progres</th>
+<th width="120">Detail</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for p in data %}
+
+<tr>
+
+<td class="text-center">{{ forloop.counter }}</td>
+
+<td>{{ p.nama }}</td>
+
+<td class="text-center">{{ p.nim }}</td>
+
+<td class="text-center">{{ p.kelas }}</td>
+
+<td class="text-center">
+
+<div class="progress-container">
+
+<div class="progress-bar"
+style="
+width: {{ p.progress }}%;
+{% if p.progress == 0 %}
+background: transparent;
+color:#6b7280;
+{% elif p.progress < 30 %}
+background:#ef4444;
+{% elif p.progress < 70 %}
+background:#facc15;
+color:#000;
+{% else %}
+background:#22c55e;
+{% endif %}
+">
+
+{{ p.progress }}%
+
+</div>
+
+</div>
+
+</td>
+
+<td class="text-center">
+
+<a href="#"
+class="btn btn-sm btn-info text-white btn-detail"
+data-user="{{ p.user_id }}"
+data-bs-toggle="modal"
+data-bs-target="#modalDetail">
+
+<i class="bi bi-eye"></i>
+
+</a>
+</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+<td colspan="6" class="text-center text-muted">
+Belum ada data progres mahasiswa
+</td>
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<!-- MODAL DETAIL PROGRES -->
+<div class="modal fade" id="modalDetail" tabindex="-1">
+
+<div class="modal-dialog modal-lg">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h5 class="modal-title w-100 text-center">Detail Progres</h5>
+
+<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+
+</div>
+
+<div class="modal-body">
+
+<table class="table table-bordered align-middle">
+
+<thead class="table-light">
+<tr>
+<th>Materi</th>
+<th class="text-center">Aktivitas</th>
+<th class="text-center">Kuis</th>
+</tr>
+</thead>
+
+<tbody id="detailTable">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+document.querySelectorAll(".btn-detail").forEach(btn => {
+
+btn.addEventListener("click", function(){
+
+const user = this.dataset.user
+
+fetch(`/detail-progress/${user}/`)
+.then(res => res.json())
+.then(data => {
+
+let html = ""
+
+function icon(v){
+return v ? 
+'<i class="bi bi-check-lg text-success fs-4"></i>' :
+'<i class="bi bi-x-lg text-danger fs-4"></i>'
+}
+
+html += `
+<tr>
+<td>Pendahuluan</td>
+<td class="text-center">${data.pendahuluan.aktivitas} / ${data.pendahuluan.total}</td>
+<td class="text-center">${icon(data.pendahuluan.kuis)}</td>
+</tr>
+`
+
+html += `
+<tr>
+<td>PKC</td>
+<td class="text-center">${data.pkc.aktivitas} / ${data.pkc.total}</td>
+<td class="text-center">${icon(data.pkc.kuis)}</td>
+</tr>
+`
+
+html += `
+<tr>
+<td>Intensitas</td>
+<td class="text-center">${data.intensitas.aktivitas} / ${data.intensitas.total}</td>
+<td class="text-center">${icon(data.intensitas.kuis)}</td>
+</tr>
+`
+
+html += `
+<tr>
+<td>Histogram</td>
+<td class="text-center">${data.histogram.aktivitas} / ${data.histogram.total}</td>
+<td class="text-center">${icon(data.histogram.kuis)}</td>
+</tr>
+`
+
+html += `
+<tr>
+<td>Praktik Python</td>
+<td class="text-center">${data.praktik.aktivitas} / ${data.praktik.total}</td>
+<td class="text-center">${icon(data.praktik.kuis)}</td>
+</tr>
+`
+
+html += `
+<tr>
+<td>Evaluasi Akhir</td>
+<td class="text-center">-</td>
+<td class="text-center">${icon(data.evaluasi.kuis)}</td>
+</tr>
+`
+
+document.getElementById("detailTable").innerHTML = html
+
+})
+
+})
+
+})
+
+</script>
+
+
+<script>
+
+const searchInput = document.getElementById("searchMahasiswa")
+const filterKelas = document.getElementById("filterKelas")
+const rows = document.querySelectorAll("#tabelMahasiswa tbody tr")
+
+function filterTable(){
+
+    const search = searchInput.value.toLowerCase()
+    const kelas = filterKelas.value
+
+    rows.forEach(row => {
+
+        const nama = row.children[1].innerText.toLowerCase()
+        const nim = row.children[2].innerText.toLowerCase()
+        const kelasRow = row.children[3].innerText
+
+        const cocokSearch =
+            nama.includes(search) ||
+            nim.includes(search)
+
+        const cocokKelas =
+            kelas === "" ||
+            kelasRow === filterKelas.options[filterKelas.selectedIndex].text
+
+        if(cocokSearch && cocokKelas){
+            row.style.display = ""
+        }else{
+            row.style.display = "none"
+        }
+
+    })
+
+}
+
+searchInput.addEventListener("keyup", filterTable)
+filterKelas.addEventListener("change", filterTable)
+
+</script>
+
+{% endblock %}

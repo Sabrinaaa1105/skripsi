@@ -1,0 +1,178 @@
+{% extends "EnhanceLearn/base.html" %}
+{% load static %}
+
+{% block title %}Grayscale Biner dengan Python{% endblock %}
+
+{% block content %}
+
+<div class="materi-container">
+    <h1 class="subbab-title">SUBBAB 5: CITRA <em>GRAYSCALE</em> & BINER DENGAN PYTHON</h1>
+
+    <div class="materi-box">
+        <div class="materi-box-header">
+            <i class="bi bi-lightbulb"></i>
+            Tujuan Pembelajaran
+        </div>
+
+        <div class="materi-box-body">
+            <h5>Setelah mempelajari bab ini, mahasiswa diharapkan:</h5>
+            <ul style="font-size:17px;">
+                <li>Mampu mengubah citra berwarna menjadi citra <em>grayscale</em> dan biner menggunakan kode Python.</li>
+                <li>Mampu menerapkan teknik transformasi intensitas citra menggunakan kode Python.</li>
+                <li>Mampu menerapkan teknik <em>histogram equalization</em> dan <em>histogram specification</em> menggunakan kode Python.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="materi-box">
+        <div class="materi-box-header">
+            <i class="bi bi-code-slash"></i>
+            Pustaka Python Pillow
+        </div>
+
+        <div class="materi-box-body">
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Bahasa pemrograman Python merupakan salah satu bahasa pemrograman yang digunakan dalam pemrosesan citra digital. Bahasa pemrograman Python banyak memiliki <em>library</em> (pustaka) untuk mengolah gambar. Pada materi ini, kita akan fokus menggunakan <em>library</em> (pustaka) Pillow. Pillow adalah <strong>pustaka Python yang dikembangkan dari <em>Python Imaging Library</em> (PIL) dan banyak digunakan untuk membaca, menampilkan, memodifikasi, serta menyimpan citra digital dalam berbagai format.</strong>
+            </p>
+        </div>
+    </div>
+
+    <div class="materi-box">
+        <div class="materi-box-body">
+            <h4 style="font-weight:700; color: #1e3a8a;">Mengubah Gambar Berwarna ke <em>Grayscale</em></h4>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Dalam Pillow, proses mengubah gambar berwarna menjadi <em>grayscale</em> dilakukan menggunakan fungsi <code>convert()</code>. Fungsi tersebut digunakan untuk mengubah mode gambar ke format lain. Untuk <em>grayscale</em>, parameter yang digunakan adalah <code>"L"</code>, yaitu mode citra keabuan.
+            </p>
+
+            <pre style="background: #dbeafe; border: 1px solid #60a5fa; border-radius: 12px; padding: 18px 20px; overflow-x: auto; margin-top: 18px;">
+<code style="font-family: 'Courier New', monospace; font-size: 16px; line-height: 1.5; color: #0f172a;">img = Image.open("gambar.jpg")
+grayscale = img.convert("L")
+grayscale.save("hasil_grayscale.jpg")</code></pre>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Pada contoh di atas, gambar berwarna dibuka menggunakan <code>Image.open()</code>, kemudian diubah menjadi <em>grayscale</em> dengan fungsi <code>convert(“L”)</code>. Hasil akhirnya adalah citra yang lebih sederhana dan sering digunakan pada tahap awal pemrosesan citra digital, karena memudahkan analisis tanpa dipengaruhi informasi warna.
+            </p>
+        </div>
+    </div>
+
+    {% comment %} CITRA BINER {% endcomment %}
+
+    <div class="materi-box">
+        <div class="materi-box-body">
+            <h4 style="font-weight:700; color: #1e3a8a;">Mengubah Gambar <em>Grayscale</em> menjadi Gambar Biner</h4>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Proses perubahan <em>grayscale</em> ke biner dilakukan menggunakan metode <em>thresholding</em>. Pada metode ini ditentukan sebuah nilai ambang (<em>threshold</em>). Setiap piksel yang memiliki nilai intensitas lebih besar atau sama dengan <em>threshold</em> akan diubah menjadi putih, sedangkan piksel yang memiliki nilai lebih kecil dari <em>threshold</em> akan diubah menjadi hitam. Proses ini dapat dilakukan menggunakan fungsi <code>.point()</code>, yaitu fungsi yang digunakan untuk memetakan nilai setiap piksel berdasarkan aturan tertentu. Setelah itu, hasilnya dapat diubah ke mode biner menggunakan <code>convert(“1”)</code>.
+            </p>
+
+            <pre style="background: #dbeafe; border: 1px solid #60a5fa; border-radius: 12px; padding: 18px 20px; overflow-x: auto; margin-top: 18px;">
+<code style="font-family: 'Courier New', monospace; font-size: 16px; line-height: 1.5; color: #0f172a;">img = Image.open("gambar.jpg").convert("L")
+threshold = 128
+binary = img.point(lambda p: 255 if p >= threshold else 0)
+binary.save("hasil_biner.jpg")</code></pre>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Pada kode di atas, gambar terlebih dahulu diubah ke <em>grayscale</em> menggunakan <code>convert(“L”)</code>. Selanjutnya setiap piksel dibandingkan dengan nilai ambang 128. Piksel yang nilainya 128 atau lebih akan menjadi putih, sedangkan yang kurang dari 128 akan menjadi hitam.
+            </p>
+        </div>
+    </div>
+
+    <div class="materi-box">
+        <div class="materi-box-header">
+            EnhanceLearn - Praktik
+        </div>
+
+        <div class="materi-box-body">
+            <div class="editor-guide">
+                <h5 style="font-weight:700; color: #1e3a8a;">Petunjuk:</h5>
+                <ul>
+                    <li><strong>Upload File:</strong> Klik tombol <strong>Upload Gambar</strong> untuk mengunggah citra yang akan digunakan pada praktik. Pastikan file gambar berhasil dimuat sebelum menjalankan kode.</li>
+                    <li><strong>Menjalankan Proses (▶):</strong> Setelah gambar diunggah, tekan tombol <strong>▶ Run</strong> pada setiap cell untuk menjalankan kode. Jalankan <strong>Cell 1</strong> terlebih dahulu untuk menghasilkan citra <em>grayscale</em>, kemudian jalankan <strong>Cell 2</strong> untuk mengubah citra menjadi biner menggunakan metode <em>thresholding</em>.</li>
+                    <li><strong>Menghapus Kode (🗑):</strong> Klik tombol <strong>🗑 Hapus</strong> untuk mengosongkan seluruh kode pada cell yang dipilih.</li>
+                    <li><strong>Menambah Cell (+):</strong> Klik tombol <strong>+ Add Cell</strong> untuk menambahkan cell baru apabila diperlukan untuk menulis atau mencoba kode tambahan.</li>
+                </ul>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="editor-box">
+                        <div class="editor-box-body">
+                            <div class="cell-box">
+                                <div class="editor-wrap">
+                                    <textarea id="editor-gray">
+from PIL import Image
+
+img = Image.open("gambar.png") # Membuka gambar
+
+gray = img.convert("L") # Mengubah gambar menjadi grayscale
+
+gray.save("hasil_grayscale.png") # Menyimpan hasil grayscale
+</textarea>
+                                </div>
+                                <div class="side-tools">
+                                    <button class="editor-icon-btn" id="run-gray">▶</button>
+                                    <button class="editor-icon-btn trash" id="clear-gray">🗑</button>
+                                </div>
+                            </div>
+                            <div class="output" id="out-gray">(Output muncul di sini)</div>
+                            <img id="img-gray" class="preview-img">
+                            <a id="download-gray" class="btn btn-primary btn-sm mt-2" download="hasil_grayscale.png" style="display:none;">Download Hasil</a>
+                            <div class="add-cell-btn">+</div>
+
+                            <div class="cell-box">
+                                <div class="editor-wrap">
+                                    <textarea id="editor-bin">
+from PIL import Image
+
+threshold = 128 # Menentukan nilai threshold
+
+# Mengubah citra grayscale menjadi citra biner
+binary = gray.point(lambda p: 255 if p >= threshold else 0) 
+
+binary.save("hasil_biner.png") # Menyimpan hasil citra biner
+</textarea>
+                                </div>
+                                <div class="side-tools">
+                                    <button class="editor-icon-btn" id="run-bin">▶</button>
+                                    <button class="editor-icon-btn trash" id="clear-bin">🗑</button>
+                                </div>
+                            </div>
+                            <div class="output" id="out-bin">(Output muncul di sini)</div>
+                            <img id="img-bin" class="preview-img">
+                            <a id="download-bin" class="btn btn-primary btn-sm mt-2" download="hasil_biner.png" style="display:none;">Download Hasil</a>
+                            <div class="add-cell-btn">+</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="upload-box text-center h-100">
+                        <i class="bi bi-upload upload-icon"></i>
+                        <p class="fw-semibold mt-2">Upload Gambar</p>
+                        <input type="file" id="uploadInput" class="form-control mt-2" accept="image/*">
+                        <p class="upload-hint mt-3">
+                            File gambar akan digunakan sebagai:
+                            <br>
+                            <code id="file-name-show">gambar.png</code>
+                        </p>
+                        <img id="upload-preview" class="preview-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include "EnhanceLearn/praktik/aktivitas13.html" %}
+
+    <div style="margin-top:32px; display:flex; justify-content:space-between;">
+        <a href="{% url 'power_law' %}" class="btn-prev-materi">« Kembali</a>
+        <a href="{% url 'intensitas' %}" class="btn-next-materi">Selanjutnya »</a>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js"></script>
+<link rel="stylesheet" href="{% static 'css/python-editor.css' %}">
+<script src="{% static 'js/python-editor.js' %}"></script>
+
+{% endblock %}

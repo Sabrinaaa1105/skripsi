@@ -1,0 +1,121 @@
+{% extends "EnhanceLearn/base.html" %}
+{% load static %}
+
+{% block title %}Pendahuluan{% endblock %}
+
+{% block content %}
+<div class="materi-container">
+
+    <h1 class="subbab-title">SUBBAB 1: PENGERTIAN CITRA DIGITAL</h1>
+
+    <!-- Tujuan Pembelajaran -->
+    <div class="materi-box">
+        <div class="materi-box-header">
+            <i class="bi bi-lightbulb"></i>
+            Tujuan Pembelajaran
+        </div>
+        <div class="materi-box-body">
+            <h6>Setelah mempelajari bab ini, mahasiswa diharapkan:</h6>
+            <ul style="font-size:15px;">
+                <li>Mampu memahami konsep citra digital.</li>
+                <li>Mampu memahami dan mengenal jenis-jenis citra digital.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Pengertian Citra Digital -->
+    <div class="materi-box">
+        <div class="materi-box-header">
+            <i class="bi bi-image"></i>
+            Pengertian Citra Digital
+        </div>
+
+        <div class="materi-box-body">
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                <strong>Citra digital</strong> adalah gambar yang direpresentasikan dalam bentuk data numerik sehingga dapat diproses oleh komputer. 
+                Dalam pemrosesan citra digital, sebuah citra dipandang sebagai kumpulan titik-titik kecil yang tersusun secara teratur. 
+                Titik-titik kecil tersebut disebut <strong>piksel <em>(picture element)</em></strong>. Setiap piksel tersebut mengandung informasi warna dan 
+                intensitas cahaya yang berbeda-beda. Perhatikan Gambar 1.1 sebuah citra dan nilai piksel salah satu kanalnya.
+            </p>
+
+            <!-- GAMBAR 1.1 -->
+            <div style="margin:16px 0;">
+                <table style="width:90%; margin:0 auto; border-collapse:collapse; border:1px solid #cbd5e1; text-align:center;">
+                    <tbody>
+                        <tr>
+                            <td style="border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:6px; vertical-align:top;">
+                                <img src="{% static 'img/citra_digital.png' %}"
+                                     alt="Citra Grayscale 16x16"
+                                     style="max-width:100%; height:auto; display:block; margin:0 auto;">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size:13px; margin-top:6px; font-style:italic; text-align:center;">
+                    Gambar 1.1. Citra dan nilai pikselnya
+                </p>
+            </div>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Gambar di atas menunjukkan bahwa komputer menyimpan dan menampilkan citra sebagai sekumpulan
+                piksel yang tersusun dalam bentuk matriks. Pada potongan gambar berukuran $8 \times 8$, terdapat 8 baris dan 8 kolom, dimana setiap piksel
+                menyimpan nilai intensitas warna RGB (<em>Red, Green, Blue</em>). Setiap piksel inilah yang secara bersama-sama membentuk tampilan 
+                visual keseluruhan. Nilai intensitas pada tiap piksel mencerminkan tingkat kecerahan, semakin tinggi nilainya maka piksel tampak 
+                semakin terang mendekati putih, sedangkan nilai yang lebih rendah menandakan area yang lebih gelap mendekati hitam.
+            </p>
+
+            <!-- PENJELASAN MATEMATIS -->
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+            Secara umum, sebuah citra digital dapat direpresentasikan dalam bentuk matriks yang terdiri dari $M$ kolom dan $N$ baris, dimana perpotongan antara kolom 
+            dan baris disebut piksel (<em>picture element</em>), yaitu elemen terkecil dari sebuah citra. Piksel mempunyai dua parameter, yaitu koordinat dan intensitas 
+            warna. Nilai yang terdapat pada koordinat $(x,y)$ adalah $f(x,y)$, yaitu besar intensitas atau warna dari piksel di titik itu. Oleh sebab itu, sebuah citra 
+            digital dapat ditulis dalam bentuk matriks berikut:</p>
+
+
+            <!-- MATRIKS DENGAN MATHJAX -->
+            <div style="text-align:center; margin:20px 0;">
+            $$
+            f(x,y)=
+            \begin{bmatrix}
+            f(0,0) & f(0,1) & \cdots & f(0,M-1) \\
+            f(1,0) & f(1,1) & \cdots & f(1,M-1) \\
+            \cdots & \cdots & \cdots & \cdots \\
+            f(N-1,0) & f(N-1,1) & \cdots & f(N-1,M-1)
+            \end{bmatrix}
+            $$
+            </div>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Berdasarkan matriks di atas, maka secara matematis citra digital dapat dituliskan sebagai fungsi intensitas $f(x,y)$, di mana nilai $x$ (baris) dan 
+                $y$ (kolom) merupakan koordinat posisi dan $f(x,y)$ adalah nilai fungsi pada setiap titik $(x,y)$ yang menyatakan besar intensitas citra atau tingkat 
+                keabuan atau warna dari piksel di titik tersebut.
+            </p>
+
+        </div>
+    </div>
+
+    <!-- AKTIVITAS -->
+    {% include "EnhanceLearn/pendahuluan/aktivitas1.html" %}
+
+    <!-- TOMBOL SELANJUTNYA -->
+    <div style="margin-top:32px; text-align:right;">
+        <a href="{% url 'jenis_citra' %}" class="btn-next-materi">
+            Selanjutnya »
+        </a>
+    </div>
+
+</div>
+
+<!-- ================= MATHJAX ================= -->
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+{% endblock %}

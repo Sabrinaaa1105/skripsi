@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Kuis Subbab {{ judul }}</title>
+    <link rel="stylesheet" href="{% static 'css/kuis.css' %}">
+</head>
+<body>
+
+<div class="container">
+    <div class="intro-card">
+
+        <div class="intro-title-box">{{ judul }}</div>
+
+        <div class="intro-inner-card">
+            <div class="intro-body result-body">
+                <p><strong>Nama:</strong> {{ nama|default:"-" }}</p>
+                <p><strong>Nilai:</strong> {{ nilai }}</p>
+                <p><strong>Waktu Pengerjaan:</strong> {{ waktu }}</p>
+
+                {% if not lulus %}
+                    <div class="result-message result-fail">
+
+                        {% if judul_kuis == "evaluasi" %}
+                            ❌ Anda belum lulus evaluasi akhir
+                        {% else %}
+                            ❌ Nilai Anda belum mencukupi
+                        {% endif %}
+
+                    </div>
+                {% else %}
+                    <div class="result-message result-pass">
+
+                        {% if judul_kuis == "evaluasi" %}
+                            ✅ Selamat! Anda lulus evaluasi akhir
+                        {% else %}
+                            ✅ Selamat! Anda lulus kuis
+                        {% endif %}
+
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if not lulus %}
+            <div class="alert-box-inline">
+                {% if judul_kuis == "evaluasi" %}
+                    Nilai kamu belum mencukupi. Silakan ulangi evaluasi.
+                {% else %}
+                    Nilai kamu belum mencukupi. Silakan ulangi kuis.
+                {% endif %}
+            </div>
+        {% endif %}
+
+<div class="intro-footer-outside">
+
+{% if not lulus %}
+
+    <a href="{% url 'halaman_kuis' judul_kuis %}" class="btn-primary">
+
+        {% if judul_kuis == "evaluasi" %}
+            Ulangi Evaluasi
+        {% else %}
+            Ulangi Kuis
+        {% endif %}
+
+    </a>
+
+    {% if materi_sebelum %}
+        <a href="{% url materi_sebelum %}" class="btn-secondary">
+            Kembali ke Materi
+        </a>
+    {% endif %}
+
+{% else %}
+
+    {% if judul_kuis == "evaluasi" %}
+
+        <a href="{% url 'dashboard' %}" class="btn-primary">
+            Kembali ke Dashboard
+        </a>
+
+    {% elif materi_sesudah %}
+
+        <a href="{% url materi_sesudah %}" class="btn-primary">
+            Lanjut Materi
+        </a>
+
+    {% endif %}
+
+{% endif %}
+
+</div>
+
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+{% extends "EnhanceLearn/base.html" %}
+{% load static %}
+
+{% block title %}Rangkuman{% endblock %}
+
+{% block content %}
+<div class="materi-container">
+
+    <h1 class="subbab-title">SUBBAB 1: RANGKUMAN</h1>
+
+    <!-- BOX RANGKUMAN -->
+    <div class="materi-box">
+        <div class="materi-box-header">
+            <i class="bi bi-journal-check"></i>
+            Ringkasan Materi
+        </div>
+
+        <div class="materi-box-body">
+            <ul style="line-height:1.8; font-size:17px; text-align: justify;">
+                <li>
+                    <strong>Citra digital</strong> adalah representasi gambar dalam bentuk data numerik
+                    yang dapat diproses oleh komputer.
+                </li>
+                <li>
+                    Elemen terkecil penyusun citra digital disebut <strong>piksel</strong>, yang
+                    tersusun dalam baris dan kolom membentuk matriks.
+                </li>
+                <li>
+                    <strong>Citra berwarna (RGB)</strong> tersusun atas tiga kanal warna:
+                    merah (R), hijau (G), dan biru (B).
+                </li>
+                <li>
+                    <strong>Citra <em>grayscale</em></strong> hanya memiliki satu kanal yang merepresentasikan
+                    tingkat keabuan dari hitam hingga putih.
+                </li>
+                <li>
+                    <strong>Citra biner</strong> hanya memiliki dua kemungkinan nilai piksel,
+                    yaitu 0 (hitam) dan 1 (putih).
+                </li>
+                <li>
+                    Konversi citra RGB ke <em>grayscale</em> dapat dilakukan dengan berbagai metode,
+                    salah satunya menggunakan pembobotan kanal warna.
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TOMBOL LANJUT -->
+    <div style="margin-top:32px; display:flex; justify-content:space-between;">
+        <a href="{% url 'jenis_citra' %}" class="btn-prev-materi">« Kembali</a>
+
+        <a href="{% url 'halaman_kuis' 'pendahuluan' %}" class="btn-next-materi">Selanjutnya »</a>
+    </div>
+
+</div>
+{% endblock %}

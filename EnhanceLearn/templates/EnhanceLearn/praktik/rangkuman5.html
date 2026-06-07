@@ -1,0 +1,109 @@
+{% extends "EnhanceLearn/base.html" %}
+{% load static %}
+
+{% block title %}Rangkuman{% endblock %}
+
+{% block content %}
+<div class="materi-container">
+
+    <h1 class="subbab-title">SUBBAB 5: RANGKUMAN</h1>
+
+    <!-- BOX RANGKUMAN -->
+    <div class="materi-box">
+        <div class="materi-box-header">
+            <i class="bi bi-journal-check"></i>
+            Ringkasan Materi
+        </div>
+
+        <div class="materi-box-body">
+            <h6 style="font-weight:700; color: #1e3a8a">
+                Pustaka Pillow
+            </h6>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Pillow adalah pustaka Python yang digunakan untuk membaca, menampilkan, memodifikasi, dan menyimpan citra digital. 
+                <em>Library</em> ini merupakan pengembangan dari <em>Python Imaging Library</em> (PIL) dan sering digunakan dalam pemrosesan citra digital.
+            </p>
+
+            <h6 style=" margin-top:30px; font-weight:700; color: #1e3a8a">
+                Mengubah Gambar Berwarna Menjadi <em>Grayscale</em>
+            </h6>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Gunakan fungsi <code>convert("L")</code> untuk mengubah gambar RGB menjadi <em>grayscale</em>. Mode <code>"L"</code> digunakan untuk menghasilkan citra keabuan sehingga 
+                analisis citra menjadi lebih sederhana.
+            </p>
+
+            <h6 style=" margin-top:30px; font-weight:700; color: #1e3a8a">
+                Mengubah Gambar <em>Grayscale</em> Menjadi Biner
+            </h6>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Perubahan citra <em>grayscale</em> menjadi citra biner dilakukan dengan metode <em>thresholding</em> menggunakan <code>point()</code> dapat menentukan nilai 
+                ambang untuk membuat gambar biner.
+            </p>
+
+            <h6 style=" margin-top:30px; font-weight:700; color: #1e3a8a">
+                Tranformasi <em>Brightness</em>
+            </h6>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Gunakan fungsi <code>ImageEnhance.Brightness()</code> untuk mengatur tingkat kecerahan gambar.
+            </p>
+
+            <h6 style=" margin-top:30px; font-weight:700; color: #1e3a8a">
+                Tranformasi <em>Contrast</em>
+            </h6>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Gunakan fungsi <code>ImageEnhance.Contrast()</code> untuk meningkatkan atau menurunkan kontras gambar.
+            </p>
+
+            <h6 style=" margin-top:30px; font-weight:700; color: #1e3a8a">
+                Tranformasi Negasi
+            </h6>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Gunakan fungsi <code>ImageOps.invert()</code> untuk membalik intensitas warna gambar.
+            </p>
+
+            <h6 style=" margin-top:30px; font-weight:700; color: #1e3a8a">
+                Tranformasi <em>Thresholding</em>
+            </h6>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Gunakan fungsi <code>point()</code> untuk mengubah gambar grayscale menjadi gambar biner berdasarkan nilai ambang.
+            </p>
+
+            <h6 style=" margin-top:30px; font-weight:700; color: #1e3a8a">
+                Tranformasi Logaritmik
+            </h6>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Gunakan fungsi <code>math.log()</code> untuk memperjelas area gelap pada citra.
+            </p>
+
+            <h6 style=" margin-top:30px; font-weight:700; color: #1e3a8a">
+                Tranformasi <em>Power-Law (Gamma Correction)</em>
+            </h6>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Gunakan fungsi <code>point(lambda p: int(255 * (p / 255) ** gamma))</code> untuk mengatur pencahayaan gambar menggunakan nilai gamma.
+            </p>
+
+            <h6 style=" margin-top:30px; font-weight:700; color: #1e3a8a">
+                Tranformasi <em>Histogram Equalization</em>
+            </h6>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Gunakan fungsi <code>ImageOps.equalize()</code> untuk meningkatkan kontras citra dengan meratakan distribusi histogram.
+            </p>
+
+            <h6 style=" margin-top:30px; font-weight:700; color: #1e3a8a">
+                Tranformasi <em>Histogram Specification</em>
+            </h6>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Gunakan <em>histogram specification (histogram matching)</em> untuk menyesuaikan distribusi intensitas suatu citra agar mendekati distribusi histogram citra referensi
+            </p>
+        </div>
+    </div>
+
+    <!-- TOMBOL LANJUT -->
+    <div style="margin-top:32px; display:flex; justify-content:space-between;">
+        <a href="{% url 'histogram' %}" class="btn-prev-materi">« Kembali</a>
+
+        <a href="{% url 'halaman_kuis' 'praktik' %}" class="btn-next-materi">Selanjutnya »</a>
+    </div>
+
+</div>
+{% endblock %}

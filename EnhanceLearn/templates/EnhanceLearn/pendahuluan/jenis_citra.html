@@ -1,0 +1,428 @@
+{% extends "EnhanceLearn/base.html" %}
+{% load static %}
+
+{% block title %}Pendahuluan{% endblock %}
+
+{% block content %}
+<div class="materi-container">
+
+    <h1 class="subbab-title">SUBBAB 1: JENIS - JENIS CITRA DIGITAL</h1>
+
+    <!-- Jenis-Jenis Citra Digital -->
+    <div class="materi-box">
+        <div class="materi-box-header">
+            <i class="bi bi-image"></i>
+            Jenis-Jenis Citra Digital
+        </div>
+
+        <div class="materi-box-body">
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Ada banyak cara untuk menyimpan citra digital di dalam memori. Cara penyimpanan menentukan 
+                jenis citra digital yang terbentuk. Beberapa jenis citra digital yang sering digunakan adalah 
+                <strong>citra warna/RGB, citra <em>grayscale</em>, dan citra biner</strong>.
+            </p>
+
+            <!-- a. Citra Berwarna / RGB -->
+            <h4 style="margin-top:24px; font-weight:700; color: #1e3a8a">
+                a. Citra Berwarna / RGB
+            </h4>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Citra berwarna adalah citra yang memiliki <strong>3 buah kanal warna</strong> di dalamnya. 
+                Pada umumnya jenis citra ini terbentuk dari komponen merah/<em>red</em> (R), hijau/<em>green</em> (G), dan 
+                biru/<em>blue</em> (B) yang dimodelkan ke dalam <strong>ruang warna RGB</strong>. RGB adalah standar 
+                yang digunakan untuk menampilkan citra berwarna pada layar televisi maupun layar komputer. 
+                Namun terdapat juga citra berwarna yang menggunakan ruang warna yang berbeda, seperti 
+                <strong><em>CMYK (<em>Cyan, Magenta, Yellow, Black</em>), HSV (<em>Hue, Saturation, Value</em>), dan YCbCr 
+                (Luma, Chroma blue, Chroma red)</strong></em>. Gambar 1.2 merupakan contoh dari citra berwarna. Gambar 1.3 merupakan potongan citra RGB 
+                beserta nilai intensitas setiap pikselnya, yang dipisahkan menjadi tiga matriks warna, yaitu matriks R (<em>red</em>/merah), 
+                matriks G (<em>green</em>/hijau), dan matriks B (<em>blue</em>/biru).
+            </p>
+
+            <!-- GAMBAR 1.2 -->
+            <div style="margin:16px 0;">
+                <table class="gambar-rgb-table" style="width:75%; margin:0 auto; border-collapse:collapse; border:1px solid #cbd5e1; text-align:center;">
+                    <tbody>
+                        <tr>
+                            <td style="border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:6px; vertical-align:top;">
+                                <img src="{% static 'img/jenis-citra/RGB1.png' %}"
+                                    alt="RGB 1"
+                                    style="width:100%; height:350px; object-fit:cover; display:block; margin:0 auto;">
+                            </td>
+
+                            <td style="border-top:1px solid #cbd5e1; padding:6px; vertical-align:top;">
+                                <img src="{% static 'img/jenis-citra/RGB2.jpeg' %}"
+                                    alt="RGB 2"
+                                    style="width:100%; height:350px; object-fit:cover; display:block; margin:0 auto;">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size:13px; margin-top:6px; font-style:italic; text-align:center;">
+                    Gambar 1.2 Contoh citra RGB
+                </p>
+            </div>
+
+            <div style="margin:16px 0;">
+                <table style="width:90%; margin:0 auto; border-collapse:collapse; border:1px solid #cbd5e1; text-align:center;">
+                    <tbody>
+                        <tr>
+                            <td style="border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:6px; vertical-align:top;">
+                                <img src="{% static 'img/jenis-citra/RGB.png' %}"
+                                     alt="Citra RGB 8x8"
+                                     style="max-width:100%; height:auto; display:block; margin:0 auto;">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size:13px; margin-top:6px; font-style:italic; text-align:center;">
+                    Gambar 1.3 Contoh piksel citra RGB
+                </p>
+            </div>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Gambar tersebut menampilkan citra digital berukuran $8 × 8$ piksel serta tiga matriks yang 
+                menunjukkan nilai intensitas pada masing-masing kanal warna: merah (R), hijau (G), dan 
+                biru (B). Setiap elemen pada matriks menyatakan tingkat kecerahan warna dengan rentang nilai 
+                0 hingga 255, di mana nilai yang lebih tinggi menunjukkan warna yang lebih terang. 
+                Nilai-nilai pada ketiga matriks tersebut digabungkan untuk menghasilkan warna akhir pada tiap 
+                piksel. Dengan demikian, warna pada setiap titik gambar merupakan hasil kombinasi dari 
+                komponen merah, hijau, dan biru yang dimilikinya.
+            </p>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Sebagai ilustrasi, ketika satu piksel memiliki nilai warna <strong>(255, 0, 0)</strong>, 
+                maka piksel tersebut akan tampak merah terang karena hanya komponen merah yang memiliki 
+                intensitas maksimal, sementara kanal hijau dan biru tidak memberikan kontribusi warna. 
+                Apabila ketiga komponennya memiliki nilai yang sama, misalnya <strong>(255, 255, 255)</strong>, 
+                maka piksel akan muncul berwarna putih, sedangkan nilai <strong>(0, 0, 0)</strong> akan 
+                menghasilkan warna hitam. Variasi nilai pada ketiga kanal tersebut memungkinkan terbentuknya 
+                jutaan kombinasi warna, sehingga model RGB menjadi sangat efektif dalam merepresentasikan 
+                citra berwarna.
+            </p>
+
+            <!-- b. Citra Grayscale -->
+            <h4 style="margin-top:28px; font-weight:700; color: #1e3a8a">
+                b. Citra <em>Grayscale</em>
+            </h4>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Citra <em>grayscale</em> adalah citra yang hanya memiliki <strong>1 buah kanal</strong> sehingga yang 
+                ditampilkan hanyalah nilai intensitas atau dikenal juga dengan istilah keabuan. Karena jenis 
+                citra ini hanya memiliki satu kanal saja, maka citra <em>grayscale</em> memiliki tempat penyimpanan 
+                yang lebih hemat. Jenis citra ini disebut juga sebagai <strong>8-bit image</strong> karena 
+                untuk setiap nilai pikselnya memerlukan 8-bit. Gambar 1.3 menunjukkan perbedaan citra berwarna dan citra <em>grayscale</em>, sedangkan Gambar 1.4 
+                menunjukkan citra <em>grayscale</em> dan nilai pikselnya berukuran 8 × 8.
+            </p>
+
+            <div style="margin:16px 0;">
+
+                <table style="width:75%; margin:0 auto; border-collapse:collapse; border:1px solid #cbd5e1; text-align:center;">
+                    <thead>
+                        <tr>
+                            <th style="width:50%; border-right:1px solid #cbd5e1; padding:6px; font-weight:600; font-size:14px;">
+                                Citra berwarna
+                            </th>
+                            <th style="width:50%; padding:6px; font-weight:600; font-size:14px;">
+                                Citra <em>grayscale</em>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:10px;">
+                                <img src="{% static 'img/jenis-citra/RGB2.jpeg' %}"
+                                    alt="rgb"
+                                    style="width:100%; height:350px; object-fit:cover; display:block; margin:0 auto;">
+                            </td>
+
+                            <td style="border-top:1px solid #cbd5e1; padding:10px;">
+                                <img src="{% static 'img/jenis-citra/grayscale.png' %}"
+                                    alt="grayscale"
+                                    style="width:100%; height:350px; object-fit:cover; display:block; margin:0 auto;">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p style="font-size:13px; margin-top:6px; font-style:italic; text-align:center;">
+                    Gambar 1.4 Perbedaan citra berwarna dan citra grayscale
+                </p>
+
+            </div>
+
+
+            <div style="margin:16px 0;">
+                <table style="width:75%; margin:0 auto; border-collapse:collapse; border:1px solid #cbd5e1; text-align:center;">
+                    <thead>
+                        <tr>
+                            <th style="width:45%; border-right:1px solid #cbd5e1; padding:4px 6px; font-weight:600; font-size:14px;">Citra <em>grayscale</em> 8 x 8</th>
+                            <th style="width:55%; padding:4px 6px; font-weight:600; font-size:14px;">Nilai Piksel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:6px; vertical-align:top;">
+                                <img src="{% static 'img/jenis-citra/grayscale-8x8.png' %}"
+                                     alt="Citra Grayscale 8x8"
+                                     style="max-width:80%; height:auto; display:block; margin:0 auto;">
+                            </td>
+                            <td style="border-top:1px solid #cbd5e1; padding:6px; vertical-align:top;">
+                                <img src="{% static 'img/jenis-citra/matriks-grayscale.png' %}"
+                                     alt="Matriks Nilai Piksel 8x8"
+                                     style="max-width:100%; height:auto; display:block; margin:0 auto;">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size:13px; margin-top:6px; font-style:italic; text-align:center;">
+                    Gambar 1.5 Nilai piksel citra grayscale
+                </p>
+            </div>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Terdapat berbagai cara untuk mengubah citra berwarna RGB menjadi citra <em>grayscale</em>. Beberapa metode yang umum digunakan adalah sebagai berikut.
+            </p>
+
+            
+
+            <h5 style="margin-top:28px; font-weight:700; color: #1e3a8a">
+                (1) Metode <em>Average</em> (Rata-Rata)
+            </h5>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Metode <em>average</em> merupakan cara paling sederhana untuk mengubah citra RGB menjadi <em>grayscale</em>. Nilai <em>grayscale</em> diperoleh dengan menghitung rata-rata dari ketiga komponen warna, 
+                yaitu merah (<em>Red</em>), hijau (<em>Green</em>), dan biru (<em>Blue</em>). Pada metode ini, setiap komponen warna dianggap memiliki kontribusi yang sama terhadap nilai keabuan. 
+            </p>
+
+            <!-- ===== RUMUS KONVERSI RGB KE GRAYSCALE ===== -->
+            <div style="margin:20px 0; text-align:center; font-size:16.5px;">
+
+                $$ y = \frac{1}{3}(R + G + B) $$
+
+            </div>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Meskipun sederhana dan mudah diterapkan, metode ini sering menghasilkan citra <em>grayscale</em> yang kurang sesuai dengan persepsi visual manusia karena semua warna diberi bobot yang sama.
+            </p>
+
+            <h5 style="margin-top:28px; font-weight:700; color: #1e3a8a">
+                (2) Metode <em>Luminance</em> (Luminasi)
+            </h5>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Metode <em>luminance</em> menghasilkan citra <em>grayscale</em> dengan memberikan bobot yang berbeda pada setiap komponen warna RGB. Bobot tersebut disesuaikan dengan sensitivitas 
+                mata manusia terhadap warna, di mana mata lebih sensitif terhadap warna hijau dibandingkan merah dan biru.
+            </p>
+
+            <!-- ===== RUMUS KONVERSI RGB KE GRAYSCALE ===== -->
+            <div style="margin:20px 0; text-align:center; font-size:16.5px;">
+
+                $$ y = 0.299R + 0.587G + 0.114B $$
+
+            </div>
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Karena mempertimbangkan karakteristik penglihatan manusia, metode ini menghasilkan citra <em>grayscale</em> yang lebih alami, lebih jelas, dan memiliki detail yang lebih baik dibandingkan metode <em>average</em>. 
+            </p>
+
+            <h5 style="margin-top:28px; font-weight:700; color: #1e3a8a">
+                (3) Metode <em>Lightness</em>
+            </h5>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Metode <em>lightness</em> menghitung nilai <em>grayscale</em> berdasarkan rata-rata antara nilai intensitas maksimum dan minimum dari ketiga komponen warna RGB. Dengan kata lain, 
+                hanya nilai warna paling terang dan paling gelap yang digunakan dalam perhitungan.
+            </p>
+
+            <!-- ===== RUMUS KONVERSI RGB KE GRAYSCALE ===== -->
+            <div style="margin:20px 0; text-align:center; font-size:16.5px;">
+                $$ y = \frac{\max(R,G,B) + \min(R,G,B)}{2} $$
+            </div>
+            <p style="text-align: justify; font-size: 16.5px; line-height: 1.75;">
+                Metode ini dapat menghasilkan kontras yang cukup baik pada beberapa jenis citra, namun sering kali mengabaikan informasi warna yang berada di antara nilai maksimum dan minimum 
+                sehingga detail tertentu dapat berkurang.  
+            </p>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Perbandingan hasil konversi citra RGB ke <em>grayscale</em> menggunakan metode <em>average, luminance, dan lightness</em> dapat dilihat pada gambar 1.6. Berdasarkan hasil tersebut, metode 
+                <em>luminance</em> umumnya menghasilkan kualitas citra <em>grayscale</em> yang paling baik karena mempertimbangkan sensitivitas mata manusia terhadap masing-masing komponen warna.   
+            </p>
+
+
+            <div style="margin:16px 0;">
+                <table style="width:75%; margin:0 auto; border-collapse:collapse; border:1px solid #cbd5e1; text-align:center;">
+                    <tr>
+                        <th style="width:50%; border-right:1px solid #cbd5e1; padding:6px;">
+                            Citra RGB
+                        </th>
+
+                        <th style="width:50%; padding:6px;">
+                            Citra <em>Grayscale Average</em>
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <td style="border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:6px;">
+                            <img src="{% static 'img/jenis-citra/RGB2.jpeg' %}"
+                                alt="RGB"
+                                style="width:100%; height:300px; object-fit:cover;">
+                        </td>
+
+                        <td style="border-top:1px solid #cbd5e1; padding:6px;">
+                            <img src="{% static 'img/jenis-citra/grayscale_average.png' %}"
+                                alt="Average"
+                                style="width:100%; height:300px; object-fit:cover;">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th style="border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:6px;">
+                            Citra <em>Grayscale Luminance</em>
+                        </th>
+
+                        <th style="border-top:1px solid #cbd5e1; padding:6px;">
+                            Citra <em>Grayscale Lightness</em>
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <td style="border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:6px;">
+                            <img src="{% static 'img/jenis-citra/grayscale_luminance.png' %}"
+                                alt="Luminance"
+                                style="width:100%; height:300px; object-fit:cover;">
+                        </td>
+
+                        <td style="border-top:1px solid #cbd5e1; padding:6px;">
+                            <img src="{% static 'img/jenis-citra/grayscale_lightness.png' %}"
+                                alt="Luminance"
+                                style="width:100%; height:300px; object-fit:cover;">
+                        </td>
+                    </tr>
+
+                </table>
+
+                <p style="font-size:13px; margin-top:6px; font-style:italic; text-align:center;">
+                    Gambar 1.6 Perbandingan citra <em>grayscale average</em> dan <em>luminance</em>
+                </p>
+            </div>
+
+
+            <!-- c. Citra Biner -->
+            <h4 style="margin-top:28px; font-weight:700; color: #1e3a8a">
+                c. Citra Biner
+            </h4>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Citra biner atau citra hitam putih adalah citra yang hanya memiliki <strong>dua kemungkinan 
+                nilai</strong> untuk setiap pikselnya, yaitu <strong>0 atau 1</strong>. Nilai 0 akan ditampilkan 
+                sebagai warna hitam sedangkan nilai 1 akan ditampilkan sebagai warna putih. Maka dari itu, 
+                jenis citra ini hanya membutuhkan <strong>1-bit</strong> untuk menyimpan nilai pada setiap 
+                pikselnya. Jenis citra ini sering digunakan untuk proses <em><strong>masking</strong></em> ataupun proses 
+                <strong>segmentasi citra</strong>. Gambar 1.7 menunjukkan perbedaan antara citra berwarna 
+                dengan citra biner.
+            </p>
+            <div style="margin:16px 0;">
+                <table style="width:75%; margin:0 auto; border-collapse:collapse; border:1px solid #cbd5e1; text-align:center;">
+                    <thead>
+                        <tr>
+                            <th style="width:50%; border-right:1px solid #cbd5e1;">Citra berwarna</th>
+                            <th>Citra biner</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td style="border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:6px;">
+                                <img src="{% static 'img/jenis-citra/RGB2.jpeg' %}"
+                                    style="width:100%; height:350px; object-fit:cover;">
+                            </td>
+
+                            <td style="border-top:1px solid #cbd5e1; padding:6px;">
+                                <img src="{% static 'img/jenis-citra/biner.png' %}"
+                                    style="width:100%; height:350px; object-fit:cover;">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p style="font-size:13px; margin-top:6px; font-style:italic; text-align:center;">
+                    Gambar 1.7 Perbedaan citra berwarna dengan citra biner
+                </p>
+            </div>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Untuk mendapatkan suatu citra biner maka dibutuhkan citra <em>grayscale</em> yang dilakukan 
+                <strong><em>thresholding</em></strong> berdasarkan nilai ambang batas <em>(threshold)</em> yang ditentukan. 
+                Jika nilai piksel pada citra grayscale melebihi atau menyamai nilai <em>threshold</em>, maka nilai 
+                piksel tersebut dikonversi menjadi 1. Namun jika nilai piksel kurang dari nilai <em>threshold</em>, 
+                maka nilai piksel tersebut dikonversi menjadi 0. Gambar 1.8 dibawah ini contoh citra biner dan nilai pikselnya.
+            </p>
+
+            <div style="margin:16px 0;">
+                <table style="width:75%; margin:0 auto; border-collapse:collapse; border:1px solid #cbd5e1; text-align:center;">
+                    <thead>
+                        <tr>
+                            <th style="width:45%; border-right:1px solid #cbd5e1;">
+                                Citra biner 16 × 16
+                            </th>
+                            <th>Nilai Piksel</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td style="border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:6px;">
+                                <img src="{% static 'img/jenis-citra/biner-8x8.png' %}"
+                                    style="width:100%; height:350px; object-fit:cover;">
+                            </td>
+
+                            <td style="border-top:1px solid #cbd5e1; padding:6px;">
+                                <img src="{% static 'img/jenis-citra/matriks-biner.png' %}"
+                                    style="width:100%; height:350px; object-fit:cover;">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p style="font-size:13px; margin-top: 6px; font-style:italic; text-align:center;">
+                    Gambar 1.8 Citra biner dan nilai pikselnya
+                </p>
+            </div>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Gambar 1.8 memperlihatkan citra biner dengan resolusi $16 × 16$ piksel, di mana setiap piksel 
+                dinyatakan dalam nilai 1 (hitam) atau 0 (putih). Bagian kiri menampilkan wujud citra hitam-putih 
+                tersebut, sedangkan bagian kanan menunjukkan bentuk datanya dalam matriks biner berukuran 
+                16 baris × 16 kolom. Nilai 1 merepresentasikan piksel aktif atau berwarna hitam, sementara 
+                nilai 0 menandakan piksel tidak aktif atau berwarna putih. Bentuk representasi seperti ini 
+                sering digunakan dalam bidang pengolahan citra digital karena memudahkan proses analisis 
+                pola dan bentuk objek.
+            </p>
+
+        </div>
+    </div>
+
+    <!-- AKTIVITAS -->
+    {% include "EnhanceLearn/pendahuluan/aktivitas2.html" %}
+
+    <!-- TOMBOL SELANJUTNYA -->
+    <div style="margin-top:32px; display:flex; justify-content:space-between;">
+        <a href="{% url 'citra_digital' %}" class="btn-prev-materi">« Kembali</a>
+
+        <a href="{% url 'rangkuman1' %}" class="btn-next-materi">Selanjutnya »</a>
+    </div>
+
+</div>
+
+<!-- ================= MATHJAX ================= -->
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+{% endblock %}

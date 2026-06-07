@@ -1,0 +1,221 @@
+/* ================= UMUM ================= */
+body {
+    background-color: #F4F7FB;
+    font-family: "Segoe UI", Arial, sans-serif;
+    padding-top: 70px; /* offset navbar fixed */
+    /* overflow-y: hidden; */
+
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    background-color: #1E3A8A;
+    padding: 6px 0;
+    border-bottom: 1px solid #1E40AF;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: 0.5px;
+    color: #F8FAFF !important;
+}
+
+.navbar-brand span {
+    color: #BFDBFE;
+    font-weight: 700;
+}
+
+.nav-link {
+    color: #DBEAFE !important;
+    margin: 0 10px;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #FFFFFF !important;
+}
+
+/* ================= BUTTON ================= */
+.btn-primary-custom {
+    background-color: #2563EB;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 14px;
+    color: #ffffff !important;
+}
+
+.btn-primary-custom:hover,
+.btn-primary-custom:focus,
+.btn-primary-custom:active {
+    background-color: #1E40AF;
+    color: #ffffff !important;
+}
+
+.btn-outline-secondary {
+    border: 2px solid #1E40AF;
+    color: #1E40AF;
+    background-color: #FFFFFF;
+    padding: 6px 14px;
+    font-size: 14px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus {
+    background-color: #1E40AF;
+    color: #FFFFFF;
+}
+
+/* ================= HERO ================= */
+.hero {
+    padding: 90px 0;
+}
+
+.hero h1 {
+    font-size: 42px;
+    font-weight: 800;
+    color: #1E3A8A;
+}
+
+.hero h2 {
+    font-size: 20px;
+    font-style: italic;
+    color: #2563EB;
+    margin-top: 10px;
+}
+
+.hero p {
+    margin-top: 20px;
+    color: #475569;
+    line-height: 1.7;
+}
+
+.hero-buttons {
+    margin-top: 30px;
+}
+
+.hero-buttons .btn {
+    margin-right: 12px;
+    padding: 10px 22px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.hero-img {
+    max-width: 100%;
+}
+
+/* ================= FOOTER ================= */
+footer {
+    background-color: #E5EDFF;
+    text-align: center;
+    padding: 18px;
+    color: #334155;
+    font-size: 14px;
+    border-top: 1px solid #BFDBFE;
+}
+
+
+/* =========================
+   CARD MATERI
+========================= */
+
+.materi-card{
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+transition:all 0.25s ease;
+height:100%;
+}
+
+.materi-card:hover{
+transform:translateY(-6px);
+box-shadow:0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* header bab */
+
+.materi-header{
+background:#2c4a9a;
+color:white;
+font-weight:600;
+padding:12px 18px;
+font-size:18px;
+}
+
+/* body materi */
+
+.materi-body{
+padding:18px;
+}
+
+.materi-body h5{
+font-weight:600;
+margin-bottom:8px;
+}
+
+.materi-body ul{
+padding-left:18px;
+margin-bottom:0;
+}
+
+.materi-body li{
+margin-bottom:3px;
+}
+
+/* ================= RESPONSIVE HP ================= */
+@media (max-width: 768px){
+
+    body{
+        padding-top: 60px;
+    }
+
+    .navbar-brand{
+        font-size: 18px;
+    }
+
+    .navbar-nav{
+        margin-top: 15px;
+        text-align: center;
+    }
+
+    .nav-link{
+        margin: 6px 0;
+    }
+
+    .auth-buttons{
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 15px;
+        width: 100%;
+    }
+
+    .auth-buttons .btn{
+        width: 100%;
+        margin-right: 0 !important;
+    }
+
+    .navbar-toggler{
+        border-color: rgba(255,255,255,0.3);
+    }
+
+    .navbar-toggler:focus{
+        box-shadow: none;
+    }
+
+    .navbar-toggler-icon{
+        filter: brightness(0) invert(1);
+    }
+}
+

@@ -1,0 +1,295 @@
+/* ===== AKTIVITAS ===== */
+.aktivitas-wrapper {
+    margin-top: 32px;
+}
+
+.aktivitas-question-box {
+    margin: 20px 0;
+    border: 2px solid #1e40af;
+    background: #f0f8ff;
+}
+
+.question-text {
+    color: #111827;
+    font-weight: 600;
+    font-size: 17px;
+    margin-bottom: 16px;
+}
+
+.feedback {
+    margin-top: 12px;
+    font-weight: 600;
+}
+
+/* ===== PILIHAN JAWABAN ===== */
+.choice-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 2px solid #1e40af;
+    border-radius: 10px;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+.choice-btn:hover {
+    background: #eef2ff;
+}
+
+.choice-btn.correct {
+    border-color: #16a34a;
+    background: #dcfce7;
+}
+
+.choice-btn.wrong {
+    border-color: #dc2626;
+    background: #fee2e2;
+}
+
+/* ===== TOMBOL NEXT ===== */
+.btn-next {
+    padding: 10px 22px;
+    border: none;
+    border-radius: 8px;
+    background: #1e40af;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 18px;
+}
+
+.btn-next.disabled {
+    background: #c7d2fe;
+    cursor: not-allowed;
+}
+
+.btn-next:not(.disabled):hover {
+    background: #1e3a8a;
+}
+
+/* ===== MODAL ===== */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-box {
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 14px;
+    text-align: center;
+    width: 360px;
+}
+
+.check-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 4px solid #a7f3d0;
+    color: #22c55e;
+    font-size: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+}
+
+.modal-box button {
+    margin-top: 20px;
+    padding: 10px 26px;
+    background: #6366f1;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* ===============================
+   TABEL AKTIVITAS PIXEL
+================================ */
+
+.brightness-table{
+    border-collapse: collapse;
+    margin: auto;
+}
+
+/* sel tabel */
+.brightness-table td{
+    width:52px;
+    height:52px;
+    border:1px solid #9ca3af; /* garis tabel biasa */
+
+    background:#ffffff;
+
+    text-align:center;
+    vertical-align:middle;
+
+    font-size:15px;
+    font-weight:500;
+
+    outline:none;
+    cursor:text;
+}
+
+/* agar kotak tetap terlihat walau kosong */
+.brightness-table td:empty::before{
+    content:" ";
+    display:inline-block;
+}
+
+/* jawaban benar */
+.pixel-benar{
+    background:#21df63 !important;
+}
+
+/* jawaban salah */
+.pixel-salah{
+    background:#d51717 !important;
+}
+
+/* pesan jawaban */
+.pesan-jawaban{
+    text-align:center;
+    margin-top:10px;
+    font-size:14px;
+    font-weight:500;
+}
+
+
+/* Pembungkus Utama agar Matriks & Histogram sejajar Sisi ke Sisi */
+.aktivitas-flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch; /* Membuat tinggi kotak kiri & kanan sama rata */
+    gap: 40px;
+    margin: 24px auto;
+    width: 100%;
+    max-width: 750px;
+    box-sizing: border-box;
+}
+
+/* Sisi Kiri: Tempat Matriks */
+.matriks-input-wrapper {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Sisi Kanan: Kotak Preview Histogram */
+.histogram-preview-box {
+    flex: 0 0 300px; /* Lebar dikunci di 300px agar tidak melar */
+    width: 300px;
+    min-height: 220px;
+    border: 1px solid #cbd5e1;
+    background-color: #f8fafc;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Judul teks di atas grafik */
+.histogram-title-text {
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    color: #475569;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+/* Area Putih Tempat Batang Berdiri */
+.histogram-bars-wrapper {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 130px;
+    border-bottom: 2px solid #475569;
+    padding: 0 6px;
+    background: #ffffff;
+    border-radius: 4px 4px 0 0;
+    box-sizing: border-box;
+}
+
+/* Item per Batang (Grafik + Label Angka) */
+.hist-bar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    gap: 4px;
+    height: 100%;
+    justify-content: flex-end; /* Memaksa batang tumbuh dari bawah */
+}
+
+/* Batang Biru Indikator Grafik */
+.hist-bar-graphic {
+    width: 18px;
+    background-color: #3b82f6;
+    border-radius: 3px 3px 0 0;
+    transition: height 0.4s ease, background-color 0.3s ease;
+    position: relative;
+    min-height: 0px; /* Mengizinkan tinggi 0 jika frekuensi kosong */
+}
+
+/* Teks Angka Frekuensi tepat di atas Batang Biru */
+.hist-bar-value {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    font-weight: bold;
+    color: #1e293b;
+}
+
+/* Teks Angka Label Skala Keabuan (0 - 7) di bawah Garis */
+.hist-bar-label {
+    font-size: 12px;
+    font-weight: bold;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+.code-question{
+    border:3px solid #1e3a8a;
+    border-radius:24px;
+    padding:10px 20px;
+    margin-top:10px;
+}
+
+.code-question pre{
+    margin:0;
+    font-family:Consolas, monospace;
+    font-size:17px;
+    line-height:1.0;
+    white-space:pre-wrap;
+    
+}
+
+.fill-input{
+    width:220px;
+    height:30px;
+
+    border:2px solid #1e3a8a;
+    border-radius:10px;
+
+    font-size:17px;
+    text-align:center;
+    color: #1e293b;
+
+    vertical-align:middle;
+}
+

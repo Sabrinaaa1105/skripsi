@@ -1,0 +1,104 @@
+{% extends "EnhanceLearn/dosen/content.html" %}
+
+{% block title %}Dashboard Dosen{% endblock %}
+
+{% block page_title %}
+Dashboard Dosen
+{% endblock %}
+
+{% block page_content %}
+
+<div class="row g-4">
+
+    <div class="col-lg-8">
+        <div class="row g-4">
+
+            <!-- Jumlah Mahasiswa -->
+            <div class="col-md-6">
+                <div class="card border-0 h-100 rounded-4 blue-shadow">
+                    <div class="card-body p-4 d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted mb-1 fw-medium">Jumlah Mahasiswa</p>
+                            <h1 class="fw-bold mb-0">{{ jumlah_mahasiswa }}</h1>
+                        </div>
+                        <i class="bi bi-people-fill fs-1 text-primary"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mahasiswa Selesai -->
+            <div class="col-md-6">
+                <div class="card border-0 h-100 rounded-4 blue-shadow">
+                    <div class="card-body p-4 d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted mb-1 fw-medium">Mahasiswa Selesai</p>
+                            <h1 class="fw-bold mb-0">{{ jumlah_selesai }}</h1>
+                        </div>
+                        <i class="bi bi-check-circle-fill fs-1 text-success"></i>
+                    </div>
+                </div>
+            </div>
+
+                        <!-- Kelas Terdaftar -->
+            <div class="col-12">
+                <div class="card border-0 h-100 rounded-4 blue-shadow">
+                    <div class="card-body p-4 d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-warning bg-opacity-10 p-3 rounded-3 me-4">
+                                <i class="bi bi-journal-bookmark-fill fs-1 text-warning"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1 fw-medium">Kelas Terdaftar</p>
+                                <h2 class="fw-bold mb-0">{{ jumlah_kelas }}</h2>
+                            </div>
+                        </div>
+
+                        <a href="{% url 'data_kelas' %}" class="btn btn-outline-warning btn-sm rounded-pill px-4">
+                            Lihat Detail
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Nilai KKM -->
+    <div class="col-lg-4">
+        <div class="card border-0 h-100 rounded-4 blue-shadow">
+            <div class="card-body p-4">
+
+                <div class="d-flex align-items-center mb-3">
+                    <div class="bg-primary bg-opacity-10 p-2 rounded-2 me-2">
+                        <i class="bi bi-clipboard-check-fill text-primary"></i>
+                    </div>
+                    <h5 class="fw-bold mb-0">Nilai KKM</h5>
+                </div>
+
+                <form method="POST" action="{% url 'update_kkm' %}">
+                {% csrf_token %}
+
+                <div class="bg-light p-3 rounded-3 mb-4 text-center">
+                    <span class="text-muted d-block small">Standar Saat Ini</span>
+                    <h2 class="fw-bold text-primary mb-0">{{ kkm }}</h2>
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-medium small mb-2">Perbarui Nilai KKM</label>
+                    <input type="number" name="kkm" class="form-control form-control-lg border-0 bg-light" value="{{ kkm }}">
+                </div>
+
+                <button class="btn btn-primary w-100 py-3 rounded-3 fw-bold shadow-sm">
+                    Simpan Perubahan
+                </button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

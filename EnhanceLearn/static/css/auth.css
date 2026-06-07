@@ -1,0 +1,192 @@
+/* ================= AUTH (LOGIN & REGISTER) ================= */
+
+
+/* BODY FULL HEIGHT & NO SCROLL */
+body {
+    padding-top: 70px;
+    /* overflow-y: hidden;  */
+    display: flex;
+    flex-direction: column;
+}
+
+/* WRAPPER AGAR LOGIN NAIK */
+.login-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    margin-top: -20px; /* Naikkan sedikit */
+}
+
+/* CONTAINER FORM */
+.auth-container {
+    max-width: 460px;
+    margin: 20px auto; /* Lebih naik dari sebelumnya */
+    background: #ffffff;
+    padding: 30px 28px;
+    border-radius: 18px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.10);
+    position: relative;
+}
+
+/* AKSEN ATAS */
+.auth-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 6px;
+    width: 100%;
+    background: linear-gradient(90deg, #1e40af, #2563eb);
+    border-radius: 18px 18px 0 0;
+}
+
+/* FORM GROUP */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 13px 14px;
+    border-radius: 10px;
+    border: 1.6px solid #c7d2fe;
+    outline: none;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+.form-group input:focus {
+    border-color: #1e40af;
+    box-shadow: 0 0 0 3px rgba(30,64,175,0.15);
+}
+
+/* BUTTON */
+.btn-auth {
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(90deg, #1e40af, #2563eb);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: 0.2s ease;
+}
+
+.btn-auth:hover {
+    opacity: 0.95;
+    transform: translateY(-1px);
+}
+
+/* FOOTER FIX DI BAWAH */
+footer {
+    background-color: #E5EDFF;
+    text-align: center;
+    padding: 20px;
+    color: #334155;
+    font-size: 14px;
+    border-top: 1px solid #BFDBFE;
+}
+
+/* ================= REGISTER LEBIH LEBAR ================= */
+
+.register-box {
+    max-width: 520px;
+}
+
+/* ================= RESPONSIVE LOGIN HP ================= */
+@media (max-width:768px){
+
+    body{
+        padding-top:60px;
+    }
+
+    /* navbar */
+    .navbar-brand{
+        font-size:18px;
+    }
+
+    .navbar-nav{
+        text-align:center;
+        margin-top:15px;
+    }
+
+    .nav-link{
+        margin:6px 0;
+    }
+
+    .auth-nav-buttons{
+        flex-direction:column;
+        gap:10px;
+        margin-top:15px;
+        width:100%;
+    }
+
+    .auth-nav-buttons .btn{
+        width:100%;
+        margin-right:0 !important;
+    }
+
+    .navbar-toggler{
+        border-color:rgba(255,255,255,0.3);
+    }
+
+    .navbar-toggler:focus{
+        box-shadow:none;
+    }
+
+    .navbar-toggler-icon{
+        filter:brightness(0) invert(1);
+    }
+
+    /* form login */
+    .container.my-5{
+        margin-top:20px !important;
+        margin-bottom:20px !important;
+    }
+
+    .auth-container{
+        max-width:100%;
+        padding:24px 20px;
+        margin:0 auto;
+        border-radius:14px;
+    }
+
+    .auth-title{
+        font-size:24px;
+    }
+
+    .form-group input{
+        padding:12px;
+        font-size:14px;
+    }
+
+    .btn-auth{
+        padding:12px;
+        font-size:14px;
+    }
+
+    .auth-footer{
+        font-size:14px;
+    }
+
+    /* sembunyikan ilustrasi login */
+    .col-lg-6.d-none.d-lg-flex{
+        display:none !important;
+    }
+
+    footer{
+        padding:14px;
+        font-size:13px;
+    }
+}

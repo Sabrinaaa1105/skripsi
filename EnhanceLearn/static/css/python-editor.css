@@ -1,0 +1,140 @@
+/* ===== CODEMIRROR ===== */
+.CodeMirror {
+    border-radius: 8px;
+    min-height: 85px !important;
+    height: auto !important;
+    font-size: 13px;
+    background: #1e1e1e !important;
+    color: #e5e7eb;
+}
+
+/* ===== CELL ===== */
+.cell-box {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.editor-wrap {
+    flex: 1;
+}
+
+.side-tools {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* ===== BUTTON ===== */
+.editor-icon-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #2b2b2b;
+    color: #fff;
+    font-size: 15px;
+}
+
+.editor-icon-btn:hover {
+    background: #2563eb;
+}
+
+.editor-icon-btn.trash:hover {
+    background: #dc2626;
+}
+
+/* ===== OUTPUT ===== */
+.output {
+    background: #000;
+    color: #22c55e;
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+/* ===== PREVIEW ===== */
+.preview-img {
+    display: none;
+    width: 100%;
+    max-width: 700px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* ===== BOX ===== */
+.editor-box {
+    border: 2px solid #1e40af;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 6px 16px rgba(30,64,175,0.25);
+}
+
+.editor-box-header {
+    background: #1e40af;
+    color: #fff;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 10px 10px 0 0;
+}
+
+.editor-box-body {
+    padding: 14px;
+}
+
+.editor-guide ul li{
+    font-size: 15px;
+    text-align: justify;
+}
+
+/* ===== ADD CELL ===== */
+.add-cell-btn {
+    width: 100%;
+    border: 2px dashed #94a3b8;
+    color: #1e40af;
+    text-align: center;
+    height: 24px;
+    line-height: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 6px 0 10px;
+    user-select: none;
+}
+
+.add-cell-btn:hover {
+    background: #eff6ff;
+    border-color: #1e40af;
+}
+
+/* ===== CELL DINAMIS ===== */
+.dynamic-cell {
+    margin-bottom: 10px;
+}
+
+/* ===== UPLOAD ===== */
+.upload-box {
+    border: 2px dashed #1e40af;
+    border-radius: 12px;
+    padding: 18px;
+    background: #f8fafc;
+}
+
+.upload-icon {
+    font-size: 30px;
+    color: #1e40af;
+}
+
+.upload-hint {
+    font-size: 13px;
+    color: #555;
+    margin-top: 8px;
+}
+
