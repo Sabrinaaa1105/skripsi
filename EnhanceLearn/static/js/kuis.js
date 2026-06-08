@@ -304,31 +304,47 @@ console.log(
     function finishQuiz() {
     clearInterval(timerInterval);
     let score = 0;
+    const detailSoal = [];
 
-    quizData.forEach((q, i) => {
-        // Cek Pilihan Ganda
+   quizData.forEach((q, i) => {
+
+        let benar = false;
+
         if (q.type !== "fill") {
-            if (answers[i] === q.correct) {
-                score++;
-            }
-        } 
-        // Cek Isian
-        else {
-            let benar = true;
-            // Kita bandingkan setiap kotak jawaban dengan kunci jawaban
+
+            benar = answers[i] === q.correct;
+
+            if (benar) score++;
+
+        } else {
+
+            benar = true;
+
             q.answers.forEach((ans, idx) => {
-                const user = String(answers[i]?.[idx] || "").trim().toLowerCase();
-                const correct = ans.trim().toLowerCase();
-                
+
+                const user =
+                    String(answers[i]?.[idx] || "")
+                    .trim()
+                    .toLowerCase();
+
+                const correct =
+                    ans.trim()
+                    .toLowerCase();
+
                 if (user !== correct) {
                     benar = false;
                 }
+
             });
 
-            if (benar) {
-                score++;
-            }
+            if (benar) score++;
         }
+
+        detailSoal.push({
+            nomor: i + 1,
+            benar: benar
+        });
+
     });
 
         const nilai = Math.round((score / quizData.length) * 100);
@@ -346,8 +362,10 @@ console.log(
             body: JSON.stringify({
                 nilai: nilai,
                 waktu: waktuFormatted,
-                judul: judulKuis
+                judul: judulKuis,
+                detail_soal: detailSoal
             })
+
         })
         .then(res => res.json())
         .then(data => {

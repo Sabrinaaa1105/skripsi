@@ -5,7 +5,17 @@
 Beranda
 {% endblock %}
 
+{% block body_class %}
+beranda-page
+{% endblock %}
+
 {% block content %}
+
+<style>
+.hero .container{
+    margin-top: -40px;
+}
+</style>
 
 <section class="hero">
     <div class="container">
@@ -18,7 +28,8 @@ Beranda
                 <p>
                     Media pembelajaran ini dirancang untuk membantu mahasiswa memahami
                     konsep dasar dan penerapan <b><em>point operation</em></b> dan
-                    <b><em>Histogram</em></b> dalam <b><em>Image Enhancement</em></b>.
+                    <b><em>Histogram</em></b> dalam
+                    <b><em>Image Enhancement</em></b>.
                 </p>
 
                 <a href="{% url 'login' %}" class="btn btn-primary-custom text-white">
@@ -27,8 +38,9 @@ Beranda
             </div>
 
             <div class="col-md-6 text-center">
-                <img src="{% static 'img/regis.png' %}" class="hero-img"
-                     style="max-width:320px;">
+                <img src="{% static 'img/landing.png' %}"
+                     class="hero-img"
+                     style="max-width:400px;">
             </div>
 
         </div>

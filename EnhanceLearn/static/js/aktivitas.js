@@ -204,7 +204,7 @@ function checkFillAnswer() {
     if (semuaBenar) {
 
         feedbackEl.innerHTML =
-            "✅ <span style='color:#16a34a'>Jawaban benar. Silakan lanjut.</span>";
+            "<span style='color:#16a34a; font-size=13px;'>Jawaban benar. Silakan lanjut.</span>";
 
         answeredCorrectly = true;
 
@@ -213,7 +213,7 @@ function checkFillAnswer() {
     } else {
 
         feedbackEl.innerHTML =
-            "⚠️ <span style='color:#dc2626'>Jawaban masih kurang tepat.</span>";
+            "<span style='color:#dc2626; font-size=13px'>Jawaban masih kurang tepat.</span>";
 
     }
 
@@ -229,12 +229,12 @@ function checkAnswer(selected, btn) {
 
     if (selected === dataAktivitas[index].correct) {
         btn.classList.add("correct");
-        feedbackEl.innerHTML = "✅ <span style='color:#16a34a;'>Jawaban benar. Silakan lanjut.</span>";
+        feedbackEl.innerHTML = "<span style='color:#16a34a; font-size=15px;'>Jawaban benar. Silakan lanjut.</span>";
         answeredCorrectly = true;
         nextBtn.classList.remove("disabled");
     } else {
         btn.classList.add("wrong");
-        feedbackEl.innerHTML = "⚠️ <span style='color:#dc2626;'>Jawaban belum tepat, silakan coba lagi.</span>";
+        feedbackEl.innerHTML = "<span style='color:#dc2626; font-size=13px;'>Jawaban belum tepat, silakan coba lagi.</span>";
     }
 }
 

@@ -81,7 +81,13 @@
             Kembali ke Dashboard
         </a>
 
-    {% elif materi_sesudah %}
+    {% elif judul_kuis == "praktik" %}
+
+        <a href="{% url 'halaman_kuis' 'evaluasi' %}" class="btn-primary">
+            Lanjut ke Evaluasi Akhir
+        </a>
+
+     {% elif materi_sesudah %}
 
         <a href="{% url materi_sesudah %}" class="btn-primary">
             Lanjut Materi

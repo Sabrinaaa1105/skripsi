@@ -105,88 +105,121 @@ footer {
 }
 
 /* ================= RESPONSIVE LOGIN HP ================= */
-@media (max-width:768px){
+/* ================= RESPONSIVE LOGIN HP ================= */
+@media (max-width: 768px){
 
     body{
-        padding-top:60px;
+        padding-top: 60px !important;
     }
 
     /* navbar */
     .navbar-brand{
-        font-size:18px;
+        font-size: 18px !important;
     }
 
     .navbar-nav{
-        text-align:center;
-        margin-top:15px;
+        text-align: center !important;
+        margin-top: 15px !important;
     }
 
     .nav-link{
-        margin:6px 0;
+        margin: 6px 0 !important;
     }
 
     .auth-nav-buttons{
-        flex-direction:column;
-        gap:10px;
-        margin-top:15px;
-        width:100%;
+        flex-direction: column !important;
+        gap: 10px !important;
+        margin-top: 15px !important;
+        width: 100% !important;
     }
 
     .auth-nav-buttons .btn{
-        width:100%;
-        margin-right:0 !important;
+        width: 100% !important;
+        margin-right: 0 !important;
     }
 
     .navbar-toggler{
-        border-color:rgba(255,255,255,0.3);
+        border-color: rgba(255,255,255,0.3) !important;
     }
 
     .navbar-toggler:focus{
-        box-shadow:none;
+        box-shadow: none !important;
     }
 
     .navbar-toggler-icon{
-        filter:brightness(0) invert(1);
+        filter: brightness(0) invert(1) !important;
     }
 
-    /* form login */
-    .container.my-5{
-        margin-top:20px !important;
-        margin-bottom:20px !important;
+    /* === RESET GRID BOOTSTRAP UNTUK HALAMAN LOGIN === */
+    /* Kode ini memaksa container pembungkus grid Bootstrap ikut mengecil di HP */
+    .container, 
+    .row, 
+    [class*="col-"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 
-    .auth-container{
-        max-width:100%;
-        padding:24px 20px;
-        margin:0 auto;
-        border-radius:14px;
+    /* === PERBAIKAN TOTAL BOX LOGIN & REGISTER === */
+    .login-wrapper {
+        margin-top: 0 !important;
+        padding: 30px 0 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
     }
 
-    .auth-title{
-        font-size:24px;
+    /* Memaksa box putih login melebar 90% dari layar HP */
+    .auth-container, 
+    .register-box {
+        width: 90% !important;
+        max-width: 90% !important;
+        min-width: 90% !important;
+        margin: 20px auto !important;
+        padding: 25px 20px !important;
+        border-radius: 14px !important;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.08) !important;
+        float: none !important; /* Menghindari bug layout mengambang */
     }
 
-    .form-group input{
-        padding:12px;
-        font-size:14px;
+    .auth-title {
+        font-size: 22px !important;
+        text-align: center !important;
     }
 
-    .btn-auth{
-        padding:12px;
-        font-size:14px;
+    .form-group label {
+        font-size: 12px !important;
     }
 
-    .auth-footer{
-        font-size:14px;
+    .form-group input {
+        padding: 11px 12px !important;
+        font-size: 14px !important;
     }
 
-    /* sembunyikan ilustrasi login */
-    .col-lg-6.d-none.d-lg-flex{
-        display:none !important;
+    .btn-auth {
+        padding: 12px !important;
+        font-size: 14px !important;
+        border-radius: 10px !important;
     }
 
-    footer{
-        padding:14px;
-        font-size:13px;
+    .auth-footer {
+        font-size: 13px !important;
+        text-align: center !important;
+    }
+
+    /* Menghilangkan visual kolom ilustrasi jika ada */
+    .col-lg-6.d-none.d-lg-flex {
+        display: none !important;
+    }
+
+    /* Penyesuaian Footer */
+    footer {
+        padding: 14px !important;
+        font-size: 13px !important;
+        width: 100% !important;
     }
 }

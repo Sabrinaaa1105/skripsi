@@ -6,121 +6,218 @@ Daftar Materi
 
 {% block content %}
 
+<style>
+
+body{
+    overflow:hidden;
+}
+
+.page-title{
+    color:#1E3A8A;
+    font-weight:700;
+    font-size:1.8rem;
+    margin-bottom:20px;
+    text-align:center;
+}
+
+.materi-link{
+    text-decoration:none;
+    color:inherit;
+    display:block;
+    height:100%;
+}
+
+.materi-link:hover{
+    color:inherit;
+}
+
+.materi-card{
+    height:100%;
+    background:#fff;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 3px 10px rgba(0,0,0,0.08);
+    transition:.3s ease;
+    display:flex;
+    flex-direction:column;
+}
+
+.materi-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 6px 18px rgba(0,0,0,0.12);
+}
+
+.materi-header{
+    background:#1E3A8A;
+    color:#fff;
+    font-weight:600;
+    text-align:center;
+    padding:8px 12px;
+    font-size:0.9rem;
+    min-height:45px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.materi-body{
+    padding:14px;
+    flex-grow:1;
+}
+
+.materi-body ul{
+    margin:0;
+    padding-left:18px;
+}
+
+.materi-body li{
+    margin-bottom:6px;
+    line-height:1.5;
+    font-size:0.9rem;
+}
+
+.container-fluid{
+    max-width:1200px;
+}
+
+
+
+@media (max-width:768px){
+
+    .page-title{
+        font-size:1.5rem;
+    }
+
+    .materi-header{
+        min-height:auto;
+        padding:10px;
+        font-size:0.9rem;
+    }
+
+    .materi-body{
+        padding:12px;
+    }
+
+    .materi-body li{
+        font-size:0.85rem;
+    }
+}
+
+</style>
+
 <div class="container-fluid py-3 px-3">
 
-<h1 class="mb-4">Daftar Isi Materi</h1>
+    <h1 class="page-title">Daftar Isi Materi</h1>
 
-<div class="row g-4">
+    <div class="row g-3 justify-content-center">
 
-<!-- Materi 1 -->
-<div class="col-md-4">
-<div class="materi-card">
+    <!-- Materi 1 -->
+    <div class="col-lg-3 col-md-6">
+        <a href="{% url 'login' %}" class="materi-link">
+            <div class="materi-card">
 
-<div class="materi-header">
-Pendahuluan
-</div>
+                <div class="materi-header">
+                    Pendahuluan
+                </div>
 
-<div class="materi-body">
+                <div class="materi-body">
+                    <ul>
+                        <li>Pengertian Citra Digital</li>
+                        <li>Jenis-Jenis Citra Digital</li>
+                    </ul>
+                </div>
 
-<ul>
-<li>Pengertian Citra Digital</li>
-<li>Jenis – Jenis Citra Digital</li>
-</ul>
+            </div>
+        </a>
+    </div>
 
-</div>
-</div>
-</div>
+    <!-- Materi 2 -->
+    <div class="col-lg-3 col-md-6">
+        <a href="{% url 'login' %}" class="materi-link">
+            <div class="materi-card">
 
+                <div class="materi-header">
+                    Pengantar <em>Image Enhancement</em>
+                </div>
 
-<!-- Materi 2 -->
-<div class="col-md-4">
-<div class="materi-card">
+                <div class="materi-body">
+                    <ul>
+                        <li>Pengertian <em>Image Enhancement</em></li>
+                        <li>Perbedaan <em>Image Enhancement</em> dan <em>Image Restoration</em></li>
+                    </ul>
+                </div>
 
-<div class="materi-header">
-Pengantar Image Enhancement
-</div>
+            </div>
+        </a>
+    </div>
 
-<div class="materi-body">
+    <!-- Materi 3 -->
+    <div class="col-lg-3 col-md-6">
+        <a href="{% url 'login' %}" class="materi-link">
+            <div class="materi-card">
 
-<ul>
-<li>Pengertian Image Enhancement</li>
-<li>Perbedaan Image Enhancement dan Image Restoration</li>
-</ul>
+                <div class="materi-header">
+                    <em>Point Operation</em>
+                </div>
 
-</div>
-</div>
-</div>
+                <div class="materi-body">
+                    <ul>
+                        <li>Kecerahan (<em>Brightness</em>)</li>
+                        <li>Contrast</li>
+                        <li><em>Negative Transformation</em></li>
+                        <li>Operasi Ambang Batas (<em>Thresholding</em>)</li>
+                        <li>Transformasi Logaritmik</li>
+                        <li>Transformasi <em>Power-Law</em> (Gamma)</li>
+                    </ul>
+                </div>
 
+            </div>
+        </a>
+    </div>
 
-<!-- Materi 3 -->
-<div class="col-md-4">
-<div class="materi-card">
+    <!-- Paksa pindah ke baris baru -->
+    <div class="w-100"></div>
 
-<div class="materi-header">
-Transformasi Intensitas Citra
-</div>
+    <!-- Materi 4 -->
+    <div class="col-lg-3 col-md-6">
+        <a href="{% url 'login' %}" class="materi-link">
+            <div class="materi-card">
 
-<div class="materi-body">
+                <div class="materi-header">
+                    Histogram
+                </div>
 
-<ul>
-<li>Kecerahan (Brightness)</li>
-<li>Contrast</li>
-<li>Operasi Negasi (Invers)</li>
-<li>Operasi Ambang Batas (Thresholding)</li>
-<li>Transformasi Logaritmik</li>
-<li>Transformasi Power-Law (Gamma)</li>
-</ul>
+                <div class="materi-body">
+                    <ul>
+                        <li><em>Histogram Equalization</em></li>
+                        <li><em>Histogram Specification</em></li>
+                    </ul>
+                </div>
 
-</div>
-</div>
-</div>
+            </div>
+        </a>
+    </div>
 
+    <!-- Materi 5 -->
+    <div class="col-lg-3 col-md-6">
+        <a href="{% url 'login' %}" class="materi-link">
+            <div class="materi-card">
 
-<!-- Materi 4 -->
-<div class="col-md-4">
-<div class="materi-card">
+                <div class="materi-header">
+                    <em>Image Enhancement</em> dengan Python
+                </div>
 
-<div class="materi-header">
-Histogram
-</div>
+                <div class="materi-body">
+                    <ul>
+                        <li>Citra <em>Grayscale</em> &amp; Biner</li>
+                        <li><em>Point Operations</em></li>
+                        <li>Histogram</li>
+                    </ul>
+                </div>
 
-<div class="materi-body">
-
-<ul>
-<li>Histogram Equalization</li>
-<li>Histogram Specification</li>
-</ul>
-
-</div>
-</div>
-</div>
-
-
-<!-- Materi 5 -->
-<div class="col-md-4">
-<div class="materi-card">
-
-<div class="materi-header">
-Implementasi Python
-</div>
-
-<div class="materi-body">
-
-<ul>
-<li>Citra Grayscale & Biner</li>
-<li>Brightness</li>
-<li>Contrast Stretching</li>
-<li>Invers</li>
-<li>Thresholding</li>
-<li>Log Transform</li>
-<li>Power-Law</li>
-<li>Histogram Equalization</li>
-<li>Histogram Specification</li>
-</ul>
-
-</div>
-</div>
-</div>
+            </div>
+        </a>
+    </div>
 
 </div>
 

@@ -9,6 +9,15 @@
     background: #f0f8ff;
 }
 
+#question{
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #111827;
+    margin-bottom: 16px;
+    text-align: justify;
+}
+
 .question-text {
     color: #111827;
     font-weight: 600;

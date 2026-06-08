@@ -17,6 +17,90 @@ Progres Mahasiswa
 <style>
 
 /* PROGRESS BAR */
+/* ===== MODAL ===== */
+
+.modal-xl{
+    max-width:50%;
+}
+
+.modal-body{
+    max-height:80vh;
+    overflow-y:auto;
+}
+
+/* ===== BOX INFO ===== */
+
+.info-box{
+    background:#f3f4f6;
+    border-radius:12px;
+    padding:12px 20px;
+    margin-bottom:15px;
+
+    display:grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content:center;
+    align-items:center;
+    column-gap:70px;
+
+    font-size:14px;
+}
+
+.info-box{
+    padding:12px 18px;
+    margin-bottom:15px;
+    font-size:15px;
+}
+
+.progress-text{
+    color:#2563eb;
+    font-weight:700;
+}
+
+/* ===== SECTION ===== */
+
+.section-progress{
+    margin-bottom:15px;
+}
+
+.section-title{
+    font-size:15px;
+    font-weight:700;
+    padding-left:10px;
+    margin-bottom:6px;
+    border-left:5px solid #2563eb;
+}
+
+/* ===== ITEM ===== */
+
+.item-progress{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:6px 0;
+
+    min-height:42px;
+
+    border-bottom:1px solid #eef2f7;
+}
+
+.item-name{
+    color:#1E3A8A;
+    font-size:14px;
+}
+
+.item-progress i{
+    font-size:16px;
+}
+
+.done{
+    color:#16a34a;
+}
+
+.not-done{
+    color:#ef4444;
+}
+
 .progress-container{
     width:250px;
     height:18px;
@@ -47,6 +131,31 @@ Progres Mahasiswa
     background:#0891b2;
 }
 
+#modalDetail{
+    z-index: 99999 !important;
+}
+
+.modal-backdrop{
+    z-index: 99998 !important;
+}
+
+.modal-header{
+    position: relative;
+}
+
+.modal-title{
+    font-size:18px;
+    font-weight:700;
+    text-align:center;
+    width:100%;
+}
+
+.modal-header .btn-close{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+}
 </style>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -173,42 +282,39 @@ Belum ada data progres mahasiswa
 
 
 <!-- MODAL DETAIL PROGRES -->
+<!-- MODAL DETAIL PROGRES -->
 <div class="modal fade" id="modalDetail" tabindex="-1">
 
-<div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
 
-<div class="modal-content">
+        <div class="modal-content">
 
-<div class="modal-header">
+            <div class="modal-header position-relative">
 
-<h5 class="modal-title w-100 text-center">Detail Progres</h5>
+                <h4 class="modal-title w-100 text-center m-0">
+                    Detail Progres Mahasiswa
+                </h4>
 
-<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <button type="button"
+                        class="btn-close position-absolute end-0 me-3"
+                        data-bs-dismiss="modal">
+                </button>
 
-</div>
+            </div>
 
-<div class="modal-body">
+            <div class="modal-body">
 
-<table class="table table-bordered align-middle">
+                <!-- INFO MAHASISWA -->
+                <div id="infoMahasiswa"></div>
 
-<thead class="table-light">
-<tr>
-<th>Materi</th>
-<th class="text-center">Aktivitas</th>
-<th class="text-center">Kuis</th>
-</tr>
-</thead>
+                <!-- DETAIL PROGRES -->
+                <div id="detailProgress"></div>
 
-<tbody id="detailTable">
-</tbody>
+            </div>
 
-</table>
+        </div>
 
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </div>
 
@@ -216,77 +322,91 @@ Belum ada data progres mahasiswa
 
 document.querySelectorAll(".btn-detail").forEach(btn => {
 
-btn.addEventListener("click", function(){
+    btn.addEventListener("click", function(){
 
-const user = this.dataset.user
+        const user = this.dataset.user;
 
-fetch(`/detail-progress/${user}/`)
-.then(res => res.json())
-.then(data => {
+        fetch(`/detail-progress/${user}/`)
+        .then(res => res.json())
+        .then(data => {
 
-let html = ""
+            function icon(status){
 
-function icon(v){
-return v ? 
-'<i class="bi bi-check-lg text-success fs-4"></i>' :
-'<i class="bi bi-x-lg text-danger fs-4"></i>'
-}
+                return status
+                ? '<i class="bi bi-check-circle-fill done"></i>'
+                : '<i class="bi bi-x-circle-fill not-done"></i>';
+            }
 
-html += `
-<tr>
-<td>Pendahuluan</td>
-<td class="text-center">${data.pendahuluan.aktivitas} / ${data.pendahuluan.total}</td>
-<td class="text-center">${icon(data.pendahuluan.kuis)}</td>
-</tr>
-`
+            // ====================
+            // INFO MAHASISWA
+            // ====================
 
-html += `
-<tr>
-<td>PKC</td>
-<td class="text-center">${data.pkc.aktivitas} / ${data.pkc.total}</td>
-<td class="text-center">${icon(data.pkc.kuis)}</td>
-</tr>
-`
+            document.getElementById("infoMahasiswa").innerHTML = `
+                <div class="info-box">
 
-html += `
-<tr>
-<td>Intensitas</td>
-<td class="text-center">${data.intensitas.aktivitas} / ${data.intensitas.total}</td>
-<td class="text-center">${icon(data.intensitas.kuis)}</td>
-</tr>
-`
+                    <div>
+                        <b>Nama:</b>
+                        ${data.nama}
+                    </div>
 
-html += `
-<tr>
-<td>Histogram</td>
-<td class="text-center">${data.histogram.aktivitas} / ${data.histogram.total}</td>
-<td class="text-center">${icon(data.histogram.kuis)}</td>
-</tr>
-`
+                    <div>
+                        <b>NIM:</b>
+                        ${data.nim}
+                    </div>
 
-html += `
-<tr>
-<td>Praktik Python</td>
-<td class="text-center">${data.praktik.aktivitas} / ${data.praktik.total}</td>
-<td class="text-center">${icon(data.praktik.kuis)}</td>
-</tr>
-`
+                    <div>
+                        <b>Progres:</b>
+                        <span class="progress-text">
+                            ${data.progress}%
+                        </span>
+                    </div>
 
-html += `
-<tr>
-<td>Evaluasi Akhir</td>
-<td class="text-center">-</td>
-<td class="text-center">${icon(data.evaluasi.kuis)}</td>
-</tr>
-`
+                </div>
+            `;
 
-document.getElementById("detailTable").innerHTML = html
+            // ====================
+            // DETAIL PROGRES
+            // ====================
 
-})
+            let html = "";
 
-})
+            data.section.forEach(section => {
 
-})
+                html += `
+                <div class="section-progress">
+
+                    <div class="section-title">
+                        ${section.judul}
+                    </div>
+                `;
+
+                section.items.forEach(item => {
+
+                    html += `
+                    <div class="item-progress">
+
+                        <div class="item-name">
+                            ${item.nama}
+                        </div>
+
+                        <div>
+                            ${icon(item.selesai)}
+                        </div>
+
+                    </div>
+                    `;
+                });
+
+                html += `</div>`;
+            });
+
+            document.getElementById("detailProgress").innerHTML = html;
+
+        });
+
+    });
+
+});
 
 </script>
 

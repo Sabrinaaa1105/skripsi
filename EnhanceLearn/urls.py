@@ -5,6 +5,7 @@ urlpatterns = [
     path('', views.beranda, name='beranda'),
     path('tentang/', views.tentang, name='tentang'),
     path('materi/', views.materi, name='materi'),
+    path('petunjuk/', views.petunjuk, name='petunjuk'),
     path('login/', views.login_user, name='login'),
 
     # ================= DOSEN =================

@@ -1,0 +1,379 @@
+{% extends "EnhanceLearn/base-beranda.html" %}
+{% load static %}
+
+{% block title %}
+Petunjuk Penggunaan
+{% endblock %}
+
+{% block content %}
+
+<style>
+html,
+body{
+    overscroll-behavior-y: none;
+}
+
+.petunjuk-card{
+    border-radius:20px;
+    overflow:hidden;
+    border:1px solid rgba(30,58,138,0.15);
+}
+
+.petunjuk-header{
+    background:#1E3A8A;
+    text-align:center;
+    padding:22px;
+}
+
+.petunjuk-header h3{
+    margin:0;
+    font-weight:700;
+    color:#fff;
+}
+
+.petunjuk-intro{
+    text-align:center;
+    padding:30px 20px;
+    color:#555;
+}
+
+.accordion-item{
+    border:1px solid rgba(30,58,138,0.25) !important;
+    border-radius:15px !important;
+    overflow:hidden;
+    margin-bottom:15px;
+}
+
+.accordion-button{
+    font-weight:600;
+    font-size:1.1rem;
+    color:#1E3A8A;
+    background:#fff;
+    box-shadow:none !important;
+    padding:20px;
+}
+
+.accordion-button:not(.collapsed){
+    background:rgba(30,58,138,0.12);
+    color:#1E3A8A;
+}
+
+.accordion-button:focus{
+    box-shadow:none;
+    border:none;
+}
+
+.petunjuk-img{
+    width:100%;
+    max-width:900px;
+    border-radius:10px;
+    border:1px solid #dbe3f5;
+}
+
+.petunjuk-judul{
+    font-weight:700;
+    color:#1E3A8A;
+    margin-top:20px;
+    margin-bottom:15px;
+}
+
+.petunjuk-list{
+    padding-left:0;
+    list-style:none;
+}
+
+.petunjuk-list li{
+    position:relative;
+    padding-left:45px;
+    margin-bottom:15px;
+    line-height:1.8;
+}
+
+.petunjuk-list li::before{
+    content:counter(item);
+    counter-increment:item;
+
+    position:absolute;
+    left:0;
+    top:2px;
+
+    width:28px;
+    height:28px;
+
+    border-radius:50%;
+    background:#1E3A8A;
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:14px;
+    font-weight:600;
+}
+
+.petunjuk-list{
+    counter-reset:item;
+}
+
+/* Hover */
+.accordion-button:hover{
+    background:rgba(30,58,138,0.05);
+}
+
+/* Mobile */
+@media (max-width:768px){
+
+    .accordion-button{
+        font-size:1rem;
+        padding:16px;
+    }
+
+    .petunjuk-header h3{
+        font-size:1.15rem;
+    }
+
+    .petunjuk-intro{
+        font-size:0.95rem;
+        padding:20px 15px;
+    }
+
+    .accordion-body{
+        padding:15px;
+    }
+
+}
+</style>
+
+<div class="container py-4">
+
+    <div class="card shadow-sm petunjuk-card">
+
+        <div class="petunjuk-header">
+            <h3>Pusat Bantuan & Petunjuk Penggunaan</h3>
+        </div>
+
+        <div class="petunjuk-intro">
+            Pilih salah satu daftar di bawah untuk melihat petunjuk penggunaan
+            media pembelajaran.
+        </div>
+
+        <div class="accordion p-4" id="accordionPetunjuk">
+
+            <!-- Beranda -->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#beranda">
+                        <i class="bi bi-house me-2"></i>
+                        Halaman Beranda
+                    </button>
+                </h2>
+
+                <div id="beranda"
+                     class="accordion-collapse collapse"
+                     data-bs-parent="#accordionPetunjuk">
+
+                    <div class="accordion-body">
+
+                        <div class="text-center">
+                            <img src="{% static 'img/petunjuk/beranda.png' %}"
+                                 class="petunjuk-img">
+                        </div>
+
+                        <div class="petunjuk-judul">
+                            Tentang Halaman Beranda
+                        </div>
+
+                        <ul class="petunjuk-list">
+                            <li>
+                                Navigasi digunakan untuk berpindah halaman
+                                Beranda, Materi, Petunjuk Penggunaan,
+                                Daftar, dan Masuk.
+                            </li>
+
+                            <li>
+                                Tombol Mulai Belajar digunakan untuk memulai
+                                pembelajaran.
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daftar -->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#daftar">
+                        <i class="bi bi-person-plus me-2"></i>
+                        Cara Mendaftar Akun
+                    </button>
+                </h2>
+
+                <div id="daftar"
+                     class="accordion-collapse collapse"
+                     data-bs-parent="#accordionPetunjuk">
+
+                    <div class="accordion-body">
+                        <div class="text-center">
+                            <img src="{% static 'img/petunjuk/daftar.png' %}"
+                                 class="petunjuk-img">
+                        </div>
+
+                        <div class="petunjuk-judul">
+                            Langkah Mendaftar Akun:
+                        </div>
+
+                        <ul class="petunjuk-list">
+                            <li>
+                                Klik tombol menu <strong>Daftar</strong> untuk membuat akun baru.
+                            </li>
+
+                            <li>
+                                Isi <strong>Nama Lengkap, NIM, Email, Token Kelas (Token yang diberikan oleh dosen), dan Kata Sandi</strong>.
+                            </li>
+                            <li>
+                                Setelah seluruh data terisi dengan benar, klik tombol <strong>Daftar</strong>.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Materi -->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#materi">
+                        <i class="bi bi-book me-2"></i>
+                        Halaman Materi
+                    </button>
+                </h2>
+
+                <div id="materi"
+                     class="accordion-collapse collapse"
+                     data-bs-parent="#accordionPetunjuk">
+
+                    <div class="accordion-body">
+                        <div class="text-center">
+                            <img src="{% static 'img/petunjuk/materi.png' %}"
+                                 class="petunjuk-img">
+                        </div>
+
+                        <div class="petunjuk-judul">
+                            Tentang Halaman Materi:
+                        </div>
+
+                        <ul class="petunjuk-list">
+                            <li>
+                                <strong>Nama pengguna</strong> menampilkan identitas akun yang berhasil masuk dan sedang digunakan pada media pembelajaran.
+                            </li>
+
+                            <li>
+                                <strong>Tombol menu dan Sidebar materi</strong> digunakan untuk mengakses bab, subbab, aktivitas, kuis, dan evaluasi. Materi yang masih memiliki ikon gembok belum dapat dibuka sampai pengguna menyelesaikan bagian sebelumnya sesuai urutan pembelajaran.
+                            </li>
+                            <li>
+                                <strong>Tombol navigasi halaman</strong> digunakan untuk berpindah antarhalaman pembelajaran melalui tombol Kembali dan Selanjutnya.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kuis dan Syarat Kelulusan -->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#kuis">
+                        <i class="bi bi-trophy me-2"></i>
+                        Kuis dan Syarat Kelulusan
+                    </button>
+                </h2>
+
+                <div id="kuis"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#accordionPetunjuk">
+
+                    <div class="accordion-body">
+                        <div class="petunjuk-judul">
+                            Tentang Kuis dan Syarat Kelulusan:
+                        </div>
+
+                        <ul class="petunjuk-list">
+                            <li>
+                                <strong>Kuis</strong> dapat dikerjakan setelah pengguna menyelesaikan materi dan aktivitas pada setiap subbab pembelajaran.
+                            </li>
+
+                            <li>
+                                Pengguna dinyatakan <strong>lulus</strong> apabila nilai yang diperoleh pada Evaluasi Akhir telah memenuhi nilai KKM yang ditentukan.
+                            </li>
+
+                            <li>
+                                Jika kuis atau evaluasi dikerjakan lebih dari satu kali, maka nilai tertinggi yang tersimpan adalah nilai yang memenuhi ketentuan sistem pembelajaran.
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Hubungi Kami -->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#kontak">
+                        <i class="bi bi-telephone me-2"></i>
+                        Hubungi Kami
+                    </button>
+                </h2>
+
+                <div id="kontak"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#accordionPetunjuk">
+
+                    <div class="accordion-body">
+
+                        <div class="petunjuk-judul">
+                            Kontak Bantuan:
+                        </div>
+
+                        <p>
+                            <i class="bi bi-envelope-fill text-primary me-2"></i>
+                            <strong>Email:</strong>
+                            <a href="mailto:sabrinaina771@gmail.com">
+                                sabrinaina771@gmail.com
+                            </a>
+                        </p>
+
+                        <p>
+                            <i class="bi bi-whatsapp text-success me-2"></i>
+                            <strong>WhatsApp:</strong>
+                            <a href="https://wa.me/628654911608" target="_blank">
+                                EnhanceLearn
+                            </a>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

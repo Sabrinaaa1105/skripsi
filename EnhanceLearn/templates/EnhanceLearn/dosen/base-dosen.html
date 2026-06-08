@@ -19,11 +19,20 @@
 </head>
 
 <body>
+<style>
+    html,
+    body{
+        overscroll-behavior-y: none;
+    }
+</style>
 
 <!-- ================= NAVBAR ================= -->
 <nav class="navbar-custom">
-    <span class="navbar-brand">
-        <span class="brand-enhance">Enhance</span><span class="brand-learn">Learn</span>
+    <button class="menu-toggle" id="menuToggle">
+        <i class="bi bi-list"></i>
+    </button>
+    <span class="navbar-brand brand-text">
+        <em>Enhance<span class="brand-learn">Learn</span></em>
     </span>
 
     <!-- TAMBAHAN HALO USER + DROPDOWN -->
@@ -95,12 +104,31 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
+    // Active menu
     const currentPath = window.location.pathname;
 
     document.querySelectorAll(".sidebar-link").forEach(link => {
         if (link.getAttribute("href") === currentPath) {
             link.classList.add("active");
         }
+    });
+
+    // Toggle sidebar
+    const menuToggle = document.getElementById("menuToggle");
+    const sidebar = document.querySelector(".sidebar");
+    const content = document.querySelector(".content");
+
+    menuToggle.addEventListener("click", function () {
+
+        if (window.innerWidth <= 768) {
+            // MOBILE
+            sidebar.classList.toggle("show");
+        } else {
+            // DESKTOP
+            sidebar.classList.toggle("collapsed");
+            content.classList.toggle("expanded");
+        }
+
     });
 
 });

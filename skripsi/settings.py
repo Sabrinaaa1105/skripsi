@@ -88,11 +88,16 @@ DATABASES = {
         'PASSWORD' : '',
         'PORT': '3306',
     },
-    'default': dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}", # Tetap gunakan sqlite jika dijalankan di laptop
-        conn_max_age=600
-    )
+    
 }
+
+
+
+# TAMBAHKAN INI UNTUK MENGATASI MASALAH LOGIN (403 CSRF/Session)
+# Ganti 'nama-proyek-anda.vercel.app' dengan URL Vercel asli Anda
+CSRF_TRUSTED_ORIGINS = ['https://enhancelearn.vercel.app', 'http://127.0.0.1:8000']
+SESSION_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_SAMESITE = 'Lax'
 
 
 # Password validation

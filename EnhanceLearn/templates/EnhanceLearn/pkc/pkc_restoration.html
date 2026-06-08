@@ -20,13 +20,16 @@
             <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
                 Dalam pemrosesan citra digital, peningkatan kualitas citra dapat dilakukan melalui dua pendekatan utama, 
                 yaitu <strong><em>image enhancement</em> dan <em>image restoration</em></strong>. Kedua pendekatan ini sama – sama bertujuan menghasilkan citra dengan 
-                kualitas yang lebih baik, namun berbeda dari segi tujuan, asumsi, dan metode yang digunakan. Image enhancement dan image 
-                restoration dibedakan berdasarkan apakah proses perbaikan citra dilakukan <strong>tanpa model degradasi atau berdasarkan model 
-                degradasi yang diketahui</strong>. Degradasi citra adalah penurunan kualitas citra yang terjadi ketika citra tidak merepresentasikan 
-                objek aslinya dengan baik. Degradasi menyebabkan citra menjadi kabur, berisik, terlalu gelap, terlalu terang, atau kehilangan 
-                detail seperti kamera bergerak maka foto menjadi kabur (blur). Gambar 2.3 merupakan contoh degradasi citra akibat pergerakan 
-                kamera atau objek saat proses pengambilan gambar, yang menyebabkan citra menjadi kabur (<em>motion blur</em>) dan kehilangan detail 
-                visual.
+                kualitas yang lebih baik, namun berbeda dari segi tujuan, asumsi, dan metode yang digunakan. Perbedaan utama keduanya terletak pada apakah proses perbaikan 
+                citra dilakukan tanpa mempertimbangkan model degradasi (kerusakan) atau berdasarkan model degradasi yang diketahui.
+            </p>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
+                Degradasi citra merupakan penurunan kualitas citra yang menyebabkan citra tidak lagi merepresentasikan objek aslinya dengan baik. Degradasi atau kerusakan citra 
+                dapat terjadi akibat berbagai faktor, seperti gangguan pada sensor, kondisi pencahayaan yang buruk, kesalahan selama proses transmisi data, atau pergerakan kamera 
+                dan objek saat proses akuisisi citra. Akibatnya, citra dapat menjadi kabur (<em>blur</em>), mengandung derau (<em>noise</em>), terlalu gelap, terlalu terang, atau 
+                kehilangan detail visual penting. Sebagai contoh, pergerakan kamera saat pengambilan gambar dapat menyebabkan terjadinya <em>motion blur</em>, sehingga objek pada 
+                citra tampak kabur dan sulit dikenali. Gambar 2.3 menunjukkan contoh degradasi citra akibat pergerakan kamera atau objek selama proses pengambilan gambar.
             </p>
 
 
@@ -43,17 +46,112 @@
                     </tbody>
                 </table>
                 <p style="font-size:13px; margin-top:6px; font-style:italic; text-align:center;">
-                    Gambar 2.3 Citra degradasi
+                    Gambar 2.3 Degradasi citra
                 </p>
             </div>
 
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75; margin-top: 10px;">
+                <em>Image enhancement</em> merupakan teknik yang berfokus pada peningkatan kualitas visual citra agar lebih mudah diamati atau dianalisis oleh pengguna. 
+                Teknik ini <strong>tidak memerlukan informasi mengenai penyebab degradasi citra</strong>, melainkan melakukan perbaikan berdasarkan karakteristik visual citra 
+                yang diinginkan. Oleh karena itu, <em>image enhancement</em> bersifat subjektif karena kualitas hasil sangat bergantung pada kebutuhan dan persepsi pengguna. 
+                Beberapa teknik yang termasuk dalam <em>image enhancement</em> antara lain pengaturan kecerahan (<em>brightness</em>), peningkatan kontras (<em>contrast stretching</em>), 
+                transformasi intensitas, serta pemrosesan histogram. 
+            </p>
 
             <p style="text-align: justify; font-size: 17px; line-height: 1.75; margin-top: 10px;">
-                Kadang – kadang <em>image restoration</em> sering dipertukarkan dengan pengertian <em>image enhancement</em>. Kedua teknik ini memang 
-                sering bertukar metode dalam menyelesaikan masalah, tetapi titik berat restorasi adalah pada perbaikan citra yang mengalami kerusakan, 
-                baik selama proses digitalisasi maupun cacat akibat usia, jamur, goresan, pelabelan teks pada citra yang dilakukan baik sengaja 
-                maupun tidak sengaja. Sedangkan <em>image enhancement</em> cenderung memperhatikan perbaikan kualitas citra yang mengalami penurunan 
-                kualitas selama pembentukan citra atau justru memberi efek berlebih pada citra yang sudah ada. 
+                Sementara itu, <em>image restoration</em> merupakan teknik yang bertujuan <strong>mengembalikan citra yang telah mengalami degradasi atau kerusakan agar mendekati kondisi citra aslinya</strong>. 
+                Berbeda dengan <em>image enhancement</em>, <em>image restoration</em> menggunakan pengetahuan atau informasi sebelumnya (<em>a priori knowledge</em>) mengenai penyebab degradasi untuk membangun model 
+                matematis yang menggambarkan proses kerusakan citra. Berdasarkan model tersebut, dilakukan proses <em>invers</em> atau pemulihan untuk mengurangi pengaruh degradasi sehingga informasi 
+                yang hilang atau terganggu dapat dikembalikan semaksimal mungkin. Oleh karena itu, <em>image restoration</em> bersifat lebih objektif karena didasarkan pada model degradasi yang terukur. 
+            </p>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75; margin-top: 10px;">
+                Kadang-kadang <em>image restoration</em> sering dipertukarkan dengan pengertian <em>image enhancement</em> karena keduanya sama-sama digunakan untuk memperbaiki kualitas citra dan dalam beberapa kasus menggunakan 
+                metode yang serupa. Namun, titik berat <em>image restoration</em> adalah pada pemulihan citra yang mengalami kerusakan, baik akibat proses digitalisasi, gangguan selama akuisisi, maupun kerusakan fisik 
+                seperti goresan, jamur, penuaan media, atau adanya teks dan objek lain yang menutupi citra. Sebaliknya, <em>image enhancement</em> lebih menekankan pada peningkatan kualitas visual citra yang mengalami 
+                penurunan kualitas atau memberikan penekanan tertentu pada informasi yang terdapat dalam citra agar lebih mudah diamati dan diinterpretasikan. Gambar 2.4 menunjukkan perbandingan hasil perbaikan 
+                citra menggunakan <em>image enhancement</em> dan <em>image restoration</em>. Pada <em>image enhancement</em>, kualitas visual citra ditingkatkan melalui penyesuaian <em>brightness</em> sehingga gambar tampak lebih terang, namun 
+                kerusakan pada citra masih tetap terlihat. Sementara itu, <em>image restoration</em> berupaya mengurangi kerusakan pada citra menggunakan proses pemulihan sehingga hasil yang diperoleh lebih mendekati 
+                kondisi citra yang seharusnya. 
+            </p>
+
+            {% comment %} <div style="margin:16px 0;">
+                <table style="width:90%; margin:0 auto; border-collapse:collapse; border:1px solid #cbd5e1; text-align:center;">
+                    <tbody>
+                        <tr>
+                            <td style="border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:6px; vertical-align:top;">
+                                <img src="{% static 'img/jenis-citra/pkc_restoration.png' %}"
+                                     alt="perbedaan PKC"
+                                     style="max-width:100%; height:auto; display:block; margin:0 auto;">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size:13px; margin-top:6px; font-style:italic; text-align:center;">
+                    Gambar 2.4 Perbandingan hasil proses <em>image enhancement</em> dan <em>image restoration</em>.
+                </p>
+            </div> {% endcomment %}
+
+            <div style="margin:16px 0;">
+                <table style="width:75%; margin:0 auto; border-collapse:collapse; border:1px solid #cbd5e1; text-align:center;">
+                    <tr>
+                        <th style="width:50%; border-right:1px solid #cbd5e1; padding:6px;">
+                            Citra Asli
+                        </th>
+
+                        <th style="width:50%; padding:6px;">
+                            Citra Rusak (Degradasi)
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <td style="border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:6px;">
+                            <img src="{% static 'img/pkc/asli.jpeg' %}"
+                                alt="asli"
+                                style="width:100%; height:300px; object-fit:cover;">
+                        </td>
+
+                        <td style="border-top:1px solid #cbd5e1; padding:6px;">
+                            <img src="{% static 'img/pkc/degradasi.png' %}"
+                                alt="degradasi"
+                                style="width:100%; height:300px; object-fit:cover;">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th style="border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:6px;">
+                            <em>Image Enhancement</em>
+                        </th>
+
+                        <th style="border-top:1px solid #cbd5e1; padding:6px;">
+                            <em>Image Restoration</em>
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <td style="border-top:1px solid #cbd5e1; border-right:1px solid #cbd5e1; padding:6px;">
+                            <img src="{% static 'img/pkc/brightness.jpg' %}"
+                                alt="enhancement"
+                                style="width:100%; height:300px; object-fit:cover;">
+                        </td>
+
+                        <td style="border-top:1px solid #cbd5e1; padding:6px;">
+                            <img src="{% static 'img/pkc/restoration.jpg' %}"
+                                alt="restoration"
+                                style="width:100%; height:300px; object-fit:cover;">
+                        </td>
+                    </tr>
+
+                </table>
+
+                <p style="font-size:13px; margin-top:6px; font-style:italic; text-align:center;">
+                    Gambar 2.4 Perbandingan hasil proses <em>image enhancement</em> dan <em>image restoration</em>.
+                </p>
+            </div>
+
+            <p style="text-align: justify; font-size: 17px; line-height: 1.75; margin-top: 10px;">
+                Dengan demikian, dapat disimpulkan bahwa <em>image enhancement</em> berfokus pada peningkatan tampilan visual citra sesuai kebutuhan pengguna, 
+                sedangkan <em>image restoration</em> berfokus pada pemulihan citra yang mengalami degradasi berdasarkan model kerusakan yang diketahui atau diperkirakan agar mendekati kondisi aslinya. 
             </p>
 
          </div>

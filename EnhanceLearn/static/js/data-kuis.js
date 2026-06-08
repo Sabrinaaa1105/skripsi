@@ -5,7 +5,7 @@ window.quizData = {
 pendahuluan: [
 
 {
-question: "Citra digital adalah gambar yang direpresentasikan dalam bentuk data numerik sehingga dapat…",
+question: "Citra digital banyak digunakan dalam berbagai aplikasi seperti pengenalan wajah, dan pengolahan citra medis. Hal ini dimungkinkan karena citra digital direpresentasikan dalam bentuk data numerik yang dapat…",
 options: [
 "Ditampilkan oleh kamera analog",
 "Diproses oleh komputer",
@@ -17,7 +17,7 @@ correct: 1
 },
 
 {
-question: "Elemen terkecil penyusun sebuah citra digital yang memiliki koordinat dan nilai intensitas disebut…",
+question: "Sebuah foto digital yang ditampilkan pada layar komputer sebenarnya tersusun atas banyak elemen kecil yang masing-masing memiliki posisi dan nilai intensitas tertentu. Elemen terkecil tersebut disebut…",
 options: [
 "Kanal",
 "Bit",
@@ -36,7 +36,9 @@ f(1,0) & f(1,1) & \\cdots & f(1,M-1) \\\\
 \\vdots & \\vdots & \\ddots & \\vdots \\\\
 f(N-1,0) & f(N-1,1) & \\cdots & f(N-1,M-1)
 \\end{bmatrix}$$
-Berdasarkan matriks tersebut, nilai $N$ dan $M$ masing-masing menyatakan …`,
+Dalam representasi tersebut, ukuran citra ditentukan oleh banyaknya piksel yang 
+tersusun dalam arah vertikal dan horizontal. Oleh karena itu, nilai N dan M masing
+masing menyatakan …`,
 options: [
 "Nilai intensitas minimum dan maksimum",
 "Kedalaman bit dan tingkat keabuan",
@@ -48,7 +50,7 @@ correct: 4
 },
 
 {
-question: "Dalam citra digital grayscale, perbedaan antara daerah terang dan gelap pada citra disebabkan oleh perbedaan …",
+question: "Pada citra <em>grayscale</em>, setiap piksel memiliki satu nilai intensitas yang menunjukkan tingkat kecerahan. Perbedaan antara daerah terang dan gelap pada citra terjadi karena adanya perbedaan …",
 options: [
 "Ukuran piksel",
 "Posisi koordinat piksel",
@@ -60,7 +62,7 @@ correct: 4
 },
 
 {
-question: "Pada citra grayscale dengan kedalaman 8 bit, nilai intensitas piksel berada pada rentang …",
+question: "Sebuah citra <em>grayscale</em> memiliki kedalaman warna 8 bit sehingga setiap piksel dapat direpresentasikan oleh sejumlah tingkat keabuan tertentu. Rentang nilai intensitas yang mungkin dimiliki oleh piksel tersebut adalah …",
 options: [
 "0 sampai 255",
 "1 sampai 256",
@@ -72,19 +74,31 @@ correct: 0
 },
 
 {
-question: "Jika citra grayscale akan diubah menjadi citra biner, maka proses yang diperlukan adalah …",
+question: "Sebelum dilakukan proses analisis tertentu, citra <em>grayscale</em> terkadang diubah menjadi citra biner agar objek dan latar belakang dapat dipisahkan dengan lebih mudah. Proses yang umum digunakan untuk melakukan perubahan tersebut adalah …",
 options: [
-"Histogram equalization",
-"Filtering",
-"Edge detection",
-"Thresholding",
-"Image detection"
+"<em>Histogram equalization</em>",
+"<em>Filtering</em>",
+"<em>Edge detection</em>",
+"<em>Thresholding</em>",
+"<em>Image detection</em>"
 ],
 correct: 3
 },
 
 {
-question: `Perhatikan matriks piksel grayscale berikut:
+question: "Dalam representasi citra digital sebagai matriks, perubahan posisi piksel dari $f(2,3)$ ke $f(2,4)$ menunjukkan perpindahan …",
+options: [
+"Dua kolom ke kanan",
+"Dua baris ke bawah",
+"Satu baris ke bawah",
+"Satu kolom ke kanan",
+"Satu baris ke atas"
+],
+correct: 3
+},
+
+{
+question: `Perhatikan matriks piksel <em>grayscale</em> berikut:
 $$\\begin{bmatrix}
 20 & 25 & 30 & 28 \\\\
 22 & 24 & 28 & 26 \\\\
@@ -103,7 +117,7 @@ correct: 1
 },
 
 {
-question: "Citra biner merupakan citra yang hanya menggunakan dua kemungkinan nilai piksel. Kedua nilai tersebut adalah …",
+question: "Sebuah citra biner digunakan untuk memisahkan objek dari latar belakang pada proses segmentasi sederhana. Nilai piksel yang umum digunakan untuk merepresentasikan dua kondisi tersebut adalah …",
 options: [
 "0 dan 1",
 "0 dan 255",
@@ -115,18 +129,6 @@ correct: 0
 },
 
 {
-question: "Dalam representasi citra digital sebagai matriks, perubahan posisi piksel dari $f(2,3)$ ke $f(2,4)$ menunjukkan perpindahan …",
-options: [
-"Dua kolom ke kanan",
-"Dua baris ke bawah",
-"Satu baris ke bawah",
-"Satu kolom ke kanan",
-"Satu baris ke atas"
-],
-correct: 3
-},
-
-{
 question: `Perhatikan matriks piksel berikut:
 $$\\begin{bmatrix}
 1 & 0 & 1 & 0 \\\\
@@ -134,7 +136,7 @@ $$\\begin{bmatrix}
 1 & 1 & 0 & 0 \\\\
 0 & 1 & 0 & 1
 \\end{bmatrix}$$
-Berdasarkan nilai piksel yang dimiliki, matriks tersebut menunjukkan jenis citra …`,
+Berdasarkan variasi nilai piksel yang digunakan, matriks tersebut paling tepat merepresentasikan …`,
 options: [
 "Citra dengan tiga kanal warna",
 "Citra keabuan",
@@ -152,7 +154,7 @@ correct: 2
 pkc: [
 
 {
-question: "Tujuan utama dari image enhancement dalam pengolahan citra digital adalah …",
+question: "Pada sistem pengenalan objek, kualitas citra sering ditingkatkan terlebih dahulu agar informasi penting lebih mudah dianalisis oleh komputer. Tujuan utama dari <em>image enhancement</em> adalah …",
 options: [
 "Mengurangi ukuran file citra",
 "Membuat citra terlihat lebih indah",
@@ -164,7 +166,7 @@ correct: 4
 },
 
 {
-question: "Image enhancement dikategorikan sebagai tahap image pre-processing karena …",
+question: "Sebelum dilakukan segmentasi atau ekstraksi fitur, citra sering mengalami proses peningkatan kualitas untuk mengurangi pengaruh gangguan yang dapat menghambat analisis. Oleh karena itu, <em>image enhancement</em> dikategorikan sebagai tahap <em>image preprocessing</em> karena …",
 options: [
 "Selalu meningkatkan resolusi citra",
 "Digunakan setelah segmentasi citra",
@@ -176,7 +178,7 @@ correct: 2
 },
 
 {
-question: "Citra dengan kontras rendah dapat berdampak pada proses lanjutan karena …",
+question: "Sebuah citra memiliki kontras yang rendah sehingga batas antara objek dan latar belakang sulit dibedakan. Kondisi ini dapat menyebabkan …",
 options: [
 "Mempercepat komputasi",
 "Mengurangi kebutuhan memori",
@@ -188,34 +190,34 @@ correct: 2
 },
 
 {
-question: "Pendekatan perbaikan citra yang memanfaatkan model degradasi yang diketahui disebut …",
+question: "Suatu citra mengalami penurunan kualitas akibat proses akuisisi, dan model matematis penyebab degradasinya diketahui. Pendekatan yang paling sesuai untuk memperbaiki citra tersebut adalah …",
 options: [
-"Image enhancement",
-"Image restoration",
-"Image segmentation",
-"Image acquisition",
-"Image compression"
+"<em>Image enhancement</em>",
+"<em>Image restoration</em>",
+"<em>Image segmentation</em>",
+"<em>Image acquisition</em>",
+"<em>Image compression</em>"
 ],
 correct: 1
 },
 
 {
-question: "Perbedaan utama antara image enhancement dan image restoration terletak pada …",
+question: "Sebuah citra hasil pemantauan mengalami efek blur akibat getaran kamera saat proses pengambilan gambar. Jika informasi mengenai jenis dan karakteristik blur tersebut diketahui, maka pendekatan yang paling tepat untuk memperbaiki citra adalah …",
 options: [
-"Ada atau tidaknya model degradasi dalam proses perbaikan",
-"Jenis citra yang diproses",
-"Resolusi dan ukuran citra",
-"Jumlah kanal warna citra",
-"Format file citra"
+"Melakukan <em>image restoration</em> dengan memanfaatkan model degradasi yang diketahui",
+"Meningkatkan kontras citra menggunakan <em>histogram equalization</em>",
+"Mengubah citra menjadi <em>grayscale</em> terlebih dahulu ",
+"Mengurangi ukuran citra agar blur tidak terlihat jelas",
+"Melakukan segmentasi objek sebelum perbaikan citra"
 ],
 correct: 0
 },
 
 {
-question: "Citra yang tampak kabur akibat pergerakan kamera saat pengambilan gambar merupakan contoh degradasi berupa …",
+question: "Sebuah foto diambil menggunakan kamera genggam saat objek dan kamera sama-sama bergerak. Akibatnya, citra yang dihasilkan tampak kabur dan detail objek sulit dikenali. Jenis degradasi yang paling mungkin terjadi pada citra tersebut adalah …",
 options: [
-"Noise",
-"Motion blur",
+"<em>Noise</em>",
+"<em>Motion blur</em>",
 "Distorsi warna",
 "Kuantisasi",
 "Aliasing"
@@ -224,7 +226,7 @@ correct: 1
 },
 
 {
-question: "Jika image enhancement dilakukan untuk menonjolkan detail tertentu sesuai kebutuhan pengguna, maka enhancement tersebut bersifat …",
+question: "Jika <em>image enhancement</em> dilakukan untuk menonjolkan detail tertentu sesuai kebutuhan pengguna, maka <em>enhancement</em> tersebut bersifat …",
 options: [
 "Tetap",
 "Objektif",
@@ -236,7 +238,7 @@ correct: 3
 },
 
 {
-question: "Histogram equalization tidak selalu cocok digunakan karena …",
+question: "Meskipun <em>image enhancement</em> dapat meningkatkan kualitas citra untuk tujuan tertentu, hasil yang diperoleh tidak selalu lebih baik dalam semua kondisi. Hal ini karena …",
 options: [
 "Dapat memperkuat noise atau detail yang tidak diinginkan",
 "Mengurangi resolusi citra",
@@ -248,25 +250,25 @@ correct: 0
 },
 
 {
-question: "Kegagalan sistem pengenalan objek sering terjadi jika citra masukan berkualitas buruk karena …",
+question: "Sebuah citra satelit mengandung noise acak dan kontras yang rendah. Seorang analis ingin meningkatkan keterlihatan objek tanpa memperkuat noise secara berlebihan. Tindakan yang paling tepat adalah …",
 options: [
-"Algoritma terlalu sederhana",
-"Ukuran citra terlalu kecil",
-"Citra tidak berwarna",
-"Format citra tidak sesuai",
-"Informasi visual yang diperlukan tidak cukup jelas"
+"Langsung menerapkan <em>histogram equalization</em> pada citra asli",
+"Mengubah citra menjadi biner terlebih dahulu",
+"Melakukan <em>filtering noise</em> terlebih dahulu kemudian <em>enhancement</em> kontras",
+"Melakukan kompresi citra sebelum <em>enhancement</em>",
+"Menurunkan resolusi citra sebelum <em>enhancement</em>"
 ],
 correct: 4
 },
 
 {
-question: "Pernyataan yang paling tepat mengenai tujuan image enhancement adalah …",
+question: "Perhatikan pernyataan berikut:<br> (1) Menggunakan model matematis degradasi citra.<br> (2) Bertujuan memulihkan citra mendekati kondisi aslinya. <br> (3) Hasil sangat bergantung pada preferensi pengguna. <br> (4) Dapat menggunakan informasi fungsi blur atau noise. <br> Pernyataan yang paling sesuai dengan karakteristik <em>image restoration</em> adalah …",
 options: [
-"Selalu memperbaiki citra secara objektif",
-"Hanya digunakan pada citra yang rusak",
-"Menghilangkan semua degradasi citra",
-"Mendukung proses analisis atau aplikasi tertentu",
-"Tidak memengaruhi interpretasi citra"
+"(1) dan (2) ",
+"(2) dan (3)",
+"(3) dan (4)",
+"(1), (2), dan (4)",
+"Semua benar"
 ],
 correct: 3
 }
@@ -277,26 +279,26 @@ correct: 3
 intensitas: [
 
 {
-question: "Sebuah citra grayscale tampak terlalu terang setelah transformasi brightness diterapkan. Kondisi tersebut paling mungkin terjadi karena …",
+question: "Sebuah citra <em>grayscale</em> tampak terlalu terang setelah transformasi <em>brightness</em> diterapkan. Kondisi tersebut paling mungkin terjadi karena …",
 options: [
-"Nilai brightness terlalu kecil",
+"Nilai <em>brightness</em> terlalu kecil",
 "Tidak dilakukan normalisasi intensitas",
-"Terjadi clipping pada nilai intensitas tinggi",
-"Transformasi brightness bersifat nonlinier",
-"Brightness mengubah struktur spasial citra"
+"Terjadi <em>clipping</em> pada nilai intensitas tinggi",
+"Transformasi <em>brightness</em> bersifat nonlinier",
+"<em>Brightness</em> mengubah struktur spasial citra"
 ],
 correct: 2
 },
 
 {
-question: `Diberikan citra grayscale 8-bit berukuran 4×4 berikut:<br>
+question: `Diberikan citra <em>grayscale</em> 8-bit berukuran 4×4 berikut:<br>
 $$f=\\begin{bmatrix}
 30 & 40 & 50 & 60 \\\\
 70 & 80 & 90 & 100 \\\\
 110 & 120 & 130 & 140 \\\\
 150 & 160 & 170 & 180
 \\end{bmatrix}$$
-Jika diterapkan transformasi brightness dengan nilai b=+80, maka kesimpulan mengenai citra hasilnya adalah …`,
+Jika diterapkan transformasi <em>brightness</em> dengan nilai b=+80, maka kesimpulan mengenai citra hasilnya adalah …`,
 options: [
 "Seluruh piksel mengalami peningkatan nilai yang sama tanpa efek samping",
 "Sebagian piksel mengalami clipping pada nilai maksimum",
@@ -308,7 +310,7 @@ correct: 1
 },
 
 {
-question: "Jika suatu citra memiliki nilai intensitas minimum 90 dan maksimum 110, lalu diterapkan contrast stretching ke rentang 0–255, maka dampak utama yang diharapkan adalah …",
+question: "Jika suatu citra memiliki nilai intensitas minimum 90 dan maksimum 110, lalu diterapkan <em>contrast stretching</em> ke rentang 0–255, maka dampak utama yang diharapkan adalah …",
 options: [
 "Penambahan informasi baru pada citra",
 "Peningkatan perbedaan visual antara area gelap dan terang",
@@ -320,19 +322,19 @@ correct: 1
 },
 
 {
-question: "Perbedaan paling mendasar antara contrast stretching dan thresholding ditinjau dari hasil citranya adalah …",
+question: "Perbedaan paling mendasar antara <em>contrast stretching</em> dan <em>thresholding</em> ditinjau dari hasil citranya adalah …",
 options: [
-"Contrast stretching menghasilkan citra berwarna",
-"Thresholding tidak memerlukan fungsi transformasi",
-"Thresholding memperluas rentang intensitas",
+"<em>Contrast stretching</em> menghasilkan citra berwarna",
+"<em>Thresholding</em> tidak memerlukan fungsi transformasi",
+"<em>Thresholding</em> memperluas rentang intensitas",
 "Keduanya menghasilkan citra dengan histogram seragam",
-"Contrast stretching mempertahankan tingkat keabuan"
+"<em>Contrast stretching</em> mempertahankan tingkat keabuan"
 ],
 correct: 4
 },
 
 {
-question: "Penerapan contrast stretching pada citra berkontras rendah bertujuan untuk …",
+question: "Sebuah citra memiliki rentang intensitas yang sempit sehingga objek sulit dibedakan dari latar belakangnya. Jika diterapkan <em>contrast stretching</em>, tujuan utama proses tersebut adalah …",
 options: [
 "Memperjelas perbedaan area gelap dan terang",
 "Menambahkan informasi baru pada citra",
@@ -370,7 +372,7 @@ $$f=\\begin{bmatrix}
 165 & 180 & 195 & 210 \\\\
 225 & 240 & 250 & 255
 \\end{bmatrix}$$
-Jika digunakan thresholding dengan nilai ambang T=120, maka karakteristik citra hasil adalah …`,
+Jika digunakan <em>thresholding</em> dengan nilai ambang T=120, maka karakteristik citra hasil adalah …`,
 options: [
 "Mayoritas piksel bernilai putih",
 "Mayoritas piksel bernilai hitam",
@@ -382,7 +384,7 @@ correct: 3
 },
 
 {
-question: "Jika nilai ambang pada thresholding diperbesar, maka jumlah piksel putih pada citra hasil akan …",
+question: "Pada proses <em>thresholding</em>, nilai ambang dinaikkan dari T=100 menjadi T=180. Dengan asumsi objek direpresentasikan oleh piksel yang memiliki intensitas lebih besar dari <em>threshold</em>, dampak yang paling mungkin terjadi adalah …",
 options: [
 "Menjadi acak",
 "Menjadi seimbang",
@@ -394,7 +396,7 @@ correct: 3
 },
 
 {
-question: "Pada transformasi power-law, pemilihan parameter γ < 1 menyebabkan …",
+question: "Pada transformasi <em>power-law</em>, pemilihan parameter γ < 1 menyebabkan …",
 options: [
 "Detail area gelap lebih ditonjolkan",
 "Citra menjadi lebih gelap",
@@ -415,10 +417,10 @@ $$f=\\begin{bmatrix}
 \\end{bmatrix}$$
 Citra tampak gelap dan detail pada intensitas rendah sulit diamati. Transformasi intensitas yang digunakan untuk menonjolkan detail tersebut adalah …`,
 options: [
-"Brightness",
-"Contrast stretching",
+"<em>Brightness</em>",
+"<em>Contrast stretching</em>",
 "Operasi negasi",
-"Thresholding",
+"<em>Thresholding</em>",
 "Transformasi logaritmik"
 ],
 correct: 4
@@ -430,11 +432,11 @@ correct: 4
 histogram: [
 
 {
-question: "Tujuan utama dari histogram equalization dalam peningkatan kualitas citra adalah …",
+question: "Sebuah citra memiliki distribusi intensitas yang terkonsentrasi pada rentang tertentu sehingga objek dan latar belakang sulit dibedakan. Untuk meningkatkan penyebaran tingkat keabuan pada citra tersebut digunakan <em>histogram equalization</em>. Tujuan utama dari proses ini adalah …",
 options: [
 "Meratakan distribusi intensitas agar kontras meningkat",
 "Menyamakan histogram dua citra berbeda",
-"Mengubah citra grayscale menjadi citra biner",
+"Mengubah citra <em>grayscale</em> menjadi citra biner",
 "Menghilangkan noise pada citra",
 "Mengubah ukuran citra"
 ],
@@ -442,7 +444,7 @@ correct: 0
 },
 
 {
-question: "Sebuah citra grayscale memiliki histogram yang sebagian besar nilainya terkonsentrasi pada intensitas rendah. Interpretasi yang paling tepat terhadap kondisi citra tersebut adalah …",
+question: "Histogram sebuah citra menunjukkan bahwa sebagian besar piksel berada pada rentang intensitas rendah dibandingkan rentang intensitas yang tersedia. Berdasarkan kondisi tersebut, citra tersebut dapat diinterpretasikan sebagai citra yang …",
 options: [
 "Citra terlalu terang",
 "Citra terlalu gelap",
@@ -454,10 +456,10 @@ correct: 1
 },
 
 {
-question: "Histogram suatu citra menunjukkan distribusi nilai keabuan yang sempit pada rentang tertentu. Kondisi ini menunjukkan bahwa citra tersebut …",
+question: "Histogram suatu citra menunjukkan distribusi nilai keabuan yang hanya menempati sebagian kecil rentang intensitas yang tersedia. Kondisi ini menunjukkan bahwa citra tersebut  …",
 options: [
 "Mengandung noise tinggi",
-"Sudah mengalami histogram equalization",
+"Sudah mengalami <em>histogram equalization</em>",
 "Memiliki resolusi rendah",
 "Memiliki kontras rendah",
 "Berada dalam skala biner"
@@ -466,7 +468,7 @@ correct: 3
 },
 
 {
-question: "Histogram kumulatif digunakan dalam histogram equalization karena …",
+question: "Dalam proses <em>histogram equalization</em>, histogram kumulatif (<em>cumulative histogram</em>) digunakan untuk membentuk fungsi transformasi yang akan diterapkan pada setiap piksel. Histogram kumulatif digunakan karena …",
 options: [
 "Menyederhanakan perhitungan intensitas piksel",
 "Menunjukkan frekuensi absolut tiap tingkat keabuan",
@@ -485,7 +487,8 @@ $$f=\\begin{bmatrix}
 2 & 5 & 5 & 6 \\\\
 6 & 7 & 7 & 7
 \\end{bmatrix}$$
-Berdasarkan matriks tersebut, kesimpulan yang paling tepat mengenai histogram citra adalah …`,
+Berdasarkan frekuensi kemunculan setiap tingkat keabuan, kesimpulan yang paling 
+tepat mengenai histogram citra tersebut adalah …`,
 options: [
 "Histogram terkonsentrasi pada intensitas tinggi",
 "Histogram terkonsentrasi pada intensitas rendah",
@@ -497,19 +500,19 @@ correct: 0
 },
 
 {
-question: "Sebuah citra 4×4 memiliki histogram yang terkonsentrasi pada nilai menengah dan diperlukan citra dengan karakteristik visual tertentu agar seragam dengan citra lain. Teknik berbasis histogram yang digunakan adalah …",
+question: "Sebuah citra memiliki distribusi intensitas yang terkonsentrasi pada nilai menengah. Agar distribusi tingkat keabuan citra tersebut menyerupai histogram citra referensi tertentu, metode yang paling tepat digunakan adalah …",
 options: [
-"Histogram equalization",
-"Histogram specification",
+"<em>Histogram equalization</em>",
+"<em>Histogram specification</em>",
 "Histogram kumulatif",
-"Thresholding",
+"<em>Thresholding</em>",
 "Transformasi logaritmik"
 ],
 correct: 1
 },
 
 {
-question: "Pada histogram specification, pemetaan nilai keabuan dilakukan dengan cara …",
+question: "Berbeda dengan <em>histogram equalization</em> yang menghasilkan distribusi histogram secara otomatis, <em>histogram specification</em> memerlukan histogram target sebagai acuan. Pada proses ini, pemetaan nilai keabuan dilakukan dengan cara …",
 options: [
 "Mengurangi histogram sumber dengan histogram target",
 "Mencocokkan histogram awal dengan histogram target",
@@ -521,19 +524,19 @@ correct: 4
 },
 
 {
-question: "Histogram equalization tidak selalu menghasilkan citra yang lebih baik secara visual karena …",
+question: "Meskipun <em>histogram equalization</em> sering digunakan untuk meningkatkan kontras citra, metode ini tidak selalu menghasilkan kualitas visual yang lebih baik. Salah satu penyebabnya adalah karena <em>histogram equalization</em> …",
 options: [
 "Selalu menurunkan kontras citra",
 "Mengubah struktur spasial citra",
 "Bersifat global dan mengabaikan konteks lokal citra",
-"Tidak dapat diterapkan pada citra grayscale",
+"Tidak dapat diterapkan pada citra <em>grayscale</em>",
 "Mengurangi jumlah tingkat keabuan"
 ],
 correct: 2
 },
 
 {
-question: "Perbedaan utama antara histogram equalization dan histogram specification terletak pada …",
+question: "Baik <em>histogram equalization</em> maupun <em>histogram specification</em> sama-sama memanfaatkan informasi histogram citra dalam proses transformasi intensitas. Perbedaan utama antara kedua metode tersebut terletak pada …",
 options: [
 "Jumlah piksel yang diproses",
 "Penggunaan histogram kumulatif",
@@ -545,7 +548,7 @@ correct: 4
 },
 
 {
-question: "Histogram specification lebih sesuai digunakan dibandingkan histogram equalization ketika …",
+question: "<em>Histogram specification</em> sering digunakan ketika hasil peningkatan citra diharapkan mengikuti distribusi intensitas tertentu yang telah ditentukan sebelumnya. Dibandingkan <em>histogram equalization</em>, metode ini lebih sesuai digunakan ketika …",
 options: [
 "Citra memiliki kontras sangat tinggi",
 "Citra mengandung banyak noise",
@@ -741,7 +744,7 @@ hasil = <input type="text" class="fillAnswer code-blank" data-index="1">
 evaluasi: [
 
 {
-question: "Tujuan utama dari <em>image enhancement</em> dalam pengolahan citra digital adalah …",
+question: "Pada sistem pengolahan citra digital, kualitas citra sering ditingkatkan terlebih dahulu sebelum dilakukan proses analisis seperti segmentasi atau pengenalan objek. Tujuan utama <em>image enhancement</em> adalah  …",
 options: [
 "Mengurangi ukuran file citra",
 "Membuat citra terlihat lebih indah",
@@ -763,7 +766,8 @@ $$
 \\end{bmatrix}
 $$
 
-Matriks tersebut paling tepat merepresentasikan jenis citra …
+Karena hanya memiliki dua kemungkinan nilai intensitas, matriks tersebut paling tepat 
+merepresentasikan jenis citra …
 `,
 options: [
 "Grayscale 16-bit",
@@ -776,19 +780,19 @@ correct: 4
 },
 
 {
-question: "Sebuah citra RGB memiliki satu piksel dengan nilai (255,0,0). Warna piksel tersebut adalah …",
+question: "Pada model warna RGB, setiap piksel direpresentasikan oleh kombinasi komponen merah <em>(Red)</em>, hijau <em>(Green)</em>, dan biru <em>(Blue)</em>. Jika sebuah piksel memiliki nilai (255,0,0), maka warna yang dihasilkan adalah …",
 options: [
 "Hitam",
+"Putih",
 "Hijau",
 "Biru",
-"Merah",
-"Putih"
+"Merah"
 ],
 correct: 3
 },
 
 {
-question: "Perbedaan utama antara <em>image enhancement</em> dan <em>image restoration</em> terletak pada …",
+question: "Meskipun sama-sama bertujuan memperbaiki kualitas citra, <em>image restoration</em> berbeda dengan <em>image enhancement</em> karena …",
 options: [
 "Ada atau tidaknya model degradasi citra",
 "Ukuran citra yang diproses",
@@ -800,7 +804,7 @@ correct: 0
 },
 
 {
-question: "Transformasi <em>brightness</em> dilakukan dengan cara menambahkan atau mengurangi nilai intensitas piksel sehingga citra dapat terlihat lebih …",
+question: "Dalam transformasi intensitas, <em>brightness</em> digunakan untuk mengatur tingkat kecerahan citra dengan menambahkan atau mengurangi nilai intensitas setiap piksel. Akibatnya, citra dapat terlihat lebih …",
 options: [
 "Tajam atau kabur",
 "Besar atau kecil",
@@ -836,13 +840,13 @@ correct: 3
 },
 
 {
-question: "Suatu citra memiliki histogram yang hanya tersebar pada rentang intensitas sempit sehingga objek tampak kurang jelas. Kondisi tersebut menunjukkan bahwa citra memiliki …",
+question: "Sebuah citra memiliki histogram yang hanya menempati sebagian kecil rentang intensitas yang tersedia. Akibatnya, objek dan latar belakang terlihat kurang jelas ketika diamati. Kondisi tersebut menunjukkan bahwa citra memiliki …",
 options: [
 "Histogram seragam",
 "Distribusi merata",
 "Kontras tinggi",
 "Kontras rendah",
-"Noise impulsive"
+"<em>Noise impulsive</em>"
 ],
 correct: 3
 },
@@ -1009,7 +1013,7 @@ correct: 4
 
 {
 question: `
-Sebuah citra memiliki histogram yang sangat sempit di area gelap. Teknik yang paling tepat untuk memperluas distribusi intensitas tanpa menentukan histogram target tertentu adalah …
+Sebuah citra memiliki histogram yang sangat sempit di area gelap sehingga detail objek sulit diamati. Teknik yang paling tepat untuk memperluas distribusi intensitas tanpa menentukan histogram target tertentu adalah …
 `,
 options: [
 "<em>Histogram specification</em>",
@@ -1029,7 +1033,7 @@ options: [
 "Histogram seragam",
 "Kontras tinggi",
 "Kontras rendah",
-"<em>Noise</em> impulsive",
+"<em>Noise impulsive</em>",
 "Intensitas maksimum"
 ],
 correct: 2
@@ -1037,7 +1041,9 @@ correct: 2
 
 {
 question: `
-Dalam <em>histogram equalization</em>, fungsi <em>CDF (Cumulative Distribution Function)</em> digunakan karena fungsi tersebut mampu …
+Pada <em>histogram equalization</em>, diperlukan suatu fungsi yang dapat mengubah nilai 
+intensitas lama menjadi nilai intensitas baru berdasarkan distribusi histogram citra. 
+Fungsi yang digunakan untuk tujuan tersebut adalah CDF karena …
 `,
 options: [
 "Menghapus intensitas minimum citra",
@@ -1106,7 +1112,10 @@ correct: 3
 
 {
 question: `
-<em>Histogram specification</em> berbeda dengan <em>histogram equalization</em> karena pada <em>histogram specification</em> …
+Perhatikan dua kondisi berikut. <br>
+1) Histogram citra terkonsentrasi pada intensitas rendah. <br>
+2) Histogram citra terkonsentrasi pada intensitas menengah dengan rentang sempit. <br>
+Transformasi yang paling tepat untuk masing-masing kondisi secara berurutan adalah  …
 `,
 options: [
 "Distribusi histogram hasil dapat ditentukan sesuai target",

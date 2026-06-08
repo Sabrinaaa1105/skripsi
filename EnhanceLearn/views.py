@@ -30,6 +30,8 @@ def tentang(request):
 
 def materi(request):
     return render(request, 'EnhanceLearn/materi.html')
+def petunjuk(request):
+    return render(request, 'EnhanceLearn/petunjuk.html')
 
 
 # =========================
@@ -113,19 +115,34 @@ def login_user(request):
 # =========================
 def dashboard_dosen(request):
 
-    jumlah_mahasiswa = Profile.objects.filter(role='mahasiswa').count()
-    jumlah_kelas = Kelas.objects.count()
+    jumlah_mahasiswa = Profile.objects.filter(
+        role='mahasiswa',
+        kelas__dosen=request.user
+    ).count()
+
+    jumlah_kelas = Kelas.objects.filter(
+        dosen=request.user
+    ).count()
+
+    jumlah_selesai = ProgressMahasiswa.objects.filter(
+        progress=100,
+        user__profile__kelas__dosen=request.user
+    ).count()
+
     kkm, created = KKM.objects.get_or_create(id=1)
-    jumlah_selesai = ProgressMahasiswa.objects.filter(progress=100).count()
 
     context = {
         "kkm": kkm.nilai,
-        'jumlah_mahasiswa': jumlah_mahasiswa,
-        'jumlah_kelas': jumlah_kelas,
-        'jumlah_selesai': jumlah_selesai
+        "jumlah_mahasiswa": jumlah_mahasiswa,
+        "jumlah_kelas": jumlah_kelas,
+        "jumlah_selesai": jumlah_selesai,
     }
 
-    return render(request, 'EnhanceLearn/dosen/dashboard-dosen.html', context)
+    return render(
+        request,
+        "EnhanceLearn/dosen/dashboard-dosen.html",
+        context
+    )
 
 
 def update_kkm(request):
@@ -173,6 +190,11 @@ def register_dosen(request):
         Profile.objects.create(
             user=user,
             role="dosen"
+        )
+
+        messages.success(
+            request,
+            "Akun dosen berhasil didaftarkan. Silakan login menggunakan akun Anda."
         )
 
         return redirect("login")
@@ -364,12 +386,17 @@ from .models import ProgressMahasiswa, Profile
 def progres_mahasiswa(request):
 
     mahasiswa_list = Profile.objects.select_related(
-        'user','kelas'
-    ).filter(role='mahasiswa')
+        'user', 'kelas'
+    ).filter(
+        role='mahasiswa',
+        kelas__dosen=request.user
+    )
 
     data = []
 
-    kelas_list = Kelas.objects.all()
+    kelas_list = Kelas.objects.filter(
+        dosen=request.user
+    )
 
     for mhs in mahasiswa_list:
 
@@ -393,46 +420,198 @@ def progres_mahasiswa(request):
 from django.http import JsonResponse
 from .models import ProgressMahasiswa, HasilKuis
 
+from django.http import JsonResponse
+from django.contrib.auth.models import User
+from .models import Profile
+
+from django.http import JsonResponse
+from django.contrib.auth.models import User
+from .models import ProgressMahasiswa, HasilKuis, Profile
+
+
 def detail_progress(request, user_id):
 
-    progress = ProgressMahasiswa.objects.filter(user_id=user_id).first()
+    progress_obj = ProgressMahasiswa.objects.filter(
+        user_id=user_id
+    ).first()
 
-    aktivitas = progress.aktivitas_selesai if progress else 0
+    aktivitas = progress_obj.aktivitas_selesai if progress_obj else 0
+    progress_persen = progress_obj.progress if progress_obj else 0
+
+    user = User.objects.get(id=user_id)
+    profile = Profile.objects.filter(user=user).first()
 
     data = {
-        "pendahuluan": {
-            "aktivitas": min(aktivitas,2),
-            "total":2,
-            "kuis": HasilKuis.objects.filter(user_id=user_id,judul_kuis="pendahuluan",status="lulus").exists()
-        },
-        "pkc": {
-            "aktivitas": max(min(aktivitas-2,2),0),
-            "total":2,
-            "kuis": HasilKuis.objects.filter(user_id=user_id,judul_kuis="pkc",status="lulus").exists()
-        },
-        "intensitas": {
-            "aktivitas": max(min(aktivitas-4,6),0),
-            "total":6,
-            "kuis": HasilKuis.objects.filter(user_id=user_id,judul_kuis="intensitas",status="lulus").exists()
-        },
-        "histogram": {
-            "aktivitas": max(min(aktivitas-10,2),0),
-            "total":2,
-            "kuis": HasilKuis.objects.filter(user_id=user_id,judul_kuis="histogram",status="lulus").exists()
-        },
-        "praktik": {
-            "aktivitas": max(min(aktivitas-12,3),0),
-            "total":3,
-            "kuis": HasilKuis.objects.filter(user_id=user_id,judul_kuis="praktik",status="lulus").exists()
-        },
 
-        "evaluasi": {
-            "kuis": HasilKuis.objects.filter(
-                user_id=user_id,
-                judul_kuis="evaluasi",
-                status="lulus"
-            ).exists()
-        }
+        "nama": user.get_full_name() or user.username,
+        "nim": profile.nim if profile else "-",
+        "progress": progress_persen,
+
+        "section": [
+
+            # =========================
+            # PENDAHULUAN
+            # =========================
+            {
+                "judul": "PENDAHULUAN",
+                "items": [
+                    {
+                        "nama": "1. Pengertian Citra Digital",
+                        "selesai": aktivitas >= 1
+                    },
+                    {
+                        "nama": "2. Jenis-Jenis Citra Digital",
+                        "selesai": aktivitas >= 2
+                    },
+                    {
+                        "nama": "3. Kuis 1",
+                        "selesai": HasilKuis.objects.filter(
+                            user_id=user_id,
+                            judul_kuis="pendahuluan",
+                            status="lulus"
+                        ).exists()
+                    }
+                ]
+            },
+
+            # =========================
+            # PENGANTAR PENINGKATAN KUALITAS CITRA
+            # =========================
+            {
+                "judul": "PENGANTAR PENINGKATAN KUALITAS CITRA",
+                "items": [
+                    {
+                        "nama": "1. Pengertian Peningkatan Kualitas Citra",
+                        "selesai": aktivitas >= 3
+                    },
+                    {
+                        "nama": "2. Perbedaan Image Enhancement VS Image Restoration",
+                        "selesai": aktivitas >= 4
+                    },
+                    {
+                        "nama": "3. Kuis 2",
+                        "selesai": HasilKuis.objects.filter(
+                            user_id=user_id,
+                            judul_kuis="pkc",
+                            status="lulus"
+                        ).exists()
+                    }
+                ]
+            },
+
+            # =========================
+            # INTENSITAS
+            # =========================
+            {
+                "judul": "INTENSITAS",
+                "items": [
+                    {
+                        "nama": "1. Brightness (Kecerahan)",
+                        "selesai": aktivitas >= 5
+                    },
+                    {
+                        "nama": "2. Contrast",
+                        "selesai": aktivitas >= 6
+                    },
+                    {
+                        "nama": "3. Negative Transformation (Operasi Negasi)",
+                        "selesai": aktivitas >= 7
+                    },
+                    {
+                        "nama": "4. Thresholding (Operasi Ambang Batas)",
+                        "selesai": aktivitas >= 8
+                    },
+                    {
+                        "nama": "5. Log Transformation (Transformasi Logaritmik)",
+                        "selesai": aktivitas >= 9
+                    },
+                    {
+                        "nama": "6. Transformasi Power-Law (Gamma)",
+                        "selesai": aktivitas >= 10
+                    },
+                    {
+                        "nama": "7. Kuis 3",
+                        "selesai": HasilKuis.objects.filter(
+                            user_id=user_id,
+                            judul_kuis="intensitas",
+                            status="lulus"
+                        ).exists()
+                    }
+                ]
+            },
+
+            # =========================
+            # HISTOGRAM
+            # =========================
+            {
+                "judul": "HISTOGRAM",
+                "items": [
+                    {
+                        "nama": "1. Histogram Equalization",
+                        "selesai": aktivitas >= 11
+                    },
+                    {
+                        "nama": "2. Histogram Specification",
+                        "selesai": aktivitas >= 12
+                    },
+                    {
+                        "nama": "3. Kuis 4",
+                        "selesai": HasilKuis.objects.filter(
+                            user_id=user_id,
+                            judul_kuis="histogram",
+                            status="lulus"
+                        ).exists()
+                    }
+                ]
+            },
+
+            # =========================
+            # IMAGE ENHANCEMENT DENGAN PYTHON
+            # =========================
+            {
+                "judul": "IMAGE ENHANCEMENT DENGAN PYTHON",
+                "items": [
+                    {
+                        "nama": "1. Citra Grayscale & Biner",
+                        "selesai": aktivitas >= 13
+                    },
+                    {
+                        "nama": "2. Point Operations",
+                        "selesai": aktivitas >= 14
+                    },
+                    {
+                        "nama": "3. Histogram",
+                        "selesai": aktivitas >= 15
+                    },
+                    {
+                        "nama": "4. Kuis 5",
+                        "selesai": HasilKuis.objects.filter(
+                            user_id=user_id,
+                            judul_kuis="praktik",
+                            status="lulus"
+                        ).exists()
+                    }
+                ]
+            },
+
+            # =========================
+            # EVALUASI
+            # =========================
+            {
+                "judul": "EVALUASI",
+                "items": [
+                    {
+                        "nama": "Evaluasi",
+                        "selesai": HasilKuis.objects.filter(
+                            user_id=user_id,
+                            judul_kuis="evaluasi",
+                            status="lulus"
+                        ).exists()
+                    }
+                ]
+            }
+
+        ]
     }
 
     return JsonResponse(data)
@@ -448,7 +627,10 @@ def data_nilai(request):
     # ambil semua mahasiswa
     mahasiswa_list = Profile.objects.select_related(
         'user', 'kelas'
-    ).filter(role='mahasiswa')
+    ).filter(
+        role='mahasiswa',
+        kelas__dosen=request.user
+    )
 
 
     # =========================
@@ -535,7 +717,9 @@ def data_nilai(request):
             "evaluasi": nilai.get("evaluasi", "-"),
         })
 
-    kelas_list = Kelas.objects.all()
+    kelas_list = Kelas.objects.filter(
+        dosen=request.user
+    )
     
     context = {
         "data_nilai": data_nilai,
@@ -571,7 +755,8 @@ def riwayat_kuis_json(request, user_id):
             "mulai": h.waktu_mulai.strftime("%H:%M:%S"),
             "selesai": h.waktu_selesai.strftime("%H:%M:%S"),
             "nilai": h.nilai,
-            "status": h.status
+            "status": h.status,
+            "detail_soal": h.detail_soal,
         })
 
     return JsonResponse(data)
@@ -601,7 +786,12 @@ def export_nilai_excel(request):
         "Evaluasi"
     ])
 
-    mahasiswa_list = Profile.objects.select_related('user','kelas').filter(role='mahasiswa')
+    mahasiswa_list = Profile.objects.select_related(
+        'user','kelas'
+    ).filter(
+        role='mahasiswa',
+        kelas__dosen=request.user
+    )
 
     kelas_id = request.GET.get("kelas")
 
@@ -797,6 +987,11 @@ def register_mhs(request):
             role="mahasiswa",
             nim=nim,
             kelas=kelas
+        )
+
+        messages.success(
+            request,
+            "Akun berhasil didaftarkan. Silakan login menggunakan akun Anda."
         )
 
         return redirect("login")
@@ -996,6 +1191,11 @@ def halaman_hasil(request, id):
         "histogram": {
             "sebelum": "histogram_specification",
             "sesudah": "grayscale_biner"
+        },
+        
+        "praktik": {
+        "sebelum": "rangkuman5",
+        "sesudah": "evaluasi"
         }
     }
 
@@ -1039,6 +1239,7 @@ def hasil_kuis(request):
 
         data = json.loads(request.body)
 
+        detail_soal = data.get("detail_soal", [])
         nilai = data.get("nilai")
         judul = data.get("judul")
         waktu = data.get("waktu")
@@ -1061,7 +1262,8 @@ def hasil_kuis(request):
             waktu_selesai=timezone.now(),
             nilai=nilai,
             status=status,
-            percobaan_ke=percobaan
+            percobaan_ke=percobaan,
+            detail_soal=detail_soal
         )
 
         return JsonResponse({
