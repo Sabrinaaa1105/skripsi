@@ -128,7 +128,7 @@ function loadQuestion() {
         MathJax.typesetPromise([questionEl]);
     }
     if (counterEl) {
-        counterEl.innerHTML = `<strong>Pertanyaan ${index + 1} dari ${dataAktivitas.length}</strong>`;
+        counterEl.innerHTML = `<strong>Pertanyaan ${index + 1} / ${dataAktivitas.length}</strong>`;
     }
     
     choicesEl.innerHTML = "";

@@ -169,7 +169,7 @@
             </button>
             <div class="accordion-body">
                 {% if "pkc" in kuis_lulus %}
-                    <a href="{% url 'brightness' %}">Brightness</a>
+                    <a href="{% url 'brightness' %}"><em>Brightness</em></a>
                 {% else %}
                     <span class="locked-link">
                         <span>Brightness</span>
@@ -178,7 +178,7 @@
                 {% endif %}
 
                 {% if "aktivitas5" in aktivitas_selesai %}
-                    <a href="{% url 'contrast' %}">Contrast</a>
+                    <a href="{% url 'contrast' %}"><em>Contrast</em></a>
                 {% else %}
                     <span class="locked-link">
                         <span>Contrast</span>
@@ -196,7 +196,7 @@
                 {% endif %}
 
                 {% if "aktivitas7" in aktivitas_selesai %}
-                    <a href="{% url 'thresholding' %}">Thresholding</a>
+                    <a href="{% url 'thresholding' %}"><em>Thresholding</em></a>
                 {% else %}
                     <span class="locked-link">
                         <span>Thresholding</span>
@@ -205,7 +205,7 @@
                 {% endif %}
 
                 {% if "aktivitas8" in aktivitas_selesai %}
-                    <a href="{% url 'logaritmik' %}">Logaritmik</a>
+                    <a href="{% url 'logaritmik' %}">Transformasi Logaritmik</a>
                 {% else %}
                     <span class="locked-link">
                         <span>Logaritmik</span>
@@ -214,7 +214,7 @@
                 {% endif %}
 
                 {% if "aktivitas9" in aktivitas_selesai %}
-                    <a href="{% url 'power_law' %}">Power Law</a>
+                    <a href="{% url 'power_law' %}">Transformasi <em>Power Law</em></a>
                 {% else %}
                     <span class="locked-link">
                         <span>Power Law</span>

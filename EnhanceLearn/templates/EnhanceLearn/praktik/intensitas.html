@@ -1,22 +1,22 @@
 {% extends "EnhanceLearn/base.html" %}
 {% load static %}
 
-{% block title %}Transformasi intensitas Citra dengan Python{% endblock %}
+{% block title %}<em>Point Operation</em> dengan Python{% endblock %}
 
 {% block content %}
 
 <div class="materi-container">
-    <h1 class="subbab-title">SUBBAB 5: TRANSFORMASI INTENSITAS CITRA DENGAN PYTHON</h1>
+    <h1 class="subbab-title">SUBBAB 5: <em>POINT OPERATION</em> DENGAN PYTHON</h1>
 
     <div class="materi-box">
         <div class="materi-box-header">
             <i class="bi bi-code-slash"></i>
-            Transformasi Intesitas Citra dengan Python
+            <em>Point Operation</em> dengan Python
         </div>
 
         <div class="materi-box-body">
             <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
-                Library Pillow menyediakan berbagai fungsi yang dapat digunakan untuk melakukan transformasi intensitas citra, seperti pengaturan kecerahan (<em>brightness</em>), kontras (<em>contrast</em>), negasi (<em>invers</em>), <em>thresholding</em>, serta transformasi non-linear seperti logaritmik dan <em>power-law (gamma)</em>.
+                Library Pillow menyediakan berbagai fungsi yang dapat digunakan untuk melakukan <em>point operation</em>, seperti pengaturan kecerahan (<em>brightness</em>), kontras (<em>contrast</em>), negasi (<em>invers</em>), <em>thresholding</em>, serta transformasi non-linear seperti logaritmik dan <em>power-law (gamma)</em>.
                 Fitur-fitur ini dapat diakses melalui modul seperti <code>Image</code>, <code>ImageEnhance</code>, dan <code>ImageOps</code>.<br>
                 Sebagai contoh, <code>ImageEnhance.Brightness</code> digunakan untuk mengatur tingkat kecerahan citra, sedangkan <code>ImageEnhance.Contrast</code> digunakan untuk meningkatkan atau menurunkan kontras. Untuk operasi negasi, Pillow menyediakan fungsi <code>ImageOps.invert</code> yang secara langsung membalik nilai intensitas piksel. Operasi thresholding dapat
                 dilakukan dengan memanfaatkan metode <code>point()</code> untuk memetakan nilai piksel berdasarkan ambang batas tertentu.
@@ -48,7 +48,7 @@ hasil = contrast.enhance(1.5)</code></pre>
 
             <hr style="margin-top:35px; margin-bottom:18px;">
 
-            <h4 style="font-weight:700; color: #1e3a8a;"><em>Invers</em></h4>
+            <h4 style="font-weight:700; color: #1e3a8a;"><em>Negative transformation</em></h4>
             <pre style="background: #dbeafe; border: 1px solid #60a5fa; border-radius: 12px; padding: 18px 20px; overflow-x: auto; margin-top: 18px;">
 <code style="font-family: 'Courier New', monospace; font-size: 16px; line-height: 1.5; color: #0f172a;">img = Image.open("gambar.jpg")
 invert = ImageOps.invert(img.convert("L"))

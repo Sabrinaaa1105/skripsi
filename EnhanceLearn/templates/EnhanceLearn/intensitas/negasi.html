@@ -7,22 +7,22 @@
 <link rel="stylesheet" href="{% static 'css/materi.css' %}">
 
 <div class="materi-container">
-    <h1 class="subbab-title">SUBBAB 3: <em>INVERS</em></h1>
+    <h1 class="subbab-title">SUBBAB 3: <em>NEGATIVE TRANSFORMATION</em></h1>
 
 
     <div class="materi-box">
         <div class="materi-box-header">
             <i class="bi bi-circle-half"></i>
-            Konsep Operasi Negasi <em>(Invers)</em>
+            Konsep <em>Negative Transformation</em>
         </div>
 
         <div class="materi-box-body">
             <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
-                Operasi negasi <em>(invers)</em> merupakan salah satu transformasi intensitas dasar
-                pada pemrosesan citra digital, yaitu transformasi yang <strong>nilai intensitas piksel keluarannya hanya 
-                bergantung pada nilai intensitas piksel masukan pada posisi yang sama</strong>. 
-                Tujuan utamanya untuk <strong>membalik tingkat intensitas piksel</strong> pada citra <em>grayscale</em>. 
-                Pada operasi ini, piksel dengan intensitas rendah akan dipetakan menjadi intensitas tinggi, dan sebaliknya.
+                <em>Negative Transformation</em> (Operasi Negasi) merupakan salah satu <em>point operation</em> yang 
+                digunakan untuk membalik nilai intensitas piksel pada citra. Pada operasi ini, setiap piksel 
+                diproses secara independen sehingga nilai intensitas rendah akan diubah menjadi intensitas 
+                tinggi, sedangkan intensitas tinggi akan diubah menjadi intensitas rendah. Hasil dari proses ini 
+                adalah citra negatif yang menampilkan kebalikan tingkat keabuan dari citra asli. 
             </p>
 
             <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
@@ -56,7 +56,7 @@
                     </tbody>
                 </table>
                 <p style="font-size:13px; margin-top:6px; font-style:italic; text-align:center;">
-                    Gambar 3.7 Perbandingan citra asli dan citra negasi
+                    Gambar 3.7 Perbandingan citra asli dan citra hasil negasi
                 </p>
             </div>
 
@@ -64,7 +64,7 @@
                 Dari Gambar 3.7 terlihat bahwa piksel–piksel yang berwarna putih diubah menjadi hitam, 
                 sebaliknya piksel–piksel yang berwarna hitam diubah menjadi putih. 
                 Secara matematis, untuk citra <em>grayscale</em> dengan jumlah tingkat keabuan 
-                <em>L</em>, operasi negasi dinyatakan dengan persamaan:
+                $L$, operasi negasi dinyatakan dengan persamaan:
             </p>
 
             <div style="text-align:center; margin: 16px 0; font-size: 17px;">

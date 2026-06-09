@@ -17,17 +17,12 @@
         <div class="materi-box-body">
             <h6>Setelah mempelajari bab ini, mahasiswa diharapkan:</h6>
             <ul style="font-size:15px;">
-                <li>Mampu memahami konsep dasar dan menerapkan persamaan transformasi <em>brightness</em> untuk 
-                menghitung nilai intensitas piksel hasil pada suatu citra.</li>
-                <li>Mampu memahami konsep dasar kontras dan menerapkan teknik transformasi <em>contrast stretching</em> 
-                untuk menghitung nilai intensitas piksel hasil pada suatu citra.</li>
-                <li>Mampu memahami konsep dasar operasi negasi <em>invers</em> dan menerapkannya untuk menghitung 
-                nilai intensitas piksel hasil pada suatu citra.</li>
-                <li>Mampu memahami konsep dasar <em>thresholding</em> dan menganalisis pengaruh perubahan nilai ambang <strong><em>(T)</em></strong> 
-                terhadap hasil citra biner.</li>
-                <li>Mampu menerapkan transformasi logaritmik pada suatu citra.</li>
-                <li>Mampu memahami konsep dasar <em>Power – Law</em> dan menerapkannya untuk menghitung nilai intensitas 
-                piksel hasil pada suatu citra.</li>
+                <li>Mampu menerapkan persamaan transformasi <em>brightness</em> untuk menghitung nilai intensitas piksel hasil pada suatu citra.</li>
+                <li>Mampu menerapkan teknik transformasi <em>contrast stretching</em> untuk menghitung nilai intensitas piksel hasil pada suatu citra.</li>
+                <li>Mampu merapkan <em>negative transformation</em> untuk menghitung nilai intensitas piksel hasil pada suatu citra.</li>
+                <li>Mampu menganalisis pengaruh perubahan nilai ambang <strong><em>(T)</em></strong> terhadap hasil citra biner.</li>
+                <li>Mampu menerapkan transformasi logaritmik pada suatu citra untuk menghitung nilai intensitas piksel hasil pada suatu citra.</li>
+                <li>Mampu menerapkan transformasi <em>power – law</em> untuk menghitung nilai intensitas piksel hasil pada suatu citra.</li>
             </ul>
         </div>
     </div>
@@ -35,11 +30,14 @@
     <div class="materi-box">
         <div class="materi-box-body">
             <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
-                Peningkatan kualitas citra (<em>image enhacement</em>) dapat dilakukan melalui transformasi intensitas citra, yaitu besar intensitas setiap piksel pada 
-                citra diubah, tetapi posisi piksel tetap. Transformasi ini dilakukan melalui sebuah fungsi yang disebut fungsi skala keabuan atau <em>Grayscale 
-                Transformation function</em> atau biasa disebut fungsi GST. Fungsi ini memetakan fungsi input $fi(x,y)$ (yang bertindak sebagai citra input) menjadi 
-                fungsi output $fo(x,y)$ (yang bertindak sebagai citra output). Menutur tingkat komputasi pengolahan citra digital, transformasi intensitas citra 
-                termasuk <em>poin operation</em> (operasi titik), yaitu hasil proses suatu titik (piksel) tidak tergantung pada titik – titik tetangganya.
+                <em>Point Operations</em> (Operasi titik) merupakan salah satu teknik dasar dalam peningkatan 
+kualitas citra (<em>image enhancement</em>) yang dilakukan dengan memodifikasi nilai intensitas setiap 
+piksel secara individual tanpa memperhatikan nilai piksel di sekitarnya. Pada metode ini, nilai 
+intensitas setiap piksel pada citra diubah, sedangkan posisi piksel tetap. Perubahan tersebut 
+dilakukan menggunakan fungsi yang disebut fungsi <em>Grayscale Transformation Function</em> 
+(GST). Fungsi ini memetakan nilai intensitas piksel pada citra masukan $𝑓_𝑖(𝑥,𝑦)$ menjadi nilai 
+intensitas piksel pada citra keluaran $𝑓_𝑜(𝑥,𝑦)$, sehingga dihasilkan citra dengan karakteristik 
+visual yang lebih sesuai dengan tujuan pengolahan. 
             </p>
          </div>
     </div>
@@ -61,20 +59,20 @@
             </p>
 
             <div style="text-align:center; margin: 14px 0; font-size: 16.5px;">
-                $$f_o(x,y) = f_i(x,y) + k$$
+                $$f_o(x,y) = f_i(x,y) + b$$
             </div>
 
             <p style="font-size: 16.5px; margin-top: 10px;">Dimana:</p>
             <ul style="font-size: 16.5px; line-height: 1.8;">
                 <li>$f_o(x,y)$ adalah nilai intensitas piksel output setelah transformasi.</li>
                 <li>$f_i(x,y)$ adalah nilai intensitas piksel input pada koordinat $(x,y)$.</li>
-                <li>$k$ adalah nilai <em>brightness</em>.</li>
+                <li>$b$ adalah nilai <em>brightness</em>.</li>
             </ul>
 
             <p style="font-size: 16.5px; margin-top: 10px;">Nilai konstanta $k$ menentukan efek yang dihasilkan, yaitu:</p>
             <ul style="font-size: 16.5px; line-height: 1.8;">
-                <li>Jika $k > 0$, maka citra menjadi <strong>lebih terang</strong>.</li>
-                <li>Jika $k < 0$, maka citra menjadi <strong>lebih gelap</strong>.</li>
+                <li>Jika $b > 0$, maka citra menjadi <strong>lebih terang</strong>.</li>
+                <li>Jika $b < 0$, maka citra menjadi <strong>lebih gelap</strong>.</li>
             </ul>
 
             <p style="text-align: justify; font-size: 17px; line-height: 1.75; margin-top: 10px;">
@@ -121,9 +119,9 @@
 
             <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
                 Pada perhitungan fungsi kecerahan untuk citra <em>grayscale</em> 256 warna, terjadi perubahan pada Gambar 3.1 Saat konstanta 
-                kecerahan <em>k</em> positif ditambah, nilai – nilai intensitas yang semula mendekati atau sama dengan 255 hasil bisa lebih besar 
-                dari 255. Sebaliknya, untuk <em>k</em> negatif, nilai-nilai intensitas yang semula mendekati atau sama dengan 0 hasilnya bisa lebih 
-                kecil dari 0 (negatif) saat ditambah dengan konstanta <em>k</em>.
+                kecerahan $b$ positif ditambah, nilai – nilai intensitas yang semula mendekati atau sama dengan 255 hasil bisa lebih besar 
+                dari 255. Sebaliknya, untuk $b$ negatif, nilai-nilai intensitas yang semula mendekati atau sama dengan 0 hasilnya bisa lebih 
+                kecil dari 0 (negatif) saat ditambah dengan konstanta $b$.
             </p>
 
         </div>

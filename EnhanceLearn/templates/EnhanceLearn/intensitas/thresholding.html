@@ -17,7 +17,7 @@
 
     <div class="materi-box-body">
       <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
-        Operasi ambang batas (<em>thresholding</em>) merupakan salah satu teknik dasar dalam pemrosesan citra digital yang 
+        <em>thresholding</em> (Operasi ambang batas) merupakan salah satu teknik dasar dalam pemrosesan citra digital yang 
         digunakan untuk <strong>memisahkan objek dan latar belakang</strong> berdasarkan nilai intensitas piksel. Pada operasi ini, 
         setiap piksel citra <em>grayscale</em> dibandingkan dengan suatu nilai ambang tertentu yang disebut sebagai 
         <strong><em>threshold (T)</em></strong>. Hasil perbandingan tersebut menentukan nilai piksel pada citra keluaran. Berbeda dengan 
@@ -48,9 +48,9 @@
       </div>
 
       <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
-        Berdasarkan persamaan tersebut, setiap nilai intensitas piksel citra masukan dibandingkan dengan nilai ambang <em>T</em>. 
-        Jika nilai intensitas piksel lebih besar dari <em>T</em>, maka piksel tersebut diklasifikasikan sebagai <strong>objek</strong> dan 
-        diberi nilai maksimum. Sebaliknya, jika nilai intensitas piksel lebih kecil atau sama dengan <em>T</em>, maka piksel tersebut 
+        Berdasarkan persamaan tersebut, setiap nilai intensitas piksel citra masukan dibandingkan dengan nilai ambang $T$. 
+        Jika nilai intensitas piksel lebih besar dari $T$, maka piksel tersebut diklasifikasikan sebagai <strong>objek</strong> dan 
+        diberi nilai maksimum. Sebaliknya, jika nilai intensitas piksel lebih kecil atau sama dengan $T$, maka piksel tersebut 
         diklasifikasikan sebagai <strong>latar belakang</strong> dan diberi nilai 0. Gambar 3.10 adalah hasil percobaan dari citra hitam putih 
         yang memiliki <em>grayscale</em> 256, yang dipetakan menjadi citra biner.
       </p>
@@ -120,7 +120,7 @@
       <ol style="font-size:14.5px; line-height:1.8; color:#334155; padding-left:20px;">
           <li>
               <strong>Atur Nilai Threshold:</strong> Geser slider atau ubah angka pada kolom 
-              <em>Threshold (T)</em> untuk menentukan batas intensitas piksel yang akan digunakan 
+              <em>Threshold ($T$)</em> untuk menentukan batas intensitas piksel yang akan digunakan 
               pada proses <em>thresholding</em>.
           </li>
 
@@ -140,7 +140,7 @@
 
           <li>
               <strong>Amati Hasil Thresholding:</strong> Jika nilai piksel lebih besar dari 
-              <em>Threshold (T)</em>, maka piksel output akan diubah menjadi 
+              <em>Threshold ($T$)</em>, maka piksel output akan diubah menjadi 
               <strong>255 (putih)</strong>. Sebaliknya, jika nilai piksel lebih kecil atau sama 
               dengan <em>T</em>, maka output akan menjadi <strong>0 (hitam)</strong>.
           </li>
@@ -170,7 +170,7 @@
 
             <div class="param-row">
               <div class="param-box">
-                Threshold (T)
+                <em>Threshold (T)</em>
                 <input type="range" id="Tslider" min="0" max="255" value="100" style="width:160px;">
                 <br>
                 <input type="number" id="Tval" min="0" max="255" value="100" style="width:70px; margin-top:6px;">
@@ -216,7 +216,7 @@
 
     <p style="font-size:15.5px; line-height:1.8; text-align:justify;">
       Upload gambar Anda sendiri kemudian ubah nilai 
-      <em>threshold (T)</em> untuk melihat bagaimana proses 
+      <em>threshold ($T$)</em> untuk melihat bagaimana proses 
       <em>thresholding</em> memisahkan objek dan latar belakang 
       menjadi citra biner hitam putih.
     </p>
@@ -241,7 +241,7 @@
       <div class="exp-slider-group">
 
         <label class="slider-label">
-          <b>Threshold (T):</b>
+          <b>Threshold ($T$):</b>
         </label>
 
         <div class="exp-slider-row">
@@ -388,11 +388,17 @@
       result[y][x] = s;
 
       calcBox.innerHTML = `
-        r=${r}<br>
-        T=${T}<br>
-        ${r} ${r > T ? ">" : "≤"} ${T}<br>
-        s=${s}
-      `;
+        \\[
+        \\begin{aligned}
+        r &= ${r} \\\\
+        T &= ${T} \\\\
+        ${r} &\\le ${T} \\\\
+        s &= ${s}
+        \\end{aligned}
+        \\]
+        `;
+
+        MathJax.typesetPromise();
 
       drawOutput(result);
       renderMatrices(step, result);
