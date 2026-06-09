@@ -277,13 +277,70 @@ const dataAktivitas8 = [
         explanation: "<em>Thresholding</em> mengubah citra menjadi dua tingkat nilai saja (biner), sedangkan <em>contrast stretching</em> mempertahankan tingkat keabuan tetapi memperlebar rentang intensitasnya."
     },
     {
-        question: "Diberikan sebuah nilai piksel 5×5 dari suatu citra. Jika digunakan operasi <em>thresholding</em> dengan nilai ambang T = 100 dan aturan s = 255 jika r > T, dan 0 jika r ≤ T, maka hasil citra biner yang benar adalah …",
+        question: String.raw`
+            Diberikan sebuah nilai piksel 5×5 dari suatu citra. Jika digunakan operasi
+            <em>thresholding</em> dengan nilai ambang \(T = 100\) dan aturan:
+
+            \[
+            s =
+            \begin{cases}
+            255, & r > T \\
+            0, & r \le T
+            \end{cases}
+            \]
+
+            maka hasil citra biner yang benar adalah …
+            `,
         options: [
-            "[[0,0,0,255,255],[0,0,0,255,255],[0,0,255,255,255],[0,0,255,255,255],[0,255,255,255,255]]",
-            "[[0,255,255,255,255],[255,255,255,255,255],[255,255,255,255,255],[255,255,255,255,255],[255,255,255,255,255]]",
-            "[[0,0,0,0,255],[0,0,0,255,255],[0,0,255,255,255],[0,0,255,255,255],[0,0,255,255,255]]",
-            "[[255,255,255,255,255],[255,255,255,255,255],[255,255,255,255,255],[255,255,255,255,255],[255,255,255,255,255]]",
-            "[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]"
+            String.raw`\[
+            \begin{bmatrix}
+            0 & 0 & 0 & 255 & 255 \\
+            0 & 0 & 0 & 255 & 255 \\
+            0 & 0 & 255 & 255 & 255 \\
+            0 & 0 & 255 & 255 & 255 \\
+            0 & 255 & 255 & 255 & 255
+            \end{bmatrix}
+            \]`,
+
+            String.raw`\[
+            \begin{bmatrix}
+            0 & 255 & 255 & 255 & 255 \\
+            255 & 255 & 255 & 255 & 255 \\
+            255 & 255 & 255 & 255 & 255 \\
+            255 & 255 & 255 & 255 & 255 \\
+            255 & 255 & 255 & 255 & 255
+            \end{bmatrix}
+            \]`,
+
+            String.raw`\[
+            \begin{bmatrix}
+            0 & 0 & 0 & 0 & 255 \\
+            0 & 0 & 0 & 255 & 255 \\
+            0 & 0 & 255 & 255 & 255 \\
+            0 & 0 & 255 & 255 & 255 \\
+            0 & 0 & 255 & 255 & 255
+            \end{bmatrix}
+            \]`,
+
+            String.raw`\[
+            \begin{bmatrix}
+            255 & 255 & 255 & 255 & 255 \\
+            255 & 255 & 255 & 255 & 255 \\
+            255 & 255 & 255 & 255 & 255 \\
+            255 & 255 & 255 & 255 & 255 \\
+            255 & 255 & 255 & 255 & 255
+            \end{bmatrix}
+            \]`,
+
+            String.raw`\[
+            \begin{bmatrix}
+            0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0
+            \end{bmatrix}
+            \]`
         ],
         correct: 0,
         explanation: "Pada <em>thresholding</em> dengan T = 100, setiap piksel yang memiliki nilai lebih besar dari 100 akan diubah menjadi 255 (putih), sedangkan nilai yang kurang dari atau sama dengan 100 menjadi 0 (hitam)."

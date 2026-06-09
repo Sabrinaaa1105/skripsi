@@ -43,14 +43,30 @@
             </div>
         </div>
 
-        {% if not lulus %}
-            <div class="alert-box-inline">
+        {% if lulus %}
+
+            <div class="alert-box-inline alert-success">
+
                 {% if judul_kuis == "evaluasi" %}
-                    Nilai kamu belum mencukupi. Silakan ulangi evaluasi.
+                    Selamat! Anda telah menyelesaikan evaluasi akhir dan dinyatakan lulus.
                 {% else %}
-                    Nilai kamu belum mencukupi. Silakan ulangi kuis.
+                    Selamat! Anda telah menyelesaikan kuis dan dinyatakan lulus.
                 {% endif %}
+
             </div>
+
+        {% else %}
+
+            <div class="alert-box-inline alert-danger">
+
+                {% if judul_kuis == "evaluasi" %}
+                    Nilai Anda belum memenuhi kriteria kelulusan. Silakan ulangi evaluasi.
+                {% else %}
+                    Nilai Anda belum memenuhi kriteria kelulusan. Silakan ulangi kuis.
+                {% endif %}
+
+            </div>
+
         {% endif %}
 
 <div class="intro-footer-outside">

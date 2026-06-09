@@ -123,6 +123,10 @@ function loadQuestion() {
 
     // Update tampilan
     questionEl.innerHTML = q.question;
+
+    if (window.MathJax) {
+        MathJax.typesetPromise([questionEl]);
+    }
     if (counterEl) {
         counterEl.innerHTML = `<strong>Pertanyaan ${index + 1} dari ${dataAktivitas.length}</strong>`;
     }
@@ -150,6 +154,10 @@ function loadQuestion() {
             choicesEl.appendChild(btn);
 
         });
+
+        if (window.MathJax) {
+            MathJax.typesetPromise([choicesEl]);
+        }
 
     }
 }
