@@ -30,6 +30,61 @@
     font-weight: 600;
 }
 
+/* =========================
+   FEEDBACK BENAR
+========================= */
+
+.feedback-success{
+    background: #dff0df;
+    border: 1px solid #c7e3c7;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-top: 10px;
+}
+
+.feedback-title{
+    color: #0f5132;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.feedback-text{
+    color: #0f5132;
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+
+/* =========================
+   FEEDBACK SALAH
+========================= */
+
+.feedback-error{
+    background: #ead0d4;
+    border: 1px solid #dfb8bf;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-top: 10px;
+}
+
+.feedback-title-error{
+    color: #6b1620;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.feedback-text-error{
+    color: #6b1620;
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
 /* ===== PILIHAN JAWABAN ===== */
 .choice-btn {
     display: block;

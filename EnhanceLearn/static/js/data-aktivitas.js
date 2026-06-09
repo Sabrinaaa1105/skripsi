@@ -9,7 +9,8 @@ const dataAktivitas1 = [
             "Nilai maksimum dan minimum intensitas citra",
             "Representasi visual dari citra analog"
         ],
-        correct: 1
+        correct: 1,
+        explanation: "Piksel merupakan elemen terkecil penyusun citra digital. Setiap piksel memiliki posisi (koordinat) dan nilai intensitas yang merepresentasikan informasi gambar."
     },
     {
         question: "Sebuah citra digital direpresentasikan sebagai fungsi dua dimensi f(x,y). Pernyataan yang paling tepat mengenai fungsi tersebut adalah…",
@@ -20,7 +21,8 @@ const dataAktivitas1 = [
             "x dan y menyatakan posisi piksel, sedangkan f(x,y) menyatakan nilai intensitas",
             "x dan y menyatakan nilai intensitas, sedangkan f(x,y) menyatakan koordinat"
         ],
-        correct: 3
+        correct: 3,
+        explanation: "Pada representasi citra digital, x dan y menunjukkan posisi piksel, sedangkan f(x,y) menunjukkan nilai intensitas atau tingkat keabuan pada posisi tersebut."
     },
     {
         question: "Dalam citra digital grayscale, perbedaan antara daerah terang dan gelap pada citra disebabkan oleh perbedaan…",
@@ -31,7 +33,8 @@ const dataAktivitas1 = [
             "Jumlah baris dan kolom citra",
             "Resolusi spasial citra"
         ],
-        correct: 2
+        correct: 2,
+        explanation: "Daerah terang dan gelap pada citra grayscale ditentukan oleh nilai intensitas piksel. Semakin tinggi nilai intensitas, semakin terang tampilan piksel tersebut."
     },
     {
         question: "Citra digital dapat diproses oleh komputer karena citra tersebut direpresentasikan dalam bentuk…",
@@ -42,7 +45,8 @@ const dataAktivitas1 = [
             "Data numerik",
             "Gambar dua dimensi"
         ],
-        correct: 3
+        correct: 3,
+        explanation: "Komputer mengolah citra digital sebagai data numerik yang tersusun dalam bentuk matriks sehingga dapat diproses menggunakan algoritma dan operasi matematika."
     },
     {
         question: "Sebuah citra digital direpresentasikan dalam bentuk matriks berukuran N × M. Jika sebuah citra memiliki ukuran 256 × 512 piksel, maka pernyataan yang paling benar adalah…",
@@ -53,7 +57,8 @@ const dataAktivitas1 = [
             "Citra memiliki 256 baris dan 512 kolom",
             "Citra memiliki 256 kolom dan 512 baris"
         ],
-        correct: 3
+        correct: 3,
+        explanation: "Ukuran citra 256 × 512 berarti citra tersebut tersusun dari 256 baris dan 512 kolom piksel dalam representasi matriksnya."
     }
 ];
 
@@ -62,12 +67,14 @@ const dataAktivitas2 = [
     {
         question: "Citra digital tersusun dari elemen-elemen kecil yang saling berdampingan untuk membentuk keseluruhan gambar. Elemen dasar yang dimaksud adalah…",
         options: ["piksel", "filter", "kanal", "histogram", "bit"],
-        correct: 0
+        correct: 0,
+         explanation: "Piksel merupakan unit terkecil penyusun citra digital. Ribuan hingga jutaan piksel yang tersusun bersama akan membentuk sebuah gambar utuh."
     },
     {
         question: "Citra grayscale hanya memiliki satu kanal yang menyimpan nilai terang–gelap, sehingga informasi yang ditampilkan berupa tingkatan…",
         options: ["warna primer", "kontras RGB", "kedalaman warna", "tekstur", "keabuan"],
-        correct: 4
+        correct: 4,
+        explanation: "Citra grayscale hanya menyimpan informasi tingkat keabuan, mulai dari hitam, abu-abu, hingga putih tanpa informasi warna."        
     },
     {
         question: "Model warna RGB membentuk citra berwarna melalui penggabungan tiga komponen dasar cahaya. Komponen tersebut terdiri dari warna…",
@@ -78,12 +85,14 @@ const dataAktivitas2 = [
             "biru, ungu, dan hijau tua",
             "merah, kuning, dan hitam"
         ],
-        correct: 0
+        correct: 0,
+        explanation: "RGB merupakan singkatan dari Red, Green, dan Blue. Kombinasi ketiga warna dasar cahaya ini dapat menghasilkan berbagai warna pada citra digital."
     },
     {
         question: "Citra biner merupakan citra yang hanya menggunakan dua kemungkinan nilai piksel. Kedua nilai tersebut menunjukkan kondisi hitam dan putih, yaitu…",
         options: ["50 dan 100", "1 dan 2", "0 dan 1", "0 dan 255", "128 dan 255"],
-        correct: 2
+        correct: 2,
+        explanation: "Pada citra biner hanya terdapat dua kemungkinan nilai piksel, yaitu 0 dan 1 yang umumnya merepresentasikan warna hitam dan putih."
     },
     {
         question: "Resolusi citra menentukan seberapa detail objek dapat dilihat dalam gambar. Resolusi ditentukan oleh jumlah…",
@@ -94,7 +103,8 @@ const dataAktivitas2 = [
             "piksel pada lebar dan tinggi citra",
             "filter yang diterapkan"
         ],
-        correct: 3
+        correct: 3,
+        explanation: "Resolusi citra ditentukan oleh jumlah piksel pada lebar dan tinggi gambar. Semakin tinggi jumlah piksel, semakin detail informasi yang dapat ditampilkan."
     }
 ];
 
@@ -102,7 +112,7 @@ const dataAktivitas2 = [
 // ================== AKTIVITAS 3 ==================
 const dataAktivitas3 = [
     {
-        question: "Tujuan utama dari Peningkatan Kualitas Citra (Image Enhancement) adalah untuk...",
+        question: "Tujuan utama dari Peningkatan Kualitas Citra (<em>Image Enhancement</em>) adalah untuk...",
         options: [
             "mengurangi ukuran file gambar secara signifikan",
             "membuat hasil citra lebih sesuai untuk pengamatan atau aplikasi tertentu",
@@ -110,29 +120,32 @@ const dataAktivitas3 = [
             "mengubah citra berwarna menjadi citra biner",
             "menghitung total jumlah piksel dalam citra"
         ],
-        correct: 1
+        correct: 1,
+        explanation: "<em>Image Enhancement</em> bertujuan memperbaiki kualitas citra sehingga lebih mudah diamati manusia atau lebih sesuai untuk kebutuhan analisis dan pemrosesan selanjutnya."
     },
     {
-        question: "Langkah Peningkatan Kualitas Citra sering dikategorikan sebagai Image Pre-processing karena...",
+        question: "Langkah Peningkatan Kualitas Citra sering dikategorikan sebagai <em>Image Pre-processing</em> karena...",
         options: [
             "ia merupakan langkah opsional yang hanya digunakan untuk tujuan visual",
             "ia mengubah format file menjadi JPEG atau PNG",
             "ia hanya berlaku untuk citra yang diakuisisi dari satelit",
-            "ia selalu menghasilkan false positives dalam deteksi tepi",
+            "ia selalu menghasilkan <em>false positives</em> dalam deteksi tepi",
             "ia adalah langkah awal yang krusial sebelum analisis hilir (seperti deteksi objek)"
         ],
-        correct: 4
+        correct: 4,
+        explanation: "<em>Image Enhancement</em> termasuk tahap pre-processing karena dilakukan sebelum proses analisis utama untuk meningkatkan kualitas data masukan agar hasil analisis lebih akurat."
     },
     {
         question: "Citra mentah yang mengalami penurunan mutu seringkali terlalu terang atau terlalu gelap, atau tercemar oleh...",
         options: [
-            "thresholding",
+            "<em>thresholding</em>",
             "matriks grid",
             "piksel elemen",
-            "derau (noise)",
-            "end-in-search"
+            "derau (<em>noise</em>)",
+            "<em>end-in-search</em>"
         ],
-        correct: 3
+        correct: 3,
+        explanation: "<em>Noise</em> atau derau merupakan gangguan yang muncul pada citra dan dapat menurunkan kualitas visual maupun akurasi pemrosesan citra."
     },
     {
         question: "Jika citra masukan memiliki kontras yang buruk, algoritma deteksi objek yang diterapkan selanjutnya cenderung menghasilkan...",
@@ -143,25 +156,27 @@ const dataAktivitas3 = [
             "keluaran yang tidak akurat, memicu deteksi tepi palsu",
             "konversi citra ke ruang warna HSV"
         ],
-        correct: 3
+        correct: 3,
+        explanation: "Kontras yang buruk membuat objek sulit dibedakan dari latar belakang sehingga proses deteksi objek atau deteksi tepi dapat menghasilkan kesalahan."
     },
     {
         question: "Proses perbaikan kualitas yang bertujuan membuat hasil akhir lebih sesuai untuk pengamatan atau aplikasi tertentu disebut...",
         options: [
-            "Image Enhancement",
-            "Noise Reduction",
-            "Image Segmentation",
-            "Image Acquisition",
-            "Edge Detection"
+            "<em>Image Enhancement</em>",
+            "<em>Noise Reduction</em>",
+            "<em>Image Segmentation</em>",
+            "<em>Image Acquisition</em>",
+            "<em>Edge Detection</em>"
         ],
-        correct: 0
+        correct: 0,
+        explanation: "<em>Image Enhancement</em> adalah proses memperbaiki atau meningkatkan kualitas citra agar lebih mudah diamati atau lebih efektif digunakan dalam aplikasi tertentu."
     }
 ];
 
 // ================== AKTIVITAS 4 ==================
 const dataAktivitas4 = [
     {
-        question: "Dalam pemrosesan citra digital, perbedaan utama antara image enhancement dan image restoration terletak pada …",
+        question: "Dalam pemrosesan citra digital, perbedaan utama antara <em>image enhancement</em> dan <em>image restoration</em> terletak pada …",
         options: [
             "Tujuan dan pendekatan perbaikan citra",
             "Jenis citra yang diproses",
@@ -169,18 +184,20 @@ const dataAktivitas4 = [
             "Format penyimpanan citra",
             "Jumlah piksel citra"
         ],
-        correct: 0
+        correct: 0,
+        explanation: "<em>Image Enhancement</em> berfokus pada peningkatan kualitas visual citra sesuai kebutuhan pengguna, sedangkan <em>Image Restoration</em> bertujuan mengembalikan citra sedekat mungkin dengan kondisi aslinya menggunakan pendekatan matematis."
     },
     {
-        question: "Dalam pemrosesan citra digital, perbedaan utama antara image enhancement dan image restoration terletak pada …",
+        question: "<em>Image restoration</em> umumnya digunakan ketika citra mengalami gangguan yang dapat dimodelkan secara matematis. Contoh gangguan tersebut adalah …",
         options: [
-            "Dengan atau tanpa mengubah citra",
-            "Menggunakan citra grayscale atau berwarna",
-            "Berdasarkan model degradasi yang diketahui atau tidak",
-            "Menggunakan perangkat lunak tertentu",
-            "Dengan atau tanpa mengubah nilai piksel"
+            "<em>Motion blur</em> dan <em>noise</em>",
+            "Ukuran file yang terlalu besar",
+            "Perbedaan format gambar",
+            "Jumlah piksel yang sedikit",
+            "Kecerahan monitor yang rendah"
         ],
-        correct: 2
+        correct: 0,
+        explanation: "<em>Image Restoration</em> digunakan untuk memperbaiki citra yang mengalami degradasi seperti <em>motion blur</em> dan <em>noise</em> dengan memanfaatkan model matematis dari gangguan tersebut."
     },
     {
         question: "Degradasi citra dapat diartikan sebagai …",
@@ -191,29 +208,32 @@ const dataAktivitas4 = [
             "Proses penyimpanan citra dalam bentuk matriks",
             "Proses penajaman citra menggunakan filter"
         ],
-        correct: 2
+        correct: 2,
+        explanation: "Degradasi citra adalah kondisi ketika kualitas citra menurun akibat gangguan seperti noise, blur, atau distorsi sehingga informasi visual menjadi kurang jelas."
     },
     {
         question: "Citra yang tampak kabur akibat pergerakan kamera atau objek saat pengambilan gambar merupakan contoh degradasi berupa …",
         options: [
-            "Noise",
+            "<em>Noise</em>",
             "Distorsi warna",
             "Penurunan resolusi",
-            "Motion blur",
+            "<em>Motion blur</em>",
             "Kuantisasi citra"
         ],
-        correct: 3
+        correct: 3,
+        explanation: "<em>Motion blur</em> terjadi karena adanya pergerakan kamera atau objek saat proses pengambilan gambar sehingga detail objek menjadi kabur."
     },
     {
-        question: "Pernyataan yang paling tepat mengenai perbedaan image enhancement dan image restoration adalah …",
+        question: "Pernyataan yang paling tepat mengenai perbedaan <em>image enhancement</em> dan <em>image restoration</em> adalah …",
         options: [
-            "Image enhancement selalu menghilangkan degradasi citra",
-            "Image enhancement bersifat subjektif, sedangkan image restoration bersifat objektif",
-            "Image restoration hanya bertujuan memperindah tampilan citra",
-            "Image restoration tidak memerlukan model degradasi",
-            "Image enhancement dan image restoration selalu menghasilkan citra yang sama"
+            "<em>Image enhancement</em> selalu menghilangkan degradasi citra",
+            "<em>Image enhancement</em> bersifat subjektif, sedangkan <em>image restoration</em> bersifat objektif",
+            "<em>Image restoration</em> hanya bertujuan memperindah tampilan citra",
+            "<em>Image restoration</em> tidak memerlukan model degradasi",
+            "<em>Image enhancement</em> dan <em>image restoration</em> selalu menghasilkan citra yang sama"
         ],
-        correct: 1
+        correct: 1,
+        explanation: "<em>Image Enhancement</em> bersifat subjektif karena hasil yang baik bergantung pada kebutuhan pengguna, sedangkan <em>Image Restoration</em> bersifat lebih objektif karena berusaha memulihkan citra berdasarkan model degradasi yang diketahui."
     }
 ];
 
@@ -221,18 +241,19 @@ const dataAktivitas4 = [
 // ================== AKTIVITAS 8 ==================
 const dataAktivitas8 = [
     {
-        question: "Pada operasi thresholding, seorang mahasiswa menggeser nilai ambang T dari 50 menjadi 180 pada media interaktif. Hasil citra biner berubah dari hampir seluruhnya putih menjadi hampir seluruhnya hitam. Kesimpulan yang paling tepat dari peristiwa tersebut adalah …",
+        question: "Pada operasi <em>thresholding</em>, seorang mahasiswa menggeser nilai ambang T dari 50 menjadi 180 pada media interaktif. Hasil citra biner berubah dari hampir seluruhnya putih menjadi hampir seluruhnya hitam. Kesimpulan yang paling tepat dari peristiwa tersebut adalah …",
         options: [
-            "Thresholding menghasilkan citra grayscale baru",
-            "Thresholding meningkatkan kontras citra secara bertahap",
-            "Thresholding sensitif terhadap pemilihan nilai ambang T",
-            "Thresholding tidak dipengaruhi oleh nilai intensitas piksel",
-            "Thresholding hanya bekerja pada citra berwarna"
+            "<em>Thresholding</em> menghasilkan citra grayscale baru",
+            "<em>Thresholding</em> meningkatkan kontras citra secara bertahap",
+            "<em>Thresholding</em> sensitif terhadap pemilihan nilai ambang T",
+            "<em>Thresholding</em> tidak dipengaruhi oleh nilai intensitas piksel",
+            "<em>Thresholding</em> hanya bekerja pada citra berwarna"
         ],
-        correct: 2
+        correct: 2,
+        explanation: "Hasil <em>thresholding</em> sangat dipengaruhi oleh nilai ambang T. Perubahan nilai T dapat menyebabkan perubahan besar pada jumlah piksel yang diklasifikasikan sebagai hitam atau putih."
     },
     {
-        question: "Jika nilai ambang T pada operasi thresholding dipilih terlalu kecil, maka hasil citra biner yang paling mungkin diperoleh adalah …",
+        question: "Jika nilai ambang T pada operasi <em>thresholding</em> dipilih terlalu kecil, maka hasil citra biner yang paling mungkin diperoleh adalah …",
         options: [
             "Kontras citra meningkat secara optimal",
             "Seluruh piksel menjadi putih",
@@ -240,21 +261,23 @@ const dataAktivitas8 = [
             "Tidak terjadi perubahan citra",
             "Histogram citra menjadi rata"
         ],
-        correct: 1
+        correct: 1,
+        explanation: "Ketika nilai ambang terlalu kecil, sebagian besar piksel memiliki nilai intensitas lebih besar dari T sehingga dikonversi menjadi putih pada citra biner."
     },
     {
-        question: "Manakah pernyataan berikut yang paling tepat membedakan thresholding dengan contrast stretching.",
+        question: "Manakah pernyataan berikut yang paling tepat membedakan <em>thresholding</em> dengan <em>contrast stretching</em>.",
         options: [
-            "Thresholding mengubah citra grayscale menjadi citra biner",
-            "Thresholding memperlebar rentang intensitas citra",
-            "Thresholding mempertahankan seluruh tingkat keabuan",
-            "Thresholding menambah atau mengurangi kecerahan citra",
-            "Thresholding tidak menggunakan nilai ambang"
+            "<em>Thresholding</em> mengubah citra <em>grayscale</em> menjadi citra biner",
+            "<em>Thresholding</em> memperlebar rentang intensitas citra",
+            "<em>Thresholding</em> mempertahankan seluruh tingkat keabuan",
+            "<em>Thresholding</em> menambah atau mengurangi kecerahan citra",
+            "<em>Thresholding</em> tidak menggunakan nilai ambang"
         ],
-        correct: 0
+        correct: 0,
+        explanation: "<em>Thresholding</em> mengubah citra menjadi dua tingkat nilai saja (biner), sedangkan <em>contrast stretching</em> mempertahankan tingkat keabuan tetapi memperlebar rentang intensitasnya."
     },
     {
-        question: "Diberikan sebuah nilai piksel 5×5 dari suatu citra. Jika digunakan operasi thresholding dengan nilai ambang T = 100 dan aturan s = 255 jika r > T, dan 0 jika r ≤ T, maka hasil citra biner yang benar adalah …",
+        question: "Diberikan sebuah nilai piksel 5×5 dari suatu citra. Jika digunakan operasi <em>thresholding</em> dengan nilai ambang T = 100 dan aturan s = 255 jika r > T, dan 0 jika r ≤ T, maka hasil citra biner yang benar adalah …",
         options: [
             "[[0,0,0,255,255],[0,0,0,255,255],[0,0,255,255,255],[0,0,255,255,255],[0,255,255,255,255]]",
             "[[0,255,255,255,255],[255,255,255,255,255],[255,255,255,255,255],[255,255,255,255,255],[255,255,255,255,255]]",
@@ -262,10 +285,11 @@ const dataAktivitas8 = [
             "[[255,255,255,255,255],[255,255,255,255,255],[255,255,255,255,255],[255,255,255,255,255],[255,255,255,255,255]]",
             "[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]"
         ],
-        correct: 0
+        correct: 0,
+        explanation: "Pada <em>thresholding</em> dengan T = 100, setiap piksel yang memiliki nilai lebih besar dari 100 akan diubah menjadi 255 (putih), sedangkan nilai yang kurang dari atau sama dengan 100 menjadi 0 (hitam)."
     },
     {
-        question: "Jika nilai ambang T pada operasi thresholding diperbesar, maka jumlah piksel yang bernilai putih (255) pada citra hasil akan …",
+        question: "Jika nilai ambang T pada operasi <em>thresholding</em> diperbesar, maka jumlah piksel yang bernilai putih (255) pada citra hasil akan …",
         options: [
             "Tidak berubah sama sekali",
             "Menjadi acak",
@@ -273,7 +297,8 @@ const dataAktivitas8 = [
             "Bertambah",
             "Berkurang"
         ],
-        correct: 4
+        correct: 4,
+        explanation: "Semakin besar nilai ambang T, semakin sedikit piksel yang memiliki intensitas melebihi ambang tersebut sehingga jumlah piksel putih pada hasil biner akan berkurang."
     }
 ];
 
@@ -293,7 +318,8 @@ gray = img.<input type="text" class="fill-input" data-index="0">("L")
 </pre>
 </div>
     `,
-    answers: ["convert"]
+    answers: ["convert"],
+    explanation: "Method convert('L') digunakan untuk mengubah citra berwarna menjadi citra grayscale."
 },
 {
     type: "fill",
@@ -307,7 +333,8 @@ binary = gray.<input type="text" class="fill-input" data-index="0"> (lambda p: 2
 </pre>
 </div>
     `,
-    answers: ["point"]
+    answers: ["point"],
+    explanation: "Method point() digunakan untuk memetakan nilai setiap piksel berdasarkan fungsi tertentu."
 }
 ];
 
@@ -326,7 +353,8 @@ brightness = <input type="text" class="fill-input" data-index="0">(img).enhance(
 </pre>
 </div>
     `,
-    answers: ["ImageEnhance.Brightness"]
+    answers: ["ImageEnhance.Brightness"],
+    explanation: "ImageEnhance.Brightness digunakan untuk mengatur tingkat kecerahan citra."
 },
 {
     type: "fill",
@@ -340,7 +368,8 @@ contrast = <input type="text" class="fill-input" data-index="0">(img).enhance(1.
 </pre>
 </div>
     `,
-    answers: ["ImageEnhance.Contrast"]
+    answers: ["ImageEnhance.Contrast"],
+    explanation: "ImageEnhance.Contrast digunakan untuk mengatur kontras citra."
 },
 {
     type: "fill",
@@ -354,7 +383,8 @@ negasi = <input type="text" class="fill-input" data-index="0">(img.<input type="
 </pre>
 </div>
     `,
-    answers: ["ImageOps.invert", "convert"]
+    answers: ["ImageOps.invert", "convert"],
+    explanation: "ImageOps.invert digunakan untuk membalik nilai intensitas piksel pada citra."
 },
 {
     type: "fill",
@@ -368,7 +398,8 @@ threshold = <input type="text" class="fill-input" data-index="1">(lambda p: 255 
 </pre>
 </div>
     `,
-    answers: ["convert", "img.point"]
+    answers: ["convert", "img.point"],
+    explanation: "img.point() digunakan untuk menerapkan thresholding pada setiap piksel citra."
 },
 {
     type: "fill",
@@ -382,7 +413,8 @@ log = img.point(lambda p: <input type="text" class="fill-input" data-index="0">)
 </pre>
 </div>
     `,
-    answers: ["int(255*math.log(1 + p)/math.log(256))"]
+    answers: ["int(255*math.log(1 + p)/math.log(256))"],
+    explanation: "Rumus logaritmik digunakan untuk memperjelas area citra yang gelap."
 },
 {
     type: "fill",
@@ -396,7 +428,8 @@ power_law = img.point(lambda p: <input type="text" class="fill-input" data-index
 </pre>
 </div>
     `,
-    answers: ["int(255 * (p / 255) ** gamma)"]
+    answers: ["int(255 * (p / 255) ** gamma)"],
+    explanation: "Rumus power law digunakan untuk melakukan gamma correction pada citra."
 },
 
 ];
@@ -415,7 +448,8 @@ equali = <input type="text" class="fill-input" data-index="0">(img)
 </pre>
 </div>
     `,
-    answers: ["ImageOps.equalize"]
+    answers: ["ImageOps.equalize"],
+    explanation: "ImageOps.equalize digunakan untuk melakukan histogram equalization."
 },
 {
     type: "fill",
@@ -431,7 +465,8 @@ hasil = <input type="text" class="fill-input" data-index="1">
 </pre>
 </div>
     `,
-    answers: ['convert("L")', "histogram_specification(img, referensi)"]
+    answers: ['convert("L")', "histogram_specification(img, referensi)"],
+    explanation: "Histogram specification digunakan untuk menyesuaikan histogram citra dengan citra referensi."
 },
 
 ];
