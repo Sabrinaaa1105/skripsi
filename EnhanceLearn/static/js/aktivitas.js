@@ -222,6 +222,9 @@ function checkFillAnswer() {
             </div>
         `;
 
+        answeredCorrectly = true;
+        nextBtn.classList.remove("disabled");
+
     } else {
 
         feedbackEl.innerHTML = `
