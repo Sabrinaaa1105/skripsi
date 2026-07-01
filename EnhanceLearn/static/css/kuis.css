@@ -1,3 +1,7 @@
+html,body {
+    overscroll-behavior-y: none;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -423,6 +427,87 @@ button {
     background: #fef2f2;
     border: 1px solid #fca5a5;
     color: #991b1b;
+}
+
+/* ================= HASIL KUIS ================= */
+
+.result-header{
+text-align:center;
+margin-bottom:15px;
+}
+
+.score-box{
+text-align:center;
+margin:10px 0 25px;
+}
+
+.score-label{
+font-size:18px;
+font-weight:600;
+color:#1e293b;
+margin-bottom:10px;
+}
+
+.score-value{
+font-size:90px;
+font-weight:800;
+line-height:1;
+}
+
+.score-pass{
+color:#16a34a;
+}
+
+.score-fail{
+color:#dc2626;
+}
+
+.result-stats{
+display:flex;
+justify-content:center;
+gap:16px;
+flex-wrap:wrap;
+margin-bottom:20px;
+}
+
+.stat-item{
+min-width:130px;
+background:#f8fafc;
+border:1px solid #e2e8f0;
+border-radius:12px;
+padding:14px;
+text-align:center;
+}
+
+.stat-number{
+font-size:28px;
+font-weight:800;
+color:#1e293b;
+}
+
+.stat-label{
+margin-top:4px;
+color:#64748b;
+font-size:14px;
+}
+
+.status-box{
+    text-align:center;
+    margin-top:20px;
+    font-size:22px;
+    font-weight:700;
+}
+
+.status-label{
+    color:#1e293b;
+}
+
+.status-lulus{
+    color:#16a34a;
+}
+
+.status-belum-lulus{
+    color:#dc2626;
 }
 
 /* ==================================================

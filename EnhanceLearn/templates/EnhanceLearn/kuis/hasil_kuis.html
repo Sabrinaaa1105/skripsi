@@ -11,35 +11,61 @@
 <div class="container">
     <div class="intro-card">
 
-        <div class="intro-title-box">{{ judul }}</div>
+        <div class="intro-title-box">Nilai {{ judul }}</div>
 
         <div class="intro-inner-card">
             <div class="intro-body result-body">
-                <p><strong>Nama:</strong> {{ nama|default:"-" }}</p>
-                <p><strong>Nilai:</strong> {{ nilai }}</p>
-                <p><strong>Waktu Pengerjaan:</strong> {{ waktu }}</p>
+                <div class="score-box">
+                <div class="score-label">Nilai</div>
 
-                {% if not lulus %}
-                    <div class="result-message result-fail">
+                <div class="score-value
+                    {% if lulus %}
+                        score-pass
+                    {% else %}
+                        score-fail
+                    {% endif %}
+                ">
+                    {{ nilai }}
+                </div>
+                </div>
 
-                        {% if judul_kuis == "evaluasi" %}
-                            ❌ Anda belum lulus evaluasi akhir
+                <div class="result-stats">
+                <div class="stat-item">
+                    <div class="stat-number">{{ benar }}</div>
+                    <div class="stat-label">Benar</div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-number">{{ salah }}</div>
+                    <div class="stat-label">Salah</div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-number">{{ waktu }}</div>
+                    <div class="stat-label">Waktu</div>
+                </div>
+                </div>
+
+
+                <div class="status-box">
+
+                    <span class="status-label">Status:</span>
+
+                    <span class="
+                        {% if lulus %}
+                            status-lulus
                         {% else %}
-                            ❌ Nilai Anda belum mencukupi
+                            status-belum-lulus
                         {% endif %}
-
-                    </div>
-                {% else %}
-                    <div class="result-message result-pass">
-
-                        {% if judul_kuis == "evaluasi" %}
-                            ✅ Selamat! Anda lulus evaluasi akhir
+                    ">
+                        {% if lulus %}
+                            Lulus
                         {% else %}
-                            ✅ Selamat! Anda lulus kuis
+                            Belum Lulus
                         {% endif %}
+                    </span>
 
-                    </div>
-                {% endif %}
+                </div>
             </div>
         </div>
 
@@ -48,9 +74,9 @@
             <div class="alert-box-inline alert-success">
 
                 {% if judul_kuis == "evaluasi" %}
-                    Selamat! Anda telah menyelesaikan evaluasi akhir dan dinyatakan lulus.
+                    Selamat! Kamu telah menyelesaikan evaluasi akhir dan dinyatakan lulus.
                 {% else %}
-                    Selamat! Anda telah menyelesaikan kuis dan dinyatakan lulus.
+                    Selamat! Kamu lulus dan dapat lanjut ke materi berikutnya.
                 {% endif %}
 
             </div>
@@ -60,9 +86,9 @@
             <div class="alert-box-inline alert-danger">
 
                 {% if judul_kuis == "evaluasi" %}
-                    Nilai Anda belum memenuhi kriteria kelulusan. Silakan ulangi evaluasi.
+                    Nilai Kamu belum memenuhi kriteria kelulusan. Silakan ulangi evaluasi atau kembali mempelajari materi.
                 {% else %}
-                    Nilai Anda belum memenuhi kriteria kelulusan. Silakan ulangi kuis.
+                    Nilai Kamu belum memenuhi kriteria kelulusan. Silakan ulangi kuis atau kembali mempelajari materi.
                 {% endif %}
 
             </div>

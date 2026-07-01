@@ -12,19 +12,12 @@
 </head>
 <body>
 
-<style>
-html,
-body{
-    overscroll-behavior-y: none;
-}
-</style>
-
 <!-- ===== NAVBAR ===== -->
 <nav class="navbar navbar-expand-lg">
     <div class="container">
 
         <a class="navbar-brand" href="{% url 'beranda' %}">
-            <em>Enhance<span>Learn</span></em>
+            Enhance<span>Learn</span>
         </a>
 
         <!-- Tombol Hamburger -->
@@ -50,19 +43,22 @@ body{
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a href="{% url 'materi' %}"
+                       class="nav-link {% if request.resolver_match.url_name == 'materi' %}active{% endif %}">
                         Daftar Materi
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a href="{% url 'petunjuk' %}"
+                       class="nav-link {% if request.resolver_match.url_name == 'petunjuk' %}active{% endif %}">
                         Petunjuk
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a href="{% url 'tentang' %}"
+                       class="nav-link {% if request.resolver_match.url_name == 'tentang' %}active{% endif %}">
                         Tentang
                     </a>
                 </li>
@@ -102,6 +98,12 @@ body{
             <div class="auth-container mx-auto">
 
                 <h2 class="auth-title text-center">LOG IN</h2>
+
+                {% if error %}
+                <div class="error-box">
+                    {{ error }}
+                </div>
+                {% endif %}
 
                 <form method="POST">
                     {% csrf_token %}

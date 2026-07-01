@@ -74,41 +74,6 @@ def login_user(request):
 
     return render(request, "EnhanceLearn/login.html")
 
-    if request.method == "POST":
-
-        email = request.POST.get("email")
-        password = request.POST.get("password")
-
-        try:
-            user_obj = User.objects.get(email=email)
-        except User.DoesNotExist:
-            return render(request, "EnhanceLearn/login.html", {
-                "error": "Email tidak ditemukan"
-            })
-
-        user = authenticate(
-            request,
-            username=user_obj.username,
-            password=password
-        )
-
-        if user is not None:
-
-            login(request, user)
-
-            if user.profile.role == "dosen":
-                return redirect("dashboard_dosen")
-
-            else:
-                return redirect("dashboard_mahasiswa")
-
-        else:
-            return render(request, "EnhanceLearn/login.html", {
-                "error": "Password salah"
-            })
-
-    return render(request, "EnhanceLearn/login.html")
-
 
 # =========================
 # DASHBOARD DOSEN
@@ -172,12 +137,17 @@ def register_dosen(request):
 
         if password != konfirmasi:
             return render(request, "EnhanceLearn/dosen/register.html", {
-                "error": "Password tidak sama"
+                "error": "Password dan konfirmasi kata sandi tidak cocok"
             })
 
         if User.objects.filter(username=nip).exists():
             return render(request, "EnhanceLearn/dosen/register.html", {
                 "error": "NIP sudah digunakan"
+            })
+        
+        if User.objects.filter(email=email).exists():
+            return render(request, "EnhanceLearn/dosen/register.html", {
+                "error": "Email sudah digunakan"
             })
 
         user = User.objects.create_user(
@@ -960,12 +930,17 @@ def register_mhs(request):
 
         if password != konfirmasi:
             return render(request, "EnhanceLearn/mahasiswa/register.html", {
-                "error": "Password tidak sama"
+                "error": "Password dan konfirmasi kata sandi tidak cocok"
             })
 
         if User.objects.filter(username=nim).exists():
             return render(request, "EnhanceLearn/mahasiswa/register.html", {
                 "error": "NIM sudah digunakan"
+            })
+        
+        if User.objects.filter(email=email).exists():
+            return render(request, "EnhanceLearn/mahasiswa/register.html", {
+                "error": "Email sudah digunakan"
             })
 
         try:
@@ -1213,12 +1188,23 @@ def halaman_hasil(request, id):
         else f"Kuis Subbab {hasil.judul_kuis.title()}"
     )
 
+    detail_soal = hasil.detail_soal or []
+
+    jumlah_benar = sum(
+        1 for soal in detail_soal
+        if soal.get("benar")
+    )
+
+    jumlah_salah = len(detail_soal) - jumlah_benar
+
     context = {
-        "judul": judul_tampil,          # untuk ditampilkan
-        "judul_kuis": hasil.judul_kuis, # untuk URL
+        "judul": judul_tampil,          
+        "judul_kuis": hasil.judul_kuis, 
         "nama": hasil.user.first_name,
         "nilai": hasil.nilai,
         "waktu": waktu,
+        "benar": jumlah_benar,
+        "salah": jumlah_salah,
         "lulus": hasil.status == "lulus",
         "materi_sebelum": materi_sebelum,
         "materi_sesudah": materi_sesudah
