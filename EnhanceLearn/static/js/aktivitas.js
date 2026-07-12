@@ -181,106 +181,68 @@ function renderFillQuestion(q) {
 }
 
 function checkFillAnswer() {
-
     const q = dataAktivitas[index];
-
     const inputs = document.querySelectorAll(".fill-input");
-
     let semuaBenar = true;
 
     inputs.forEach((input, i) => {
-
-        const jawabanUser =
-            input.value.trim().toLowerCase();
-
-        const jawabanBenar =
-            q.answers[i].toLowerCase();
+         const jawabanUser = input.value.trim().toLowerCase();
+        const jawabanBenar = q.answers[i].toLowerCase();
 
         if (jawabanUser === jawabanBenar) {
-
             input.style.borderColor = "#22c55e";
-
         } else {
-
             input.style.borderColor = "#ef4444";
-
             semuaBenar = false;
         }
-
     });
 
     if (semuaBenar) {
-
         feedbackEl.innerHTML = `
             <div class="feedback-success">
-                <div class="feedback-title">
-                    BENAR
-                </div>
-                <div class="feedback-text">
-                    ${q.explanation}
-                </div>
+                <div class="feedback-title">BENAR</div>
+                <div class="feedback-text">${q.explanation}</div>
             </div>
         `;
 
         answeredCorrectly = true;
         nextBtn.classList.remove("disabled");
-
     } else {
-
         feedbackEl.innerHTML = `
             <div class="feedback-error">
-                <div class="feedback-title-error">
-                    SALAH
-                </div>
-                <div class="feedback-text-error">
-                    Jawaban masih kurang tepat. Silakan coba lagi.
-                </div>
+                <div class="feedback-title-error">SALAH</div>
+                <div class="feedback-text-error">Jawaban masih kurang tepat. Silakan coba lagi.</div>
             </div>
         `;
-
     }
-
 }
 
 function checkAnswer(selected, btn) {
     if (answeredCorrectly) return;
-
-    // Reset warna tombol sebelumnya
     document.querySelectorAll(".choice-btn").forEach(b => {
         b.classList.remove("wrong", "correct");
     });
 
     if (selected === dataAktivitas[index].correct) {
-
         btn.classList.add("correct");
-
+        
         feedbackEl.innerHTML = `
             <div class="feedback-success">
-                <div class="feedback-title">
-                    BENAR
-                </div>
-                <div class="feedback-text">
-                    ${dataAktivitas[index].explanation}
-                </div>
+                <div class="feedback-title">BENAR</div>
+                <div class="feedback-text">${dataAktivitas[index].explanation}</div>
             </div>
         `;
 
         answeredCorrectly = true;
         nextBtn.classList.remove("disabled");
     } 
-    
     else {
-
         btn.classList.add("wrong");
 
         feedbackEl.innerHTML = `
             <div class="feedback-error">
-                <div class="feedback-title-error">
-                    SALAH
-                </div>
-                <div class="feedback-text-error">
-                    Jawaban belum tepat. Silakan coba lagi.
-                </div>
+                <div class="feedback-title-error">SALAH</div>
+                <div class="feedback-text-error">Jawaban belum tepat. Silakan coba lagi.</div>
             </div>
         `;
     }

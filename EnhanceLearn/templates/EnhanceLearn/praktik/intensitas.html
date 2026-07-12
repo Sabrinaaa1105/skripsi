@@ -50,9 +50,8 @@ hasil = contrast.enhance(1.5)</code></pre>
 
             <h4 style="font-weight:700; color: #1e3a8a;"><em>Negative transformation</em></h4>
             <pre style="background: #dbeafe; border: 1px solid #60a5fa; border-radius: 12px; padding: 18px 20px; overflow-x: auto; margin-top: 18px;">
-<code style="font-family: 'Courier New', monospace; font-size: 16px; line-height: 1.5; color: #0f172a;">img = Image.open("gambar.jpg")
-invert = ImageOps.invert(img.convert("L"))
-hasil = ImageOps.invert(img)</code></pre>
+<code style="font-family: 'Courier New', monospace; font-size: 16px; line-height: 1.5; color: #0f172a;">img = Image.open("gambar.jpg").convert("L")
+invert = ImageOps.invert(img)</code></pre>
             <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
                 Pada kode di atas, fungsi <code>ImageOps.invert()</code> digunakan untuk membalik nilai piksel. Piksel terang menjadi gelap dan piksel gelap menjadi terang sehingga menghasilkan citra negatif.   
             </p>
@@ -102,7 +101,8 @@ power_law = img.point(lambda p: int(255 * (p / 255) ** gamma))</code></pre>
                 <h5 style="font-weight:700; color: #1e3a8a;">Petunjuk:</h5>
                 <ul>
                     <li><strong>Upload File:</strong> Klik tombol <strong>Upload Gambar</strong> untuk mengunggah citra yang akan digunakan pada praktik. Pastikan file gambar berhasil dimuat sebelum menjalankan kode.</li>
-                    <li><strong>Menjalankan Proses (▶):</strong> Setelah gambar diunggah, tekan tombol <strong>▶ Run</strong> pada setiap cell untuk menjalankan kode.</li>
+                    <li><strong>Lengkapi Kode:</strong> Lengkapi bagian kode yang masih kosong di dalam kode editor.</li>
+                    <li><strong>Menjalankan Proses (▶):</strong> Setelah gambar diunggah dan melengkapi kode, tekan tombol <strong>▶ Run</strong> pada setiap cell untuk menjalankan kode.</li>
                     <li><strong>Menghapus Kode (🗑):</strong> Klik tombol <strong>🗑 Hapus</strong> untuk mengosongkan seluruh kode pada cell yang dipilih.</li>
                     <li><strong>Menambah Cell (+):</strong> Klik tombol <strong>+ Add Cell</strong> untuk menambahkan cell baru apabila diperlukan untuk menulis atau mencoba kode tambahan.</li>
                 </ul>
@@ -119,13 +119,12 @@ power_law = img.point(lambda p: int(255 * (p / 255) ** gamma))</code></pre>
 from PIL import Image, ImageEnhance
 
 # Membuka dan mengubah gambar menjadi grayscale
-img = Image.open("gambar.png").convert("L") 
+img = Image.open("gambar.png").convert("L")
 
-brightness = ImageEnhance.Brightness(img) # Membuat objek brightness
+# Tuliskan kode untuk membuat objek brightness
 
-# Nilai > 1 = lebih terang
-# Nilai < 1 = lebih gelap
-hasil = brightness.enhance(1.5) 
+# Tuliskan kode untuk meningkatkan brightness sebesar 1.5
+
 </textarea>
                                 </div>
                                 <div class="side-tools">
@@ -133,7 +132,7 @@ hasil = brightness.enhance(1.5)
                                     <button class="editor-icon-btn trash" id="clear-brightness">🗑</button>
                                 </div>
                             </div>
-                            <div class="output" id="out-brightness">(Output muncul di sini)</div>
+                            <div class="output" id="out-brightness"></div>
                             <img id="img-brightness" class="preview-img">
                             <a id="download-brightness" class="btn btn-primary btn-sm mt-2" download="hasil_brightness.png" style="display:none;">Download Hasil</a>
                             <div class="add-cell-btn">+</div>
@@ -144,13 +143,11 @@ hasil = brightness.enhance(1.5)
 from PIL import Image, ImageEnhance
 
 # Membuka dan mengubah gambar menjadi grayscale
-img = Image.open("gambar.png").convert("L") 
+img = Image.open("gambar.png").convert("L")
 
-contrast = ImageEnhance.Contrast(img) # Membuat objek contrast
+# Tuliskan kode untuk membuat objek contrast
 
-# Nilai > 1 = contrast lebih tinggi
-# Nilai < 1 = contrast lebih rendah
-hasil = contrast.enhance(1.5) 
+# Tuliskan kode untuk meningkatkan contrast 1.5
 </textarea>
                                 </div>
                                 <div class="side-tools">
@@ -169,9 +166,9 @@ hasil = contrast.enhance(1.5)
 from PIL import Image, ImageOps
 
 # Membuka dan mengubah gambar menjadi grayscale
-img = Image.open("gambar.png").convert("L") 
+img = Image.open("gambar.png").convert("L")
 
-hasil = ImageOps.invert(img) # Membalik nilai intensitas piksel
+# Tuliskan kode untuk menghasilkan citra negatif
 </textarea>
                                 </div>
                                 <div class="side-tools">
@@ -188,13 +185,13 @@ hasil = ImageOps.invert(img) # Membalik nilai intensitas piksel
                                 <div class="editor-wrap">
                                     <textarea id="editor-threshold">
 from PIL import Image
+
 # Membuka dan mengubah gambar menjadi grayscale
-img = Image.open("gambar.png").convert("L") 
+img = Image.open("gambar.png").convert("L")
 
 threshold = 128 # Menentukan nilai ambang
 
-# Mengubah ke citra biner
-hasil = img.point(lambda p: 255 if p > threshold else 0) 
+# Tuliskan kode untuk mengubah citra menjadi biner
 </textarea>
                                 </div>
                                 <div class="side-tools">
@@ -214,10 +211,9 @@ from PIL import Image
 import math
 
 # Membuka dan mengubah gambar menjadi grayscale
-img = Image.open("gambar.png").convert("L") 
+img = Image.open("gambar.png").convert("L")
 
-# Transformasi logaritmik
-hasil = img.point(lambda p: int(255 * math.log(1 + p) / math.log(256))) 
+# Tuliskan kode transformasi logaritmik
 </textarea>
                                 </div>
                                 <div class="side-tools">
@@ -236,12 +232,11 @@ hasil = img.point(lambda p: int(255 * math.log(1 + p) / math.log(256)))
 from PIL import Image
 
 # Membuka dan mengubah gambar menjadi grayscale
-img = Image.open("gambar.png").convert("L") 
+img = Image.open("gambar.png").convert("L")
 
 gamma = 2.0 # Menentukan nilai gamma
 
-# Transformasi gamma
-hasil = img.point(lambda p: int(255 * (p / 255) ** gamma)) 
+# Tuliskan kode transformasi gamma
 </textarea>
                                 </div>
                                 <div class="side-tools">

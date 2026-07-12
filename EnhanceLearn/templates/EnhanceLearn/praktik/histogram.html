@@ -31,7 +31,7 @@
             <pre style="background: #dbeafe; border: 1px solid #60a5fa; border-radius: 12px; padding: 18px 20px; overflow-x: auto; margin-top: 18px;">
 <code style="font-family: 'Courier New', monospace; font-size: 16px; line-height: 1.5; color: #0f172a;">img = Image.open("gambar.jpg")
 img = Image.open("gambar.jpg").convert("L")
-equali = ImageOps.equalize(img)</code></pre>
+equalization = ImageOps.equalize(img)</code></pre>
 
             <p style="text-align: justify; font-size: 17px; line-height: 1.75;">
                 Pada kode di atas, gambar terlebih dahulu diubah menjadi <em>grayscale</em> menggunakan <code>convert("L")</code>. Selanjutnya fungsi <code>ImageOps.equalize()</code> digunakan untuk meratakan distribusi intensitas piksel sehingga kontras gambar meningkat dan detail menjadi lebih jelas.     
@@ -63,7 +63,8 @@ hasil = histogram_specification(img, referensi)</code></pre>
                 <h5 style="font-weight:700; color: #1e3a8a;">Petunjuk:</h5>
                 <ul>
                     <li><strong>Upload File:</strong> Klik tombol <strong>Upload Gambar</strong> untuk mengunggah citra yang akan digunakan pada praktik. Pastikan file gambar berhasil dimuat sebelum menjalankan kode.</li>
-                    <li><strong>Menjalankan Proses (▶):</strong> Setelah gambar diunggah, tekan tombol <strong>▶ Run</strong> pada setiap cell untuk menjalankan kode.</li>
+                    <li><strong>Lengkapi Kode:</strong> Lengkapi bagian kode yang masih kosong di dalam kode editor.</li>
+                    <li><strong>Menjalankan Proses (▶):</strong> Setelah gambar diunggah dan melengkapi kode, tekan tombol <strong>▶ Run</strong> pada setiap cell untuk menjalankan kode.</li>
                     <li><strong>Menghapus Kode (🗑):</strong> Klik tombol <strong>🗑 Hapus</strong> untuk mengosongkan seluruh kode pada cell yang dipilih.</li>
                     <li><strong>Menambah Cell (+):</strong> Klik tombol <strong>+ Add Cell</strong> untuk menambahkan cell baru apabila diperlukan untuk menulis atau mencoba kode tambahan.</li>
                 </ul>
@@ -84,8 +85,8 @@ import io, base64
 # Membuka dan mengubah gambar menjadi grayscale
 img = Image.open("gambar.png").convert("L")
 
-# fungsi histogram equalization
-hasil = ImageOps.equalize(img)
+# Tuliskan kode histogram equalization
+
 
 hist_awal = img.histogram()
 hist_hasil = hasil.histogram()

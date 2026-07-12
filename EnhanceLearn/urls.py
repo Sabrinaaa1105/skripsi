@@ -15,6 +15,7 @@ urlpatterns = [
     path("update-kkm/", views.update_kkm, name="update_kkm"),
     path('dosen/data-kelas/', views.data_kelas, name='data_kelas'),
     path('dosen/data-kelas/hapus-kelas/<int:id>/', views.hapus_kelas, name='hapus_kelas'),
+    path('dosen/data-kelas/edit/<int:id>/', views.edit_kelas, name='edit_kelas'),
     path('dosen/data-mahasiswa/', views.data_mahasiswa, name='data_mahasiswa'),
     path('dosen/data-mahasiswa/edit/<int:id>/', views.edit_mahasiswa, name='edit_mahasiswa'),
     path('dosen/data-mahasiswa/hapus/<int:id>/', views.hapus_mahasiswa, name='hapus_mahasiswa'),
@@ -77,4 +78,5 @@ urlpatterns = [
     path("praktik/rangkuman5/", views.rangkuman5, name="rangkuman5"),
 
     path('evaluasi/', views.evaluasi, name='evaluasi'),
+    path("rangkuman/", views.rangkuman, name="rangkuman"),
 ]

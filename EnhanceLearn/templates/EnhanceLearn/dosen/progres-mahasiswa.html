@@ -158,39 +158,75 @@ Progres Mahasiswa
 }
 </style>
 
-<div class="d-flex justify-content-between align-items-center mb-3">
+<form method="GET" class="d-flex align-items-center justify-content-between mb-3">
 
-    <!-- FILTER KELAS -->
-    <div class="d-flex align-items-center gap-2">
-        <label class="fw-semibold">Pilih Kelas:</label>
+    <div class="d-flex align-items-center gap-3">
 
-        <select class="form-select" style="width:200px" id="filterKelas">
+        <!-- Filter Kelas -->
+        <div class="d-flex align-items-center gap-2">
 
-            <option value="">Semua Kelas</option>
+            <label class="fw-semibold mb-0">Pilih Kelas:</label>
 
-            {% for k in kelas_list %}
-            <option value="{{ k.id }}">{{ k.nama_kelas }}</option>
-            {% endfor %}
+            <select
+                name="kelas"
+                class="form-select"
+                style="width:200px;"
+                onchange="this.form.submit();">
 
-        </select>
+                <option value="">Semua Kelas</option>
+
+                {% for k in kelas_list %}
+                <option value="{{ k.id }}"
+                    {% if request.GET.kelas == k.id|stringformat:"s" %}
+                    selected
+                    {% endif %}>
+                    {{ k.nama_kelas }}
+                </option>
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+        <!-- Jumlah Data -->
+        <div class="d-flex align-items-center gap-2">
+
+            <label class="fw-semibold mb-0">Tampilkan:</label>
+
+            <select
+                name="per_page"
+                class="form-select"
+                style="width:90px;"
+                onchange="this.form.submit();">
+
+                <option value="10" {% if request.GET.per_page == "10" %}selected{% endif %}>10</option>
+                <option value="25" {% if request.GET.per_page == "25" %}selected{% endif %}>25</option>
+                <option value="50" {% if request.GET.per_page == "50" %}selected{% endif %}>50</option>
+                <option value="100" {% if request.GET.per_page == "100" %}selected{% endif %}>100</option>
+
+            </select>
+
+            <span>data</span>
+
+        </div>
+
     </div>
 
+    <!-- Search -->
+    <div class="search-box">
 
-    <!-- SEARCH -->
-    <div class="position-relative">
+        <i class="bi bi-search search-icon"></i>
 
-        <i class="bi bi-search position-absolute"
-           style="left:12px; top:50%; transform:translateY(-50%); color:#6b7280;"></i>
-
-        <input type="text"
-               id="searchMahasiswa"
-               class="form-control ps-5"
-               style="width:260px"
-               placeholder="Cari nama / NIM...">
+        <input
+            type="text"
+            name="search"
+            value="{{ request.GET.search }}"
+            class="form-control search-input"
+            placeholder="Cari nama / NIM...">
 
     </div>
 
-</div>
+</form>
 
 <div class="table-responsive">
 
@@ -407,47 +443,6 @@ document.querySelectorAll(".btn-detail").forEach(btn => {
     });
 
 });
-
-</script>
-
-
-<script>
-
-const searchInput = document.getElementById("searchMahasiswa")
-const filterKelas = document.getElementById("filterKelas")
-const rows = document.querySelectorAll("#tabelMahasiswa tbody tr")
-
-function filterTable(){
-
-    const search = searchInput.value.toLowerCase()
-    const kelas = filterKelas.value
-
-    rows.forEach(row => {
-
-        const nama = row.children[1].innerText.toLowerCase()
-        const nim = row.children[2].innerText.toLowerCase()
-        const kelasRow = row.children[3].innerText
-
-        const cocokSearch =
-            nama.includes(search) ||
-            nim.includes(search)
-
-        const cocokKelas =
-            kelas === "" ||
-            kelasRow === filterKelas.options[filterKelas.selectedIndex].text
-
-        if(cocokSearch && cocokKelas){
-            row.style.display = ""
-        }else{
-            row.style.display = "none"
-        }
-
-    })
-
-}
-
-searchInput.addEventListener("keyup", filterTable)
-filterKelas.addEventListener("change", filterTable)
 
 </script>
 

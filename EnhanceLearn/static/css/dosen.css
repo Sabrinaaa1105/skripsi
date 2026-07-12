@@ -1,137 +1,587 @@
-/* ===== JUDUL HALAMAN ===== */
+/* =====================================================
+   JUDUL HALAMAN
+===================================================== */
 
-.page-title{
-    font-weight:700;
-    font-size:24px;
-    color:#333;
+.page-title {
+    font-weight: 700;
+    font-size: 24px;
+    color: #333;
 }
 
 
-/* ===== CARD TABEL ===== */
-.card{
-    border:none;
-    border-radius:10px;
+/* =====================================================
+   CARD
+===================================================== */
+
+.card {
+    border: none;
+    border-radius: 10px;
 }
 
-.card-body{
-    padding:25px;
-}
-
-
-/* ===== TABEL ===== */
-.table{
-    margin-bottom:0;
-}
-
-.table thead th{
-    background:#f5f7fa;
-    font-weight:600;
-    text-align:center;
-}
-
-.table td{
-    vertical-align:middle;
+.card-body {
+    padding: 25px;
 }
 
 
-/* ===== TOKEN ===== */
-.token-badge{
-    background:#eef1f5;
-    color:#333;
-    padding:6px 12px;
-    border-radius:6px;
-    font-weight:600;
-    letter-spacing:1px;
+/* =====================================================
+   TABEL
+===================================================== */
+
+.table {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background: #f8f9fa;
+    font-weight: 600;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.table tbody td {
+    vertical-align: middle;
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 
-/* ===== BUTTON SALIN ===== */
-.btn-copy{
-    font-size:13px;
-    padding:4px 10px;
+/* =====================================================
+   TOKEN
+===================================================== */
+
+.token-badge {
+    display: inline-block;
+    background: #eef1f5;
+    color: #333;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    white-space: nowrap;
 }
 
 
-/* ===== BUTTON TAMBAH ===== */
-.btn-primary{
-    background:#5b7cfa;
-    border:none;
-}
+/* =====================================================
+   BUTTON SALIN
+===================================================== */
 
-.btn-primary:hover{
-    background:#4a6de0;
-}
-
-
-/* ===== BUTTON HAPUS ===== */
-.btn-danger{
-    font-size:13px;
+.btn-copy {
+    font-size: 13px;
+    padding: 4px 10px;
+    white-space: nowrap;
 }
 
 
-/* ===== MODAL ===== */
-.modal-content{
-    border-radius:10px;
+/* =====================================================
+   BUTTON PRIMARY / TAMBAH
+===================================================== */
+
+.btn-primary {
+    background: #5b7cfa;
+    border: none;
 }
 
-.modal-header{
-    border-bottom:none;
-}
-
-.modal-title{
-    font-weight:600;
-}
-
-.modal-body label{
-    font-weight:500;
+.btn-primary:hover,
+.btn-primary:focus {
+    background: #4a6de0;
 }
 
 
-/* ===== INPUT ===== */
-.form-control{
-    border-radius:6px;
+/* =====================================================
+   BUTTON HAPUS
+===================================================== */
+
+.btn-danger {
+    font-size: 13px;
 }
 
 
-/* ===== EMPTY DATA ===== */
-.table-empty{
-    text-align:center;
-    color:#888;
-    padding:20px;
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal-content {
+    border-radius: 10px;
 }
 
-.search-box{
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-title {
+    font-weight: 600;
+}
+
+.modal-body label {
+    font-weight: 500;
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+.form-control {
+    border-radius: 6px;
+}
+
+.form-select {
+    min-width: 170px;
+}
+
+
+/* =====================================================
+   EMPTY DATA
+===================================================== */
+
+.table-empty {
+    text-align: center;
+    color: #888;
+    padding: 20px;
+}
+
+
+/* =====================================================
+   SEARCH BOX
+===================================================== */
+
+.search-box {
     position: relative;
     width: 260px;
 }
 
-.search-input{
-    padding-left:40px;
-    border-radius:8px;
+.search-input {
+    width: 100%;
+    padding-left: 40px;
+    border-radius: 8px;
 }
 
-.search-icon{
-    position:absolute;
-    left:12px;
-    top:50%;
-    transform:translateY(-50%);
-    color:#999;
-    font-size:16px;
-    pointer-events:none;
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 16px;
+    pointer-events: none;
 }
 
-.progress-container{
-    width:150px;
-    height:20px;
-    background:#eee;
-    border-radius:10px;
-    overflow:hidden;
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.progress-container {
+    width: 150px;
+    height: 20px;
+    background: #eee;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-.progress-bar{
-    height:100%;
-    color:white;
-    font-size:11px;
-    text-align:center;
-    line-height:18px;
+.progress-bar {
+    height: 100%;
+    color: white;
+    font-size: 11px;
+    text-align: center;
+    line-height: 18px;
+}
+
+
+/* =====================================================
+   BADGE
+===================================================== */
+
+.badge {
+    font-size: 13px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast-container {
+    z-index: 9999;
+}
+
+
+/* =====================================================
+   TABLET
+   Maksimal 991px
+===================================================== */
+
+@media (max-width: 991.98px) {
+
+    /* Judul halaman */
+    .page-title {
+        font-size: 22px;
+    }
+
+
+    /* Card */
+    .card-body {
+        padding: 20px;
+    }
+
+
+    /* Tabel */
+    .table {
+        min-width: 850px;
+    }
+
+    .table thead th {
+        padding: 12px 10px;
+    }
+
+    .table tbody td {
+        padding: 12px 10px;
+    }
+
+
+    /* Search */
+    .search-box {
+        width: 100%;
+    }
+
+
+    /* Select */
+    .form-select {
+        min-width: 140px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE / TABLET KECIL
+   Maksimal 767px
+===================================================== */
+
+@media (max-width: 767.98px) {
+
+    /* =========================
+       JUDUL HALAMAN
+    ========================= */
+
+    .page-title {
+        font-size: 20px;
+    }
+
+
+    /* =========================
+       CONTAINER
+    ========================= */
+
+    .container-fluid {
+        width: 100%;
+    }
+
+
+    /* =========================
+       CARD
+    ========================= */
+
+    .card {
+        border-radius: 8px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+
+    /* =========================
+       TABEL
+    ========================= */
+
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table {
+        min-width: 800px;
+        font-size: 14px;
+    }
+
+    .table thead th {
+        font-size: 13px;
+        padding: 12px 10px;
+        white-space: nowrap;
+    }
+
+    .table tbody td {
+        font-size: 13px;
+        padding: 10px;
+        white-space: nowrap;
+    }
+
+
+    /* =========================
+       TOKEN
+    ========================= */
+
+    .token-badge {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+
+
+    /* =========================
+       BADGE
+    ========================= */
+
+    .badge {
+        font-size: 12px;
+        padding: 7px 12px;
+    }
+
+
+    /* =========================
+       BUTTON
+    ========================= */
+
+    .btn-copy {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+
+    .table .btn-sm {
+        padding: 5px 8px;
+        font-size: 12px;
+    }
+
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    .search-box {
+        width: 100%;
+    }
+
+
+    /* =========================
+       SELECT
+    ========================= */
+
+    .form-select {
+        width: 100%;
+        min-width: 0;
+    }
+
+
+    /* =========================
+       PROGRESS
+    ========================= */
+
+    .progress-container {
+        width: 120px;
+    }
+
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    .modal-dialog {
+        margin: 15px;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE KECIL
+   Maksimal 575px
+===================================================== */
+
+@media (max-width: 575.98px) {
+
+    /* =========================
+       JUDUL HALAMAN
+    ========================= */
+
+    .page-title {
+        font-size: 18px;
+    }
+
+
+    /* =========================
+       CONTAINER
+    ========================= */
+
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+
+    /* =========================
+       TOMBOL TAMBAH KELAS
+    ========================= */
+
+    .container-fluid > .btn-primary {
+        width: 100%;
+        padding: 10px 16px;
+    }
+
+
+    /* =========================
+       CARD
+    ========================= */
+
+    .card {
+        border-radius: 8px;
+    }
+
+
+    /* =========================
+       TABEL
+    ========================= */
+
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table {
+        min-width: 750px;
+    }
+
+    .table thead th {
+        font-size: 12px;
+        padding: 10px 8px;
+    }
+
+    .table tbody td {
+        font-size: 12px;
+        padding: 9px 8px;
+    }
+
+
+    /* =========================
+       TOKEN
+    ========================= */
+
+    .token-badge {
+        font-size: 11px;
+        padding: 5px 8px;
+        letter-spacing: 0.5px;
+    }
+
+
+    /* =========================
+       BADGE
+    ========================= */
+
+    .badge {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+
+
+    /* =========================
+       TOMBOL AKSI
+    ========================= */
+
+    .table .btn-sm {
+        padding: 5px 7px;
+        font-size: 11px;
+    }
+
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    .modal-dialog {
+        margin: 10px;
+    }
+
+    .modal-content {
+        border-radius: 8px;
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 15px;
+    }
+
+    .modal-footer {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 8px;
+    }
+
+    .modal-footer .btn {
+        flex: 1;
+        margin: 0;
+    }
+
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    .toast-container {
+        width: calc(100% - 30px);
+        max-width: calc(100% - 30px);
+    }
+
+    .toast-container .toast {
+        width: 100%;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE SANGAT KECIL
+   Maksimal 375px
+===================================================== */
+
+@media (max-width: 375px) {
+
+    .page-title {
+        font-size: 17px;
+    }
+
+    .container-fluid > .btn-primary {
+        font-size: 13px;
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 12px;
+    }
+
+    .modal-title {
+        font-size: 16px;
+    }
+
+    .modal-footer .btn {
+        font-size: 13px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
 }

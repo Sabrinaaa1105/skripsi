@@ -628,6 +628,9 @@ const popupOkBtn  = document.getElementById("popupOkBtn");
 let currentIndex = 0;
 let autoInterval = null;
 
+let pdfSelesai = false;
+let cdfSelesai = false;
+
 /* =========================
    HAPUS HIGHLIGHT
 ========================= */
@@ -685,6 +688,8 @@ function showStep(index){
 ========================= */
 function checkFinished() {
 
+    pdfSelesai = true;
+
     calculationBox.innerHTML += `
         <div style="
             margin-top:15px;
@@ -701,7 +706,6 @@ function checkFinished() {
     autoBtn.classList.add("hidden-sim");
     pauseBtn.classList.add("hidden-sim");
 
-    // tampilkan popup
     finishPopup.style.display = "flex";
 }
 
@@ -709,6 +713,9 @@ function checkFinished() {
    TOMBOL MULAI
 ========================= */
 startBtn.addEventListener("click", ()=>{
+
+    pdfSelesai = false;
+    cdfSelesai = false;
 
     currentIndex = 0;
 
@@ -861,22 +868,28 @@ let cumulative = 0;
    FUNGSI VALIDASI INTERLOCK DOM (Membaca Elemen PDF Langkah Sebelumnya)
    ========================================================================== */
 function cekKesiapanLangkahPDF() {
-    // Mengambil element penanda dari tabel PDF di atas (.pdf-cell)
-    const checkPdfCells = document.querySelectorAll(".pdf-cell");
-    
-    // Validasi: Jika cell tidak ditemukan atau cell pertama masih kosong, kunci simulasi
-    if (checkPdfCells.length === 0 || checkPdfCells[0].innerHTML.trim() === "") {
-        if (cdfCalculationBox) {
-            cdfCalculationBox.style.display = "block";
-            cdfCalculationBox.innerHTML = `
-                <div style="text-align: center; font-size: 24px; font-weight: bold; color: #ff0000; padding: 20px; line-height: 1.4;">
-                    Selesaikan langkah sebelumnya terlebih dahulu.
-                </div>
-            `;
-        }
-        return false; // Mengunci proses
+
+    if (!pdfSelesai) {
+
+        cdfCalculationBox.style.display = "block";
+
+        cdfCalculationBox.innerHTML = `
+            <div style="
+                text-align:center;
+                font-size:18px;
+                font-weight:bold;
+                color:red;
+                padding:20px;
+                line-height:1.4;
+            ">
+                Selesaikan langkah sebelumnya terlebih dahulu.
+            </div>
+        `;
+
+        return false;
     }
-    return true; // Mengizinkan proses berjalan
+
+    return true;
 }
 
 /* =========================
@@ -986,7 +999,7 @@ function showCDFStep(index){
    FINISH
 ========================= */
 function finishCDFSimulation(){
-
+    cdfSelesai = true;
     nextCDFBtn.classList.add("hidden-sim");
     autoCDFBtn.classList.add("hidden-sim");
     pauseCDFBtn.classList.add("hidden-sim");
@@ -1013,7 +1026,7 @@ function finishCDFSimulation(){
 startCDFBtn.addEventListener("click", () => {
     // Jalankan validasi DOM element tabel PDF
     if (!cekKesiapanLangkahPDF()) return;
-
+    cdfSelesai = false;
     cdfIndex = 0;
     cumulative = 0;
 
@@ -1082,6 +1095,7 @@ pauseCDFBtn.addEventListener("click", () => {
 ========================= */
 resetCDFBtn.addEventListener("click", () => {
     clearInterval(cdfAutoInterval);
+    cdfSelesai = false;
 
     cdfIndex = 0;
     cumulative = 0;
@@ -1158,17 +1172,24 @@ let grayInterval = null;
  * FUNGSI PENGECEKAN INTERLOCK LANGKAH 5
  */
 function cekKesiapanLangkah3() {
-    // Memeriksa apakah data CDF langkah sebelumnya sudah dihitung/ada isinya
-    if (cdfInputCells.length === 0 || cdfInputCells[0].innerHTML.trim() === "") {
+    if (!cdfSelesai) {
         if (grayCalcBox) {
             grayCalcBox.innerHTML = `
-                <div style="color:red; font-weight:bold; text-align:center; font-size:13px;">
+                <div style="
+                    color:red;
+                    font-weight:bold;
+                    text-align:center;
+                    font-size:15px;
+                    padding:12px;
+                ">
                     Selesaikan langkah sebelumnya terlebih dahulu.
                 </div>
             `;
         }
+
         return false;
     }
+
     return true;
 }
 
@@ -1342,6 +1363,8 @@ pauseGrayBtn.addEventListener("click", ()=>{
 ========================= */
 resetGrayBtn.addEventListener("click", ()=>{
     clearInterval(grayInterval);
+    pdfSelesai = false;
+    cdfSelesai = false;
     grayIndex = 0;
 
     clearGrayHighlight();

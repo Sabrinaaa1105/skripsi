@@ -8,54 +8,105 @@ Dashboard Dosen
 
 {% block page_content %}
 
+<div class="toast-container position-fixed top-50 start-50 translate-middle"
+     style="z-index: 9999;">
+
+    <div id="kkmToast"
+         class="toast align-items-center text-white bg-dark border-0 shadow-lg"
+         role="alert"
+         aria-live="assertive"
+         aria-atomic="true">
+
+        <div class="d-flex">
+            <div class="toast-body p-3">
+                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                Nilai KKM berhasil diperbarui!
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
 <div class="row g-4">
 
-    <div class="col-lg-8">
+    <!-- ========================= -->
+    <!-- Ringkasan Dashboard -->
+    <!-- ========================= -->
+    <div class="col-12">
         <div class="row g-4">
 
             <!-- Jumlah Mahasiswa -->
-            <div class="col-md-6">
+            <div class="col-lg-4 col-md-6">
                 <div class="card border-0 h-100 rounded-4 blue-shadow">
                     <div class="card-body p-4 d-flex justify-content-between align-items-center">
+
                         <div>
-                            <p class="text-muted mb-1 fw-medium">Jumlah Mahasiswa</p>
-                            <h1 class="fw-bold mb-0">{{ jumlah_mahasiswa }}</h1>
+                            <p class="text-muted mb-1 fw-medium">
+                                Jumlah Mahasiswa
+                            </p>
+
+                            <h1 class="fw-bold mb-0">
+                                {{ jumlah_mahasiswa }}
+                            </h1>
                         </div>
+
                         <i class="bi bi-people-fill fs-1 text-primary"></i>
+
                     </div>
                 </div>
             </div>
 
             <!-- Mahasiswa Selesai -->
-            <div class="col-md-6">
+            <div class="col-lg-4 col-md-6">
                 <div class="card border-0 h-100 rounded-4 blue-shadow">
                     <div class="card-body p-4 d-flex justify-content-between align-items-center">
+
                         <div>
-                            <p class="text-muted mb-1 fw-medium">Mahasiswa Selesai</p>
-                            <h1 class="fw-bold mb-0">{{ jumlah_selesai }}</h1>
+                            <p class="text-muted mb-1 fw-medium">
+                                Mahasiswa Selesai
+                            </p>
+
+                            <h1 class="fw-bold mb-0">
+                                {{ jumlah_selesai }}
+                            </h1>
                         </div>
+
                         <i class="bi bi-check-circle-fill fs-1 text-success"></i>
+
                     </div>
                 </div>
             </div>
 
-                        <!-- Kelas Terdaftar -->
-            <div class="col-12">
+            <!-- Kelas Terdaftar -->
+            <div class="col-lg-4 col-md-12">
                 <div class="card border-0 h-100 rounded-4 blue-shadow">
                     <div class="card-body p-4 d-flex justify-content-between align-items-center">
-                        <div class="d-flex align-items-center">
-                            <div class="bg-warning bg-opacity-10 p-3 rounded-3 me-4">
-                                <i class="bi bi-journal-bookmark-fill fs-1 text-warning"></i>
-                            </div>
-                            <div>
-                                <p class="text-muted mb-1 fw-medium">Kelas Terdaftar</p>
-                                <h2 class="fw-bold mb-0">{{ jumlah_kelas }}</h2>
-                            </div>
+
+                        <div>
+
+                            <p class="text-muted mb-1 fw-medium">
+                                Kelas Terdaftar
+                            </p>
+
+                            <h1 class="fw-bold mb-0">
+                                {{ jumlah_kelas }}
+                            </h1>
+
                         </div>
 
-                        <a href="{% url 'data_kelas' %}" class="btn btn-outline-warning btn-sm rounded-pill px-4">
-                            Lihat Detail
-                        </a>
+                        <div class="text-end">
+
+                            <i class="bi bi-journal-bookmark-fill fs-1 text-warning d-block mb-3"></i>
+
+                            <a href="{% url 'data_kelas' %}"
+                               class="btn btn-outline-warning btn-sm rounded-pill px-3">
+
+                                Lihat Detail
+
+                            </a>
+
+                        </div>
 
                     </div>
                 </div>
@@ -64,41 +115,241 @@ Dashboard Dosen
         </div>
     </div>
 
+    <!-- ========================= -->
     <!-- Nilai KKM -->
-    <div class="col-lg-4">
-        <div class="card border-0 h-100 rounded-4 blue-shadow">
+    <!-- ========================= -->
+    <div class="col-12">
+
+        <div class="card border-0 rounded-4 blue-shadow">
+
             <div class="card-body p-4">
 
-                <div class="d-flex align-items-center mb-3">
+                <div class="d-flex align-items-center mb-4">
+
                     <div class="bg-primary bg-opacity-10 p-2 rounded-2 me-2">
                         <i class="bi bi-clipboard-check-fill text-primary"></i>
                     </div>
-                    <h5 class="fw-bold mb-0">Nilai KKM</h5>
+
+                    <h5 class="fw-bold mb-0">
+                        Nilai KKM
+                    </h5>
+
                 </div>
 
                 <form method="POST" action="{% url 'update_kkm' %}">
-                {% csrf_token %}
 
-                <div class="bg-light p-3 rounded-3 mb-4 text-center">
-                    <span class="text-muted d-block small">Standar Saat Ini</span>
-                    <h2 class="fw-bold text-primary mb-0">{{ kkm }}</h2>
-                </div>
+                    {% csrf_token %}
 
-                <div class="mb-3">
-                    <label class="fw-medium small mb-2">Perbarui Nilai KKM</label>
-                    <input type="number" name="kkm" class="form-control form-control-lg border-0 bg-light" value="{{ kkm }}">
-                </div>
+                    <div class="row">
 
-                <button class="btn btn-primary w-100 py-3 rounded-3 fw-bold shadow-sm">
-                    Simpan Perubahan
-                </button>
+                        <div class="col-lg-3">
+
+                            <div class="bg-light rounded-3 text-center p-4">
+
+                                <span class="text-muted d-block small">
+                                    Standar Saat Ini
+                                </span>
+
+                                <h1 class="fw-bold text-primary mb-0">
+                                    {{ kkm }}
+                                </h1>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-9">
+
+                            <label class="fw-medium mb-2">
+                                Perbarui Nilai KKM
+                            </label>
+
+                            <input
+                                type="number"
+                                name="kkm"
+                                class="form-control form-control-lg border-0 bg-light mb-2"
+                                value="{{ kkm }}">
+
+                            <div class="alert alert-info py-2 px-3 mb-3 small">
+                                <i class="bi bi-info-circle-fill me-2"></i>
+                                Nilai KKM digunakan sebagai standar ketuntasan untuk seluruh kuis dan evaluasi pada media pembelajaran.
+                            </div>
+
+                            <button class="btn btn-primary px-5 rounded-3 fw-bold">
+                                Simpan Perubahan
+                            </button>
+
+                        </div>
+
+                    </div>
 
                 </form>
 
             </div>
+
         </div>
+
     </div>
 
 </div>
+
+<div class="card border-0 rounded-4 blue-shadow mt-4">
+
+    <div class="card-body">
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+            <h5 class="fw-bold mb-0">
+                <i class="bi bi-bar-chart-fill text-primary me-2"></i>
+                Ringkasan Hasil Belajar Mahasiswa
+            </h5>
+
+            <form method="GET" class="d-flex align-items-center gap-3">
+
+                <div class="d-flex align-items-center gap-2">
+
+                    <label class="small text-muted mb-0">
+                        Kelas
+                    </label>
+
+                    <select
+                        name="kelas"
+                        class="form-select form-select-sm"
+                        style="width:180px;"
+                        onchange="this.form.submit()">
+
+                        <option value="">Semua Kelas</option>
+
+                        {% for kelas in daftar_kelas %}
+
+                        <option value="{{ kelas.id }}"
+                            {% if kelas_filter == kelas.id|stringformat:"s" %}selected{% endif %}>
+                            {{ kelas.nama_kelas }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <div class="d-flex align-items-center gap-2">
+
+                    <span class="small text-muted">
+                        Menampilkan
+                    </span>
+
+                    <select
+                        name="limit"
+                        class="form-select form-select-sm"
+                        style="width:80px;"
+                        onchange="this.form.submit()">
+
+                        <option value="10" {% if limit == "10" %}selected{% endif %}>10</option>
+                        <option value="25" {% if limit == "25" %}selected{% endif %}>25</option>
+                        <option value="50" {% if limit == "50" %}selected{% endif %}>50</option>
+                        <option value="all" {% if limit == "all" %}selected{% endif %}>Semua</option>
+
+                    </select>
+
+                    <span class="small text-muted">
+                        data
+                    </span>
+
+                </div>
+
+            </form>
+
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle">
+
+                <thead>
+
+                    <tr class="text-center">
+
+                        <th>Nama Mahasiswa</th>
+                        <th>Kelas</th>
+                        <th>Rata-rata Nilai</th>
+                        <th>Status Belajar</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for item in statistik %}
+
+                    <tr>
+
+                        <td>{{ item.nama }}</td>
+
+                        <td class="text-center">
+                            {{ item.kelas }}
+                        </td>
+
+                        <td class="text-center">
+                            {{ item.rata }}
+                        </td>
+
+                        <td class="text-center">
+
+                            <span class="badge bg-{{ item.badge }} px-3 py-2">
+
+                                {{ item.status }}
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="4" class="text-center py-4">
+
+                            Belum ada data mahasiswa.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get("kkm_updated") === "1") {
+
+        const toastElement = document.getElementById("kkmToast");
+
+        const toast = new bootstrap.Toast(toastElement, {
+            delay: 3000
+        });
+
+        toast.show();
+
+        // Hapus parameter dari URL agar toast tidak muncul lagi saat refresh
+        window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname
+        );
+    }
+
+});
+</script>
 
 {% endblock %}

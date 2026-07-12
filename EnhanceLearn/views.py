@@ -19,6 +19,8 @@ from .models import HasilKuis
 from .models import Kelas
 from .models import KKM
 from .models import AktivitasSelesai
+from django.db.models import Max
+from django.core.paginator import Paginator
 
 
 # ================= BERANDA =================
@@ -96,11 +98,78 @@ def dashboard_dosen(request):
 
     kkm, created = KKM.objects.get_or_create(id=1)
 
+    kelas_filter = request.GET.get("kelas", "")
+    limit = request.GET.get("limit", "10")
+
+    mahasiswa = Profile.objects.filter(
+        role="mahasiswa",
+        kelas__dosen=request.user
+    ).select_related(
+        "user",
+        "kelas"
+    )
+
+    if kelas_filter:
+        mahasiswa = mahasiswa.filter(kelas_id=kelas_filter)
+
+    statistik = []
+
+    for mhs in mahasiswa:
+
+        progress_obj = ProgressMahasiswa.objects.filter(
+            user=mhs.user
+        ).first()
+
+        progress = progress_obj.progress if progress_obj else 0
+
+        if progress == 0:
+            status = "Belum Belajar"
+            badge = "danger"
+
+        elif progress == 100:
+            status = "Selesai"
+            badge = "success"
+
+        else:
+            status = "Sedang Belajar"
+            badge = "warning"
+
+        nilai_terbaik = (
+            HasilKuis.objects.filter(user=mhs.user)
+            .values("judul_kuis")
+            .annotate(nilai_tertinggi=Max("nilai"))
+        )
+
+        if nilai_terbaik:
+            total = sum(item["nilai_tertinggi"] for item in nilai_terbaik)
+            rata_nilai = round(total / len(nilai_terbaik), 2)
+        else:
+            rata_nilai = "-"
+
+        statistik.append({
+            "nama": mhs.user.get_full_name() or mhs.user.username,
+            "kelas": mhs.kelas.nama_kelas if mhs.kelas else "-",
+            "rata": rata_nilai,
+            "status": status,
+            "badge": badge,
+        })
+
+    if limit != "all":
+        statistik = statistik[:int(limit)]
+
     context = {
+        "daftar_kelas": Kelas.objects.filter(
+            dosen=request.user
+        ),
+
+        "kelas_filter": kelas_filter,
+        "limit": limit,
+
         "kkm": kkm.nilai,
         "jumlah_mahasiswa": jumlah_mahasiswa,
         "jumlah_kelas": jumlah_kelas,
         "jumlah_selesai": jumlah_selesai,
+        "statistik": statistik,
     }
 
     return render(
@@ -109,6 +178,8 @@ def dashboard_dosen(request):
         context
     )
 
+
+from django.urls import reverse
 
 def update_kkm(request):
 
@@ -119,6 +190,10 @@ def update_kkm(request):
         kkm, created = KKM.objects.get_or_create(id=1)
         kkm.nilai = nilai
         kkm.save()
+
+        return redirect(
+            reverse("dashboard_dosen") + "?kkm_updated=1"
+        )
 
     return redirect("dashboard_dosen")
 
@@ -224,6 +299,27 @@ def hapus_kelas(request, id):
 
     return redirect("data_kelas")
 
+@login_required
+def edit_kelas(request, id):
+
+    kelas = get_object_or_404(
+        Kelas,
+        id=id,
+        dosen=request.user
+    )
+
+    if request.method == "POST":
+
+        nama_kelas = request.POST.get("nama_kelas")
+
+        if nama_kelas:
+            kelas.nama_kelas = nama_kelas
+            kelas.save()
+
+        return redirect("data_kelas")
+
+    return redirect("data_kelas")
+
 # =========================
 # DATA MAHASISWA
 # =========================
@@ -232,6 +328,7 @@ def data_mahasiswa(request):
     mahasiswa = Profile.objects.filter(role="mahasiswa", kelas__dosen=request.user).select_related("user","kelas")
     kelas_id = request.GET.get('kelas')
     search = request.GET.get('search')
+    per_page = request.GET.get('per_page', 10)
 
     # filter jika kelas dipilih
     if kelas_id:
@@ -245,13 +342,23 @@ def data_mahasiswa(request):
             Q(user__first_name__icontains=search) |
             Q(nim__icontains=search)
         )
+    
+    try:
+        per_page = int(per_page)
+    except (ValueError, TypeError):
+        per_page = 10
 
     kelas_list = Kelas.objects.filter(dosen=request.user)
+
+    paginator = Paginator(mahasiswa, per_page)
+    page_number = request.GET.get('page')
+    mahasiswa = paginator.get_page(page_number)
 
     context = {
         "mahasiswa": mahasiswa,
         "kelas_list": kelas_list,
-        "search": search
+        "search": search,
+        "per_page": per_page,
     }
     
     return render(request, "EnhanceLearn/dosen/data-mahasiswa.html", context)
@@ -353,24 +460,44 @@ def export_mahasiswa_excel(request):
 # =========================
 from .models import ProgressMahasiswa, Profile
 
+from django.core.paginator import Paginator
+from django.db.models import Q
+
+@login_required
 def progres_mahasiswa(request):
 
+    kelas_id = request.GET.get("kelas")
+    search = request.GET.get("search")
+    per_page = request.GET.get("per_page", 10)
+
     mahasiswa_list = Profile.objects.select_related(
-        'user', 'kelas'
+        "user",
+        "kelas"
     ).filter(
-        role='mahasiswa',
+        role="mahasiswa",
         kelas__dosen=request.user
     )
 
-    data = []
+    # Filter kelas
+    if kelas_id:
+        mahasiswa_list = mahasiswa_list.filter(
+            kelas_id=kelas_id
+        )
 
-    kelas_list = Kelas.objects.filter(
-        dosen=request.user
-    )
+    # Search
+    if search:
+        mahasiswa_list = mahasiswa_list.filter(
+            Q(user__first_name__icontains=search) |
+            Q(nim__icontains=search)
+        )
+
+    data = []
 
     for mhs in mahasiswa_list:
 
-        progress_obj = ProgressMahasiswa.objects.filter(user=mhs.user).first()
+        progress_obj = ProgressMahasiswa.objects.filter(
+            user=mhs.user
+        ).first()
 
         persen = progress_obj.progress if progress_obj else 0
 
@@ -382,10 +509,29 @@ def progres_mahasiswa(request):
             "progress": persen
         })
 
-    context = {"data": data,
-               "kelas_list" : kelas_list}
+    try:
+        per_page = int(per_page)
+    except (TypeError, ValueError):
+        per_page = 10
 
-    return render(request,"EnhanceLearn/dosen/progres-mahasiswa.html",context)
+    data = data[:per_page]
+
+    kelas_list = Kelas.objects.filter(
+        dosen=request.user
+    )
+
+    context = {
+        "data": data,
+        "kelas_list": kelas_list,
+        "search": search,
+        "per_page": per_page,
+    }
+
+    return render(
+        request,
+        "EnhanceLearn/dosen/progres-mahasiswa.html",
+        context
+    )
 
 from django.http import JsonResponse
 from .models import ProgressMahasiswa, HasilKuis
@@ -608,6 +754,8 @@ def data_nilai(request):
     # =========================
 
     kelas_id = request.GET.get("kelas")
+    search = request.GET.get("search")
+    per_page = request.GET.get("per_page", 10)
 
     if kelas_id:
         mahasiswa_list = mahasiswa_list.filter(kelas_id=kelas_id)
@@ -686,6 +834,13 @@ def data_nilai(request):
             "k5": nilai.get("k5", "-"),
             "evaluasi": nilai.get("evaluasi", "-"),
         })
+    
+    try:
+        per_page = int(per_page)
+    except (ValueError, TypeError):
+        per_page = 10
+
+    data_nilai = data_nilai[:per_page]
 
     kelas_list = Kelas.objects.filter(
         dosen=request.user
@@ -693,7 +848,9 @@ def data_nilai(request):
     
     context = {
         "data_nilai": data_nilai,
-        "kelas_list": kelas_list
+        "kelas_list": kelas_list,
+        "search": search,
+        "per_page": per_page,
     }
 
     return render(request, "EnhanceLearn/dosen/data-nilai.html", context)
@@ -1133,9 +1290,11 @@ def halaman_kuis(request, judul):
                     judul="praktik"
                 )
 
+    kkm = KKM.objects.get(id=1)
 
     context = {
-        "judul_kuis": judul
+        "judul_kuis": judul,
+        "kkm": kkm.nilai
     }
 
     return render(
@@ -1215,8 +1374,6 @@ def halaman_hasil(request, id):
         "EnhanceLearn/kuis/hasil_kuis.html",
         context
     )
-
-
 
 
 def hasil_kuis(request):
@@ -1616,3 +1773,6 @@ def evaluasi(request):
         "EnhanceLearn/evaluasi.html"
     )
 
+@login_required
+def rangkuman(request):
+    return render(request, "EnhanceLearn/rangkuman.html")

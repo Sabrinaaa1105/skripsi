@@ -84,7 +84,8 @@ binary.save("hasil_biner.jpg")</code></pre>
                 <h5 style="font-weight:700; color: #1e3a8a;">Petunjuk:</h5>
                 <ul>
                     <li><strong>Upload File:</strong> Klik tombol <strong>Upload Gambar</strong> untuk mengunggah citra yang akan digunakan pada praktik. Pastikan file gambar berhasil dimuat sebelum menjalankan kode.</li>
-                    <li><strong>Menjalankan Proses (▶):</strong> Setelah gambar diunggah, tekan tombol <strong>▶ Run</strong> pada setiap cell untuk menjalankan kode. Jalankan <strong>Cell 1</strong> terlebih dahulu untuk menghasilkan citra <em>grayscale</em>, kemudian jalankan <strong>Cell 2</strong> untuk mengubah citra menjadi biner menggunakan metode <em>thresholding</em>.</li>
+                    <li><strong>Lengkapi Kode:</strong> Lengkapi bagian kode yang masih kosong di dalam kode editor.</li>
+                    <li><strong>Menjalankan Proses (▶):</strong> Setelah gambar diunggah dan melengkapi kode, tekan tombol <strong>▶ Run</strong> pada setiap cell untuk menjalankan kode. Jalankan <strong>Cell 1</strong> terlebih dahulu untuk menghasilkan citra <em>grayscale</em>, kemudian jalankan <strong>Cell 2</strong> untuk mengubah citra menjadi biner menggunakan metode <em>thresholding</em>.</li>
                     <li><strong>Menghapus Kode (🗑):</strong> Klik tombol <strong>🗑 Hapus</strong> untuk mengosongkan seluruh kode pada cell yang dipilih.</li>
                     <li><strong>Menambah Cell (+):</strong> Klik tombol <strong>+ Add Cell</strong> untuk menambahkan cell baru apabila diperlukan untuk menulis atau mencoba kode tambahan.</li>
                 </ul>
@@ -101,7 +102,7 @@ from PIL import Image
 
 img = Image.open("gambar.png") # Membuka gambar
 
-gray = img.convert("L") # Mengubah gambar menjadi grayscale
+# Tuliskan kode untuk mengubah gambar menjadi grayscale
 
 gray.save("hasil_grayscale.png") # Menyimpan hasil grayscale
 </textarea>
@@ -123,8 +124,7 @@ from PIL import Image
 
 threshold = 128 # Menentukan nilai threshold
 
-# Mengubah citra grayscale menjadi citra biner
-binary = gray.point(lambda p: 255 if p >= threshold else 0) 
+# Tuliskan kode untuk mengubah citra grayscale menjadi citra biner
 
 binary.save("hasil_biner.png") # Menyimpan hasil citra biner
 </textarea>

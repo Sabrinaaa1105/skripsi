@@ -42,12 +42,27 @@
                             <td class="text-center">{{ kelas.jumlah_mahasiswa|default:"0" }}</td>
 
                             <td class="text-center">
-                                <a href="{% url 'hapus_kelas' kelas.id %}" 
-                                class="btn btn-sm btn-danger"
-                                onclick="return confirm('Apakah Anda yakin ingin menghapus kelas ini?')"
-                                title="Hapus Kelas">
+
+                                <button
+                                    class="btn btn-warning btn-sm me-2"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#editModal{{ kelas.id }}"
+                                    title="Edit">
+
+                                    <i class="bi bi-pencil-square"></i>
+
+                                </button>
+
+                                <a
+                                    href="{% url 'hapus_kelas' kelas.id %}"
+                                    class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Apakah Anda yakin ingin menghapus kelas ini?')"
+                                    title="Hapus">
+
                                     <i class="bi bi-trash"></i>
+
                                 </a>
+
                             </td>
                         </tr>
                         {% empty %}
@@ -88,6 +103,86 @@
         </div>
     </div>
 </div>
+
+{% for kelas in kelas_list %}
+
+<div class="modal fade"
+     id="editModal{{ kelas.id }}"
+     tabindex="-1">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+                    Edit Kelas
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+            <form
+                method="POST"
+                action="{% url 'edit_kelas' kelas.id %}">
+
+                {% csrf_token %}
+
+                <div class="modal-body">
+
+                    <div class="mb-3">
+
+                        <label class="form-label fw-bold">
+                            Nama Kelas
+                        </label>
+
+                        <input
+                            type="text"
+                            name="nama_kelas"
+                            class="form-control"
+                            value="{{ kelas.nama_kelas }}"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+
+                        Batal
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-warning">
+
+                        Simpan Perubahan
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
 
 <div class="toast-container position-fixed top-50 start-50 translate-middle" style="z-index: 9999;">
     <div id="copyToast" class="toast align-items-center text-white bg-dark border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
