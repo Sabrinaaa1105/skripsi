@@ -381,6 +381,8 @@
 
     let result = Array.from({ length: 4 }, () => Array(4).fill(""));
     let step = 0;
+    let normalisasiSelesai = false;
+    let gammaSelesai = false;
 
     const inMatrix = document.getElementById("inMatrix");
     const outMatrix = document.getElementById("outMatrix");
@@ -444,19 +446,43 @@
     }
 
     startBtn.onclick = () => {
+        normalisasiSelesai = false;
+        gammaSelesai = false;
+
         step = 0;
         result = Array.from({ length: 4 }, () => Array(4).fill(""));
+
         startBtn.classList.add("hidden-sim");
         nextBtn.classList.remove("hidden-sim");
         resetBtn.classList.remove("hidden-sim");
+
         stepCalc();
     };
 
     nextBtn.onclick = () => {
-        if (step < 16) stepCalc();
+        if (step < 16) {
+            stepCalc();
+        }
+        if (step >= 16) {
+            normalisasiSelesai = true;
+            nextBtn.classList.add("hidden-sim");
+            calcBox.innerHTML += `
+                <div style="
+                    margin-top:15px;
+                    color:#166534;
+                    font-weight:bold;
+                    text-align:center;
+                    font-size:16px;
+                ">
+                    Semua perhitungan normalisasi selesai dilakukan.
+                </div>
+            `;
+        }
     };
 
     resetBtn.onclick = () => {
+        normalisasiSelesai = false;
+        gammaSelesai = false;
         step = 0;
         result = Array.from({ length: 4 }, () => Array(4).fill(""));
         renderMatrices();
@@ -524,12 +550,36 @@
         gammaStep++;
     }
 
+    function cekKesiapanLangkah2() {
+        if (!normalisasiSelesai) {
+            gammaCalcBox.innerHTML = `
+                <div style="
+                    color:red;
+                    font-weight:bold;
+                    text-align:center;
+                    font-size:15px;
+                    padding:12px;
+                ">
+                    Selesaikan langkah sebelumnya terlebih dahulu.
+                </div>
+            `;
+
+            return false;
+        }
+        return true;
+    }
+
     startGammaBtn.onclick = () => {
+        if (!cekKesiapanLangkah2()) return;
+        gammaSelesai = false;
+
         gammaStep = 0;
         gammaResult = Array.from({ length: 4 }, () => Array(4).fill(""));
+
         startGammaBtn.classList.add("hidden-sim");
         nextGammaBtn.classList.remove("hidden-sim");
         resetGammaBtn.classList.remove("hidden-sim");
+
         stepGammaCalc();
     };
 
@@ -537,16 +587,34 @@
         if (gammaStep < 16) {
             stepGammaCalc();
         }
+        if (gammaStep >= 16) {
+            gammaSelesai = true;
+            nextGammaBtn.classList.add("hidden-sim");
+            gammaCalcBox.innerHTML += `
+                <div style="
+                    margin-top:15px;
+                    color:#166534;
+                    font-weight:bold;
+                    text-align:center;
+                    font-size:16px;
+                ">
+                    Semua perhitungan transformasi Power-Law selesai dilakukan.
+                </div>
+            `;
+        }
     };
 
     resetGammaBtn.onclick = () => {
+        gammaSelesai = false;
         gammaStep = 0;
         gammaResult = Array.from({ length: 4 }, () => Array(4).fill(""));
         renderGammaMatrices();
         startGammaBtn.classList.remove("hidden-sim");
         nextGammaBtn.classList.add("hidden-sim");
         resetGammaBtn.classList.add("hidden-sim");
-        gammaCalcBox.innerHTML = `Klik <b>Mulai</b> untuk memulai proses gamma.`;
+        gammaCalcBox.innerHTML = `
+            Klik <b>Mulai</b> untuk memulai proses gamma.
+        `;
     };
 
     renderGammaMatrices();
@@ -602,12 +670,34 @@
         scaleStep++;
     }
 
+    function cekKesiapanLangkah3() {
+        if (!gammaSelesai) {
+            scaleCalcBox.innerHTML = `
+                <div style="
+                    color:red;
+                    font-weight:bold;
+                    text-align:center;
+                    font-size:15px;
+                    padding:12px;
+                ">
+                    Selesaikan langkah sebelumnya terlebih dahulu.
+                </div>
+            `;
+
+            return false;
+        }
+
+        return true;
+    }
+
     startScaleBtn.onclick = () => {
+        if (!cekKesiapanLangkah3()) return;
         scaleStep = 0;
         scaleResult = Array.from({ length: 4 }, () => Array(4).fill(""));
         startScaleBtn.classList.add("hidden-sim");
         nextScaleBtn.classList.remove("hidden-sim");
         resetScaleBtn.classList.remove("hidden-sim");
+
         stepScaleCalc();
     };
 
@@ -718,7 +808,7 @@
 <script>
   window.MathJax = {
     tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']] // Baris ini yang mengaktifkan tanda $
+      inlineMath: [['$', '$'], ['\\(', '\\)']] 
     }
   };
 </script>

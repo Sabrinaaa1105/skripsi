@@ -30,8 +30,8 @@ initPyodide();
 
 function normalizeCode(code) {
     return code
-        .replace(/#.*/g, "")      // abaikan komentar
-        .replace(/\s+/g, "")      // abaikan semua spasi, tab, enter
+        .replace(/#.*/g, "")      
+        .replace(/\s+/g, "")      
         .trim();
 }
 
