@@ -164,10 +164,9 @@ console.log(
             
             if (answers[i] !== null) {
                 if (Array.isArray(answers[i])) {
-                    // Untuk soal isian: pastikan semua input dalam array sudah diisi
+                    // Untuk soal isian
                     isFilled = answers[i].every(val => val !== "" && val !== null);
                 } else {
-                    // Untuk pilihan ganda
                     isFilled = true; 
                 }
             }

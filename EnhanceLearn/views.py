@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.urls import reverse
 from .models import Profile
 from .models import Kelas, Profile
 from django.contrib.auth.decorators import login_required
@@ -12,6 +13,7 @@ from django.db.models import Q
 import openpyxl
 from django.http import HttpResponse
 from .models import HasilKuis
+from .models import Profile, HasilKuis
 import json
 from django.http import JsonResponse
 from django.utils import timezone
@@ -178,8 +180,6 @@ def dashboard_dosen(request):
         context
     )
 
-
-from django.urls import reverse
 
 def update_kkm(request):
 
@@ -533,14 +533,12 @@ def progres_mahasiswa(request):
         context
     )
 
-from django.http import JsonResponse
+
 from .models import ProgressMahasiswa, HasilKuis
 
-from django.http import JsonResponse
 from django.contrib.auth.models import User
 from .models import Profile
 
-from django.http import JsonResponse
 from django.contrib.auth.models import User
 from .models import ProgressMahasiswa, HasilKuis, Profile
 
@@ -888,12 +886,6 @@ def riwayat_kuis_json(request, user_id):
 
     return JsonResponse(data)
 
-
-from django.http import HttpResponse
-import openpyxl
-from .models import Profile, HasilKuis
-
-
 def export_nilai_excel(request):
 
     wb = openpyxl.Workbook()
@@ -1027,16 +1019,8 @@ def dashboard_mhs(request):
     )
 
 
-import json
-from django.http import JsonResponse
 from .models import ProgressMahasiswa
-import json
-from django.http import JsonResponse
-from .models import ProgressMahasiswa
-
-from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import json
 from .models import ProgressMahasiswa, Profile
 
 def simpan_progress(request):
@@ -1160,7 +1144,6 @@ def simpan_aktivitas(request):
     })
 
 from django.shortcuts import redirect
-from .models import AktivitasSelesai
 
 def halaman_kuis(request, judul):
 
@@ -1414,8 +1397,6 @@ def hasil_kuis(request):
         })
 
 
-from .models import AktivitasSelesai
-
 def cek_aktivitas(user, nama_aktivitas):
     return AktivitasSelesai.objects.filter(
         user=user,
@@ -1435,7 +1416,6 @@ def citra_digital(request):
 
 @login_required
 def jenis_citra(request):
-
     if not cek_aktivitas(
         request.user,
         "aktivitas1"
@@ -1449,7 +1429,6 @@ def jenis_citra(request):
 
 @login_required
 def rangkuman1(request):
-
     aktivitas1 = AktivitasSelesai.objects.filter(
         user=request.user,
         nama_aktivitas="aktivitas1"
